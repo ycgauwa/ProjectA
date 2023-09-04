@@ -1,0 +1,144 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerManager : MonoBehaviour
+{
+    //メンバー変数として変数を定義してる。
+    public float m_speed;//速さの定義
+    //Staticを使ってたり、インスタンス化している
+    public static PlayerManager m_instance;
+    public GameTeleportManager teleportManager;
+    public GameObject mainCamera;
+    // Start is called before the first frame update
+    void Start()
+    {
+        m_instance = this;
+        
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        Application.targetFrameRate = 60;
+
+        var h = Input.GetAxis("Horizontal");
+        var v = Input.GetAxis("Vertical");
+
+        var velocity = new Vector3(h, v)* m_speed;
+        transform.localPosition += velocity;
+        
+    }
+    //ワープポイントに触れるとTPするコード
+    /// <summary>
+    /// 衝突した時のスクリプト、FindTeleportAddressの変数を使って関数を使っている
+    /// ここではカメラやオブジェクトの位置を変数と＝で結んでおりこの関係があることによって
+    /// 別スクリプトであるGameTeleportManageが活きる
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+
+        bool isTeleport = other.gameObject.CompareTag("House") || other.gameObject.CompareTag("Warp1") ||
+            other.gameObject.CompareTag("School1") || other.gameObject.CompareTag("School2") ||
+            other.gameObject.CompareTag("School3") || other.gameObject.CompareTag("School4") ||
+            other.gameObject.CompareTag("School5") || other.gameObject.CompareTag("School6") ||
+            other.gameObject.CompareTag("School7") || other.gameObject.CompareTag("School8") ||
+            other.gameObject.CompareTag("School9") || other.gameObject.CompareTag("School10") ||
+            other.gameObject.CompareTag("Home1") || other.gameObject.CompareTag("Home2");
+
+        if (isTeleport == false) 
+        {
+            return;
+
+        }
+        //TeleportAddress型の変数、であり初期値はnull
+        TeleportAddress teleportAddress = null;
+
+
+        if (other.gameObject.CompareTag("House"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("House");
+            transform.position = teleportAddress.playerPosition;
+            
+            
+            
+        }
+        if (other.gameObject.CompareTag("Warp1"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Warp1");
+            transform.position = teleportAddress.playerPosition;
+           
+            
+        }
+        if (other.gameObject.CompareTag("School1"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("School1");
+            transform.position = teleportAddress.playerPosition;
+
+
+        }
+        if (other.gameObject.CompareTag("School2"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("School2");
+            transform.position = teleportAddress.playerPosition;
+
+
+        }
+        if (other.gameObject.CompareTag("School3"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("School3");
+            transform.position = teleportAddress.playerPosition;
+
+
+        }
+        if (other.gameObject.CompareTag("School4"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("School4");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if (other.gameObject.CompareTag("School5"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("School5");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if (other.gameObject.CompareTag("School6"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("School6");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if (other.gameObject.CompareTag("School7"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("School7");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if (other.gameObject.CompareTag("School8"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("School8");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if (other.gameObject.CompareTag("Home1"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Home1");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if (other.gameObject.CompareTag("Home2"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Home2");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if (other.gameObject.CompareTag("School9"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("School9");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if (other.gameObject.CompareTag("School10"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("School10");
+            transform.position = teleportAddress.playerPosition;
+        }
+        //別クラスのメソッドの行使引数はteleportAddress
+        teleportManager.OnPlayerTeleport(teleportAddress);
+    }
+
+}

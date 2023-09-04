@@ -1,0 +1,5332 @@
+fileFormatVersion: 2
+guid: 2fb19276d24108c48ae975d766f75838
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Village1-C_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 480.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 237af04bd3e739144bcff65bd4f0d6d1
+      internalID: -904844610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 480.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c80d648ceaf0724aa426209d70d49a0
+      internalID: -1801269062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 480.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c69517ce334177e4c80d5824b36fd2d5
+      internalID: 1388758904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_3
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 480.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a766405edea53545b070ec3827a193c
+      internalID: 54096199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 480.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bf1c1ff48cd83a41b052f223861d5b1
+      internalID: 1493649037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_5
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 480.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95b60c802792d3443bdd230d53f95cda
+      internalID: -1460635411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_6
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 480.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6bebba8808ffb7418abfbf6f713429f
+      internalID: -240832727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_7
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 480.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 374a2992b24dc484c9204d8b6f06e22d
+      internalID: 1322773094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_8
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 480.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dab467cbf8005dd41b864de02ee9ccd0
+      internalID: 783254737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_9
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 480.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34d4a9fbe7edae14a8097fb37f3fb249
+      internalID: 223980532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_10
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 480.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61238c7fd61f0d64aa844ca4e9207b79
+      internalID: 1628982727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_11
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 480.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2642727e678e6f3408450aa72e396b16
+      internalID: 2067441166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_12
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 480.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aba78689c8691d945a80b3cc19c8bf9b
+      internalID: 1095455862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 448.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84448e3f4611bbf4685f9f55e4fed681
+      internalID: 1840727644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_14
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 448.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fface04344af75d4cb664235ef12229e
+      internalID: 121285877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_15
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 448.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96fd15f7c653396468b245a4e0c838c7
+      internalID: 2087814793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_16
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 448.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d6b1c67762da314eac928b45ed15f0f
+      internalID: 1097365571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_17
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 448.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ce598da09d71284880b676b256b7991
+      internalID: 380281538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_18
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 448.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ac2377a65c5c7a4897ed4d8ab52a7b9
+      internalID: 1828197543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_19
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 448.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e45d0aa11efb6b64b8d39e9704b8f03f
+      internalID: 430053088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_20
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 448.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1779d00a0dc2e434f812f16b7acccc7e
+      internalID: -1928812055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_21
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 448.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f0b200e38a224649ab00544b8ffef50
+      internalID: -1387146015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_22
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 448.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c10faa39f7754f43a3a32d8f6fff713
+      internalID: -128001892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_23
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 448.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e25c6143fc420b54eb8576c5f4d87fc5
+      internalID: 1578471280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_24
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 448.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80f738200a580234f80b09707af66da2
+      internalID: 782144860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_25
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 448.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc4d6105782efc34893221cc968f70d9
+      internalID: 337565874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_26
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 448.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ec3e994fd5184d4f8f74353ac8eed04
+      internalID: 1072380993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_27
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 448.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4fcb96d4b9f4e5438bfc5a3ee46640b
+      internalID: -925158857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 416.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88aeeb7e4eb05de4a88fd20d1227037d
+      internalID: -1206761153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_29
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 416.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89a7153d332f62d4bbaf09c868eb93d8
+      internalID: 1305177634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_30
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 416.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f4b635d47feea0478e67e54e995459b
+      internalID: 323055738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_31
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 416.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78a7728f7f543fa4ca18768593cea16b
+      internalID: 206844393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_32
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 416.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b07411df01ad14b459a3c400e907d327
+      internalID: -1061149872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_33
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 416.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d010a5188279ce4385843bb80756863
+      internalID: -54762142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_34
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 416.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd0040a20b09d8d47915d1c2e28a682e
+      internalID: 861897726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_35
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 416.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d2a5e63249443144bb7be82a862a261
+      internalID: 238395590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_36
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 416.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0616c3627dc403e498817cb3dc85b4f2
+      internalID: 576504343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_37
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 416.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4295c210011f04c4892722111d0901a0
+      internalID: 1654167981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_38
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 416.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6149f6acb9bd1074aa2f9527060130cc
+      internalID: -912773873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_39
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecdd8159cc1522646be2a685837a9f0a
+      internalID: -454776372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_40
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 384.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86e132942041b3a49becca38914fa74a
+      internalID: 1040723366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_41
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 384.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41737552af609e04b925a121fba72bdb
+      internalID: 1466553958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_42
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 384.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08e1a1893d010ef40af8bbb375fd2134
+      internalID: 168113660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_43
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 384.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9246f2c361f741409eea5581be8a1f9
+      internalID: 41448797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_44
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 384.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 264d86c86341c58459bb2a98e4ee54b0
+      internalID: 1867548155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_45
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 384.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b5e954de7b13b743861371187a2c270
+      internalID: 1648599980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_46
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 384.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 252e3fdc2b104684a9e9a7affd4fbddb
+      internalID: -493168283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_47
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 384.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59fcdf2e570f6464b937c6cea72d506f
+      internalID: 1070084537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_48
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 384.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e2f477d6cbd82540a9cbed3c0e2a93d
+      internalID: 721955012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_49
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 384.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ee0c49c200669148b642e23a57ea73e
+      internalID: 1514192005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_50
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 384.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20e14f90e3c6fbb4890673d4463ed65a
+      internalID: 760983224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_51
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cafe7651b0b6cb4797607807f479297
+      internalID: 248450096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_52
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 384.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ffdf95026a80af428723178f3f81e33
+      internalID: -1318611846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_53
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 384.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 973ccbd61906c0a41b0211fa65942de5
+      internalID: 346319815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_54
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 384.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a1265178550158419121bbcc643e217
+      internalID: 514489669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_55
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 352.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 020ce9ce9e75d034f8629296a7c4802d
+      internalID: 1357187336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_56
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 352.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2862381c63fd7784d8574f0f45d362a6
+      internalID: -336462935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_57
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 352.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27e3d96fac198544681c2f8f9479c49f
+      internalID: -1685358969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_58
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 352.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e040459c4af843a4fbbae3df911e77d0
+      internalID: -290259768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_59
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 352.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76ba58b819fef1542bef37025ef32159
+      internalID: 897126581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_60
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 352.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07f1dcc99b289824e82940fe31ad2195
+      internalID: 1687451052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_61
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 352.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0251e5e263de144a96642bbfd9ca5a0
+      internalID: 1058555688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_62
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 352.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b654946f16325f1429e7a170cf19fcb5
+      internalID: 29562024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_63
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 352.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d24fe3b0ae4907f4f83bd99de2dfaaa4
+      internalID: -1515028730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_64
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 352.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c02dd1a444ab4c041a278d51a2755390
+      internalID: -1011812561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_65
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 352.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6337ed8c5ccce640b1cb54af857070f
+      internalID: 1076592401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_66
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 352.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20c9d709894743d488c85e2b641064b9
+      internalID: -355570004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_67
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 352.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1311b85139037d14db9b9193d7d5d6cd
+      internalID: -1982874414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_68
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 352.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44278b3a84e4848478882fe9b0e30269
+      internalID: -1524612220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_69
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 352.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bc8c192ab871e041babbb4105dde528
+      internalID: -234562405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_70
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 352.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e37ab5ad8ba65b4c95f44247037ce48
+      internalID: -1320359769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_71
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4c5c3854e9fe7841960798bd401f358
+      internalID: 1069288382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_72
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 320.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2986c43036395de4dba45b1f0ec8adcb
+      internalID: 1299139400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_73
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 320.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd796219c1e3d7b4db05fd1d38ff2b48
+      internalID: 845182767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_74
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 320.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a829ce02ac6a9b9458ff1812107e9053
+      internalID: 1310526536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_75
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 320.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d38f7854508a684d8677c30f9147623
+      internalID: 1960228537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_76
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 320.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f3be6a93169a814f808f40a5941a1bb
+      internalID: 862784957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_77
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 320.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c49705e62edee344fbf82028f132ea2e
+      internalID: 1654628954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_78
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 320.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dc4d98c4a00b5d48971d8928e6d1b9f
+      internalID: -1686137909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_79
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 320.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 016b2ac476004eb4487c06c167f2ef00
+      internalID: 666570741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_80
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 320.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b2a0642dfd455349b50a827b7374d8c
+      internalID: 524854589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_81
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 320.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4fa5a8d9d0195b44a261c39aa880edc
+      internalID: -871575976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_82
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 320.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3aab4cbe53e38314b8ea88f102922260
+      internalID: 2106911085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_83
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 320.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36628a2732c0f7d47a51e00e265e5036
+      internalID: -1219832395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_84
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 320.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 862955f70d53bf442af530fe734924e4
+      internalID: -2097771931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_85
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 320.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0dd267db8e11c96418f0c74d07dee10a
+      internalID: -1749976779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_86
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82548c2a21d0efd42b4b4e39ec0ff769
+      internalID: -1486136914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_87
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 288.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97125baab1e4f104e862431cb4e9002d
+      internalID: 159766083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_88
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 288.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f68d7675b2db1264e91bdd23fef0e2f1
+      internalID: 1439715985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_89
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 288.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 996f546d8cce1514c9b34e738aaecc86
+      internalID: 1958666905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_90
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 288.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5fbbd98ce1577145ae5d631c4e496c6
+      internalID: 1714286982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_91
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 288.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36630b10a9d5fe74a9f4c9e9a50f4344
+      internalID: -2002553123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_92
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 288.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 223fe52b15f375f42bed3b8e47d84602
+      internalID: 665928141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_93
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 288.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a0e64530e268d54c8a4c55cc1df860d
+      internalID: 218572910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_94
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 288.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09bb58569e1cd654fae1c5dc937305ce
+      internalID: 1561879291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_95
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 288.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7cf981460c2fae46ac184eb844fc466
+      internalID: -2005503034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_96
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 288.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7fb197d69dcc794ba88b051ca32be3d
+      internalID: -470938972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_97
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 288.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 919309b1754c7e04f846897f72ca651b
+      internalID: 2019974150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_98
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 310cc5b9aba58da4087c56ad51354e68
+      internalID: 2038277824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_99
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 256.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52dee1426b1dd0949a48b488c1df28fa
+      internalID: 1698664902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_100
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 256.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62b682db665f0e446afdb47e4471112c
+      internalID: -601705806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_101
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 256.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1704556e7e20a054a9449fbd25f151ca
+      internalID: 1410300602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_102
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96997451b3abefb47bac0c6b6c7edac8
+      internalID: -1942667669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_103
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 256.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e409b1727efc384baf379b6ac320a8f
+      internalID: -1008959855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_104
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 256.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f56b09325187ec840aff9c4b47152283
+      internalID: -1164379102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_105
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 680614d08182fdb49974af5d6bbccdc6
+      internalID: 510038189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_106
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 256.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07e71768d4439db4e8652c6ad681a9e6
+      internalID: 108201478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_107
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 256.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 923b4e53e839c7b4289ce1f625f15da4
+      internalID: -1890613141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_108
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 256.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6592832abf8e1454bb0d6076a5894e91
+      internalID: -565688120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_109
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 256.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cb839ce3e26fdf46a64c5132e98b393
+      internalID: 1831743566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_110
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 256.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac0d4a9d431048849be454bc2b31678b
+      internalID: 1574022569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_111
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 256.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1922cc6f0b4df434fa6f29b436e43455
+      internalID: 1362073613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_112
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 256.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7deaba58da07ac439b25068dd8142e9
+      internalID: -1858762661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_113
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 224.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 464584ac522bcbf4bbde61a2b5d4912f
+      internalID: 883236053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_114
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 224.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ab14fd6581577840913f06c554d14d9
+      internalID: 1205491494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_115
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 224.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d5815ebfeb03124185f8bed7bc66387
+      internalID: -235201541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_116
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 224.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7a9f4fa0dadafc43abbec5d7c165a72
+      internalID: -1753852604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_117
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 224.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcab9882da6ba2143a2fb92e68446862
+      internalID: -192205437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_118
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 224.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 622539bf0e8bb724082f0d58dd7ed7ab
+      internalID: 1402342755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_119
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 224.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f509f8af0202a249a49fa4cdd09779a
+      internalID: -311600569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_120
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 224.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b0a0b65f4cbd6f4b9f4bcc368d1f7c7
+      internalID: 2007330658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_121
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 224.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46fbb051afe40df4dbb134633dd27b72
+      internalID: 277858044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_122
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 224.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d081491e4c188e441b7c129402cb8794
+      internalID: -423143944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_123
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 224.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e94d1d096e9d5ce4e8b7e2db6cd9fdd4
+      internalID: -1838928688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_124
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 224.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d2437beb10ba564e8ca0e825e0f919d
+      internalID: -245211738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_125
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 224.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b963759226b13545a50b8d591adffcf
+      internalID: 1978443894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_126
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 224.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: babdde686d17cbd46b24769ce1d21b06
+      internalID: -1429026327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_127
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 224.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adec6b39cb99c154ab3b72332dd37398
+      internalID: 172839342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_128
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73979c3a9bbe1c04b909c07cc5e06254
+      internalID: 986232385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_129
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 192.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc6b05b064cac7346a16e44d167d671f
+      internalID: -88029216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_130
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d33965112bd1594ba208996c03378fd
+      internalID: -616358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_131
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 192.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3589d1a9f603d2e4289e9538636f7d22
+      internalID: 986179076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_132
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28fdaa7448e13664db2af0530fa4a6fe
+      internalID: 624031631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_133
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 192.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0b8794c4fc2abb4fae3cc407e35f6b0
+      internalID: 1824862330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_134
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f0635723ed11a74bacfb315227b9e0b
+      internalID: 713621384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_135
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 192.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6f729e39a48e8445bbd80ce0174fa79
+      internalID: 480448769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_136
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 335795b503436374f96f547e014b3ce1
+      internalID: -327283836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_137
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 192.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 708e03e31c65b02458eb94be50722d3f
+      internalID: -1648074642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_138
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 192.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fbca2dc68b59fc4490c4edefd621248
+      internalID: -964934859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_139
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 192.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a7716a87aff79f4ab0351b2e3e8b951
+      internalID: 1634876475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_140
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 192.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 986b3f0e5e8d8724ea0fce5caf695e4e
+      internalID: -30396388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_141
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 192.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c24db790a4c97f4fae2e0e082898d35
+      internalID: 289699143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_142
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 192.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c22c94ab3c7b4ee42b4317db06c21b2e
+      internalID: -527727827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_143
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 192.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6f12364a8abe6b4aac23203354fc214
+      internalID: -1225719814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_144
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34f6dbed24914184caf790d4db06b6e1
+      internalID: 1146588372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_145
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 160.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcaacf21f185bf44dbb1d32fe735ab65
+      internalID: -357710311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_146
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 160.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59586ec19cd1888458c91fe517c19181
+      internalID: -1257712472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_147
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 160.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab0d45225c9afa14582b9713d60f2594
+      internalID: -846245221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_148
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 160.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4357e39865825fa44a1756001bc29681
+      internalID: -1200707929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_149
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 160.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b80292947a4f10459a90b1e6fb3b569
+      internalID: -81583433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_150
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 160.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 549fa00c207142f4b942402bb0ba0703
+      internalID: -2009024761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_151
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 160.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39df0cd0bceef524b9d2be3bf690b3b6
+      internalID: 1128138052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_152
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 160.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04aa0da3e6e91e74e8f853fb7c80a1b9
+      internalID: -965022913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_153
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 160.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff4594d3076498c46a1faf1c15c8840f
+      internalID: -758553124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_154
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 160.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84fe0960e814b704894eae69208ab16f
+      internalID: 1487990780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_155
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 160.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba6aed2a3bcba7647ac1d3ba13b8f236
+      internalID: 1187130238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_156
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 160.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a1f51c3a970119489d24d2ccd662a6f
+      internalID: -1499263612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_157
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 160.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c01c5802443dcf48a8696bfec5cf3e6
+      internalID: 1094004816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_158
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 160.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a5533150e06f54429a140dc88e2c57a
+      internalID: 1542946210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_159
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 160.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 766ca2698b4bbfa40b27c69b50df3c61
+      internalID: -390996050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_160
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76c98a9547f643243b6bde010714410a
+      internalID: 56612480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_161
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 128.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3eb70bfafcdd2042b66434da8d9b720
+      internalID: -979755368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_162
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0d2c5e715269d5409230f03b9a9e69c
+      internalID: -1540158624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_163
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 128.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02661a9f6a6c12a45975579ddb0b461f
+      internalID: 1283368994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_164
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa885008633f8be4bb6f7bc7d3bb1d99
+      internalID: 688383886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_165
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 128.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb30820b425e49e4db1de3a5ad1fd8c9
+      internalID: -862663263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_166
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9046b0cad768bbc4aab80dc7e494ead2
+      internalID: 2029174036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_167
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 128.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dd7f0f6f083eac4b85e6b3df7c1e1de
+      internalID: -2006530286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_168
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d1f9b274d5ca394b8f23f44515a1b11
+      internalID: -781265399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_169
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 128.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46f298fc9fc61054ba8c4917eb1b3011
+      internalID: 651599876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_170
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 128.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d39981addadfa974da712f243277b133
+      internalID: 1767370198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_171
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 128.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b50bd0f70bd653947aef97f8f6c5d747
+      internalID: 1558708379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_172
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 128.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 263995def93131a419d58dab721e4b67
+      internalID: -1402924201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_173
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 128.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6056d23eaa0a7a549a670e84c8cc6711
+      internalID: 757048085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_174
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 128.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3309082acbfa60a4581c75fdbc75b9f2
+      internalID: 1986136169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_175
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 128.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f88e09a7f1031d41bdcdf41f68d11fe
+      internalID: -1853945550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_176
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a158bb112b302e4eb571a71c0870064
+      internalID: -1586647199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_177
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffcbd7931a3e5e5499b2bb01444ae535
+      internalID: -571978413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_178
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 399f9ad802e683941a6edc1926938c97
+      internalID: -1267299552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_179
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a158a830b4465140b8913c48f105b52
+      internalID: -310884944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_180
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc86539e994cff64ea1741a50077ca80
+      internalID: 258886278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_181
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 96.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33e8be5b2494c4546a1dd7a61f040756
+      internalID: 336080506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_182
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 96.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e44da7b012c03a145b74c2b5a8d1e3b7
+      internalID: 1721112524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_183
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 96.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae0836b30bacebf4485a5826db132387
+      internalID: 795758187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_184
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 96.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33b3eb8504d59664ab1533a5a0fa77bc
+      internalID: -1038084457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_185
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 96.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e129e1cefc87e24188ecdaa2a22380d
+      internalID: 1042187892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_186
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 96.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cd69018c45ce5e4a87899fa9c03f494
+      internalID: -323669405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_187
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 96.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be287c4b4716c0141b0c1b30f985e892
+      internalID: 2124817929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_188
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 96.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b28d201515b5534496699e1081f770c
+      internalID: -639718080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_189
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 96.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 247401098824c164499ae22c81f13904
+      internalID: 103824958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_190
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 96.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b84c656072b842940be9a01acf21f6f2
+      internalID: -1669236188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_191
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 96.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9573fcee04fdf4c419f40ee1df558b05
+      internalID: -1472836435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_192
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fae21513024a1c3449490ab3878556e8
+      internalID: -1881142737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_193
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69b6d564fd06a8246b1af359c0f1a2c8
+      internalID: -1414730829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_194
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d0b6234b54eb9844ba7a2057e1081d2
+      internalID: -128705770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_195
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5bb00ceea53aee45ad5613f5a062e92
+      internalID: 807605910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_196
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49f61beda919c424aa28733e4f0d4cc8
+      internalID: 846647752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_197
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f3a17bcd8a2514499c6d6434bfbf652
+      internalID: 348316133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_198
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ec5f75145ed6264095c709e22e3d391
+      internalID: 4596819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_199
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 64.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2775767b69d496e4d84cbd29063388c7
+      internalID: -1943238579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_200
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0890d1b469b2e824099c9742a32660af
+      internalID: -470959860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_201
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 64.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bdb8bc768020094989b38ed2e35bdab
+      internalID: 1979277055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_202
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 64.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7529f9f92098624fa1b786c491731c2
+      internalID: 1518514724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_203
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 64.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae14ddb175e38314981e1ee23558c17b
+      internalID: 1262606219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_204
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 64.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74e343bbf2b135944880ecdbf34b9b9b
+      internalID: 1908188319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_205
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 64.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2d3d385a06a3a644a693bf255bf2878
+      internalID: -613223107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_206
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 64.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3399f586cd176c64c98fcb61ec7ec9fa
+      internalID: 565158009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_207
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 64.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8248f92e54cbb0244ab66106f71c1fd1
+      internalID: 868764310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_208
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7574e1429bbc5a448561a9e5d8267d0
+      internalID: -1360560614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_209
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23c4412f1a713614a94c8ad229ee7c81
+      internalID: -311172957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_210
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c2c37ac6a5af584ba396916af21cc0c
+      internalID: -2067047062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_211
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cd76c51db98d7d4ba35782ff89dbf34
+      internalID: -1534620091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_212
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da349996e85ffcb46aab9f9f680ccf1c
+      internalID: 760018463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_213
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 32.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8b576b56c6239f4289758e5146cfa21
+      internalID: -724139610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_214
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 32.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb50ccc14abfdab4598d34388a9c475f
+      internalID: -451079766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_215
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 32.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b90b60961fb22b14f864ec3c6f72763b
+      internalID: 1914076147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_216
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 32.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6763de81e2f29547943ac724250f134
+      internalID: 155871565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_217
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 32.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 143733654fcbeb44c8c4f251e9424f38
+      internalID: -731940661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_218
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 32.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d233d46ec7e8c14eb5cbfbf170fd5fc
+      internalID: -850094617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_219
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 32.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51ba319fad636084db9d88c16bdb5885
+      internalID: 868256508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_220
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 32.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80edef5a5f9447d48a805e25cc0f23c6
+      internalID: -1803901231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_221
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 32.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46744b2878a603e429a7c678c3014f84
+      internalID: 125181341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_222
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 32.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e21e5a144e5594b4ea35141bdb00b1a7
+      internalID: -1814648599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_223
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fd48d2f3e122aa4a9ed93ede5a85916
+      internalID: 1448959096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_224
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02f84aa7a570d6b48adfa9c3ca6f7b49
+      internalID: -1640442370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_225
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89a205d4c723f05478ae6073dade368b
+      internalID: -152700934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_226
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbfafbf1dde11064b94b5daa252762de
+      internalID: -310631567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_227
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea796918664e0a74090e73b22991f7a8
+      internalID: 2130631026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_228
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60bb7357363552a439936bd868546037
+      internalID: 1018265876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_229
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b652f484861554428b66e51a3ec363c
+      internalID: 1740235530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_230
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de84bca4ce0f86e408b9eec8b6e4d1fa
+      internalID: -135577274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_231
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 0.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a48192c7b2ecb1c42a748dfb88692c91
+      internalID: 452650883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_232
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ee1252b1f372dd41b2c32f6d433cd76
+      internalID: -1515890580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_233
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 0.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05811d96ece735648b880658f86b8e6d
+      internalID: 952157545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_234
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a553e3f701efab0418130e8f1895a638
+      internalID: 648235614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Village1-C_235
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0.9375
+        width: 32
+        height: 32.0625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f640e5c33490be545a4b0d957e0fe972
+      internalID: -357935898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Village1-C_0: -904844610
+      Village1-C_1: -1801269062
+      Village1-C_10: 1628982727
+      Village1-C_100: -601705806
+      Village1-C_101: 1410300602
+      Village1-C_102: -1942667669
+      Village1-C_103: -1008959855
+      Village1-C_104: -1164379102
+      Village1-C_105: 510038189
+      Village1-C_106: 108201478
+      Village1-C_107: -1890613141
+      Village1-C_108: -565688120
+      Village1-C_109: 1831743566
+      Village1-C_11: 2067441166
+      Village1-C_110: 1574022569
+      Village1-C_111: 1362073613
+      Village1-C_112: -1858762661
+      Village1-C_113: 883236053
+      Village1-C_114: 1205491494
+      Village1-C_115: -235201541
+      Village1-C_116: -1753852604
+      Village1-C_117: -192205437
+      Village1-C_118: 1402342755
+      Village1-C_119: -311600569
+      Village1-C_12: 1095455862
+      Village1-C_120: 2007330658
+      Village1-C_121: 277858044
+      Village1-C_122: -423143944
+      Village1-C_123: -1838928688
+      Village1-C_124: -245211738
+      Village1-C_125: 1978443894
+      Village1-C_126: -1429026327
+      Village1-C_127: 172839342
+      Village1-C_128: 986232385
+      Village1-C_129: -88029216
+      Village1-C_13: 1840727644
+      Village1-C_130: -616358
+      Village1-C_131: 986179076
+      Village1-C_132: 624031631
+      Village1-C_133: 1824862330
+      Village1-C_134: 713621384
+      Village1-C_135: 480448769
+      Village1-C_136: -327283836
+      Village1-C_137: -1648074642
+      Village1-C_138: -964934859
+      Village1-C_139: 1634876475
+      Village1-C_14: 121285877
+      Village1-C_140: -30396388
+      Village1-C_141: 289699143
+      Village1-C_142: -527727827
+      Village1-C_143: -1225719814
+      Village1-C_144: 1146588372
+      Village1-C_145: -357710311
+      Village1-C_146: -1257712472
+      Village1-C_147: -846245221
+      Village1-C_148: -1200707929
+      Village1-C_149: -81583433
+      Village1-C_15: 2087814793
+      Village1-C_150: -2009024761
+      Village1-C_151: 1128138052
+      Village1-C_152: -965022913
+      Village1-C_153: -758553124
+      Village1-C_154: 1487990780
+      Village1-C_155: 1187130238
+      Village1-C_156: -1499263612
+      Village1-C_157: 1094004816
+      Village1-C_158: 1542946210
+      Village1-C_159: -390996050
+      Village1-C_16: 1097365571
+      Village1-C_160: 56612480
+      Village1-C_161: -979755368
+      Village1-C_162: -1540158624
+      Village1-C_163: 1283368994
+      Village1-C_164: 688383886
+      Village1-C_165: -862663263
+      Village1-C_166: 2029174036
+      Village1-C_167: -2006530286
+      Village1-C_168: -781265399
+      Village1-C_169: 651599876
+      Village1-C_17: 380281538
+      Village1-C_170: 1767370198
+      Village1-C_171: 1558708379
+      Village1-C_172: -1402924201
+      Village1-C_173: 757048085
+      Village1-C_174: 1986136169
+      Village1-C_175: -1853945550
+      Village1-C_176: -1586647199
+      Village1-C_177: -571978413
+      Village1-C_178: -1267299552
+      Village1-C_179: -310884944
+      Village1-C_18: 1828197543
+      Village1-C_180: 258886278
+      Village1-C_181: 336080506
+      Village1-C_182: 1721112524
+      Village1-C_183: 795758187
+      Village1-C_184: -1038084457
+      Village1-C_185: 1042187892
+      Village1-C_186: -323669405
+      Village1-C_187: 2124817929
+      Village1-C_188: -639718080
+      Village1-C_189: 103824958
+      Village1-C_19: 430053088
+      Village1-C_190: -1669236188
+      Village1-C_191: -1472836435
+      Village1-C_192: -1881142737
+      Village1-C_193: -1414730829
+      Village1-C_194: -128705770
+      Village1-C_195: 807605910
+      Village1-C_196: 846647752
+      Village1-C_197: 348316133
+      Village1-C_198: 4596819
+      Village1-C_199: -1943238579
+      Village1-C_2: 1388758904
+      Village1-C_20: -1928812055
+      Village1-C_200: -470959860
+      Village1-C_201: 1979277055
+      Village1-C_202: 1518514724
+      Village1-C_203: 1262606219
+      Village1-C_204: 1908188319
+      Village1-C_205: -613223107
+      Village1-C_206: 565158009
+      Village1-C_207: 868764310
+      Village1-C_208: -1360560614
+      Village1-C_209: -311172957
+      Village1-C_21: -1387146015
+      Village1-C_210: -2067047062
+      Village1-C_211: -1534620091
+      Village1-C_212: 760018463
+      Village1-C_213: -724139610
+      Village1-C_214: -451079766
+      Village1-C_215: 1914076147
+      Village1-C_216: 155871565
+      Village1-C_217: -731940661
+      Village1-C_218: -850094617
+      Village1-C_219: 868256508
+      Village1-C_22: -128001892
+      Village1-C_220: -1803901231
+      Village1-C_221: 125181341
+      Village1-C_222: -1814648599
+      Village1-C_223: 1448959096
+      Village1-C_224: -1640442370
+      Village1-C_225: -152700934
+      Village1-C_226: -310631567
+      Village1-C_227: 2130631026
+      Village1-C_228: 1018265876
+      Village1-C_229: 1740235530
+      Village1-C_23: 1578471280
+      Village1-C_230: -135577274
+      Village1-C_231: 452650883
+      Village1-C_232: -1515890580
+      Village1-C_233: 952157545
+      Village1-C_234: 648235614
+      Village1-C_235: -357935898
+      Village1-C_24: 782144860
+      Village1-C_25: 337565874
+      Village1-C_26: 1072380993
+      Village1-C_27: -925158857
+      Village1-C_28: -1206761153
+      Village1-C_29: 1305177634
+      Village1-C_3: 54096199
+      Village1-C_30: 323055738
+      Village1-C_31: 206844393
+      Village1-C_32: -1061149872
+      Village1-C_33: -54762142
+      Village1-C_34: 861897726
+      Village1-C_35: 238395590
+      Village1-C_36: 576504343
+      Village1-C_37: 1654167981
+      Village1-C_38: -912773873
+      Village1-C_39: -454776372
+      Village1-C_4: 1493649037
+      Village1-C_40: 1040723366
+      Village1-C_41: 1466553958
+      Village1-C_42: 168113660
+      Village1-C_43: 41448797
+      Village1-C_44: 1867548155
+      Village1-C_45: 1648599980
+      Village1-C_46: -493168283
+      Village1-C_47: 1070084537
+      Village1-C_48: 721955012
+      Village1-C_49: 1514192005
+      Village1-C_5: -1460635411
+      Village1-C_50: 760983224
+      Village1-C_51: 248450096
+      Village1-C_52: -1318611846
+      Village1-C_53: 346319815
+      Village1-C_54: 514489669
+      Village1-C_55: 1357187336
+      Village1-C_56: -336462935
+      Village1-C_57: -1685358969
+      Village1-C_58: -290259768
+      Village1-C_59: 897126581
+      Village1-C_6: -240832727
+      Village1-C_60: 1687451052
+      Village1-C_61: 1058555688
+      Village1-C_62: 29562024
+      Village1-C_63: -1515028730
+      Village1-C_64: -1011812561
+      Village1-C_65: 1076592401
+      Village1-C_66: -355570004
+      Village1-C_67: -1982874414
+      Village1-C_68: -1524612220
+      Village1-C_69: -234562405
+      Village1-C_7: 1322773094
+      Village1-C_70: -1320359769
+      Village1-C_71: 1069288382
+      Village1-C_72: 1299139400
+      Village1-C_73: 845182767
+      Village1-C_74: 1310526536
+      Village1-C_75: 1960228537
+      Village1-C_76: 862784957
+      Village1-C_77: 1654628954
+      Village1-C_78: -1686137909
+      Village1-C_79: 666570741
+      Village1-C_8: 783254737
+      Village1-C_80: 524854589
+      Village1-C_81: -871575976
+      Village1-C_82: 2106911085
+      Village1-C_83: -1219832395
+      Village1-C_84: -2097771931
+      Village1-C_85: -1749976779
+      Village1-C_86: -1486136914
+      Village1-C_87: 159766083
+      Village1-C_88: 1439715985
+      Village1-C_89: 1958666905
+      Village1-C_9: 223980532
+      Village1-C_90: 1714286982
+      Village1-C_91: -2002553123
+      Village1-C_92: 665928141
+      Village1-C_93: 218572910
+      Village1-C_94: 1561879291
+      Village1-C_95: -2005503034
+      Village1-C_96: -470938972
+      Village1-C_97: 2019974150
+      Village1-C_98: 2038277824
+      Village1-C_99: 1698664902
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
