@@ -12482,6 +12482,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dad0cec47d219c45bd944502316d40b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  messages:
+  - yeeeeeei
+  - yaaaaaaa
+  - hooooooo
+  names:
+  - aaa
+  - fffff
+  - aa
+  window: {fileID: 88001128}
+  target: {fileID: 1101182247}
+  nameText: {fileID: 695143831}
+  player: {fileID: 2052289768}
 --- !u!1 &882146283
 GameObject:
   m_ObjectHideFlags: 0
@@ -42439,6 +42451,7 @@ MonoBehaviour:
   m_speed: 0.05
   teleportManager: {fileID: 818445714}
   mainCamera: {fileID: 519420028}
+  m_Rigidbody: {fileID: 2052289773}
 --- !u!50 &2052289773
 Rigidbody2D:
   serializedVersion: 4

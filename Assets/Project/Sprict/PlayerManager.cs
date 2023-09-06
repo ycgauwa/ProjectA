@@ -10,11 +10,19 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager m_instance;
     public GameTeleportManager teleportManager;
     public GameObject mainCamera;
+    public Rigidbody2D m_Rigidbody;
     // Start is called before the first frame update
     void Start()
     {
         m_instance = this;
-        
+        m_speed = 0.05f;
+
+    }
+    public void Event1()
+    {
+        Debug.Log("ooo");
+        m_speed = 0;
+
     }
 
     // Update is called once per frame

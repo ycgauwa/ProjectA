@@ -12,17 +12,19 @@ public class PlayerMessage : MonoBehaviour
     public Canvas window;
     public Text target;
     private IEnumerator coroutine;
+    public static PlayerMessage instance;
 
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         coroutine = CreateCoroutine();
         // コルーチンの起動(下記説明2)
         StartCoroutine(coroutine);
     }
 
     // Update is called once per frame
-    private IEnumerator CreateCoroutine()
+    public IEnumerator CreateCoroutine()
     {
         // window起動
         window.gameObject.SetActive(true);

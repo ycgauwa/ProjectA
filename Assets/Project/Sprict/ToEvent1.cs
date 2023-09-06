@@ -2,11 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class ToEvent1 : MonoBehaviour
 {
+    [SerializeField]
+    private List<string> messages;
+    [SerializeField]
+    private List<string> names;
+    public Canvas window;
+    public Text target;
+    public Text nameText;
     static bool one = false;
+    public GameObject player;
+    private IEnumerator coroutine;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,16 +24,104 @@ public class ToEvent1 : MonoBehaviour
     }
 
     // Update is called once per frame
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
+        //一回しか作動しないための仕組み
         if (!one)
         {
             Debug.Log("aaa");
+            StartCoroutine(Event1());
             one = true;
             Debug.Log(one);
-            
         }
        
     }
+    //イベント１のためのコルーチン。大枠の役割を果たしてくれる。
+    IEnumerator Event1()
+    {
+        
+        yield return new WaitForSeconds(1);
+        player.transform.position = new Vector3(-33, -34, 0);
+        //プレイヤーの固定（実力不足のため別のクラスのメソッドを呼び出している）
+        PlayerManager.m_instance.Event1();
+        coroutine = CreateCoroutine();
+        // コルーチンの起動(下記説明2)
+        StartCoroutine(coroutine);
+        
+    }
+
+    public IEnumerator CreateCoroutine()
+    {
+        // window起動
+        window.gameObject.SetActive(true);
+
+        // 抽象メソッド呼び出し 詳細は子クラスで実装
+        yield return OnAction();
+
+        // window終了
+        this.target.text = "";
+        this.window.gameObject.SetActive(false);
+
+        StopCoroutine(coroutine);
+        coroutine = null;
+        Debug.Log("hhh");
+        PlayerManager.m_instance.m_speed = 0.05f;
+
+
+    }
+    protected void showMessage(string message,string name)
+    {
+        this.target.text = message;
+        this.nameText.text = name;
+    }
+
+    IEnumerator OnAction()
+    {
+
+        for(int i = 0; i < messages.Count; ++i)
+        {
+            // 1フレーム分 処理を待機(下記説明1)
+            yield return null;
+
+            // 会話をwindowのtextフィールドに表示
+            showMessage(messages[i], names[i]);
+
+
+            // キー入力を待機 (下記説明1)
+            yield return new WaitUntil(() => Input.anyKeyDown);
+        }
+
+        yield break;
+
+    }
+    /*IEnumerator OnAction2()
+    {
+
+        for(int i = 0; i < names.Count; ++i)
+        {
+            // 1フレーム分 処理を待機(下記説明1)
+            yield return null;
+
+            // 会話をwindowのtextフィールドに表示
+            showMessage(messages[i], names[i]);
+
+
+            // キー入力を待機 (下記説明1)
+            yield return new WaitUntil(() => Input.anyKeyDown);
+        }
+
+        yield break;
+
+    }*/
+    /*IEnumerator ParallelEnumerator()
+    {
+        int counter = 0;
+        StartCoroutine((OnAction()));
+        StartCoroutine((OnAction2()));
+        yield return new WaitUntil(() => counter == 2);
+        Debug.Log("Finish!");
+    }*/
+
+
 }
