@@ -34,7 +34,14 @@ public class GameTeleportManager : MonoBehaviour
         new TeleportAddress(){tag="Home2",playerPosition = new Vector2(-11, -72)},
         new TeleportAddress(){tag="School9",playerPosition = new Vector2(-7, -71)},
         new TeleportAddress(){tag="School10",playerPosition = new Vector2(-10, -102)},
-
+        new TeleportAddress(){tag="School11",playerPosition = new Vector2(-85, -42)},
+        new TeleportAddress(){tag="School12",playerPosition = new Vector2(-4, -102)},
+        new TeleportAddress(){tag="School13",playerPosition = new Vector2(-66, -42)},
+        new TeleportAddress(){tag="School14",playerPosition = new Vector2(15, -102)},
+        new TeleportAddress(){tag="School15",playerPosition = new Vector2(-86, 5)},
+        new TeleportAddress(){tag="School16",playerPosition = new Vector2(23, -102)},
+        new TeleportAddress(){tag="School17",playerPosition = new Vector2(-76, 5)},
+        new TeleportAddress(){tag="School18",playerPosition = new Vector2(30, -102)},
     };
     
     // Start is called before the first frame update

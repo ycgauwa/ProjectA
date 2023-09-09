@@ -61,7 +61,7 @@ public class NewBehaviourScript : MonoBehaviour
             showMessage(messages[i]);
 
             // キー入力を待機 (下記説明1)
-            yield return new WaitUntil(() => Input.anyKeyDown);
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
 
         yield break;

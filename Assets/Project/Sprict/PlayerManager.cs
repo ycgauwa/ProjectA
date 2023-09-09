@@ -20,9 +20,7 @@ public class PlayerManager : MonoBehaviour
     }
     public void Event1()
     {
-        Debug.Log("ooo");
         m_speed = 0;
-
     }
 
     // Update is called once per frame
@@ -53,9 +51,13 @@ public class PlayerManager : MonoBehaviour
             other.gameObject.CompareTag("School5") || other.gameObject.CompareTag("School6") ||
             other.gameObject.CompareTag("School7") || other.gameObject.CompareTag("School8") ||
             other.gameObject.CompareTag("School9") || other.gameObject.CompareTag("School10") ||
-            other.gameObject.CompareTag("Home1") || other.gameObject.CompareTag("Home2");
+            other.gameObject.CompareTag("Home1") || other.gameObject.CompareTag("Home2") ||
+            other.gameObject.CompareTag("School11") || other.gameObject.CompareTag("School12") ||
+            other.gameObject.CompareTag("School13") || other.gameObject.CompareTag("School14") ||
+            other.gameObject.CompareTag("School15") || other.gameObject.CompareTag("School16")||
+            other.gameObject.CompareTag("School17") || other.gameObject.CompareTag("School18");
 
-        if (isTeleport == false) 
+        if(isTeleport == false) 
         {
             return;
 
@@ -143,6 +145,52 @@ public class PlayerManager : MonoBehaviour
         if (other.gameObject.CompareTag("School10"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("School10");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("School11"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("School11");
+            transform.position = teleportAddress.playerPosition;
+
+
+        }
+        if(other.gameObject.CompareTag("School12"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("School12");
+            transform.position = teleportAddress.playerPosition;
+
+
+        }
+        if(other.gameObject.CompareTag("School13"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("School13");
+            transform.position = teleportAddress.playerPosition;
+
+
+        }
+        if(other.gameObject.CompareTag("School14"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("School14");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("School15"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("School15");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("School16"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("School16");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("School17"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("School17");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("School18"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("School18");
             transform.position = teleportAddress.playerPosition;
         }
         //別クラスのメソッドの行使引数はteleportAddress

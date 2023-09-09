@@ -19,6 +19,7 @@ public class PlayerMessage : MonoBehaviour
     {
         instance = this;
         coroutine = CreateCoroutine();
+        PlayerManager.m_instance.Event1();
         // コルーチンの起動(下記説明2)
         StartCoroutine(coroutine);
     }
@@ -38,7 +39,8 @@ public class PlayerMessage : MonoBehaviour
 
         StopCoroutine(coroutine);
         coroutine = null;
-        
+        PlayerManager.m_instance.m_speed = 0.05f;
+
 
     }
     private void FixedUpdate()
@@ -61,7 +63,7 @@ public class PlayerMessage : MonoBehaviour
             showMessage(messages[i]);
 
             // キー入力を待機 (下記説明1)
-            yield return new WaitUntil(() => Input.anyKeyDown);
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
 
         yield break;

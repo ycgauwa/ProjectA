@@ -89,39 +89,11 @@ public class ToEvent1 : MonoBehaviour
 
 
             // キー入力を待機 (下記説明1)
-            yield return new WaitUntil(() => Input.anyKeyDown);
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
 
         yield break;
 
     }
-    /*IEnumerator OnAction2()
-    {
-
-        for(int i = 0; i < names.Count; ++i)
-        {
-            // 1フレーム分 処理を待機(下記説明1)
-            yield return null;
-
-            // 会話をwindowのtextフィールドに表示
-            showMessage(messages[i], names[i]);
-
-
-            // キー入力を待機 (下記説明1)
-            yield return new WaitUntil(() => Input.anyKeyDown);
-        }
-
-        yield break;
-
-    }*/
-    /*IEnumerator ParallelEnumerator()
-    {
-        int counter = 0;
-        StartCoroutine((OnAction()));
-        StartCoroutine((OnAction2()));
-        yield return new WaitUntil(() => counter == 2);
-        Debug.Log("Finish!");
-    }*/
-
-
+    
 }
