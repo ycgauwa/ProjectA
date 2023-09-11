@@ -14,7 +14,7 @@ public class ToEvent1 : MonoBehaviour
     public Canvas window;
     public Text target;
     public Text nameText;
-    static bool one = false;
+    public static bool one = false;
     public GameObject player;
     private IEnumerator coroutine;
     // Start is called before the first frame update
