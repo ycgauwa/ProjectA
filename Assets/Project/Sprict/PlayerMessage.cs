@@ -8,28 +8,27 @@ using UnityEngine.UI;
 public class PlayerMessage : MonoBehaviour
 {
     [SerializeField]
-    private List<string> messages;
+    private List<string> Messages;
     public Canvas window;
     public Text target;
-    private IEnumerator coroutine;
+    private IEnumerator playercoroutine;
     public static PlayerMessage instance;
 
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
-        coroutine = CreateCoroutine();
+        playercoroutine = CreateCoroutine();
         PlayerManager.m_instance.Event1();
         // コルーチンの起動(下記説明2)
-        StartCoroutine(coroutine);
+        StartCoroutine(playercoroutine);
+        Debug.Log("PlayerMessageStart");
     }
-
-    // Update is called once per frame
-    public IEnumerator CreateCoroutine()
+    private IEnumerator CreateCoroutine()
     {
         // window起動
         window.gameObject.SetActive(true);
-
+        Debug.Log("PlayerMessage.window");
         // 抽象メソッド呼び出し 詳細は子クラスで実装
         yield return OnAction();
 
@@ -37,9 +36,10 @@ public class PlayerMessage : MonoBehaviour
         this.target.text = "";
         this.window.gameObject.SetActive(false);
 
-        StopCoroutine(coroutine);
-        coroutine = null;
+        StopCoroutine(playercoroutine);
+        playercoroutine = null;
         PlayerManager.m_instance.m_speed = 0.05f;
+        Debug.Log("LLL");
 
 
     }
@@ -53,14 +53,14 @@ public class PlayerMessage : MonoBehaviour
     }
     IEnumerator OnAction()
     {
-
-        for (int i = 0; i < messages.Count; ++i)
+        Debug.Log("PlayerMessage.OnAction");
+        for (int i = 0; i < Messages.Count; ++i)
         {
             // 1フレーム分 処理を待機(下記説明1)
             yield return null;
 
             // 会話をwindowのtextフィールドに表示
-            showMessage(messages[i]);
+            showMessage(Messages[i]);
 
             // キー入力を待機 (下記説明1)
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));

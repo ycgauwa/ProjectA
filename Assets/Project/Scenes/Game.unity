@@ -3341,6 +3341,7 @@ GameObject:
   - component: {fileID: 284048998}
   - component: {fileID: 284048997}
   - component: {fileID: 284048999}
+  - component: {fileID: 284049001}
   m_Layer: 0
   m_Name: HomeInterior6
   m_TagString: Untagged
@@ -3425,14 +3426,61 @@ MonoBehaviour:
   m_GameObject: {fileID: 284048996}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ce0f3ac53fcae840bb56abd95376c01, type: 3}
+  m_Script: {fileID: 11500000, guid: d52c48136bf9bcb4592aece13fe17258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  window: {fileID: 0}
-  target: {fileID: 0}
-  charaname: {fileID: 0}
-  messages: []
-  chara: []
+  messages:
+  - aaaa
+  names:
+  - me
+  window: {fileID: 88001128}
+  target: {fileID: 1101182247}
+  nameText: {fileID: 695143831}
+--- !u!61 &284049001
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284048996}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &301327165
 GameObject:
   m_ObjectHideFlags: 0
@@ -17316,11 +17364,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   one: 0
-  messages: []
-  names: []
-  window: {fileID: 0}
-  target: {fileID: 0}
-  nameText: {fileID: 0}
+  messages:
+  - "\u307F\u3093\u306A\u304C\u96C6\u307E\u3063\u3066\u3044\u308B\u6559\u5BA4\u306B\u884C\u304B\u306A\u304D\u3083"
+  names:
+  - "\u5E78\u4EBA"
+  window: {fileID: 88001128}
+  target: {fileID: 1101182247}
+  nameText: {fileID: 695143831}
 --- !u!1 &852456066
 GameObject:
   m_ObjectHideFlags: 0
@@ -74668,6 +74718,55 @@ Transform:
   - {fileID: 1641137714}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1851983509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1851983511}
+  - component: {fileID: 1851983510}
+  m_Layer: 0
+  m_Name: Game Message Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1851983510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851983509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f245c2c01b3436a47aac2bd26241392a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messages: []
+  names: []
+  window: {fileID: 88001128}
+  target: {fileID: 1101182247}
+  nameText: {fileID: 695143831}
+--- !u!4 &1851983511
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851983509}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20.996845, y: -34.94368, z: 1.1221818}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1961341851
 GameObject:
   m_ObjectHideFlags: 0
@@ -75275,9 +75374,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76218673b938acf4c9f2efaaa2e42055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messages:
-  - "\u3068\u3046\u3068\u3046\u4ECA\u65E5\u3067\u5B66\u6821\u306E\u90FD\u5E02\u4F1D\u8AAC\u304C\u660E\u3089\u304B\u306B\u306A\u308B\u306E\u304B"
-  - "\u9045\u308C\u308B\u3068\u3001\u6012\u3089\u308C\u308B\u304B\u3089\u306A\u3002\u6E96\u5099\u3057\u305F\u3089\u968E\u6BB5\u3092\u964D\u308A\u3066\u5B66\u6821\u306B\u5411\u304B\u3046\u304B"
+  Messages:
+  - "\u3053\u308C\u304C\u8868\u793A\u3055\u308C\u3066\u308B"
+  - "\u3067\u304D\u3066\u308B\u3046\u3046\u3046"
   window: {fileID: 88001128}
   target: {fileID: 1101182247}
 --- !u!114 &2052289776
@@ -75292,7 +75391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76218673b938acf4c9f2efaaa2e42055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messages:
+  Messages:
   - "\u4E3B\u4EBA\u516C"
   - "\u4E3B\u4EBA\u516C"
   window: {fileID: 88001128}
@@ -75442,3 +75541,4 @@ SceneRoots:
   - {fileID: 88001129}
   - {fileID: 909309024}
   - {fileID: 1805624211}
+  - {fileID: 1851983511}

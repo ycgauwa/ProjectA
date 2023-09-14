@@ -14,26 +14,26 @@ public class ToEvent1 : MonoBehaviour
     public Canvas window;
     public Text target;
     public Text nameText;
-    public static bool one = false;
+    public static bool one;
     public GameObject player;
     private IEnumerator coroutine;
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(one);
+        one = false;
     }
 
     // Update is called once per frame
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log($"colloder: {other.gameObject.name} ");
+
         //àÍâÒÇµÇ©çÏìÆÇµÇ»Ç¢ÇΩÇﬂÇÃédëgÇ›
         if (!one)
         {
-            Debug.Log("aaa");
             StartCoroutine(Event1());
             one = true;
-            Debug.Log(one);
         }
        
     }
