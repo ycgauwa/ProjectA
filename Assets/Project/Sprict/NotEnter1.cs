@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public class NotEnter1 : MonoBehaviour
 {
-    //条件を満たさずに触れるとメッセージAが出て動けなくなる仕組みの作成
-    //ToEventクラスのone変数の条件によってこっちのクラスのメソッドが動くか動かないかを作る
-    //TPする前にウィンドウの表示→座標の固定をする。
-    public bool one = ToEvent1.one;
+    /*条件を満たさずに触れるとメッセージAが出て動けなくなる仕組みの作成
+    ToEventクラスのone変数の条件によってこっちのクラスのメソッドが動くか動かないかを作る
+    TPする前にウィンドウの表示→座標の固定をする。
+    変数の引き渡しは引数を使って行うToEvent→NotEnterで渡す*/
+    public bool one;
     [SerializeField]
     private List<string> messages;
     [SerializeField]
@@ -18,11 +19,12 @@ public class NotEnter1 : MonoBehaviour
     public Text target;
     public Text nameText;
     private IEnumerator coroutine;
+    public GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        one = false;
     }
 
     // Update is called once per frame
@@ -34,6 +36,8 @@ public class NotEnter1 : MonoBehaviour
     {
         //イベントなしには通れない仕組み
         //falseの時メッセージウィンドウの表示
+        //代入大事。同じ名前であっても下記のようなやり方で代入可能
+        this.one = ToEvent1.one;
         if(one == false)
         {
             PlayerManager.m_instance.Event1();
@@ -43,7 +47,7 @@ public class NotEnter1 : MonoBehaviour
         }
         if(one == true)
         {
-            Debug.Log("jdks");
+            player.transform.position = new Vector2(-10, -102);
         }
 
     }

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Test1 : MonoBehaviour
-{
+public class ItemGet : MonoBehaviour
+{　/*アイテムをゲットする時に使う関数
+  　調べるとメッセージウィンドウの表示
+    そしてインベントリにアイテムを突っ込む*/
     [SerializeField]
     private List<string> messages;
     [SerializeField]
@@ -12,6 +14,7 @@ public class Test1 : MonoBehaviour
     public Canvas window;
     public Text target;
     public Text nameText;
+    
     private void OnTriggerEnter2D(Collider2D collider)
     {
         isContacted = collider.gameObject.tag.Equals("Player");
@@ -31,15 +34,4 @@ public class Test1 : MonoBehaviour
             MessageManager.message_instance.MessageWindowActive(messages, names);
         }
     }
-    /*private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.gameObject.CompareTag("Player") &&Input.GetKeyDown(KeyCode.Return))
-        {
-            Debug.Log($"colloder: {collider.gameObject.name} ");
-            /*（）の中に引数を入れてあげると実行元のメソッドが渡した変数で処理を行ってくれる。
-            ただし、データを渡す側は変数だけでよい*/
-           /* MessageManager.message_instance.MessageWindowActive(messages, names);
-        }
-       
-    }*/
 }

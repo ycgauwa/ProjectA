@@ -22,13 +22,11 @@ public class PlayerMessage : MonoBehaviour
         PlayerManager.m_instance.Event1();
         // コルーチンの起動(下記説明2)
         StartCoroutine(playercoroutine);
-        Debug.Log("PlayerMessageStart");
     }
     private IEnumerator CreateCoroutine()
     {
         // window起動
         window.gameObject.SetActive(true);
-        Debug.Log("PlayerMessage.window");
         // 抽象メソッド呼び出し 詳細は子クラスで実装
         yield return OnAction();
 
