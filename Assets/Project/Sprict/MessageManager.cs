@@ -68,6 +68,7 @@ public class MessageManager : MonoBehaviour
     {
         this.messages = messages;
         this.names = names;
+        Debug.Log("ppp");
         PlayerManager.m_instance.m_speed = 0;
         coroutine = MessageCoroutine();
         // コルーチンの起動(下記説明2)
