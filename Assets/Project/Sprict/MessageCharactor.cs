@@ -37,7 +37,7 @@ public abstract class FieldObjectBase : MonoBehaviour
         if (isContacted && coroutine == null && Input.GetButton("Submit") && Input.GetKeyDown(KeyCode.Return))
         {
             coroutine = CreateCoroutine();
-            PlayerManager.m_instance.Event1();
+            PlayerManager.m_instance.m_speed = 0;
             // コルーチンの起動(下記説明2)
             StartCoroutine(coroutine);
         }

@@ -40,7 +40,7 @@ public class NotEnter1 : MonoBehaviour
         this.one = ToEvent1.one;
         if(one == false)
         {
-            PlayerManager.m_instance.Event1();
+            PlayerManager.m_instance.m_speed = 0;
             coroutine = CreateCoroutine();
             // コルーチンの起動(下記説明2)
             StartCoroutine(coroutine);

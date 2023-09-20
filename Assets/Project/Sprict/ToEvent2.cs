@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
 
 public class ToEvent2 : MonoBehaviour
 {
-    //選択画面が出て会話が始まり太鼓の音を流す。その後白い光の演出が出た後に誰もいなくなる
+    //選択画面が出て会話が始まりそのあとに太鼓の音を流す。その後白い光の演出が出た後に誰もいなくなる
     //座標固定したカメラが移動して（ゆっくり目に）一人のNPCが教室に入り太鼓の前まで行く
     //セリフを話した後にまたカメラを移動、警備員と少女が映る画角に移動そこで会話が終わった後
     //女の子がエフェクトを出して消滅。警備員のセリフを書いてから終幕。
@@ -13,9 +16,48 @@ public class ToEvent2 : MonoBehaviour
     private List<string> messages;
     [SerializeField]
     private List<string> names;
+    [SerializeField]
+    private List<string> messages2;
+    [SerializeField]
+    private List<string> names2;
+    [SerializeField]
+    private List<string> messages3;
+    [SerializeField]
+    private List<string> names3;
+    [SerializeField]
+    private List<string> messages4;
+    [SerializeField]
+    private List<string> names4;
+    [SerializeField]
+    private List<string> messages5;
+    [SerializeField]
+    private List<string> names5;
     public Canvas window;
     public Text target;
     public Text nameText;
+    public static bool one;
+    private IEnumerator coroutine;
+    private bool isContacted = false;
+    public AudioClip sound;
+    public AudioClip doorSound;
+    public Light2D light2D;
+    public GameObject player;
+    public GameObject[] friends;
+    public GameObject girl;
+    public GameObject guards;
+    public GameObject eventcamera;
+    public float speed;
+    private bool playerCamera;
+
+    //イベント2のためのコルーチン。大枠の役割を果たしてくれる。
+    IEnumerator Event2()
+    {
+        yield return new WaitForSeconds(1);
+        coroutine = CreateCoroutine();
+        // コルーチンの起動(下記説明2)
+        StartCoroutine(coroutine);
+
+    }
     private void OnTriggerEnter2D(Collider2D collider)
     {
         isContacted = collider.gameObject.tag.Equals("Player");
@@ -26,27 +68,257 @@ public class ToEvent2 : MonoBehaviour
     {
         isContacted = !collider.gameObject.tag.Equals("Player");
     }
-    private bool isContacted = false;
-
     private void FixedUpdate()
     {
-        if(isContacted && Input.GetButton("Submit") && Input.GetKeyDown(KeyCode.Return))
+        if(isContacted && coroutine == null && Input.GetButton("Submit") && Input.GetKeyDown(KeyCode.Return))
         {
-            Debug.Log(MessageManager.message_instance);
-            Debug.Log(messages);
-            Debug.Log(names);
-            MessageManager.message_instance.MessageWindowActive(messages, names);
+            light2D = this.gameObject.GetComponent<Light2D>();
+            coroutine = CreateCoroutine();
+            PlayerManager.m_instance.m_speed = 0;
+            // コルーチンの起動(下記説明2)
+            StartCoroutine(coroutine);
+        }
+        if(eventcamera.transform.position.y > 6 && cameraManager.playerCamera == false)
+        {
+            eventcamera.transform.Translate(new Vector3(0.0f, -0.05f, 0.0f * Time.deltaTime * speed));
+        }
+        if(girl.transform.position.x > -86 && cameraManager.girlCamera == true)
+        {
+            //girlが動くプログラム
+            girl.transform.Translate(new Vector3(-0.05f, 0, 0.0f * Time.deltaTime * speed));
+        }
+        if(eventcamera.transform.position.x < -80 && cameraManager.playerCamera == false && cameraManager.girlCamera == false)
+        {
+            eventcamera.transform.Translate(new Vector3(0.07f, 0.0f, 0.0f * Time.deltaTime * speed));
         }
     }
-    // Start is called before the first frame update
-    void Start()
+
+    IEnumerator CreateCoroutine()
     {
+        // window起動
+        window.gameObject.SetActive(true);
+
+        // 抽象メソッド呼び出し 詳細は子クラスで実装
+        yield return OnAction();
+
+        // window終了
+        this.target.text = "";
+        this.window.gameObject.SetActive(false);
+        GetComponent<AudioSource>().PlayOneShot(sound);
+        yield return new WaitForSeconds(2.0f);
+        yield return Flash();
+        //startCoroutineではなくてyield　return を書いてあげると動く（yield returnの意味を調べておく）
+        yield return new WaitForSeconds(3.0f);
+        light2D.intensity = 1.0f;
+        //cameraの処理
+        Event2Camera();
+
+        PlayerManager.m_instance.m_speed = 0.05f;
+        yield return new WaitForSeconds(6.0f);
+
+        window.gameObject.SetActive(true);
+        yield return OnAction2();
+        this.target.text = "";
+        this.window.gameObject.SetActive(false);
         
+        cameraManager.girlCamera = true;
+        yield return new WaitForSeconds(2.0f);
+        GetComponent<AudioSource>().PlayOneShot(doorSound);
+        yield return new WaitForSeconds(2.0f);
+        guards.transform.position = new Vector3(-76, 5, 0);
+        cameraManager.girlCamera = false;
+        yield return new WaitForSeconds(3.0f);
+        window.gameObject.SetActive(true);
+        yield return OnAction3();
+        this.target.text = "";
+        this.window.gameObject.SetActive(false);
+        yield return Flash();
+        yield return new WaitForSeconds(3.0f);
+        girl.transform.position = new Vector3(0, 0, 0);
+        light2D.intensity = 1.0f;
+        window.gameObject.SetActive(true);
+        yield return OnAction4();
+        this.target.text = "";
+        this.window.gameObject.SetActive(false);
+        yield return new WaitForSeconds(1.0f);
+
+        cameraManager.playerCamera = true;
+        yield return new WaitForSeconds(1.0f);
+        window.gameObject.SetActive(true);
+        yield return OnAction5();
+        this.target.text = "";
+        this.window.gameObject.SetActive(false);
+
+        StopCoroutine(coroutine);
+        coroutine = null;
+
+    }
+    private IEnumerator Flash()
+    {
+        Debug.Log("Flash");
+        light2D = this.gameObject.GetComponent<Light2D>();
+        light2D.intensity = 1.0f;
+
+        while(light2D.intensity < 7.0f)
+        {
+            light2D.intensity += 0.1f;
+            yield return null;//ここで１フレーム待ってくれてる
+                              //yield return null をつけるからもともとのメソッドを
+                              //void じゃなくて IEnumerator にしなきゃいけない。
+        }
+        
+        
+        /*Light2D x = light2D;
+        x.intensity = 1.0f;
+        while(x.intensity < 7.0f)
+        {
+           light2D.intensity += 0.1f;
+        }
+        
+        下は間違えた例。上から２行目の文が間違い違いとしてはコピーするのかショートカットの違い
+        float int stringの３つが危険。上の例はLight2D x = light2Dがコピーでなくショートカット
+        新たな疑問点として下はfloatじゃなくてvarにしてもダメみたいだからその理由が右辺にあるのかチェックしておく
+        
+        light2D = this.gameObject.GetComponent<Light2D>();
+        float brightness = light2D.intensity;
+        Debug.Log(light2D.intensity);
+        brightness = 1.0f;
+
+        while(brightness < 7.0f)
+        {
+            light2D.intensity += 0.1f;
+        }
+        
+        */
+    }
+    private void Event2Camera()
+    {
+        this.playerCamera = cameraManager.playerCamera;
+        cameraManager.playerCamera = false;
+        player.transform.position = new Vector3(70, -45, 0);
+        friends[0].transform.position = new Vector3(0, 0, 0);
+        friends[1].transform.position = new Vector3(0, 0, 0);
+        friends[2].transform.position = new Vector3(0, 0, 0);
+        friends[3].transform.position = new Vector3(0, 0, 0);
+        girl.transform.position = new Vector3(-80, 6, 0);
+
+    }
+    protected void showMessage(string message, string name )
+    {
+        this.target.text = message;
+        this.nameText.text = name;
+    }
+    protected void showMessage2(string message2, string name2)
+    {
+        this.target.text = message2;
+        this.nameText.text = name2;
+    }
+    protected void showMessage3(string message3, string name3)
+    {
+        this.target.text = message3;
+        this.nameText.text = name3;
+    }
+    protected void showMessage4(string message4, string name4)
+    {
+        this.target.text = message4;
+        this.nameText.text = name4;
+    }
+    protected void showMessage5(string message5, string name5)
+    {
+        this.target.text = message5;
+        this.nameText.text = name5;
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator OnAction()
     {
-        
+        for(int i = 0; i < messages.Count; ++i)
+        {
+            // 1フレーム分 処理を待機(下記説明1)
+            yield return null;
+            // 会話をwindowのtextフィールドに表示
+            showMessage(messages[i], names[i]);
+            // キー入力を待機 (下記説明1)
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+        }
+
+        yield break;
+
     }
+    IEnumerator OnAction2()
+    {
+
+        for(int i = 0; i < messages2.Count; ++i)
+        {
+            // 1フレーム分 処理を待機(下記説明1)
+            yield return null;
+
+            // 会話をwindowのtextフィールドに表示
+            showMessage2(messages2[i], names2[i]);
+
+
+            // キー入力を待機 (下記説明1)
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+        }
+
+        yield break;
+
+    }
+    IEnumerator OnAction3()
+    {
+
+        for(int i = 0; i < messages3.Count; ++i)
+        {
+            // 1フレーム分 処理を待機(下記説明1)
+            yield return null;
+
+            // 会話をwindowのtextフィールドに表示
+            showMessage3(messages3[i], names3[i]);
+
+
+            // キー入力を待機 (下記説明1)
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+        }
+
+        yield break;
+
+    }
+    IEnumerator OnAction4()
+    {
+
+        for(int i = 0; i < messages4.Count; ++i)
+        {
+            // 1フレーム分 処理を待機(下記説明1)
+            yield return null;
+
+            // 会話をwindowのtextフィールドに表示
+            showMessage4(messages4[i], names4[i]);
+
+
+            // キー入力を待機 (下記説明1)
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+        }
+
+        yield break;
+
+    }
+    IEnumerator OnAction5()
+    {
+
+        for(int i = 0; i < messages5.Count; ++i)
+        {
+            // 1フレーム分 処理を待機(下記説明1)
+            yield return null;
+
+            // 会話をwindowのtextフィールドに表示
+            showMessage5(messages5[i], names5[i]);
+
+
+            // キー入力を待機 (下記説明1)
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+        }
+
+        yield break;
+
+    }
+
 }

@@ -44,7 +44,8 @@ public class ToEvent1 : MonoBehaviour
         yield return new WaitForSeconds(1);
         player.transform.position = new Vector3(-33, -34, 0);
         //プレイヤーの固定（実力不足のため別のクラスのメソッドを呼び出している）
-        PlayerManager.m_instance.Event1();
+        //PlayerManager.m_instance.Event1();
+        PlayerManager.m_instance.m_speed = 0;
         coroutine = CreateCoroutine();
         // コルーチンの起動(下記説明2)
         StartCoroutine(coroutine);

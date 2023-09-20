@@ -18,10 +18,6 @@ public class PlayerManager : MonoBehaviour
         m_speed = 0.05f;
 
     }
-    public void Event1()
-    {
-        m_speed = 0;
-    }
 
     // Update is called once per frame
     private void Update()
@@ -54,8 +50,17 @@ public class PlayerManager : MonoBehaviour
             other.gameObject.CompareTag("Home1") || other.gameObject.CompareTag("Home2") ||
             other.gameObject.CompareTag("School11") || other.gameObject.CompareTag("School12") ||
             other.gameObject.CompareTag("School13") || other.gameObject.CompareTag("School14") ||
-            other.gameObject.CompareTag("School15") || other.gameObject.CompareTag("School16")||
-            other.gameObject.CompareTag("School17") || other.gameObject.CompareTag("School18");
+            other.gameObject.CompareTag("School15") || other.gameObject.CompareTag("School16") ||
+            other.gameObject.CompareTag("School17") || other.gameObject.CompareTag("School18") ||
+            other.gameObject.CompareTag("Minnka1-1") || other.gameObject.CompareTag("Minnka1-2") ||
+            other.gameObject.CompareTag("Minnka1-3") || other.gameObject.CompareTag("Minnka1-4") ||
+            other.gameObject.CompareTag("Minnka1-5") || other.gameObject.CompareTag("Minnka1-6") ||
+            other.gameObject.CompareTag("Minnka1-7") || other.gameObject.CompareTag("Minnka1-8") ||
+            other.gameObject.CompareTag("Minnka1-9") || other.gameObject.CompareTag("Minnka1-10") ||
+            other.gameObject.CompareTag("Minnka1-11") || other.gameObject.CompareTag("Minnka1-12") ||
+            other.gameObject.CompareTag("Minnka1-13") || other.gameObject.CompareTag("Minnka1-14") ||
+            other.gameObject.CompareTag("Minnka1-15") || other.gameObject.CompareTag("Minnka1-16") ||
+            other.gameObject.CompareTag("Minnka1-17") || other.gameObject.CompareTag("Minnka1-18");
 
         if(isTeleport == false) 
         {
@@ -191,6 +196,86 @@ public class PlayerManager : MonoBehaviour
         if(other.gameObject.CompareTag("School18"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("School18");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-1"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-1");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-2"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-2");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-3"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-3");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-4"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-4");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-5"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-5");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-6"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-6");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-7"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-7");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-8"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-8");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-9"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-9");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-10"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-10");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-11"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-11");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-12"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-12");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-13"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-13");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-14"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-14");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-15"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-15");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-16"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-16");
             transform.position = teleportAddress.playerPosition;
         }
         //別クラスのメソッドの行使引数はteleportAddress

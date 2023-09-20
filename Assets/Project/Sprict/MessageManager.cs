@@ -14,6 +14,7 @@ public class MessageManager : MonoBehaviour
     public Text nameText;
     public static MessageManager message_instance;
     private IEnumerator coroutine;
+    public static bool talk = false;
 
     //ここでメッセージスクリプトを呼び出すスクリプトを作成する
     void Start()
@@ -35,6 +36,7 @@ public class MessageManager : MonoBehaviour
         StopCoroutine(coroutine);
         coroutine = null;
         PlayerManager.m_instance.m_speed = 0.05f;
+        
 
 
     }
@@ -64,15 +66,19 @@ public class MessageManager : MonoBehaviour
     }
     /*（）の中に引数をいれるその引数の中身はTest1.csが渡してきている
     受け取る側ではList<string>まで型を書いて*/
-    public void MessageWindowActive(List<string>messages,List<string>names)
+    public void MessageWindowActive(List<string>messages,List<string>names,AudioClip sound = null)
     {
         this.messages = messages;
         this.names = names;
-        Debug.Log("ppp");
         PlayerManager.m_instance.m_speed = 0;
         coroutine = MessageCoroutine();
         // コルーチンの起動(下記説明2)
         StartCoroutine(coroutine);
+
+        if(sound != null)
+        {
+            GetComponent<AudioSource>().PlayOneShot(sound);
+        }
     }
     /*疑問点まとめ
     １受け取る側の引数の名前がmsgとnamだけどこれどっからとってきてるの？

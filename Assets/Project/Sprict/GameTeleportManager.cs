@@ -42,6 +42,26 @@ public class GameTeleportManager : MonoBehaviour
         new TeleportAddress(){tag="School16",playerPosition = new Vector2(23, -102)},
         new TeleportAddress(){tag="School17",playerPosition = new Vector2(-76, 5)},
         new TeleportAddress(){tag="School18",playerPosition = new Vector2(30, -102)},
+        new TeleportAddress(){tag="Minnka1-1",playerPosition = new Vector2(24, -2)},
+        new TeleportAddress(){tag="Minnka1-2",playerPosition = new Vector2(60, -42)},
+        new TeleportAddress(){tag="Minnka1-3",playerPosition = new Vector2(79, -64)},
+        new TeleportAddress(){tag="Minnka1-4",playerPosition = new Vector2(81, -47)},
+        new TeleportAddress(){tag="Minnka1-5",playerPosition = new Vector2(99, -66)},
+        new TeleportAddress(){tag="Minnka1-6",playerPosition = new Vector2(88, -67)},
+        new TeleportAddress(){tag="Minnka1-7",playerPosition = new Vector2(107, -45)},
+        new TeleportAddress(){tag="Minnka1-8",playerPosition = new Vector2(87, -45)},
+        new TeleportAddress(){tag="Minnka1-9",playerPosition = new Vector2(90, -23)},
+        new TeleportAddress(){tag="Minnka1-10",playerPosition = new Vector2(70, 3)},
+        new TeleportAddress(){tag="Minnka1-11",playerPosition = new Vector2(69, -21)},
+        new TeleportAddress(){tag="Minnka1-12",playerPosition = new Vector2(71, -35)},
+        new TeleportAddress(){tag="Minnka1-13",playerPosition = new Vector2(93, 4)},
+        new TeleportAddress(){tag="Minnka1-14",playerPosition = new Vector2(-14, 4)},
+        new TeleportAddress(){tag="Minnka1-15",playerPosition = new Vector2(10, 1)},
+        new TeleportAddress(){tag="Minnka1-16",playerPosition = new Vector2(45, -1)},
+        new TeleportAddress(){tag="Minnka1-17",playerPosition = new Vector2(24, -2)},
+        new TeleportAddress(){tag="Minnka1-18",playerPosition = new Vector2(24, -2)},
+        new TeleportAddress(){tag="Minnka1-19",playerPosition = new Vector2(24, -2)},
+
     };
     
     // Start is called before the first frame update
