@@ -13,7 +13,7 @@ public class MessageManager : MonoBehaviour
     public Text target;
     public Text nameText;
     public static MessageManager message_instance;
-    private IEnumerator coroutine;
+    private Coroutine coroutine;
     public static bool talk = false;
 
     //ここでメッセージスクリプトを呼び出すスクリプトを作成する
@@ -23,6 +23,8 @@ public class MessageManager : MonoBehaviour
     }
     public IEnumerator MessageCoroutine()
     {
+        //if文でコルーチンがあるかどうかの条件式を作る
+        //メッセージ中だよってboolを作る（IEnumerator内で）
         // window起動
         window.gameObject.SetActive(true);
 
@@ -33,12 +35,9 @@ public class MessageManager : MonoBehaviour
         this.target.text = "";
         this.window.gameObject.SetActive(false);
 
-        StopCoroutine(coroutine);
-        coroutine = null;
         PlayerManager.m_instance.m_speed = 0.05f;
-        
-
-
+        //StopCoroutine(coroutine);
+        coroutine = null;
     }
     protected void showMessage(string message, string name)
     {
@@ -68,12 +67,15 @@ public class MessageManager : MonoBehaviour
     受け取る側ではList<string>まで型を書いて*/
     public void MessageWindowActive(List<string>messages,List<string>names,AudioClip sound = null)
     {
+        //ここでコルーチンが歩かないかの条件
+        if(coroutine != null)
+        {
+            StopCoroutine(coroutine); 
+        }
         this.messages = messages;
         this.names = names;
         PlayerManager.m_instance.m_speed = 0;
-        coroutine = MessageCoroutine();
-        // コルーチンの起動(下記説明2)
-        StartCoroutine(coroutine);
+        coroutine = StartCoroutine(MessageCoroutine()); 
 
         if(sound != null)
         {

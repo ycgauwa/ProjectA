@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class Test1 : MonoBehaviour
 {
-    [SerializeField]
+    //メッセージウィンドウが表示され続けキーを押しても反応せず動かない不具合を解決しておく
+    //このスクリプトは廃棄。他のスクリプトに干渉したり、一回目が時間経過？でウィンドウ閉じるのに
+    //２回目は一生閉じたり消えたりするのが意味わからん
+    /*[SerializeField]
     private List<string> messages;
     [SerializeField]
     private List<string> names;
