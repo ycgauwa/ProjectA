@@ -105,8 +105,10 @@ public class ToEvent2 : MonoBehaviour
         this.target.text = "";
         this.window.gameObject.SetActive(false);
         GetComponent<AudioSource>().PlayOneShot(sound);
+       
         yield return new WaitForSeconds(2.0f);
         yield return Flash();
+        
         //startCoroutineではなくてyield　return を書いてあげると動く（yield returnの意味を調べておく）
         yield return new WaitForSeconds(3.0f);
         light2D.intensity = 1.0f;
@@ -118,6 +120,7 @@ public class ToEvent2 : MonoBehaviour
 
         window.gameObject.SetActive(true);
         yield return OnAction2();
+        
         this.target.text = "";
         this.window.gameObject.SetActive(false);
         
@@ -125,27 +128,39 @@ public class ToEvent2 : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         GetComponent<AudioSource>().PlayOneShot(doorSound);
         yield return new WaitForSeconds(2.0f);
+        
         guards.transform.position = new Vector3(-76, 5, 0);
         cameraManager.girlCamera = false;
+        
         yield return new WaitForSeconds(3.0f);
+        
         window.gameObject.SetActive(true);
         yield return OnAction3();
+
         this.target.text = "";
         this.window.gameObject.SetActive(false);
+        
         yield return Flash();
+
         yield return new WaitForSeconds(3.0f);
+
         girl.transform.position = new Vector3(0, 0, 0);
         light2D.intensity = 1.0f;
         window.gameObject.SetActive(true);
         yield return OnAction4();
+
         this.target.text = "";
         this.window.gameObject.SetActive(false);
+        
         yield return new WaitForSeconds(1.0f);
 
         cameraManager.playerCamera = true;
+        
         yield return new WaitForSeconds(1.0f);
+
         window.gameObject.SetActive(true);
         yield return OnAction5();
+
         this.target.text = "";
         this.window.gameObject.SetActive(false);
 
@@ -208,26 +223,7 @@ public class ToEvent2 : MonoBehaviour
         this.target.text = message;
         this.nameText.text = name;
     }
-    protected void showMessage2(string message2, string name2)
-    {
-        this.target.text = message2;
-        this.nameText.text = name2;
-    }
-    protected void showMessage3(string message3, string name3)
-    {
-        this.target.text = message3;
-        this.nameText.text = name3;
-    }
-    protected void showMessage4(string message4, string name4)
-    {
-        this.target.text = message4;
-        this.nameText.text = name4;
-    }
-    protected void showMessage5(string message5, string name5)
-    {
-        this.target.text = message5;
-        this.nameText.text = name5;
-    }
+
 
     IEnumerator OnAction()
     {
@@ -253,7 +249,7 @@ public class ToEvent2 : MonoBehaviour
             yield return null;
 
             // 会話をwindowのtextフィールドに表示
-            showMessage2(messages2[i], names2[i]);
+            showMessage(messages2[i], names2[i]);
 
 
             // キー入力を待機 (下記説明1)
@@ -272,7 +268,7 @@ public class ToEvent2 : MonoBehaviour
             yield return null;
 
             // 会話をwindowのtextフィールドに表示
-            showMessage3(messages3[i], names3[i]);
+            showMessage(messages3[i], names3[i]);
 
 
             // キー入力を待機 (下記説明1)
@@ -291,7 +287,7 @@ public class ToEvent2 : MonoBehaviour
             yield return null;
 
             // 会話をwindowのtextフィールドに表示
-            showMessage4(messages4[i], names4[i]);
+            showMessage(messages4[i], names4[i]);
 
 
             // キー入力を待機 (下記説明1)
@@ -310,7 +306,7 @@ public class ToEvent2 : MonoBehaviour
             yield return null;
 
             // 会話をwindowのtextフィールドに表示
-            showMessage5(messages5[i], names5[i]);
+            showMessage(messages5[i], names5[i]);
 
 
             // キー入力を待機 (下記説明1)

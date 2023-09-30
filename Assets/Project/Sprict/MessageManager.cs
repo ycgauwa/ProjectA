@@ -34,6 +34,7 @@ public class MessageManager : MonoBehaviour
         // windowèIóπ
         this.target.text = "";
         this.window.gameObject.SetActive(false);
+        Test1.messageSwitch = false;
 
         PlayerManager.m_instance.m_speed = 0.05f;
         //StopCoroutine(coroutine);
@@ -46,6 +47,7 @@ public class MessageManager : MonoBehaviour
     }
     IEnumerator OnAction()
     {
+        Debug.Log("2");
 
         for(int i = 0; i < messages.Count; ++i)
         {

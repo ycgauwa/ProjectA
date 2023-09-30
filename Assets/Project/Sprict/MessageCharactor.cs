@@ -32,7 +32,7 @@ public abstract class FieldObjectBase : MonoBehaviour
         isContacted = !collider.gameObject.tag.Equals("Player");
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (isContacted && coroutine == null && Input.GetButton("Submit") && Input.GetKeyDown(KeyCode.Return))
         {

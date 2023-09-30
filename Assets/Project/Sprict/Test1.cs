@@ -5,16 +5,18 @@ using UnityEngine.UI;
 
 public class Test1 : MonoBehaviour
 {
-    //メッセージウィンドウが表示され続けキーを押しても反応せず動かない不具合を解決しておく
+    //①メッセージウィンドウが表示され続けキーを押しても反応せず動かない不具合を解決しておく
+    //①はウィンドウが開いてるのにメソッドを動かしちゃってウィンドウが閉じる→消えるを一瞬で繰り返すから起きた。条件付けをしよう
     //このスクリプトは廃棄。他のスクリプトに干渉したり、一回目が時間経過？でウィンドウ閉じるのに
-    //２回目は一生閉じたり消えたりするのが意味わからん
-    /*[SerializeField]
+    //２回目は一生閉じたり消えたりするのが意味わからん→これも①と同じ感じ
+    [SerializeField]
     private List<string> messages;
     [SerializeField]
     private List<string> names;
     public Canvas window;
     public Text target;
     public Text nameText;
+    public static bool messageSwitch = false;
     private void OnTriggerEnter2D(Collider2D collider)
     {
         isContacted = collider.gameObject.tag.Equals("Player");
@@ -26,11 +28,14 @@ public class Test1 : MonoBehaviour
         isContacted = !collider.gameObject.tag.Equals("Player");
     }
     private bool isContacted = false;
+    //物理的な挙動の時はFixedUpdateでかけ！
 
-    private void FixedUpdate()
+    private void Update()//入力チェックはUpdateに書く
     {
-        if(isContacted && Input.GetButton("Submit") && Input.GetKeyDown(KeyCode.Return))
+        //メッセージウィンドウ閉じるときはこのメソッドを
+        if(isContacted && messageSwitch == false && Input.GetKeyDown(KeyCode.Return))
         {
+            messageSwitch = true;
             Debug.Log(MessageManager.message_instance);
             Debug.Log(messages);
             Debug.Log(names);

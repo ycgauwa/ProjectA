@@ -29,78 +29,72 @@ public class Choice1 : MonoBehaviour
     public Button yes;
     public Button no;
     private IEnumerator coroutine;
-    private bool yesSelection;
-    private bool noSelection;
-    //private bool choice1 = false;
+    private IEnumerator coroutine2;
+    
+    //アンサーとして何を答えたか
+    private bool answer;
+    //アイテムを既に入手しているかどうか
+    private bool isGet;
+    private bool isOpenSelect = false;
     private bool isContacted = false;
-
 
     // Start is called before the first frame update
     void Start()
     {
-        yesSelection = false;
-        noSelection = false;
-
+        answer = false;
+        isGet = false;
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        isContacted = collider.gameObject.tag.Equals("Player");
+        if(collider.gameObject.tag.Equals("Player"))
+        {
+            isContacted = true;
+        }
+        
     }
 
     // colliderをもつオブジェクトの領域外にでたとき(下記で説明1)
     private void OnTriggerExit2D(Collider2D collider)
     {
-        isContacted = !collider.gameObject.tag.Equals("Player");
-    }
-    private void FixedUpdate()
-    {
-        if(isContacted && coroutine == null && Input.GetButton("Submit") && /*choice1 == false && */Input.GetKeyDown(KeyCode.Return))
+        if(collider.gameObject.tag.Equals("Player"))
         {
-            coroutine = CreateCoroutine();
-            PlayerManager.m_instance.m_speed = 0;
-            // コルーチンの起動(下記説明2)
-            StartCoroutine(coroutine);
+            isContacted = false;
         }
     }
-    public void Update()
-    {
-        //Debug.Log(choice1);
-    }
-    IEnumerator CreateCoroutine() 
-    {
-        window.gameObject.SetActive(true);
-        yield return OnAction();
-        /*if(choice1 == false)
+    private void Update()
+    {   
+        //話しかける(条件は動的なものと今回のboolのように恒常的なもので分けた方がいい)
+        if(Input.GetKeyDown(KeyCode.Return))
         {
-            yield return OnAction();
+            if(isContacted == true && coroutine == null)
+            {
+                if(isGet)
+                {
+                    coroutine = OnAction2();
+                    PlayerManager.m_instance.m_speed = 0;
+                    StartCoroutine(coroutine);
+                }
+                else
+                {
+                    coroutine = OnAction();
+                    PlayerManager.m_instance.m_speed = 0;
+                    // コルーチンの起動(下記説明2)
+                    StartCoroutine(coroutine);
+                }
+
+            }
         }
-        else
-        {
-            yield return OnAction2();
-        }*/
+
     }
     protected void showMessage(string message, string name)
     {
         this.target.text = message;
         this.nameText.text = name;
     }
-    protected void showMessage2(string message2, string name2)
-    {
-        this.target.text = message2;
-        this.nameText.text = name2;
-    }
-    protected void showMessage3(string message3, string name3)
-    {
-        this.target.text = message3;
-        this.nameText.text = name3;
-    }
-    protected void showMessage4(string message4, string name4)
-    {
-        this.target.text = message4;
-        this.nameText.text = name4;
-    }
     IEnumerator OnAction()
     {
+        window.gameObject.SetActive(true);
+        Debug.Log("OnAction");
         for(int i = 0; i < messages.Count; ++i)
         {
             // 1フレーム分 処理を待機(下記説明1)
@@ -110,62 +104,74 @@ public class Choice1 : MonoBehaviour
             if(i == messages.Count - 1)
             {
                 Selectwindow.gameObject.SetActive(true);
+                isOpenSelect = true;
+                break;
             }
-            // キー入力を待機 (下記説明1)
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
-        for(int i = 0; i < messages2.Count && yesSelection == true; ++i)
+        yield return new WaitUntil(() => !isOpenSelect );
+        //はいを選んだ
+        if(answer == true)
         {
-            Debug.Log("OnAction.yesSelection");
-            yield return null;
-            showMessage2(messages2[i], names2[i]);
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            for(int i = 0; i < messages2.Count; ++i)
+            {
+                yield return null;
+                //入手するを表示
+                showMessage(messages2[i], names2[i]);
+                isGet = true;
+                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            }
         }
-        for(int i = 0; i < messages3.Count && noSelection == true; ++i)
+        else
         {
-            Debug.Log("OnAction.noSelection");
-            yield return null;
-            showMessage3(messages3[i], names3[i]);
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            for(int i = 0; i < messages3.Count; ++i)
+            {
+                yield return null;
+                //入手してない
+                showMessage(messages3[i], names3[i]);
+                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            }
         }
-
+        
         window.gameObject.SetActive(false);
-        noSelection = false;
-        yesSelection = false;
         PlayerManager.m_instance.m_speed = 0.05f;
-        //choice1 = true;
+        coroutine = null;
         yield break;
 
     }
     IEnumerator OnAction2()
     {
+        window.gameObject.SetActive(true);
         Debug.Log("OnAction2");
+
         for(int i = 0; i < messages4.Count; ++i)
         {
+            Debug.Log(messages4);
             // 1フレーム分 処理を待機(下記説明1)
             yield return null;
 
-            // 会話をwindowのtextフィールドに表示
-            showMessage4(messages4[i], names4[i]);
+            //すでにもってる
+            showMessage(messages4[i], names4[i]);
 
 
             // キー入力を待機 (下記説明1)
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
-
+        window.gameObject.SetActive(false);
+        PlayerManager.m_instance.m_speed = 0.05f;
+        coroutine = null;
         yield break;
-
     }
-
-    //選択したあとにもっかい話しかける時のテキストの用意
-    public void YesChangeText()
+    public void SelectAnswerYes()
     {
-        yesSelection = !yesSelection;
+        answer = true;
         Selectwindow.gameObject.SetActive(false);
+        isOpenSelect = false;
     }
-    public void NoChangeText()
+    public void SelectAnswerNo()
     {
-        noSelection = !noSelection;
+        answer = false;
         Selectwindow.gameObject.SetActive(false);
+        isOpenSelect = false;
     }
 }
