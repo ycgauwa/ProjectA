@@ -41,10 +41,6 @@ public class PlayerMessage : MonoBehaviour
 
 
     }
-    private void FixedUpdate()
-    {
-        
-    }
     protected void showMessage(string message)
     {
         this.target.text = message;
@@ -65,11 +61,6 @@ public class PlayerMessage : MonoBehaviour
         }
 
         yield break;
-
-    }
-    // Update is called once per frame
-    void Update()
-    {
 
     }
 }

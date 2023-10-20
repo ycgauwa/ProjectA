@@ -196,6 +196,9 @@ MonoBehaviour:
   names:
   - "\u5E78\u4EBA"
   - "\u5E78\u4EBA"
+  image:
+  - {fileID: 0}
+  - {fileID: 0}
   window: {fileID: 0}
   target: {fileID: 0}
   nameText: {fileID: 0}

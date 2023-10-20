@@ -13,6 +13,8 @@ public class Test1 : MonoBehaviour
     private List<string> messages;
     [SerializeField]
     private List<string> names;
+    [SerializeField]
+    private List<Sprite> image;
     public Canvas window;
     public Text target;
     public Text nameText;
@@ -39,7 +41,7 @@ public class Test1 : MonoBehaviour
             Debug.Log(MessageManager.message_instance);
             Debug.Log(messages);
             Debug.Log(names);
-            MessageManager.message_instance.MessageWindowActive(messages, names);
+            MessageManager.message_instance.MessageWindowActive(messages, names,image);
         }
     }
     /*private void OnTriggerEnter2D(Collider2D collider)

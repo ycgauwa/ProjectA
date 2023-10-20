@@ -9,9 +9,12 @@ public class MessageManager : MonoBehaviour
     private List<string> messages;
     [SerializeField]
     private List<string> names;
+    [SerializeField]
+    private List<Sprite> image;
     public Canvas window;
     public Text target;
     public Text nameText;
+    public Image characterImage;
     public static MessageManager message_instance;
     private Coroutine coroutine;
     public static bool talk = false;
@@ -32,22 +35,24 @@ public class MessageManager : MonoBehaviour
         yield return OnAction();
 
         // window終了
-        this.target.text = "";
-        this.window.gameObject.SetActive(false);
+        target.text = "";
+        window.gameObject.SetActive(false);
         Test1.messageSwitch = false;
 
         PlayerManager.m_instance.m_speed = 0.05f;
+        Homing.m_instance.speed = 2;
         //StopCoroutine(coroutine);
         coroutine = null;
     }
-    protected void showMessage(string message, string name)
+    protected void showMessage(string message, string name ,Sprite image)
     {
-        this.target.text = message;
-        this.nameText.text = name;
+        target.text = message;
+        nameText.text = name;
+        characterImage.sprite = image;
+
     }
     IEnumerator OnAction()
     {
-        Debug.Log("2");
 
         for(int i = 0; i < messages.Count; ++i)
         {
@@ -55,7 +60,7 @@ public class MessageManager : MonoBehaviour
             yield return null;
 
             // 会話をwindowのtextフィールドに表示
-            showMessage(messages[i], names[i]);
+            showMessage(messages[i], names[i], image[i]);
 
 
             // キー入力を待機 (下記説明1)
@@ -67,7 +72,7 @@ public class MessageManager : MonoBehaviour
     }
     /*（）の中に引数をいれるその引数の中身はTest1.csが渡してきている
     受け取る側ではList<string>まで型を書いて*/
-    public void MessageWindowActive(List<string>messages,List<string>names,AudioClip sound = null)
+    public void MessageWindowActive(List<string>messages,List<string>names, List<Sprite> image = null, AudioClip sound = null )
     {
         //ここでコルーチンが歩かないかの条件
         if(coroutine != null)
@@ -76,7 +81,10 @@ public class MessageManager : MonoBehaviour
         }
         this.messages = messages;
         this.names = names;
+        this.image = image;
         PlayerManager.m_instance.m_speed = 0;
+        Homing.m_instance.speed = 0;
+        
         coroutine = StartCoroutine(MessageCoroutine()); 
 
         if(sound != null)

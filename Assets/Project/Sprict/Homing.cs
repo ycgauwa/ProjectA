@@ -2,39 +2,59 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.LowLevel;
 
 public class Homing : MonoBehaviour
 {
-    Transform playerTr; //プレイヤーのTransform
+    //プレイヤーのTransform
+    Transform playerTr;
+
+    //Staticを使ってたり、インスタンス化している
+    public static Homing m_instance;
     public GameTeleportManager teleportManager;
-    [SerializeField] float speed = 2; //敵の動くスピード
-    // Start is called before the first frame update
+    [SerializeField] 
+    public float speed = 2; //敵の動くスピード
+    public ToEvent3 toevent3;
+    public float enemyCount = 0.0f; //　敵が追いかけている時間
+    public AudioClip chaseSound;
+
     private void Start()
     {
+        m_instance = this;
         // プレイヤーのTransformを取得（プレイヤーのタグPlayerに設定必要）
         playerTr = GameObject.FindGameObjectWithTag("Player").transform;
     }
-
-
-
-    // Update is called once per frame
     private void Update()
     {
-        if (Vector2.Distance(transform.position, playerTr.position) < 0.1f)
-            return;
 
-        // プレイヤーに向けて進む
-        transform.position = Vector2.MoveTowards(
-            transform.position,
-            new Vector2(playerTr.position.x, playerTr.position.y),
-            speed * Time.deltaTime);
-       
+        if(toevent3.event3flag)
+        {
+            if(Vector2.Distance(transform.position, playerTr.position) < 0.1f)
+                return;
+
+            // プレイヤーに向けて進む
+            transform.position = Vector2.MoveTowards(
+                transform.position,
+                new Vector2(playerTr.position.x, playerTr.position.y),
+                speed * Time.deltaTime);
+        }
+        if(speed > 0)
+        {
+            enemyCount += Time.deltaTime;
+        }
     }
+    // 敵が一定の距離を動いた状態でプレイヤーがワープしたら追っかけてこなくなる
+    // 動いた距離を記録（あるいは時間を記録する変数を作成）その後動いた距離が一定以上になると
+    // その変数の値が０となる。０の時は（一定の数以下なら）ワープしないを追加する
+
+
     //敵が時間差テレポートするメソッド
     public void TimerTeleport()
     {
-        var teleportAddress = teleportManager.FindTeleportAddress("House");
-        
+        if(toevent3.event3flag)
+        {
+            var teleportAddress = teleportManager.FindTeleportAddress("House");
+        }
     }
     //プレイヤーがTPことを認知させる
     

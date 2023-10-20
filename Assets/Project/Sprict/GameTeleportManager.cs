@@ -12,6 +12,10 @@ public class GameTeleportManager : MonoBehaviour
     
     //テレポートまでの時間を設定する変数
     [SerializeField] private float enemyTeleportTimer = 0f;
+
+    // この変数は確率を起こすために乱数を格納するもの
+    private int enemyRndNum;
+    public GameObject enemy;
     
     /// <summary>
     /// この配列はテレポートのタグと位置をまとめたものであるこの配列がまとめられている
@@ -63,13 +67,7 @@ public class GameTeleportManager : MonoBehaviour
         new TeleportAddress(){tag="Minnka1-19",playerPosition = new Vector2(24, -2)},
 
     };
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-         
-
-    }
+    public ToEvent3 toevent3;
 
     /*ここでテレポートアドレスから引っ張ってきたPTAの変数が引数となって
      プレイヤーがテレポートしたという情報を持っている。invokeもプレイヤーが
@@ -79,11 +77,20 @@ public class GameTeleportManager : MonoBehaviour
     {
         //ETAにPTAを代入している
         enemyTeleportAddress = playerTeleportAddress;
+        enemyRndNum = Random.Range(1, 101);
+        Debug.Log(enemyRndNum);
+        if(!enemy.activeSelf)
+        {
+            if(enemyRndNum > 80)
+            {
+                Enemy.gameObject.SetActive(true);
+            }
+        }
         Invoke("OnEnemyTeleport", enemyTeleportTimer);
     }
     /*nullチェックもしておりエネミーがいなくなるとはじかれる。また、この関数は
     エネミーの位置がプレイヤーが飛んだTPの位置まで移動してくれるものである*/
-    private void OnEnemyTeleport() 
+    private void OnEnemyTeleport()
     {
         if(Enemy == null)
         {
@@ -91,13 +98,28 @@ public class GameTeleportManager : MonoBehaviour
             return;
 
         }
-        //左は向かう先、右辺はプレイヤーが踏んだTPの位置
-        Enemy.transform.position = enemyTeleportAddress.playerPosition;
+        // EnemyがTPするメソッド(ここに確率を加えたい)
+        if(toevent3.event3flag)
+        {
+            if(Homing.m_instance.enemyCount < 15.0f)
+            {
+                //左は向かう先、右辺はプレイヤーが踏んだTPの位置
+                Enemy.transform.position = enemyTeleportAddress.playerPosition;
+            }
+            else 
+            {
+                Enemy.gameObject.SetActive(false);
+                Homing.m_instance.enemyCount = 0;
+            }
+        }
     }
     // Update is called once per frame
     void Update()
     {
-        
+        if(enemyRndNum >80)
+        {
+            Enemy.gameObject.SetActive(true);
+        }
     }
     /// <summary>
     /// 下のスクリプトは配列＋forが仲良しという理論で作られている。

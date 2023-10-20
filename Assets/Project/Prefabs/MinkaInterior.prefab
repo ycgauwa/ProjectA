@@ -190,8 +190,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d52c48136bf9bcb4592aece13fe17258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messages: []
-  names: []
+  messages:
+  - 
+  - 
+  names:
+  - 
+  - 
+  image:
+  - {fileID: 0}
+  - {fileID: 0}
   window: {fileID: 0}
   target: {fileID: 0}
   nameText: {fileID: 0}

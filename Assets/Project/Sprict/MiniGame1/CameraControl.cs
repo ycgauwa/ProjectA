@@ -15,8 +15,6 @@ public class CameraControl : MonoBehaviour
         //プレイヤーの位置（player.transform.position）との差分を確保。
         position_offset = player.transform.position - this.transform.position;
     }
-
-    // Update is called once per frame
     void LateUpdate()
     {
         //カメラの現在位置をnew_positionに取得。

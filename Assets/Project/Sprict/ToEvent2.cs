@@ -17,24 +17,35 @@ public class ToEvent2 : MonoBehaviour
     [SerializeField]
     private List<string> names;
     [SerializeField]
+    private List<Sprite> images;
+    [SerializeField]
     private List<string> messages2;
     [SerializeField]
     private List<string> names2;
+    [SerializeField]
+    private List<Sprite> images2;
     [SerializeField]
     private List<string> messages3;
     [SerializeField]
     private List<string> names3;
     [SerializeField]
+    private List<Sprite> images3;
+    [SerializeField]
     private List<string> messages4;
     [SerializeField]
     private List<string> names4;
     [SerializeField]
+    private List<Sprite> images4;
+    [SerializeField]
     private List<string> messages5;
     [SerializeField]
     private List<string> names5;
+    [SerializeField]
+    private List<Sprite> images5;
     public Canvas window;
     public Text target;
     public Text nameText;
+    public Image characterImage;
     public static bool one;
     private IEnumerator coroutine;
     private bool isContacted = false;
@@ -72,8 +83,12 @@ public class ToEvent2 : MonoBehaviour
     {
         if(isContacted && coroutine == null && Input.GetButton("Submit") && Input.GetKeyDown(KeyCode.Return))
         {
-            light2D = this.gameObject.GetComponent<Light2D>();
+            light2D = gameObject.GetComponent<Light2D>();
             coroutine = CreateCoroutine();
+            friends[0].transform.position = new Vector3(-77, 20, 0);
+            friends[1].transform.position = new Vector3(-83, 20, 0);
+            friends[2].transform.position = new Vector3(-83, 17, 0);
+            friends[3].transform.position = new Vector3(-78, 17, 0);
             PlayerManager.m_instance.m_speed = 0;
             // コルーチンの起動(下記説明2)
             StartCoroutine(coroutine);
@@ -84,7 +99,7 @@ public class ToEvent2 : MonoBehaviour
         }
         if(girl.transform.position.x > -86 && cameraManager.girlCamera == true)
         {
-            //girlが動くプログラム
+            // girlが動くプログラム
             girl.transform.Translate(new Vector3(-0.05f, 0, 0.0f * Time.deltaTime * speed));
         }
         if(eventcamera.transform.position.x < -80 && cameraManager.playerCamera == false && cameraManager.girlCamera == false)
@@ -102,8 +117,8 @@ public class ToEvent2 : MonoBehaviour
         yield return OnAction();
 
         // window終了
-        this.target.text = "";
-        this.window.gameObject.SetActive(false);
+        target.text = "";
+        window.gameObject.SetActive(false);
         GetComponent<AudioSource>().PlayOneShot(sound);
        
         yield return new WaitForSeconds(2.0f);
@@ -115,14 +130,13 @@ public class ToEvent2 : MonoBehaviour
         //cameraの処理
         Event2Camera();
 
-        PlayerManager.m_instance.m_speed = 0.05f;
         yield return new WaitForSeconds(6.0f);
 
         window.gameObject.SetActive(true);
         yield return OnAction2();
         
-        this.target.text = "";
-        this.window.gameObject.SetActive(false);
+        target.text = "";
+        window.gameObject.SetActive(false);
         
         cameraManager.girlCamera = true;
         yield return new WaitForSeconds(2.0f);
@@ -137,8 +151,8 @@ public class ToEvent2 : MonoBehaviour
         window.gameObject.SetActive(true);
         yield return OnAction3();
 
-        this.target.text = "";
-        this.window.gameObject.SetActive(false);
+        target.text = "";
+        window.gameObject.SetActive(false);
         
         yield return Flash();
 
@@ -149,8 +163,8 @@ public class ToEvent2 : MonoBehaviour
         window.gameObject.SetActive(true);
         yield return OnAction4();
 
-        this.target.text = "";
-        this.window.gameObject.SetActive(false);
+        target.text = "";
+        window.gameObject.SetActive(false);
         
         yield return new WaitForSeconds(1.0f);
 
@@ -161,8 +175,9 @@ public class ToEvent2 : MonoBehaviour
         window.gameObject.SetActive(true);
         yield return OnAction5();
 
-        this.target.text = "";
-        this.window.gameObject.SetActive(false);
+        target.text = "";
+        window.gameObject.SetActive(false);
+        PlayerManager.m_instance.m_speed = 0.05f;
 
         StopCoroutine(coroutine);
         coroutine = null;
@@ -171,7 +186,7 @@ public class ToEvent2 : MonoBehaviour
     private IEnumerator Flash()
     {
         Debug.Log("Flash");
-        light2D = this.gameObject.GetComponent<Light2D>();
+        light2D = gameObject.GetComponent<Light2D>();
         light2D.intensity = 1.0f;
 
         while(light2D.intensity < 7.0f)
@@ -208,7 +223,7 @@ public class ToEvent2 : MonoBehaviour
     }
     private void Event2Camera()
     {
-        this.playerCamera = cameraManager.playerCamera;
+        playerCamera = cameraManager.playerCamera;
         cameraManager.playerCamera = false;
         player.transform.position = new Vector3(70, -45, 0);
         friends[0].transform.position = new Vector3(0, 0, 0);
@@ -218,10 +233,12 @@ public class ToEvent2 : MonoBehaviour
         girl.transform.position = new Vector3(-80, 6, 0);
 
     }
-    protected void showMessage(string message, string name )
+    protected void showMessage(string message, string name , Sprite image)
     {
-        this.target.text = message;
-        this.nameText.text = name;
+        target.text = message;
+        nameText.text = name;
+        characterImage.sprite = image;
+        
     }
 
 
@@ -232,7 +249,7 @@ public class ToEvent2 : MonoBehaviour
             // 1フレーム分 処理を待機(下記説明1)
             yield return null;
             // 会話をwindowのtextフィールドに表示
-            showMessage(messages[i], names[i]);
+            showMessage(messages[i], names[i], images[i]);
             // キー入力を待機 (下記説明1)
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
@@ -249,7 +266,7 @@ public class ToEvent2 : MonoBehaviour
             yield return null;
 
             // 会話をwindowのtextフィールドに表示
-            showMessage(messages2[i], names2[i]);
+            showMessage(messages2[i], names2[i], images2[i]);
 
 
             // キー入力を待機 (下記説明1)
@@ -268,7 +285,7 @@ public class ToEvent2 : MonoBehaviour
             yield return null;
 
             // 会話をwindowのtextフィールドに表示
-            showMessage(messages3[i], names3[i]);
+            showMessage(messages3[i], names3[i], images3[i]);
 
 
             // キー入力を待機 (下記説明1)
@@ -287,7 +304,7 @@ public class ToEvent2 : MonoBehaviour
             yield return null;
 
             // 会話をwindowのtextフィールドに表示
-            showMessage(messages4[i], names4[i]);
+            showMessage(messages4[i], names4[i], images4[i]);
 
 
             // キー入力を待機 (下記説明1)
@@ -306,7 +323,7 @@ public class ToEvent2 : MonoBehaviour
             yield return null;
 
             // 会話をwindowのtextフィールドに表示
-            showMessage(messages5[i], names5[i]);
+            showMessage(messages5[i], names5[i], images5[i]);
 
 
             // キー入力を待機 (下記説明1)

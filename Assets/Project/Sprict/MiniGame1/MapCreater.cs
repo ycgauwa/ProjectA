@@ -34,6 +34,9 @@ public class MapCreater : MonoBehaviour
     private FloorBlock last_block;
     private PlayerControl player = null;
     private BlockCreator block_creator;
+
+    public TextAsset level_data_text = null;
+    private GameRoot game_root = null;
     
     void Start()
     {
@@ -43,6 +46,11 @@ public class MapCreater : MonoBehaviour
 
         level_control = new LevelControl();
         level_control.initialize();
+        level_control.loadLevelData(level_data_text);
+
+        game_root = gameObject.GetComponent<GameRoot>();
+
+        player.level_control = level_control;
     }
 
     // Update is called once per frame
@@ -88,7 +96,8 @@ public class MapCreater : MonoBehaviour
         //これまでのコードで設定したblock_positionを渡す。
         //(コメントアウト)block_creator.createBlock(block_position);
 
-        this.level_control.update();        //　LevelControlを更新。
+        //(コメントアウト)this.level_control.update();        //　LevelControlを更新。
+        level_control.update(game_root.getPlayTime());
 
         //　level_controlに置かれたcurrent_block(今作る情報のブロック)の。
         //　height（高さ）を、シーン上の座標に変換。
