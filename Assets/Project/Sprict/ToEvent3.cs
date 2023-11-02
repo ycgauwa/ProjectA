@@ -7,7 +7,7 @@ public class ToEvent3 : MonoBehaviour
 {
     //指定の座標に行ったらカメラが移動し敵を補足
     //そのあとにメッセージウィンドウを表示してボタンを押すたびに
-    //効果音を発生一定の会話まで進むとBGMが鳴り響き追っかけてくる
+    //効果音を発生 一定の会話まで進むとBGMが鳴り響き追っかけてくる
 
     public GameObject eventcamera;
     public GameObject enemy;
@@ -60,6 +60,7 @@ public class ToEvent3 : MonoBehaviour
                 // 効果音とメッセージを流す
                 MessageManager.message_instance.MessageWindowActive(messages,names,images);
                 GetComponent<AudioSource>().PlayOneShot(eatSound);
+
                 event3flag = true; //フラグが立つ
                 // Destroyすることでフラグはオンにしつつもっかい踏んでもイベントは起こらないようにする
                 //Destroy(this);

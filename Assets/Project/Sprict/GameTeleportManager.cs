@@ -62,9 +62,10 @@ public class GameTeleportManager : MonoBehaviour
         new TeleportAddress(){tag="Minnka1-14",playerPosition = new Vector2(-14, 4)},
         new TeleportAddress(){tag="Minnka1-15",playerPosition = new Vector2(10, 1)},
         new TeleportAddress(){tag="Minnka1-16",playerPosition = new Vector2(45, -1)},
-        new TeleportAddress(){tag="Minnka1-17",playerPosition = new Vector2(24, -2)},
-        new TeleportAddress(){tag="Minnka1-18",playerPosition = new Vector2(24, -2)},
+        new TeleportAddress(){tag="Minnka1-17",playerPosition = new Vector2(31, 60)},
+        new TeleportAddress(){tag="Minnka1-18",playerPosition = new Vector2(24, 0)},
         new TeleportAddress(){tag="Minnka1-19",playerPosition = new Vector2(24, -2)},
+        new TeleportAddress(){tag="Minnka1-20",playerPosition = new Vector2(24, -2)},
 
     };
     public ToEvent3 toevent3;

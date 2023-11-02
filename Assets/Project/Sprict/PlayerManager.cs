@@ -278,6 +278,36 @@ public class PlayerManager : MonoBehaviour
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-16");
             transform.position = teleportAddress.playerPosition;
         }
+        if(other.gameObject.CompareTag("Minnka1-17"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-17");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-18"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-18");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-19"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-19");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-20"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-20");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-21"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-21");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if(other.gameObject.CompareTag("Minnka1-22"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Minnka1-22");
+            transform.position = teleportAddress.playerPosition;
+        }
         //別クラスのメソッドの行使引数はteleportAddress
         teleportManager.OnPlayerTeleport(teleportAddress);
     }
