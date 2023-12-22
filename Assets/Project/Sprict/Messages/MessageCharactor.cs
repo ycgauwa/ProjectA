@@ -6,47 +6,46 @@ using UnityEngine.UI;
 /**
  * フィールドオブジェクトの基本処理
  */
-public abstract class FieldObjectBase : MonoBehaviour
+public class MessageCharactor : MonoBehaviour
 {
 
     // Unityのインスペクタ(UI上)で、前項でつくったオブジェクトをバインドする。
     // （次項 : インスペクタでscriptを追加して、設定をする で説明）
+    //　特定のフラグを回収した状態で話しかけると会話内容が変わる。
+    //　またインデックスをランダムでとることで会話内容に変化を持たせる。
+    
+    [SerializeField]
+    private List<string> messages;
+    [SerializeField]
+    private string charactername;
+    [SerializeField]
+    private Sprite images;
     public Canvas window;
     public Text target;
+    public Image Chara;
     public Text charaname;
-
-    // 接触判定
-    private bool isContacted = false;
+    private Sprite charaImage;
+    public Character character;
     private IEnumerator coroutine;
 
 
-    // colliderをもつオブジェクトの領域に入ったとき(下記で説明1)
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        isContacted = collider.gameObject.tag.Equals("Player");
-    }
-
-    // colliderをもつオブジェクトの領域外にでたとき(下記で説明1)
-    private void OnTriggerExit2D(Collider2D collider)
-    {
-        isContacted = !collider.gameObject.tag.Equals("Player");
-    }
-
-    private void Update()
-    {
-        if (isContacted && coroutine == null && Input.GetButton("Submit") && Input.GetKeyDown(KeyCode.Return))
+        if(collider.gameObject.tag.Equals("Player"))
         {
-            coroutine = CreateCoroutine();
             PlayerManager.m_instance.m_speed = 0;
-            // コルーチンの起動(下記説明2)
+            coroutine = CreateCoroutine();
             StartCoroutine(coroutine);
         }
     }
-
-    /**
-     * リアクション用コルーチン(下記で説明2)
-     */
-    private IEnumerator CreateCoroutine()
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+        if(collider.gameObject.tag.Equals("Player"))
+        {
+            
+        }
+    }
+    public IEnumerator CreateCoroutine()
     {
         // window起動
         window.gameObject.SetActive(true);
@@ -55,51 +54,39 @@ public abstract class FieldObjectBase : MonoBehaviour
         yield return OnAction();
 
         // window終了
-        this.target.text = "";
-        this.window.gameObject.SetActive(false);
+        target.text = "";
+        window.gameObject.SetActive(false);
 
         StopCoroutine(coroutine);
         coroutine = null;
         PlayerManager.m_instance.m_speed = 0.05f;
+
     }
 
-    protected abstract IEnumerator OnAction();
-
-    /**
-     * メッセージを表示する
-     */
-    protected void showMessage(string message,string name)
+    protected void showMessage(string message, string name, Sprite image)
     {
-        this.target.text = message;
-        this.charaname.text = name;
+        target.text = message;
+        charaname.text = name;
+        Chara.sprite = image;
     }
-}
-public class MessageCharactor : FieldObjectBase
-{
 
-    // セリフ : Unityのインスペクタ(UI上)で会話文を定義する 
-    // （次項 : インスペクタでscriptを追加して、設定をする で説明）
-    [SerializeField]
-    private List<string> messages;
-    [SerializeField]
-    private List<string> chara;
-
-    // 親クラスから呼ばれるコールバックメソッド (接触 & ボタン押したときに実行)
-    protected override IEnumerator OnAction()
+    IEnumerator OnAction()
     {
-
-        for (int i = 0; i < messages.Count; ++i)
+        int i = 0;
+        charactername = character.charaName;
+        charaImage = character.characterImages[0];
+        for(i = 0; i < messages.Count; ++i)
         {
+            messages[i] = character.messageTexts[i];
             // 1フレーム分 処理を待機(下記説明1)
             yield return null;
 
             // 会話をwindowのtextフィールドに表示
-            showMessage(messages[i], chara[i]);
+            showMessage(messages[i], charactername, charaImage);
 
-            // キー入力を待機 (下記説明1)
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
-
         yield break;
+
     }
 }

@@ -6,12 +6,10 @@ using UnityEngine.UI;
 public class Item : ScriptableObject
 {
     new public string name = "New Item";
-
     public Sprite icon = null;
-
     public string itemText = null;
-
     public bool checkPossession = false;
+    public bool selectedItem = false;
 
     public void start()
     {

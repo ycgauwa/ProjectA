@@ -82,7 +82,7 @@ public class GameTeleportManager : MonoBehaviour
         Debug.Log(enemyRndNum);
         if(!enemy.activeSelf)
         {
-            if(enemyRndNum > 80)
+            if(enemyRndNum > 30)
             {
                 Enemy.gameObject.SetActive(true);
             }
@@ -110,16 +110,9 @@ public class GameTeleportManager : MonoBehaviour
             else 
             {
                 Enemy.gameObject.SetActive(false);
+                Enemy.transform.position = new Vector2(0,0);
                 Homing.m_instance.enemyCount = 0;
             }
-        }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        if(enemyRndNum >80)
-        {
-            Enemy.gameObject.SetActive(true);
         }
     }
     /// <summary>

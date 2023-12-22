@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class CalenderMessage : MonoBehaviour
 {
     // 話しかけた時にメッセージウィンドウを表示。ウィンドウが非表示になった後にカレンダーをアクティブにする
-    // 触ってから、表示する画像が保存されるためどんどん増えていく
+    // 話しかけて画像が出てきて、画像が出てるときはタイムスケールを０にする。そしてエンターを押すとテキスト
+    // メッセージが出てきて、表示し終わったら画像も消してタイムスケールを元に戻す。
 
     [SerializeField]
     private List<string> messages;
@@ -14,12 +15,19 @@ public class CalenderMessage : MonoBehaviour
     private List<string> names;
     [SerializeField]
     private List<Sprite> image;
+    [SerializeField]
+    private List<string> messages2;
+    [SerializeField]
+    private List<string> names2;
+    [SerializeField]
+    private List<Sprite> image2;
     public Canvas window;
     public Text target;
     public Text nameText;
     public Canvas calCanvas;
     public Image characterImage;
     public Image calender;
+    public Image TVScreen;
     private IEnumerator coroutine;
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -39,6 +47,14 @@ public class CalenderMessage : MonoBehaviour
             {
                 calender.gameObject.SetActive(false);
                 calCanvas.gameObject.SetActive(false);
+            }
+            if(TVScreen == null)
+            {
+                return;
+            }
+            if(TVScreen.gameObject.activeSelf)
+            {
+                TVScreen.gameObject.SetActive(false);
             }
         }
     }
@@ -86,6 +102,18 @@ public class CalenderMessage : MonoBehaviour
         calender.gameObject.SetActive(true);
         yield break;
 
+    }
+    private void Update()
+    {
+        if(calender.gameObject.activeSelf)
+        {
+            Time.timeScale = 0.0f;
+            if(Input.GetKeyDown(KeyCode.Return))
+            {
+                calender.gameObject.SetActive(false);
+                Time.timeScale = 1.0f;
+            }
+        }
     }
 
 }

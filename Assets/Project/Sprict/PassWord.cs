@@ -9,7 +9,6 @@ public class PassWord : MonoBehaviour
     public InputField passcode;
     public Item item;
     public Inventry inventry;
-    private bool getItemDoll = false;
     void Start()
     {
         //これはお手本が画像を触って起こることだからImageを取得してるけど俺のゲームの場合は、、？

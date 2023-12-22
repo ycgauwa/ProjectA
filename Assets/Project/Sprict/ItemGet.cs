@@ -44,6 +44,7 @@ public class ItemGet : MonoBehaviour
         if(isContacted &&  messageSwitch == false && Input.GetKeyDown(KeyCode.Return))
         {
             messageSwitch = true;
+            item.checkPossession = true;
             MessageManager.message_instance.MessageWindowActive(messages, names,images);
             inventry.Add(item);
         }

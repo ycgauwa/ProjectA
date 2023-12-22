@@ -62,7 +62,6 @@ public class MessageManager : MonoBehaviour
             // 会話をwindowのtextフィールドに表示
             showMessage(messages[i], names[i], image[i]);
 
-            Debug.Log(messages.Count);
             // キー入力を待機 (下記説明1)
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }

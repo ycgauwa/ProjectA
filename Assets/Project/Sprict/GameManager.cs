@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,11 +11,6 @@ public class GameManager : MonoBehaviour
     public Homing homing;
     public Canvas menuCanvas;
     public Canvas inventryCanvas;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -23,7 +19,6 @@ public class GameManager : MonoBehaviour
         {
             if(Input.GetKeyUp(KeyCode.Escape))
             {
-                Debug.Log("menu");
                 Time.timeScale = 0;
                 menuCanvas.gameObject.SetActive(true);
 
@@ -54,4 +49,5 @@ public class GameManager : MonoBehaviour
         menuCanvas.gameObject.SetActive(false);
         inventryCanvas.gameObject.SetActive(true);
     }
+   
 }

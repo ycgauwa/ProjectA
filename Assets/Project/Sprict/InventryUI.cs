@@ -20,13 +20,13 @@ public class InventryUI : MonoBehaviour
         //　はじめにパスワードを入力するとエラーを吐き何回もエンター押すと今までの回数分以上出てくる
         for(int i=0; i< slots.Length; i++)
         {
-            if(i<inventry.items.Count)//UIではないインベントリのデータの中で
+            if(i < inventry.items.Count)//UIではないインベントリのデータの中で
             {
                 slots[i].AddItem(inventry.items[i]);
             }
             else
             {
-
+                slots[i].ClearSlot();
             }
         }
     }
