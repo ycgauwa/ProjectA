@@ -58,6 +58,8 @@ public class ToEvent2 : MonoBehaviour
     public GameObject guards;
     public GameObject eventcamera;
     public float speed;
+    public Inventry inventry;
+    public Item item;
     private bool playerCamera;
 
     //イベント2のためのコルーチン。大枠の役割を果たしてくれる。
@@ -110,13 +112,11 @@ public class ToEvent2 : MonoBehaviour
 
     IEnumerator CreateCoroutine()
     {
-        // window起動
+        inventry.Delete(item);
         window.gameObject.SetActive(true);
 
-        // 抽象メソッド呼び出し 詳細は子クラスで実装
         yield return OnAction();
 
-        // window終了
         target.text = "";
         window.gameObject.SetActive(false);
         GetComponent<AudioSource>().PlayOneShot(sound);

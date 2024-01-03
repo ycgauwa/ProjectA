@@ -11,9 +11,12 @@ public class ToEvent1 : MonoBehaviour
     private List<string> messages;
     [SerializeField]
     private List<string> names;
+    [SerializeField]
+    private List<Sprite> images;
     public Canvas window;
     public Text target;
     public Text nameText;
+    public Image Chara;
     public static bool one;
     public GameObject player;
     private IEnumerator coroutine;
@@ -71,10 +74,11 @@ public class ToEvent1 : MonoBehaviour
 
 
     }
-    protected void showMessage(string message,string name)
+    protected void showMessage(string message,string name, Sprite image)
     {
         this.target.text = message;
         this.nameText.text = name;
+        Chara.sprite = image;
     }
 
     IEnumerator OnAction()
@@ -86,7 +90,7 @@ public class ToEvent1 : MonoBehaviour
             yield return null;
 
             // 会話をwindowのtextフィールドに表示
-            showMessage(messages[i], names[i]);
+            showMessage(messages[i], names[i], images[i]);
 
 
             // キー入力を待機 (下記説明1)

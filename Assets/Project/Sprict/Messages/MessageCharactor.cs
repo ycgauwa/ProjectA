@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 /**
  * フィールドオブジェクトの基本処理
@@ -19,7 +21,7 @@ public class MessageCharactor : MonoBehaviour
     [SerializeField]
     private string charactername;
     [SerializeField]
-    private Sprite images;
+    private List<Sprite> images;
     public Canvas window;
     public Text target;
     public Image Chara;
@@ -27,7 +29,9 @@ public class MessageCharactor : MonoBehaviour
     private Sprite charaImage;
     public Character character;
     private IEnumerator coroutine;
-
+    private bool isContacted = false;
+    public NotEnter1 notEnter1;
+    public NotEnter4 notEnter4;
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -51,7 +55,7 @@ public class MessageCharactor : MonoBehaviour
         window.gameObject.SetActive(true);
 
         // 抽象メソッド呼び出し 詳細は子クラスで実装
-        yield return OnAction();
+        yield return CharaShowMessage();
 
         // window終了
         target.text = "";
@@ -70,21 +74,85 @@ public class MessageCharactor : MonoBehaviour
         Chara.sprite = image;
     }
 
+    /*イベントを回収するごとに話す内容を変更する。
+    bool変数で条件を変更して話してほしい状況ならそのままShow Message
+    違うなら最初の文はContinueで後回しにしてあげる
+    会話内容ごとにリストを作ってあげたらいいのでは？
+    特定の条件の時にはList1、別の条件ではList2を呼び出すことによってListを呼び出しながらも会話内容を変えることができる
+    今悩んでいるのは、foreachを使った場合stringのListは回してくれるけどImageのListはどうなるの？ってはなし
+    でもメッセージと画像は一対一対応してるから別にforeachじゃなくてもよくね？*/
+
+    IEnumerator CharaShowMessage()
+    {
+        if(notEnter1.one == false)
+        {
+            charactername = character.charaName;
+            images = character.characterImages1;
+            messages = character.messageTexts1;
+            int i = 0;
+            // 要素の数だけループが行われる。
+            foreach(string str in messages)
+            {
+                yield return null;
+                showMessage(str, charactername, images[i]);
+                i++;
+                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            }
+            yield break;
+        }
+        else if(notEnter4.getKey1 == true)
+        {
+            charactername = character.charaName;
+            images = character.characterImages2;
+            messages = character.messageTexts2;
+            int i = 0;
+            // 要素の数だけループが行われる。
+            foreach(string str in messages)
+            {
+                yield return null;
+                showMessage(str, charactername, images[i]);
+                i++;
+                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            }
+            yield break;
+        }
+    }
     IEnumerator OnAction()
     {
         int i = 0;
         charactername = character.charaName;
-        charaImage = character.characterImages[0];
-        for(i = 0; i < messages.Count; ++i)
+        //　家ごとにセリフを割り当てる。
+        if(notEnter1.one == false)
         {
-            messages[i] = character.messageTexts[i];
-            // 1フレーム分 処理を待機(下記説明1)
-            yield return null;
+            for(i = 0; i < messages.Count; ++i)
+            {
+                messages[i] = character.messageTexts1[i];
+                images = character.characterImages1;
+                // 1フレーム分 処理を待機(下記説明1)
+                yield return null;
 
-            // 会話をwindowのtextフィールドに表示
-            showMessage(messages[i], charactername, charaImage);
+                // 会話をwindowのtextフィールドに表示
+                showMessage(messages[i], charactername, images[i]);
 
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            }
+            yield break;
+        }
+        else if(notEnter4.getKey1 == true)
+        {
+            for(i = 0; i < messages.Count; ++i)
+            {
+                messages[i] = character.messageTexts2[i];
+                images = character.characterImages2;
+                // 1フレーム分 処理を待機(下記説明1)
+                yield return null;
+
+                // 会話をwindowのtextフィールドに表示
+                showMessage(messages[i], charactername, images[i]);
+
+                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            }
+            yield break;
         }
         yield break;
 

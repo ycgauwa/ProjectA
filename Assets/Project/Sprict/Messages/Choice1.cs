@@ -29,6 +29,8 @@ public class Choice1 : MonoBehaviour
     public Button yes;
     public Button no;
     private IEnumerator coroutine;
+    public Inventry inventry;
+    public Item item;
     private IEnumerator coroutine2;
     
     //アンサーとして何を答えたか
@@ -94,7 +96,6 @@ public class Choice1 : MonoBehaviour
     IEnumerator OnAction()
     {
         window.gameObject.SetActive(true);
-        Debug.Log("OnAction");
         for(int i = 0; i < messages.Count; ++i)
         {
             // 1フレーム分 処理を待機(下記説明1)
@@ -121,6 +122,7 @@ public class Choice1 : MonoBehaviour
                 isGet = true;
                 yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
             }
+            inventry.Add(item);
         }
         else
         {

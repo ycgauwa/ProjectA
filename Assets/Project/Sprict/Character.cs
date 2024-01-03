@@ -10,7 +10,13 @@ public class Character : ScriptableObject
 
     public string charaName;
     public string description;
-    public List<Sprite> characterImages;
-    public List<string> messageTexts;
+    public List<Sprite> characterImages1;
+    public List<Sprite> characterImages2;
+    public List<Sprite> characterImages3;
+    public List<Sprite> characterImages4;
+    public List<string> messageTexts1;
+    public List<string> messageTexts2;
+    public List<string> messageTexts3;
+    public List<string> messageTexts4;
 
 }
