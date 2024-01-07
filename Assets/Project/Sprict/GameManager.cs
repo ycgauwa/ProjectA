@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class GameManager : MonoBehaviour
     public Homing homing;
     public Canvas menuCanvas;
     public Canvas inventryCanvas;
+    public Canvas gameoverWindow;
+    public Image buttonPanel;
 
     // Update is called once per frame
     void Update()
@@ -49,5 +52,18 @@ public class GameManager : MonoBehaviour
         menuCanvas.gameObject.SetActive(false);
         inventryCanvas.gameObject.SetActive(true);
     }
-   
+   public void OnclickRetryButton()
+    {
+        buttonPanel.gameObject.SetActive(false);
+        gameoverWindow.gameObject.SetActive(false);
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene("Game");
+    }
+    public void OnClickTitleButton() 
+    {
+        buttonPanel.gameObject.SetActive(false);
+        gameoverWindow.gameObject.SetActive(false);
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene("Title");
+    }
 }

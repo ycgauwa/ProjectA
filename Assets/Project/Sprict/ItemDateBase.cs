@@ -26,6 +26,7 @@ public class ItemDateBase : MonoBehaviour
             itemTextMessage.text = "‡¬Š®—¹";
             notEnter4.getKey1 = true;
         }
+
     }
     private void Update()
     {

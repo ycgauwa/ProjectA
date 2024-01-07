@@ -29,14 +29,19 @@ public class CalenderMessage : MonoBehaviour
     public Image calender;
     public Image TVScreen;
     private IEnumerator coroutine;
+    public bool messageSwitch = false;
+    private bool isContacted = false;
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    /*private void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.tag.Equals("Player"))
         {
-            PlayerManager.m_instance.m_speed = 0;
-            coroutine = CreateCoroutine();
-            StartCoroutine(coroutine);
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                PlayerManager.m_instance.m_speed = 0;
+                coroutine = CreateCoroutine();
+                StartCoroutine(coroutine);
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collider)
@@ -57,7 +62,39 @@ public class CalenderMessage : MonoBehaviour
                 TVScreen.gameObject.SetActive(false);
             }
         }
+    }*/
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag.Equals("Player"))
+        {
+            isContacted = true;
+        }
+
     }
+    // この状態だと文字や画像は出る。でも画像が閉じれなくなってしまう。後動けない
+    //　画像が一周してからもう一度画像を出すために
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+        messageSwitch = false;
+        if (collider.gameObject.tag.Equals("Player"))
+        {
+            isContacted = false;
+            if (calCanvas.gameObject.activeSelf)
+            {
+                calender.gameObject.SetActive(false);
+                calCanvas.gameObject.SetActive(false);
+            }
+            if (TVScreen == null)
+            {
+                return;
+            }
+            if (TVScreen.gameObject.activeSelf)
+            {
+                TVScreen.gameObject.SetActive(false);
+            }
+        }
+    }
+
     public IEnumerator CreateCoroutine()
     {
         // window起動
@@ -105,7 +142,14 @@ public class CalenderMessage : MonoBehaviour
     }
     private void Update()
     {
-        if(calender.gameObject.activeSelf)
+        if (isContacted && messageSwitch == false && Input.GetKeyDown(KeyCode.Return))
+        {
+            messageSwitch = true;
+            PlayerManager.m_instance.m_speed = 0;
+            coroutine = CreateCoroutine();
+            StartCoroutine(coroutine);
+        }
+        if (calender.gameObject.activeSelf)
         {
             Time.timeScale = 0.0f;
             if(Input.GetKeyDown(KeyCode.Return))
