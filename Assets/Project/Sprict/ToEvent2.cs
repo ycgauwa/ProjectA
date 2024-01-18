@@ -177,15 +177,13 @@ public class ToEvent2 : MonoBehaviour
 
         target.text = "";
         window.gameObject.SetActive(false);
-        PlayerManager.m_instance.m_speed = 0.05f;
+        PlayerManager.m_instance.m_speed = 0.075f;
 
         StopCoroutine(coroutine);
         coroutine = null;
-
     }
     private IEnumerator Flash()
     {
-        Debug.Log("Flash");
         light2D = gameObject.GetComponent<Light2D>();
         light2D.intensity = 1.0f;
 
@@ -238,7 +236,6 @@ public class ToEvent2 : MonoBehaviour
         target.text = message;
         nameText.text = name;
         characterImage.sprite = image;
-        
     }
 
 
@@ -253,9 +250,7 @@ public class ToEvent2 : MonoBehaviour
             // キー入力を待機 (下記説明1)
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
-
         yield break;
-
     }
     IEnumerator OnAction2()
     {

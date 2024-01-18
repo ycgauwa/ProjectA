@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
+//using static UnityEditor.Progress;
 
 public class ItemGet : MonoBehaviour
 {　/*アイテムをゲットする時に使う関数
@@ -23,6 +23,10 @@ public class ItemGet : MonoBehaviour
     private bool isContacted = false;
     public static bool messageSwitch = false;
 
+    private void Start()
+    {
+        messageSwitch = false;
+    }
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.tag.Equals("Player"))

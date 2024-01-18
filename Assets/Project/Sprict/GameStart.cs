@@ -9,7 +9,7 @@ public class GameStart : MonoBehaviour
 
     public void ClickStartButton()
     {
-        SceneManager.LoadScene("StartFirst");
+        SceneManager.LoadScene("Game");
     }
 
 }

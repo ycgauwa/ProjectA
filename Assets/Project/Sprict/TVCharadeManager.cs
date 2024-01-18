@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
+//using static UnityEditor.Progress;
 using static UnityEngine.GraphicsBuffer;
 
 public class TVCharadeManager : MonoBehaviour
@@ -25,6 +25,7 @@ public class TVCharadeManager : MonoBehaviour
     public Text screenText;
     public Item item;
     public Inventry inventry;
+    public NotEnter5 notEnter5;
 
 
 
@@ -96,6 +97,7 @@ public class TVCharadeManager : MonoBehaviour
         TVScreen.gameObject.SetActive(true);
         screenText.text = messages;
         inventry.Add(item);
+        notEnter5.getKey2 = true;
     }
     private void TVMessageMiss() 
     {

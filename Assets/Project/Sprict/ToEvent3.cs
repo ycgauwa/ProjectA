@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.VersionControl;
+//using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class ToEvent3 : MonoBehaviour
@@ -29,14 +29,19 @@ public class ToEvent3 : MonoBehaviour
     private List<string> names2;
     [SerializeField]
     private List<Sprite> images2;
+    public AudioSource chasedBGM;
+    bool firstchased = false;
 
     // 効果音
+    AudioSource audioSound;
     public AudioClip eatSound;
 
     // Start is called before the first frame update
     void Start()
     {
         event3flag = false;
+        chasedBGM = GetComponent<AudioSource>();
+        audioSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -59,11 +64,20 @@ public class ToEvent3 : MonoBehaviour
                 playerStop = true;
                 // 効果音とメッセージを流す
                 MessageManager.message_instance.MessageWindowActive(messages,names,images);
-                GetComponent<AudioSource>().PlayOneShot(eatSound);
-
+                audioSound.PlayOneShot(eatSound);
                 event3flag = true; //フラグが立つ
-                // Destroyすることでフラグはオンにしつつもっかい踏んでもイベントは起こらないようにする
-                //Destroy(this);
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+        if(collider.gameObject.tag.Equals("Player"))
+        {
+            if(!firstchased)
+            {
+                audioSound.Stop();
+                chasedBGM.Play();
+                firstchased = true;
             }
         }
     }

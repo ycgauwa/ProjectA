@@ -118,7 +118,7 @@ public class ToMiniGame1 : MonoBehaviour
         }
 
         window.gameObject.SetActive(false);
-        PlayerManager.m_instance.m_speed = 0.05f;
+        PlayerManager.m_instance.m_speed = 0.075f;
         coroutine = null;
         yield break;
 

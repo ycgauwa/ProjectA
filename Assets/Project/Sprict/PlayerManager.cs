@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         m_instance = this;
-        m_speed = 0.05f;
+        m_speed = 0.075f;
 
     }
 
@@ -60,6 +60,7 @@ public class PlayerManager : MonoBehaviour
             other.gameObject.CompareTag("Minnka1-11") || other.gameObject.CompareTag("Minnka1-12") ||
             other.gameObject.CompareTag("Minnka1-13") || other.gameObject.CompareTag("Minnka1-14") ||
             other.gameObject.CompareTag("Minnka1-15") || other.gameObject.CompareTag("Minnka1-16") ||
+            other.gameObject.CompareTag("Minnka1-20") || other.gameObject.CompareTag("Minnka1-21") ||
             other.gameObject.CompareTag("Minnka1-17") || other.gameObject.CompareTag("Minnka1-18");
 
         if(isTeleport == false) 

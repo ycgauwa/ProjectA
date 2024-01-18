@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47c5cf7a1069f43acc6cfe09d5d118, type: 3}
   m_Name: hummer
   m_EditorClassIdentifier: 
-  name: hammer
+  name: "\u30CF\u30F3\u30DE\u30FC"
   icon: {fileID: 21300000, guid: 8c4a0a0d60ab76b41ae8ea535a12e87f, type: 3}
-  itemText: aaaaa
+  itemText: "\u304D\u308C\u3044\u306B\u78E8\u304B\u308C\u305F\u30CF\u30F3\u30DE\u30FC\u3060"
   checkPossession: 0
   selectedItem: 0

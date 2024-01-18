@@ -194,8 +194,8 @@ MonoBehaviour:
   - 
   - 
   names:
-  - 
-  - 
+  - "\u5E78\u4EBA"
+  - "\u5E78\u4EBA"
   image:
   - {fileID: 21300000, guid: 846f20be52de4934381c6c80cbacbaee, type: 3}
   - {fileID: 21300000, guid: 846f20be52de4934381c6c80cbacbaee, type: 3}

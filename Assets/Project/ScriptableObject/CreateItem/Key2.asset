@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47c5cf7a1069f43acc6cfe09d5d118, type: 3}
   m_Name: Key2
   m_EditorClassIdentifier: 
-  name: Key
+  name: "\u5BDD\u5BA4\u306E\u9375"
   icon: {fileID: 21300000, guid: 943df3b0fd0fcf547b908bd391725a77, type: 3}
-  itemText: aaaaaaaaaaaaa
+  itemText: "\u5BDD\u5BA4\u306E\u9375\u306E\u3088\u3046\u3060"
   checkPossession: 0
   selectedItem: 0

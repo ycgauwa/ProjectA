@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47c5cf7a1069f43acc6cfe09d5d118, type: 3}
   m_Name: detergent
   m_EditorClassIdentifier: 
-  name: detergent
+  name: "\u6D17\u5264"
   icon: {fileID: 21300000, guid: 517ae6daba5b6624b9a3e17c2655ffde, type: 3}
   itemText: "\u5F37\u529B\u306A\u6D17\u5264\u306E\u3088\u3046\u3060\u3002\u3053\u308C\u304C\u3042\u308C\u3070\u3069\u3093\u306A\u9306\u3073\u3082\u6C5A\u308C\u3082\u843D\u3068\u305B\u308B\u304B\u3082\u77E5\u308C\u306A\u3044"
   checkPossession: 0

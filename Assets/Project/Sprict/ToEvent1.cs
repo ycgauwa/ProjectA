@@ -70,7 +70,7 @@ public class ToEvent1 : MonoBehaviour
         StopCoroutine(coroutine);
         coroutine = null;
         Debug.Log("hhh");
-        PlayerManager.m_instance.m_speed = 0.05f;
+        PlayerManager.m_instance.m_speed = 0.075f;
 
 
     }

@@ -52,7 +52,6 @@ public class Choice1 : MonoBehaviour
         {
             isContacted = true;
         }
-        
     }
 
     // colliderをもつオブジェクトの領域外にでたとき(下記で説明1)
@@ -64,7 +63,7 @@ public class Choice1 : MonoBehaviour
         }
     }
     private void Update()
-    {   
+    {
         //話しかける(条件は動的なものと今回のboolのように恒常的なもので分けた方がいい)
         if(Input.GetKeyDown(KeyCode.Return))
         {
@@ -83,10 +82,8 @@ public class Choice1 : MonoBehaviour
                     // コルーチンの起動(下記説明2)
                     StartCoroutine(coroutine);
                 }
-
             }
         }
-
     }
     protected void showMessage(string message, string name)
     {
@@ -136,7 +133,7 @@ public class Choice1 : MonoBehaviour
         }
         
         window.gameObject.SetActive(false);
-        PlayerManager.m_instance.m_speed = 0.05f;
+        PlayerManager.m_instance.m_speed = 0.075f;
         coroutine = null;
         yield break;
 
@@ -160,7 +157,7 @@ public class Choice1 : MonoBehaviour
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
         window.gameObject.SetActive(false);
-        PlayerManager.m_instance.m_speed = 0.05f;
+        PlayerManager.m_instance.m_speed = 0.075f;
         coroutine = null;
         yield break;
     }

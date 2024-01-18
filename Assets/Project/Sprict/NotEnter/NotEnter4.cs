@@ -12,6 +12,7 @@ public class NotEnter4 : MonoBehaviour
     [SerializeField]
     private List<Sprite> images;
     public bool getKey1;
+    public ToEvent3 toevent3;
     public ItemDateBase itemDateBase;
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -28,6 +29,8 @@ public class NotEnter4 : MonoBehaviour
             if(collider.gameObject.tag.Equals("Player"))
             {
                 this.gameObject.tag = "Minnka1-17";
+                // ˆê’U“G‚ªo‚Ä‚±‚È‚¢‚æ‚¤‚É‚·‚éB
+                toevent3.event3flag = false;
                 itemDateBase.Items4Delete();
             }
         }

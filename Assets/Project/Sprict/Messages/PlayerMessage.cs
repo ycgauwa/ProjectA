@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager.UI;
-using UnityEditor.VersionControl;
+//using UnityEditor.PackageManager.UI;
+//using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,7 +36,7 @@ public class PlayerMessage : MonoBehaviour
 
         StopCoroutine(playercoroutine);
         playercoroutine = null;
-        PlayerManager.m_instance.m_speed = 0.05f;
+        PlayerManager.m_instance.m_speed = 0.075f;
         
 
 

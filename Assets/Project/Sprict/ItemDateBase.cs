@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+//using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
+//using static UnityEditor.Progress;
 
 public class ItemDateBase : MonoBehaviour
 {
@@ -12,6 +13,13 @@ public class ItemDateBase : MonoBehaviour
     public Text itemTextMessage;
     public Canvas inventryCanvas;
 
+    private void Start()
+    {
+        for(int i = 0; i < items.Count; ++i)
+        {
+            items[i].checkPossession = false;
+        }
+    }
     //　アイテム合成のメソッド
     public void synthesis()
     {
@@ -24,9 +32,18 @@ public class ItemDateBase : MonoBehaviour
             // ここで合成のメッセージを出すようにする。
             itemTextMessage.gameObject.SetActive(true);
             itemTextMessage.text = "合成完了";
+        }
+        //　普通のハンマーと人形で鍵が出てくる。
+        if(items[0].selectedItem == true && items[3].selectedItem == true && notEnter4.getKey1 == false)
+        {
+            inventry.Add(items[5]);
+            inventry.Delete(items[0]);
+            inventry.Delete(items[3]);
+            itemTextMessage.gameObject.SetActive(true);
+            itemTextMessage.text = "合成完了";
             notEnter4.getKey1 = true;
         }
-
+        
     }
     private void Update()
     {
@@ -39,6 +56,10 @@ public class ItemDateBase : MonoBehaviour
         }
     }
     public void Items4Delete()
+    {
+        inventry.Delete(items[3]);
+    }
+    public void Items5Delete()
     {
         inventry.Delete(items[3]);
     }

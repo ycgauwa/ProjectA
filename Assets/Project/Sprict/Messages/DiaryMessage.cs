@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.VersionControl;
+//using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -88,7 +88,7 @@ public class DiaryMessage : MonoBehaviour
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
         diaryWindow.gameObject.SetActive(false);
-        PlayerManager.m_instance.m_speed = 0.05f;
+        PlayerManager.m_instance.m_speed = 0.075f;
         coroutine = null;
         yield break;
     }

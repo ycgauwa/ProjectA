@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager.UI;
+//using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.LowLevel;
@@ -18,7 +18,6 @@ public class Homing : MonoBehaviour
     public float speed = 2; //敵の動くスピード
     public ToEvent3 toevent3;
     public float enemyCount = 0.0f; //　敵が追いかけている時間
-    public AudioClip chaseSound;
     public Canvas gameoverWindow;
     public Image buttonPanel;
 

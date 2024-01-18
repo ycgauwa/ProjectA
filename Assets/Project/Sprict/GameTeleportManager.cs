@@ -16,7 +16,12 @@ public class GameTeleportManager : MonoBehaviour
     // この変数は確率を起こすために乱数を格納するもの
     private int enemyRndNum;
     public GameObject enemy;
-    
+    public AudioSource chasedBGM;
+
+    private void Start()
+    {
+        chasedBGM = GetComponent<AudioSource>();
+    }
     /// <summary>
     /// この配列はテレポートのタグと位置をまとめたものであるこの配列がまとめられている
     /// １つ１つの箱はTeleportAddress.csから作られていてその変数を引っ張ってきている。
@@ -65,6 +70,9 @@ public class GameTeleportManager : MonoBehaviour
         new TeleportAddress(){tag="Minnka1-17",playerPosition = new Vector2(31, 60)},
         new TeleportAddress(){tag="Minnka1-18",playerPosition = new Vector2(24, 0)},
         new TeleportAddress(){tag="Minnka1-19",playerPosition = new Vector2(24, -2)},
+        new TeleportAddress(){tag="Minnka1-20",playerPosition = new Vector2(26, 27)},
+        new TeleportAddress(){tag="Minnka1-21",playerPosition = new Vector2(35, 70)},
+        new TeleportAddress(){tag="Minnka1-20",playerPosition = new Vector2(24, -2)},
         new TeleportAddress(){tag="Minnka1-20",playerPosition = new Vector2(24, -2)},
 
     };
@@ -79,12 +87,12 @@ public class GameTeleportManager : MonoBehaviour
         //ETAにPTAを代入している
         enemyTeleportAddress = playerTeleportAddress;
         enemyRndNum = Random.Range(1, 101);
-        Debug.Log(enemyRndNum);
         if(!enemy.activeSelf)
         {
-            if(enemyRndNum > 30)
+            if(enemyRndNum > 92)
             {
                 Enemy.gameObject.SetActive(true);
+                chasedBGM.Play();
             }
         }
         Invoke("OnEnemyTeleport", enemyTeleportTimer);
@@ -110,6 +118,8 @@ public class GameTeleportManager : MonoBehaviour
             else 
             {
                 Enemy.gameObject.SetActive(false);
+                chasedBGM.Stop();
+                toevent3.chasedBGM.Stop();
                 Enemy.transform.position = new Vector2(0,0);
                 Homing.m_instance.enemyCount = 0;
             }

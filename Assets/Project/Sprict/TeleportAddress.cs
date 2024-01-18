@@ -11,7 +11,5 @@ public class TeleportAddress
     public string tag;
     public string name;
     public Vector2 playerPosition;
-    
-    
 }
 

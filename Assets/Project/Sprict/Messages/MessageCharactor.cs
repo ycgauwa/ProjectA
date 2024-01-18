@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
+//using static UnityEditor.Progress;
 
 /**
  * フィールドオブジェクトの基本処理
@@ -29,7 +29,6 @@ public class MessageCharactor : MonoBehaviour
     private Sprite charaImage;
     public Character character;
     private IEnumerator coroutine;
-    private bool isContacted = false;
     public NotEnter1 notEnter1;
     public NotEnter4 notEnter4;
 
@@ -63,7 +62,7 @@ public class MessageCharactor : MonoBehaviour
 
         StopCoroutine(coroutine);
         coroutine = null;
-        PlayerManager.m_instance.m_speed = 0.05f;
+        PlayerManager.m_instance.m_speed = 0.075f;
 
     }
 

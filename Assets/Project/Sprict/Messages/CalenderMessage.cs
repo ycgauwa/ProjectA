@@ -109,9 +109,7 @@ public class CalenderMessage : MonoBehaviour
 
         StopCoroutine(coroutine);
         coroutine = null;
-        PlayerManager.m_instance.m_speed = 0.05f;
-
-
+        PlayerManager.m_instance.m_speed = 0.075f;
     }
 
     protected void showMessage(string message, string name, Sprite image)
@@ -119,7 +117,6 @@ public class CalenderMessage : MonoBehaviour
         target.text = message;
         nameText.text = name;
         characterImage.sprite = image;
-
     }
 
     IEnumerator OnAction()
@@ -159,5 +156,4 @@ public class CalenderMessage : MonoBehaviour
             }
         }
     }
-
 }
