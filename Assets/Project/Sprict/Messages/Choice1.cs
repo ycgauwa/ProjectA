@@ -65,7 +65,7 @@ public class Choice1 : MonoBehaviour
     private void Update()
     {
         //話しかける(条件は動的なものと今回のboolのように恒常的なもので分けた方がいい)
-        if(Input.GetKeyDown(KeyCode.Return))
+        if(Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return))
         {
             if(isContacted == true && coroutine == null)
             {
@@ -105,7 +105,7 @@ public class Choice1 : MonoBehaviour
                 isOpenSelect = true;
                 break;
             }
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
         yield return new WaitUntil(() => !isOpenSelect );
         //はいを選んだ
@@ -117,7 +117,7 @@ public class Choice1 : MonoBehaviour
                 //入手するを表示
                 showMessage(messages2[i], names2[i]);
                 isGet = true;
-                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+                yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
             }
             inventry.Add(item);
         }
@@ -128,7 +128,7 @@ public class Choice1 : MonoBehaviour
                 yield return null;
                 //入手してない
                 showMessage(messages3[i], names3[i]);
-                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+                yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
             }
         }
         
@@ -154,7 +154,7 @@ public class Choice1 : MonoBehaviour
 
 
             // キー入力を待機 (下記説明1)
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
         window.gameObject.SetActive(false);
         PlayerManager.m_instance.m_speed = 0.075f;

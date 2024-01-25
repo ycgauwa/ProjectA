@@ -130,7 +130,7 @@ public class CalenderMessage : MonoBehaviour
             // 会話をwindowのtextフィールドに表示
             showMessage(messages[i], names[i], image[i]);
 
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
         }
         calCanvas.gameObject.SetActive(true);
         calender.gameObject.SetActive(true);
@@ -139,7 +139,7 @@ public class CalenderMessage : MonoBehaviour
     }
     private void Update()
     {
-        if (isContacted && messageSwitch == false && Input.GetKeyDown(KeyCode.Return))
+        if (isContacted && messageSwitch == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
             messageSwitch = true;
             PlayerManager.m_instance.m_speed = 0;
@@ -148,11 +148,13 @@ public class CalenderMessage : MonoBehaviour
         }
         if (calender.gameObject.activeSelf)
         {
+            PlayerManager.m_instance.m_speed = 0;
             Time.timeScale = 0.0f;
-            if(Input.GetKeyDown(KeyCode.Return))
+            if(Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return))
             {
                 calender.gameObject.SetActive(false);
                 Time.timeScale = 1.0f;
+                PlayerManager.m_instance.m_speed = 0.075f;
             }
         }
     }

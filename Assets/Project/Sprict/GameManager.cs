@@ -14,14 +14,16 @@ public class GameManager : MonoBehaviour
     public Canvas inventryCanvas;
     public Canvas gameoverWindow;
     public Image buttonPanel;
+    public ItemDateBase itemDate;
 
     // Update is called once per frame
     void Update()
     {
         if(!menuCanvas.gameObject.activeSelf)
         {
-            if(Input.GetKeyUp(KeyCode.Escape))
+            if(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
             {
+                PlayerManager.m_instance.m_speed = 0;
                 Time.timeScale = 0;
                 menuCanvas.gameObject.SetActive(true);
 
@@ -29,17 +31,19 @@ public class GameManager : MonoBehaviour
         }
         else if(menuCanvas.gameObject.activeSelf)
         {
-            if(Input.GetKeyUp(KeyCode.Escape))
+            if(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
             {
                 Time.timeScale = 1;
+                PlayerManager.m_instance.m_speed = 0.075f;
                 menuCanvas.gameObject.SetActive(false);
             }
         }
         if(inventryCanvas.gameObject.activeSelf)
         {
-            if(Input.GetKeyUp(KeyCode.Escape))
+            if(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
             {
                 inventryCanvas.gameObject.SetActive(false);
+                itemDate.SelectDiff();
                 menuCanvas.gameObject.SetActive(true);
             }
         }

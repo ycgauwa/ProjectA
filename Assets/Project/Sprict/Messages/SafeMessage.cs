@@ -80,7 +80,7 @@ public class SafeMessage : MonoBehaviour
             // 会話をwindowのtextフィールドに表示
             showMessage(messages[i], names[i], image[i]);
 
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
         }
         calCanvas.gameObject.SetActive(true);
         calender.gameObject.SetActive(true);

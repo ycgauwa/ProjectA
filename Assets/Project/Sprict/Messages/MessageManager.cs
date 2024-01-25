@@ -63,7 +63,7 @@ public class MessageManager : MonoBehaviour
             showMessage(messages[i], names[i], image[i]);
 
             // キー入力を待機 (下記説明1)
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
         }
 
         yield break;

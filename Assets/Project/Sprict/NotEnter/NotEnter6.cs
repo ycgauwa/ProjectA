@@ -140,7 +140,7 @@ public class NotEnter6 : MonoBehaviour
             // 1フレーム分 処理を待機(下記説明1)
             yield return null;
             showMessage(messages2[i], names2[i], images2[i]);
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
         }
         yield break;
     }
@@ -158,7 +158,7 @@ public class NotEnter6 : MonoBehaviour
             // 1フレーム分 処理を待機(下記説明1)
             yield return null;
             showMessage(messages3[i], names3[i], images3[i]);
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
         }
         yield break;
     }

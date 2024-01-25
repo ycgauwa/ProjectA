@@ -13,10 +13,18 @@ public class PlayerMessage : MonoBehaviour
     public Text target;
     private IEnumerator playercoroutine;
     public static PlayerMessage instance;
+    public bool StartActive;
+    public bool firstActive;
+    public Canvas Demo;
+    public Image DemoImage;
+    public Image DemoPanel;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
+        firstActive = true;
         instance = this;
         playercoroutine = CreateCoroutine();
         PlayerManager.m_instance.m_speed = 0; ;
@@ -36,6 +44,7 @@ public class PlayerMessage : MonoBehaviour
 
         StopCoroutine(playercoroutine);
         playercoroutine = null;
+        StartActive = true;
         PlayerManager.m_instance.m_speed = 0.075f;
         
 
@@ -57,10 +66,27 @@ public class PlayerMessage : MonoBehaviour
             showMessage(Messages[i]);
 
             // キー入力を待機 (下記説明1)
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
         }
 
         yield break;
 
+    }
+    private void Update()
+    {
+        if (StartActive && firstActive == true)
+        {
+            DemoImage.gameObject.SetActive(true);
+            DemoPanel.gameObject.SetActive(true);
+        }
+        if (DemoImage.gameObject.activeSelf)
+        {
+            if (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return))
+            {
+                DemoImage.gameObject.SetActive(false);
+                DemoPanel.gameObject.SetActive(false);
+                firstActive = false;
+            }
+        }
     }
 }

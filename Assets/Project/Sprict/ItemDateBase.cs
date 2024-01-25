@@ -20,6 +20,14 @@ public class ItemDateBase : MonoBehaviour
             items[i].checkPossession = false;
         }
     }
+    //　アイテムのセレクト状態解除
+    public void SelectDiff()
+    {
+        for (int i = 0; i < items.Count; ++i)
+        {
+            items[i].selectedItem = false;
+        }
+    }
     //　アイテム合成のメソッド
     public void synthesis()
     {
@@ -49,7 +57,7 @@ public class ItemDateBase : MonoBehaviour
     {
         if(inventryCanvas.gameObject.activeSelf)
         {
-            if(Input.GetKeyDown(KeyCode.Return))
+            if(Input.GetKeyDown("joystick button 0") || Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return))
             {
                 itemTextMessage.gameObject.SetActive(false);
             }

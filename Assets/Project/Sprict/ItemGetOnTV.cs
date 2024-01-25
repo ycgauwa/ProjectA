@@ -46,7 +46,7 @@ public class ItemGetOnTV : MonoBehaviour
 
     private void Update()
     {
-        if(isContacted && messageSwitch == false && Input.GetKeyDown(KeyCode.Return))
+        if(isContacted && messageSwitch == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
             messageSwitch = true;
             MessageManager.message_instance.MessageWindowActive(messages, names, images);

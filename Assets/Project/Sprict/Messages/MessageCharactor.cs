@@ -95,7 +95,7 @@ public class MessageCharactor : MonoBehaviour
                 yield return null;
                 showMessage(str, charactername, images[i]);
                 i++;
-                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+                yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
             }
             yield break;
         }
@@ -111,7 +111,7 @@ public class MessageCharactor : MonoBehaviour
                 yield return null;
                 showMessage(str, charactername, images[i]);
                 i++;
-                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+                yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
             }
             yield break;
         }
@@ -132,8 +132,7 @@ public class MessageCharactor : MonoBehaviour
 
                 // 会話をwindowのtextフィールドに表示
                 showMessage(messages[i], charactername, images[i]);
-
-                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+                yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
             }
             yield break;
         }
@@ -149,7 +148,7 @@ public class MessageCharactor : MonoBehaviour
                 // 会話をwindowのtextフィールドに表示
                 showMessage(messages[i], charactername, images[i]);
 
-                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+                yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
             }
             yield break;
         }

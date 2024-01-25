@@ -73,7 +73,7 @@ public class DiaryMessage : MonoBehaviour
             yield return null;
             // 会話をwindowのtextフィールドに表示
             showMessage(messages[i], names[i]);
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
         window.gameObject.SetActive(false);
         
@@ -85,7 +85,7 @@ public class DiaryMessage : MonoBehaviour
             yield return null;
             // 会話をwindowのtextフィールドに表示
             showDiaryMessage(sentences[i], dates[i]);
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
         diaryWindow.gameObject.SetActive(false);
         PlayerManager.m_instance.m_speed = 0.075f;

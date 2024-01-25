@@ -49,7 +49,7 @@ public class Slot : MonoBehaviour
     {
         if(itemTextMessage.gameObject.activeSelf)
         {
-            if(Input.GetKeyDown(KeyCode.Return))
+            if(Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return))
             {
                 itemTextMessage.gameObject.SetActive(false);
             }

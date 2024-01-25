@@ -45,7 +45,7 @@ public class ItemGet : MonoBehaviour
 
     private void Update()
     {
-        if(isContacted &&  messageSwitch == false && Input.GetKeyDown(KeyCode.Return))
+        if(isContacted && messageSwitch == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
             messageSwitch = true;
             item.checkPossession = true;

@@ -248,7 +248,7 @@ public class ToEvent2 : MonoBehaviour
             // 会話をwindowのtextフィールドに表示
             showMessage(messages[i], names[i], images[i]);
             // キー入力を待機 (下記説明1)
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
         yield break;
     }
@@ -265,7 +265,7 @@ public class ToEvent2 : MonoBehaviour
 
 
             // キー入力を待機 (下記説明1)
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
 
         yield break;
@@ -284,7 +284,7 @@ public class ToEvent2 : MonoBehaviour
 
 
             // キー入力を待機 (下記説明1)
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
 
         yield break;
@@ -303,7 +303,7 @@ public class ToEvent2 : MonoBehaviour
 
 
             // キー入力を待機 (下記説明1)
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
 
         yield break;
@@ -322,7 +322,7 @@ public class ToEvent2 : MonoBehaviour
 
 
             // キー入力を待機 (下記説明1)
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
 
         yield break;

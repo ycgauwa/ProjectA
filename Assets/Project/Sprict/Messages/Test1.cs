@@ -41,7 +41,7 @@ public class Test1 : MonoBehaviour
     private void Update()//入力チェックはUpdateに書く
     {
         //メッセージウィンドウ閉じるときはこのメソッドを
-        if(isContacted && messageSwitch == false && Input.GetKeyDown(KeyCode.Return))
+        if(isContacted && messageSwitch == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
             messageSwitch = true;
             MessageManager.message_instance.MessageWindowActive(messages, names,image);

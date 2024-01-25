@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class PassWord : MonoBehaviour
@@ -9,6 +10,12 @@ public class PassWord : MonoBehaviour
     public InputField passcode;
     public Item item;
     public Inventry inventry;
+    [SerializeField]
+    private List<string> messages;
+    [SerializeField]
+    private List<string> names;
+    [SerializeField]
+    private List<Sprite> images;
     void Start()
     {
         //これはお手本が画像を触って起こることだからImageを取得してるけど俺のゲームの場合は、、？
@@ -27,6 +34,7 @@ public class PassWord : MonoBehaviour
                 // Inventryの追加（アイテムの取得）
                 inventry.Add(item);
                 item.checkPossession = true;
+                MessageManager.message_instance.MessageWindowActive(messages, names, images);
             }
         }
     }

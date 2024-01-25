@@ -27,6 +27,7 @@ public class ItemGet2 : MonoBehaviour
     public Item detergent;
     private bool isContacted = false;
     public static bool messageSwitch = false;
+    private bool geted = false;
 
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -50,7 +51,7 @@ public class ItemGet2 : MonoBehaviour
         // アイテムを入手する前
         if(hummer.checkPossession == false)
         {
-            if(isContacted && messageSwitch == false && Input.GetKeyDown(KeyCode.Return))
+            if(isContacted && messageSwitch == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
             {
                 messageSwitch = true;
                 MessageManager.message_instance.MessageWindowActive(messages, names, images);
@@ -59,9 +60,10 @@ public class ItemGet2 : MonoBehaviour
         //　アイテムを入手したあと
         if(hummer.checkPossession == true)
         {
-            if(isContacted && messageSwitch == false && Input.GetKeyDown(KeyCode.Return))
+            if(isContacted && messageSwitch == false && geted == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
             {
                 messageSwitch = true;
+                geted = true;
                 MessageManager.message_instance.MessageWindowActive(messages2, names2, images2);
                 inventry.Add(detergent);
             }
