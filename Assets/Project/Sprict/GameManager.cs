@@ -15,7 +15,14 @@ public class GameManager : MonoBehaviour
     public Canvas gameoverWindow;
     public Image buttonPanel;
     public ItemDateBase itemDate;
+    public AudioSource audioSource;
+    public AudioClip cancel;
+    public AudioClip decision;
 
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -26,7 +33,7 @@ public class GameManager : MonoBehaviour
                 PlayerManager.m_instance.m_speed = 0;
                 Time.timeScale = 0;
                 menuCanvas.gameObject.SetActive(true);
-
+                audioSource.PlayOneShot(cancel);
             }
         }
         else if(menuCanvas.gameObject.activeSelf)
@@ -36,6 +43,7 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1;
                 PlayerManager.m_instance.m_speed = 0.075f;
                 menuCanvas.gameObject.SetActive(false);
+                audioSource.PlayOneShot(cancel);
             }
         }
         if(inventryCanvas.gameObject.activeSelf)
@@ -45,6 +53,7 @@ public class GameManager : MonoBehaviour
                 inventryCanvas.gameObject.SetActive(false);
                 itemDate.SelectDiff();
                 menuCanvas.gameObject.SetActive(true);
+                audioSource.PlayOneShot(cancel);
             }
         }
         //  メニュー画面をESCで呼べる。呼んだあとESCで閉じれる。だけどメニュー画面から
@@ -53,11 +62,13 @@ public class GameManager : MonoBehaviour
     {
         //　インベントリボタンをクリックしたときメニューキャンバスを消してインベントリを呼び出す
         //　インベントリだけ出てるのでESC押したらインベントリを消してメニューを呼べばよい
+        audioSource.PlayOneShot(decision);
         menuCanvas.gameObject.SetActive(false);
         inventryCanvas.gameObject.SetActive(true);
     }
    public void OnclickRetryButton()
     {
+        audioSource.PlayOneShot(decision);
         buttonPanel.gameObject.SetActive(false);
         gameoverWindow.gameObject.SetActive(false);
         Time.timeScale = 1.0f;
@@ -65,6 +76,7 @@ public class GameManager : MonoBehaviour
     }
     public void OnClickTitleButton() 
     {
+        audioSource.PlayOneShot(decision);
         buttonPanel.gameObject.SetActive(false);
         gameoverWindow.gameObject.SetActive(false);
         Time.timeScale = 1.0f;

@@ -27,9 +27,6 @@ public class TVCharadeManager : MonoBehaviour
     public Inventry inventry;
     public NotEnter5 notEnter5;
 
-
-
-
     // 正解を押し続けたらアイテムがもらえて、メッセージも表示させる仕組みの作成
     // 不正解を選択したら最後のメッセージがでてアイテムはもらえない。
     // 最終的にはboolの変数は元に戻すようにする。

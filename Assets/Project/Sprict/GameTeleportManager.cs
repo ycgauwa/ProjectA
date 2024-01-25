@@ -17,6 +17,7 @@ public class GameTeleportManager : MonoBehaviour
     private int enemyRndNum;
     public GameObject enemy;
     public AudioSource chasedBGM;
+    public AudioClip openDoor;
 
     private void Start()
     {
@@ -84,6 +85,7 @@ public class GameTeleportManager : MonoBehaviour
     情報があればよいというのが考え方の違いがあった。こっちの方がおんなじクラスで導入しやすい*/
     public void OnPlayerTeleport(TeleportAddress playerTeleportAddress)
     {
+        chasedBGM.PlayOneShot(openDoor);
         //ETAにPTAを代入している
         enemyTeleportAddress = playerTeleportAddress;
         enemyRndNum = Random.Range(1, 101);

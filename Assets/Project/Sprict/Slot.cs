@@ -9,7 +9,7 @@ public class Slot : MonoBehaviour
     public Text itemTextMessage;
     public ItemDateBase itemDate;
     public bool checkItem;
-    
+    public GameManager gameManager;
     Item item;
 
     public void AddItem(Item newItem)
@@ -35,12 +35,14 @@ public class Slot : MonoBehaviour
             item.selectedItem = true;
             itemTextMessage.gameObject.SetActive(true);
             itemTextMessage.text = item.itemText;
+            gameManager.audioSource.PlayOneShot(gameManager.decision);
             itemDate.synthesis();
         }
         else
         {
             item.selectedItem = false;
             itemTextMessage.gameObject.SetActive(false);
+            gameManager.audioSource.PlayOneShot(gameManager.cancel);
         }
         //checkItem = item.checkPossession;
 
