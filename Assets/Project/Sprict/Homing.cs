@@ -10,7 +10,6 @@ public class Homing : MonoBehaviour
 {
     //プレイヤーのTransform
     Transform playerTr;
-
     //Staticを使ってたり、インスタンス化している
     public static Homing m_instance;
     public GameTeleportManager teleportManager;
@@ -20,6 +19,7 @@ public class Homing : MonoBehaviour
     public float enemyCount = 0.0f; //　敵が追いかけている時間
     public Canvas gameoverWindow;
     public Image buttonPanel;
+    public bool enemyEmerge;
 
     private void Start()
     {
@@ -29,12 +29,10 @@ public class Homing : MonoBehaviour
     }
     private void Update()
     {
-
-        if(toevent3.event3flag)
+        if(toevent3.event3flag && enemyEmerge)
         {
             if(Vector2.Distance(transform.position, playerTr.position) < 0.1f)
                 return;
-
             // プレイヤーに向けて進む
             transform.position = Vector2.MoveTowards(
                 transform.position,
@@ -71,7 +69,7 @@ public class Homing : MonoBehaviour
     //敵が時間差テレポートするメソッド
     public void TimerTeleport()
     {
-        if(toevent3.event3flag)
+        if(toevent3.event3flag && enemyEmerge)
         {
             var teleportAddress = teleportManager.FindTeleportAddress("House");
         }

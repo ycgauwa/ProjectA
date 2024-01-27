@@ -57,6 +57,8 @@ public class NotEnter6 : MonoBehaviour
     public bool cameraSwitch = false;
     private float redNum = 0.0f;
     public GameObject player;
+    public GameObject enemy;
+    public GameTeleportManager gameTeleportManager;
 
     private void Start()
     {
@@ -194,6 +196,10 @@ public class NotEnter6 : MonoBehaviour
         redScreen.gameObject.SetActive(false);
         choiced = true;
         player.transform.position = new Vector3(128, 25, 0);
+        enemy.transform.position = new Vector2(0, 0);
+        enemy.gameObject.SetActive(false);
+        gameTeleportManager.chasedBGM.Stop();
+        Homing.m_instance.enemyEmerge = false;
     }
     public void OnRescueBotton()
     {
@@ -206,5 +212,9 @@ public class NotEnter6 : MonoBehaviour
         audioSound.Stop();
         redScreen.gameObject.SetActive(false);
         choiced = true;
+        if(!enemy.activeSelf)
+        {
+            Homing.m_instance.enemyEmerge = false;
+        }
     }
 }

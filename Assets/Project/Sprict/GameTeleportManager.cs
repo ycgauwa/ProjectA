@@ -91,8 +91,9 @@ public class GameTeleportManager : MonoBehaviour
         enemyRndNum = Random.Range(1, 101);
         if(!enemy.activeSelf)
         {
-            if(enemyRndNum > 92)
+            if(enemyRndNum > 75 && Homing.m_instance.enemyEmerge)
             {
+                Debug.Log(enemyRndNum);
                 Enemy.gameObject.SetActive(true);
                 chasedBGM.Play();
             }
@@ -107,10 +108,9 @@ public class GameTeleportManager : MonoBehaviour
         {
             Debug.LogError("エネミーの参照がありません");
             return;
-
         }
         // EnemyがTPするメソッド(ここに確率を加えたい)
-        if(toevent3.event3flag)
+        if(toevent3.event3flag && Homing.m_instance.enemyEmerge)
         {
             if(Homing.m_instance.enemyCount < 15.0f)
             {

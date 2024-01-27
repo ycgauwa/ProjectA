@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour
     public GameTeleportManager teleportManager;
     public GameObject mainCamera;
     public Rigidbody2D m_Rigidbody;
+    public GameObject enemy;
     // Start is called before the first frame update
     void Start()
     {
@@ -233,11 +234,20 @@ public class PlayerManager : MonoBehaviour
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-7");
             transform.position = teleportAddress.playerPosition;
+            if(!enemy.activeSelf)
+            {
+                enemy.transform.position = new Vector2(0, 0);
+                Homing.m_instance.enemyEmerge = false;
+            }
         }
         if(other.gameObject.CompareTag("Minnka1-8"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-8");
             transform.position = teleportAddress.playerPosition;
+            if(Homing.m_instance.enemyEmerge == false)
+            {
+                Homing.m_instance.enemyEmerge = true;
+            }
         }
         if(other.gameObject.CompareTag("Minnka1-9"))
         {

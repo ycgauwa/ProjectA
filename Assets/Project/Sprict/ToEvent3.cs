@@ -14,7 +14,6 @@ public class ToEvent3 : MonoBehaviour
     public GameObject player;
     //特定のエリアに初めて入りイベントが開始される
     public bool event3flag;
-    public bool playerStop;
 
     // メッセージウィンドウ用の変数
     [SerializeField]
@@ -30,6 +29,7 @@ public class ToEvent3 : MonoBehaviour
     [SerializeField]
     private List<Sprite> images2;
     public AudioSource chasedBGM;
+    public Homing homing;
     bool firstchased = false;
 
     // 効果音
@@ -60,12 +60,10 @@ public class ToEvent3 : MonoBehaviour
         {
             if(collider.gameObject.tag.Equals("Player"))
             {
-                // プレイヤーの速度が停止
-                playerStop = true;
-                // 効果音とメッセージを流す
                 MessageManager.message_instance.MessageWindowActive(messages,names,images);
                 audioSound.PlayOneShot(eatSound);
                 event3flag = true; //フラグが立つ
+                homing.enemyEmerge = true; // 敵が出現する
             }
         }
     }
