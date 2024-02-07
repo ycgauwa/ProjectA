@@ -14,7 +14,7 @@ public class GameTeleportManager : MonoBehaviour
     [SerializeField] private float enemyTeleportTimer = 0f;
 
     // ‚±‚Ì•Ï”‚ÍŠm—¦‚ğ‹N‚±‚·‚½‚ß‚É—”‚ğŠi”[‚·‚é‚à‚Ì
-    private int enemyRndNum;
+    public int enemyRndNum;
     public GameObject enemy;
     public AudioSource chasedBGM;
     public AudioClip openDoor;

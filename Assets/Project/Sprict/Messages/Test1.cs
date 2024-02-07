@@ -21,6 +21,7 @@ public class Test1 : MonoBehaviour
     public static bool messageSwitch = false;
     private void OnTriggerEnter2D(Collider2D collider)
     {
+        //幸人の時に表示されるメッセージ
         if(collider.gameObject.tag.Equals("Player"))
         {
             isContacted = true;

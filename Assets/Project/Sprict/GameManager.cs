@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager m_instance;
     public GameObject player;
     public PlayerManager playerManager;
+    public RescueEvent rescueEvent;
+    public int deathCount;
     public GameObject enemy;
     public Homing homing;
     public Canvas menuCanvas;
@@ -22,6 +26,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        m_instance = this;
     }
     // Update is called once per frame
     void Update()
@@ -68,11 +73,23 @@ public class GameManager : MonoBehaviour
     }
    public void OnclickRetryButton()
     {
-        audioSource.PlayOneShot(decision);
-        buttonPanel.gameObject.SetActive(false);
-        gameoverWindow.gameObject.SetActive(false);
-        Time.timeScale = 1.0f;
-        SceneManager.LoadScene("Game");
+        if (rescueEvent.RescueSwitch)
+        {
+            player.transform.position = new Vector2(35, 68);
+            enemy.transform.position = new Vector2(35, 71);
+            buttonPanel.gameObject.SetActive(false);
+            gameoverWindow.gameObject.SetActive(false);
+            Time.timeScale = 1.0f;
+            deathCount++;
+        }
+        else
+        {
+            audioSource.PlayOneShot(decision);
+            buttonPanel.gameObject.SetActive(false);
+            gameoverWindow.gameObject.SetActive(false);
+            Time.timeScale = 1.0f;
+            SceneManager.LoadScene("Game");
+        }
     }
     public void OnClickTitleButton() 
     {

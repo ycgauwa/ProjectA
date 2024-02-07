@@ -45,6 +45,7 @@ public class NotEnter6 : MonoBehaviour
     public bool getKey;
     public bool toevent5;
     public bool choiced;
+    public bool rescued;
     private IEnumerator coroutine;
     public ItemDateBase itemDateBase;
     public AudioClip fearBGM;
@@ -212,6 +213,7 @@ public class NotEnter6 : MonoBehaviour
         audioSound.Stop();
         redScreen.gameObject.SetActive(false);
         choiced = true;
+        rescued = true;
         if(!enemy.activeSelf)
         {
             Homing.m_instance.enemyEmerge = false;
