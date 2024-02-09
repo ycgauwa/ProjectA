@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager m_instance;
     public GameObject player;
+    public GameObject seiitirou;
     public PlayerManager playerManager;
     public RescueEvent rescueEvent;
     public int deathCount;
@@ -73,13 +74,24 @@ public class GameManager : MonoBehaviour
     }
    public void OnclickRetryButton()
     {
+        if (deathCount > 5)
+        {
+            //　カメラの位置を幸人から征一郎に変更して、征一郎をキー操作で動かせるようにする。
+            cameraManager.playerCamera = false;
+            player.gameObject.SetActive(false);
+            cameraManager.seiitirouCamera = true;
+            playerManager = seiitirou.AddComponent<PlayerManager>();
+
+        }
         if (rescueEvent.RescueSwitch)
         {
             player.transform.position = new Vector2(35, 68);
             enemy.transform.position = new Vector2(35, 71);
             buttonPanel.gameObject.SetActive(false);
             gameoverWindow.gameObject.SetActive(false);
-            Time.timeScale = 1.0f;
+            Time.timeScale = 1;
+            PlayerManager.m_instance.m_speed = 0.075f;
+            Homing.m_instance.speed = 2;
             deathCount++;
         }
         else

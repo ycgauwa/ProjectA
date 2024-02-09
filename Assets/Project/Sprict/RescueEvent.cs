@@ -92,6 +92,10 @@ public class RescueEvent : MonoBehaviour
         {
             light2D.intensity = 0.0f;
         }
+        else if (GameManager.m_instance.deathCount == 6)
+        {
+            light2D.intensity = 1.0f;
+        }
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {

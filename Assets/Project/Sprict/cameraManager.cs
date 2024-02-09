@@ -6,10 +6,12 @@ using UnityEngine;
 public class cameraManager : MonoBehaviour
 {
     public GameObject player; // 追従する対象を決める変数
+    public GameObject seiitirou;
     public GameObject girl;
     Vector3 pos;              // カメラの初期位置を記憶するための変数
     public static bool playerCamera = true;
     public static bool girlCamera = false;
+    public static bool seiitirouCamera = false;
     public float cameraSize = 0.0f;
     public Camera cam;
     public NotEnter6 notEnter6;
@@ -52,6 +54,18 @@ public class cameraManager : MonoBehaviour
 
             cameraPos.z = -10; // カメラの奥行きの位置に-10を入れる
             Camera.main.gameObject.transform.position = cameraPos; //　カメラの位置に変数cameraPosの位置を入れる
+        }
+        if (seiitirouCamera == true)
+        {
+            Vector3 cameraPos = seiitirou.transform.position;
+
+
+            cameraPos.x = seiitirou.transform.position.x;
+            cameraPos.y = seiitirou.transform.position.y;
+
+
+            cameraPos.z = -10;
+            Camera.main.gameObject.transform.position = cameraPos;
         }
         if(notEnter6.cameraSwitch)
         {
