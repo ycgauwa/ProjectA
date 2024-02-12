@@ -11,7 +11,10 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject seiitirou;
     public PlayerManager playerManager;
+    public GameTeleportManager teleportManager;
     public RescueEvent rescueEvent;
+    public GameObject rescuePoint;
+    public GameObject yukitoDead;
     public int deathCount;
     public GameObject enemy;
     public Homing homing;
@@ -20,6 +23,7 @@ public class GameManager : MonoBehaviour
     public Canvas gameoverWindow;
     public Image buttonPanel;
     public ItemDateBase itemDate;
+    public Inventry inventry;
     public AudioSource audioSource;
     public AudioClip cancel;
     public AudioClip decision;
@@ -74,32 +78,45 @@ public class GameManager : MonoBehaviour
     }
    public void OnclickRetryButton()
     {
-        if (deathCount > 5)
+        if (deathCount > 4)
         {
+            itemDate.items[7].checkPossession = false;
+            inventry.Delete(itemDate.items[7]);
+            yukitoDead.SetActive(true);
+            seiitirou.gameObject.tag = "Seiitirou";
+
             //　カメラの位置を幸人から征一郎に変更して、征一郎をキー操作で動かせるようにする。
             cameraManager.playerCamera = false;
             player.gameObject.SetActive(false);
             cameraManager.seiitirouCamera = true;
+            rescueEvent = rescuePoint.GetComponent<RescueEvent>();
+            rescueEvent.ChasedBGM.Stop();
             playerManager = seiitirou.AddComponent<PlayerManager>();
-
+            playerManager = seiitirou.GetComponent<PlayerManager>();
+            playerManager.teleportManager = teleportManager;
+            Rigidbody2D rb = seiitirou.GetComponent<Rigidbody2D>();
+            rb.constraints = RigidbodyConstraints2D.None;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            playerManager.SeiitirouRes();
         }
         if (rescueEvent.RescueSwitch)
         {
+            Debug.Log(deathCount);
             player.transform.position = new Vector2(35, 68);
             enemy.transform.position = new Vector2(35, 71);
             buttonPanel.gameObject.SetActive(false);
             gameoverWindow.gameObject.SetActive(false);
-            Time.timeScale = 1;
             PlayerManager.m_instance.m_speed = 0.075f;
             Homing.m_instance.speed = 2;
             deathCount++;
         }
         else
         {
+            PlayerManager.m_instance.m_speed = 0.075f;
+            Homing.m_instance.speed = 2;
             audioSource.PlayOneShot(decision);
             buttonPanel.gameObject.SetActive(false);
             gameoverWindow.gameObject.SetActive(false);
-            Time.timeScale = 1.0f;
             SceneManager.LoadScene("Game");
         }
     }

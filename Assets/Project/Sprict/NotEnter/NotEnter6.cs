@@ -37,6 +37,13 @@ public class NotEnter6 : MonoBehaviour
     private List<string> rescuenames;
     [SerializeField]
     private List<Sprite> rescueimages;
+    [SerializeField]
+    private List<string> messages4;
+    [SerializeField]
+    private List<string> names4;
+    [SerializeField]
+    private List<Sprite> images4;
+
     public Canvas window;
     public Text target;
     public Text nameText;
@@ -46,8 +53,11 @@ public class NotEnter6 : MonoBehaviour
     public bool toevent5;
     public bool choiced;
     public bool rescued;
+    public bool seiitirouFlag;
     private IEnumerator coroutine;
     public ItemDateBase itemDateBase;
+    public Inventry inventry;
+    public Item underKey;
     public AudioClip fearBGM;
     public AudioClip scream;
     public AudioClip heartSound;
@@ -58,6 +68,7 @@ public class NotEnter6 : MonoBehaviour
     public bool cameraSwitch = false;
     private float redNum = 0.0f;
     public GameObject player;
+    public GameObject seiitirou;
     public GameObject enemy;
     public GameTeleportManager gameTeleportManager;
 
@@ -84,6 +95,21 @@ public class NotEnter6 : MonoBehaviour
             coroutine = ToEvent5();
             StartCoroutine(coroutine);
             ToEvent5();
+        }
+
+        if(collider.gameObject.tag.Equals("Seiitirou"))
+        {
+            if(underKey.checkPossession == false)
+            {
+                MessageManager.message_instance.MessageWindowActive(messages4, names4, images4);
+                seiitirouFlag = true;
+                enemy.transform.position = new Vector2(0, 0);
+                enemy.gameObject.SetActive(false);
+            }
+            else
+            {
+                seiitirou.transform.position = new Vector3(128, 25, 0);
+            }
         }
     }
     IEnumerator ToEvent5()
@@ -201,6 +227,8 @@ public class NotEnter6 : MonoBehaviour
         enemy.gameObject.SetActive(false);
         gameTeleportManager.chasedBGM.Stop();
         Homing.m_instance.enemyEmerge = false;
+        underKey.checkPossession = false;
+        inventry.Delete(itemDateBase.items[7]);
     }
     public void OnRescueBotton()
     {

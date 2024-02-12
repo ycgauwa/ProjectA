@@ -16,6 +16,7 @@ public class Homing : MonoBehaviour
     [SerializeField] 
     public float speed = 2; //敵の動くスピード
     public ToEvent3 toevent3;
+    public GameObject player;
     public float enemyCount = 0.0f; //　敵が追いかけている時間
     public Canvas gameoverWindow;
     public Image buttonPanel;
@@ -57,7 +58,8 @@ public class Homing : MonoBehaviour
 
     public void AppearChoice()
     {
-        Time.timeScale = 0.0f;
+        PlayerManager.m_instance.m_speed = 0f;
+        Homing.m_instance.speed = 0f;
         buttonPanel.gameObject.SetActive(true);
     }
 

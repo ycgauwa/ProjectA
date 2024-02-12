@@ -19,15 +19,22 @@ public class ItemGet2 : MonoBehaviour
     private List<string> names2;
     [SerializeField]
     private List<Sprite> images2;
+    [SerializeField]
+    private List<string> messages3;
+    [SerializeField]
+    private List<string> names3;
+    [SerializeField]
+    private List<Sprite> images3;
     public Canvas window;
     public Text target;
     public Text nameText;
     public Inventry inventry;
     public Item hummer;
     public Item detergent;
+    public Item underKey;
     private bool isContacted = false;
     public static bool messageSwitch = false;
-    private bool geted = false;
+    private bool hummerGeted = false;
 
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -36,7 +43,6 @@ public class ItemGet2 : MonoBehaviour
         {
             isContacted = true;
         }
-
     }
     private void OnTriggerExit2D(Collider2D collider)
     {
@@ -58,17 +64,16 @@ public class ItemGet2 : MonoBehaviour
             }
         }
         //　アイテムを入手したあと
-        if(hummer.checkPossession == true)
+        else if(hummer.checkPossession == true)
         {
-            if(isContacted && messageSwitch == false && geted == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
+            if(isContacted && messageSwitch == false && hummerGeted == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
             {
                 messageSwitch = true;
-                geted = true;
+                hummerGeted = true;
                 MessageManager.message_instance.MessageWindowActive(messages2, names2, images2);
                 inventry.Add(detergent);
             }
         }
-        
     }
 
 }

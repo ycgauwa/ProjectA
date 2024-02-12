@@ -16,6 +16,7 @@ public class GameTeleportManager : MonoBehaviour
     // ‚±‚Ì•Ï”‚ÍŠm—¦‚ð‹N‚±‚·‚½‚ß‚É—”‚ðŠi”[‚·‚é‚à‚Ì
     public int enemyRndNum;
     public GameObject enemy;
+    public GameObject Yukito;
     public AudioSource chasedBGM;
     public AudioClip openDoor;
 
@@ -113,13 +114,16 @@ public class GameTeleportManager : MonoBehaviour
         //ETA‚ÉPTA‚ð‘ã“ü‚µ‚Ä‚¢‚é
         enemyTeleportAddress = playerTeleportAddress;
         enemyRndNum = Random.Range(1, 101);
-        if(!enemy.activeSelf)
+        if(Yukito.activeSelf)
         {
-            if(enemyRndNum > 75 && Homing.m_instance.enemyEmerge)
+            if(!enemy.activeSelf)
             {
-                Debug.Log(enemyRndNum);
-                Enemy.gameObject.SetActive(true);
-                chasedBGM.Play();
+                if(enemyRndNum > 75 && Homing.m_instance.enemyEmerge)
+                {
+                    Debug.Log(enemyRndNum);
+                    Enemy.gameObject.SetActive(true);
+                    chasedBGM.Play();
+                }
             }
         }
         Invoke("OnEnemyTeleport", enemyTeleportTimer);

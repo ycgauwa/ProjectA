@@ -107,6 +107,8 @@ public class RescueEvent : MonoBehaviour
             }
             if (notEnter6.rescued == true && RescueSwitch == false)
             {
+                CapsuleCollider2D capsuleCollider = Seiitirou.GetComponent<CapsuleCollider2D>();
+                capsuleCollider.enabled = false;
                 coroutine = RescueSeiitirouEvent();
                 StartCoroutine(coroutine);
             }
@@ -125,6 +127,7 @@ public class RescueEvent : MonoBehaviour
         //ªˆê˜Y‚ªo‚Ä‚«‚Ä‰ï˜b‚·‚é
         GetComponent<AudioSource>().PlayOneShot(doorSound);
         Seiitirou.transform.position = new Vector2(35,71);
+        yield return new WaitForSeconds(0.5f);
         SeiitirouMove = true;
 
         window.gameObject.SetActive(true);

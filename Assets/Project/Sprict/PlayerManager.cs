@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -17,7 +18,6 @@ public class PlayerManager : MonoBehaviour
     {
         m_instance = this;
         m_speed = 0.075f;
-
     }
 
     // Update is called once per frame
@@ -253,6 +253,10 @@ public class PlayerManager : MonoBehaviour
                 enemy.transform.position = new Vector2(0, 0);
                 Homing.m_instance.enemyEmerge = false;
             }
+            else
+            {
+                return;
+            }
         }
         if(other.gameObject.CompareTag("Minnka1-8"))
         {
@@ -465,6 +469,16 @@ public class PlayerManager : MonoBehaviour
         }
         //別クラスのメソッドの行使引数はteleportAddress
         teleportManager.OnPlayerTeleport(teleportAddress);
+    }
+    public void SeiitirouRes()
+    {
+        Debug.Log("aaa");
+        if(m_Rigidbody == null)
+        {
+            Debug.Log("null");
+        }
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        GameTeleportManager gametp = GetComponent<GameTeleportManager>();
     }
 
 }

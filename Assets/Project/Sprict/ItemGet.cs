@@ -29,7 +29,7 @@ public class ItemGet : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.tag.Equals("Player"))
+        if(collider.gameObject.tag.Equals("Player") || collider.gameObject.tag.Equals("Seiitirou"))
         {
             isContacted = true;
         }
@@ -37,7 +37,7 @@ public class ItemGet : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collider)
     {
-        if(collider.gameObject.tag.Equals("Player"))
+        if(collider.gameObject.tag.Equals("Player") || collider.gameObject.tag.Equals("Seiitirou"))
         {
             isContacted = false;
         }
@@ -45,7 +45,7 @@ public class ItemGet : MonoBehaviour
 
     private void Update()
     {
-        if(isContacted && messageSwitch == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
+        if(isContacted && item.checkPossession == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
             messageSwitch = true;
             item.checkPossession = true;

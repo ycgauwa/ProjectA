@@ -13,6 +13,7 @@ public class NotEnter3 : MonoBehaviour
     [SerializeField]
     private List<Sprite> images;
     public GameObject player;
+    public GameObject seiitirou;
     public ToEvent3 toevent3;
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -28,6 +29,10 @@ public class NotEnter3 : MonoBehaviour
         else if(toevent3.event3flag == true)
         {
             this.gameObject.tag = "Minnka1-1";
+            if(collider.gameObject.tag.Equals("Seiitirou"))
+            {
+                seiitirou.transform.position = new Vector2(24, -2);
+            }
         }
     }
 }
