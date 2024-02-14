@@ -21,7 +21,10 @@ public class GameManager : MonoBehaviour
     public Canvas menuCanvas;
     public Canvas inventryCanvas;
     public Canvas gameoverWindow;
+    public Canvas InstructionsCanvas;
     public Image buttonPanel;
+    public Image Instruction1;
+    public Image Instruction2;
     public ItemDateBase itemDate;
     public Inventry inventry;
     public AudioSource audioSource;
@@ -127,5 +130,17 @@ public class GameManager : MonoBehaviour
         gameoverWindow.gameObject.SetActive(false);
         Time.timeScale = 1.0f;
         SceneManager.LoadScene("Title");
+    }
+    public void OnClickHelpButton()
+    {
+
+    }
+    public void OnClickNextHelpButton()
+    {
+
+    }
+    public void OnClickBackHelpButton() 
+    {
+        //“Á’è‚Ì‰æ‘œ‚ª•\¦‚³‚ê‚Ä‚¢‚½ê‡‚ÅA–ß‚é‚©•Â‚¶‚é‚©‚ğ•Ï‚¦‚é
     }
 }
