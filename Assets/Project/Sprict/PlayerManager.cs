@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour
 {
     //メンバー変数として変数を定義してる。
     public float m_speed;//速さの定義
+    public float Speed;
     //Staticを使ってたり、インスタンス化している
     public static PlayerManager m_instance;
     public GameTeleportManager teleportManager;
@@ -28,9 +29,12 @@ public class PlayerManager : MonoBehaviour
         var h = Input.GetAxis("Horizontal");
         var v = Input.GetAxis("Vertical");
 
-        var velocity = new Vector3(h, v)* m_speed;
+        var velocity = new Vector3(h, v)* Speed;
         transform.localPosition += velocity;
-        
+    }
+    private void Update()
+    {
+        Speed = m_speed;
     }
     //ワープポイントに触れるとTPするコード
     /// <summary>
@@ -472,7 +476,6 @@ public class PlayerManager : MonoBehaviour
     }
     public void SeiitirouRes()
     {
-        Debug.Log("aaa");
         if(m_Rigidbody == null)
         {
             Debug.Log("null");

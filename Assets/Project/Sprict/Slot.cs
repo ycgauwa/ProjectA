@@ -10,17 +10,25 @@ public class Slot : MonoBehaviour
     public ItemDateBase itemDate;
     public bool checkItem;
     public GameManager gameManager;
+    public GameObject iconSprite;
+    public Image iconImage;
     Item item;
 
     public void AddItem(Item newItem)
     {
         item = newItem;
-        icon .sprite = newItem.icon;
+        iconImage.color = Color.white;
+        iconImage.sprite = newItem.icon;
+        //if (iconImage.sprite == null)
+        //{
+        //    iconImage.color = new Color(56, 56, 56, 181);
+        //}
     }
     public void ClearSlot()
     {
         item = null;
-        icon .sprite = null;
+        iconImage.color = new Color32(56,56,56,181); 
+        iconImage.sprite = null;
     }
 
     // ここでアイテムをクリックした時に説明文が出てきてほしい

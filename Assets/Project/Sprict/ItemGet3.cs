@@ -49,10 +49,6 @@ public class ItemGet3 : MonoBehaviour
         {
             isContacted = false;
         }
-        if(toevent4.event4flag == true && getedItem == false)
-        {
-            getedItem = true;
-        }
     }
     private void Update()
     {
@@ -71,6 +67,7 @@ public class ItemGet3 : MonoBehaviour
                 PlayerManager.m_instance.m_speed = 0;
                 MessageManager.message_instance.MessageWindowActive(messages2, names2, image2);
                 notEnter6.getKey = true;
+                getedItem = true;
                 inventry.Add(item);
             }
             //　もうここには用はない的なメッセージを書く

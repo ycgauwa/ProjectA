@@ -47,12 +47,7 @@ public class ToEvent3 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //@“G‚ª’Ç‚¢‚©‚¯I‚í‚Á‚½‚ç‰½‚©ˆ—‚ğ‰Á‚¦‚é
-        if(!enemy.activeSelf)
-        {
-            MessageManager.message_instance.MessageWindowActive(messages2, names2, images2);
-            Destroy(this);
-        }
+
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {

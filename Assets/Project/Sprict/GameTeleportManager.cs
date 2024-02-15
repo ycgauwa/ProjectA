@@ -118,7 +118,7 @@ public class GameTeleportManager : MonoBehaviour
         {
             if(!enemy.activeSelf)
             {
-                if(enemyRndNum > 75 && Homing.m_instance.enemyEmerge)
+                if(enemyRndNum > 91 && Homing.m_instance.enemyEmerge)
                 {
                     Debug.Log(enemyRndNum);
                     Enemy.gameObject.SetActive(true);

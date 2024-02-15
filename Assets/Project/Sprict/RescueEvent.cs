@@ -108,6 +108,7 @@ public class RescueEvent : MonoBehaviour
             if (notEnter6.rescued == true && RescueSwitch == false)
             {
                 CapsuleCollider2D capsuleCollider = Seiitirou.GetComponent<CapsuleCollider2D>();
+                PlayerManager.m_instance.m_speed = 0;
                 capsuleCollider.enabled = false;
                 coroutine = RescueSeiitirouEvent();
                 StartCoroutine(coroutine);
@@ -117,7 +118,6 @@ public class RescueEvent : MonoBehaviour
     IEnumerator RescueSeiitirouEvent()
     {
         // �Ƃ茾
-        PlayerManager.m_instance.m_speed = 0;
 
         window.gameObject.SetActive(true);
         yield return OnMessage1();

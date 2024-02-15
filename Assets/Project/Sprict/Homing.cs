@@ -35,6 +35,7 @@ public class Homing : MonoBehaviour
             if(Vector2.Distance(transform.position, playerTr.position) < 0.1f)
                 return;
             // プレイヤーに向けて進む
+            Debug.Log("test");
             transform.position = Vector2.MoveTowards(
                 transform.position,
                 new Vector2(playerTr.position.x, playerTr.position.y),

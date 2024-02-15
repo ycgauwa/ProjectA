@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public Canvas inventryCanvas;
     public Canvas gameoverWindow;
     public Canvas InstructionsCanvas;
+    public Canvas messageCanvas;
     public Image buttonPanel;
     public Image Instruction1;
     public Image Instruction2;
@@ -39,6 +40,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (messageCanvas.gameObject.activeSelf)
+        {
+            PlayerManager.m_instance.m_speed = 0;
+            Homing.m_instance.speed = 0;
+        }
         if(!menuCanvas.gameObject.activeSelf)
         {
             if(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
@@ -65,6 +71,15 @@ public class GameManager : MonoBehaviour
             {
                 inventryCanvas.gameObject.SetActive(false);
                 itemDate.SelectDiff();
+                menuCanvas.gameObject.SetActive(true);
+                audioSource.PlayOneShot(cancel);
+            }
+        }
+        if (Instruction1.gameObject.activeSelf)
+        {
+            if (Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
+            {
+                Instruction1.gameObject.SetActive(false);
                 menuCanvas.gameObject.SetActive(true);
                 audioSource.PlayOneShot(cancel);
             }
@@ -133,14 +148,30 @@ public class GameManager : MonoBehaviour
     }
     public void OnClickHelpButton()
     {
-
+        menuCanvas.gameObject.SetActive(false);
+        Instruction1.gameObject.SetActive(true);
+        audioSource.PlayOneShot(decision);
     }
     public void OnClickNextHelpButton()
     {
-
+        Instruction1.gameObject.SetActive(false);
+        Instruction2.gameObject.SetActive(true);
+        audioSource.PlayOneShot(decision);
     }
     public void OnClickBackHelpButton() 
     {
         //ì¡íËÇÃâÊëúÇ™ï\é¶Ç≥ÇÍÇƒÇ¢ÇΩèÍçáÇ≈ÅAñﬂÇÈÇ©ï¬Ç∂ÇÈÇ©ÇïœÇ¶ÇÈ
+        if (Instruction1.gameObject.activeSelf)
+        {
+            Instruction1.gameObject.SetActive(false);
+            menuCanvas.gameObject.SetActive(true);
+            audioSource.PlayOneShot(cancel);
+        }
+        else if (Instruction2.gameObject.activeSelf)
+        {
+            Instruction2.gameObject.SetActive(false);
+            Instruction1.gameObject.SetActive(true);
+            audioSource.PlayOneShot(cancel);
+        }
     }
 }

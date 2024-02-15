@@ -92,6 +92,7 @@ public class NotEnter6 : MonoBehaviour
         }
         if(getKey  == true)
         {
+            PlayerManager.m_instance.m_speed = 0;
             coroutine = ToEvent5();
             StartCoroutine(coroutine);
             ToEvent5();

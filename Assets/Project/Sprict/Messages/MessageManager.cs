@@ -42,6 +42,7 @@ public class MessageManager : MonoBehaviour
 
         PlayerManager.m_instance.m_speed = 0.075f;
         Homing.m_instance.speed = 2;
+        Time.timeScale = 1f;
         //StopCoroutine(coroutine);
         coroutine = null;
     }
@@ -83,7 +84,7 @@ public class MessageManager : MonoBehaviour
         this.image = image;
         PlayerManager.m_instance.m_speed = 0;
         Homing.m_instance.speed = 0;
-        
+        Time.timeScale = 0;
         coroutine = StartCoroutine(MessageCoroutine()); 
 
         if(sound != null)

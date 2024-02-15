@@ -18,6 +18,7 @@ public class PlayerMessage : MonoBehaviour
     public Canvas Demo;
     public Image DemoImage;
     public Image DemoPanel;
+    public Image Instruction;
 
 
 
@@ -81,12 +82,17 @@ public class PlayerMessage : MonoBehaviour
         }
         if (DemoImage.gameObject.activeSelf)
         {
+            PlayerManager.m_instance.m_speed = 0;
             if (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return))
             {
                 DemoImage.gameObject.SetActive(false);
                 DemoPanel.gameObject.SetActive(false);
+                Instruction.gameObject.SetActive(true);
                 firstActive = false;
             }
+        }
+        else
+        {
         }
     }
 }
