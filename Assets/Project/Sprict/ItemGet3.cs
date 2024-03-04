@@ -30,7 +30,7 @@ public class ItemGet3 : MonoBehaviour
     public Inventry inventry;
     public NotEnter6 notEnter6;
     private bool isContacted = false;
-    private bool getedItem = false;
+    public bool getedItem = false;
     public bool messageSwitch = false;
 
     // 最初は話しかけてもメッセージが出るだけだが、イベント４のフラグを回収すると別のメッセージが流れてアイテムをゲットできる。
@@ -60,8 +60,7 @@ public class ItemGet3 : MonoBehaviour
                 PlayerManager.m_instance.m_speed = 0;
                 MessageManager.message_instance.MessageWindowActive(messages, names, images);
             }
-
-            if(toevent4.event4flag == true && getedItem == false)
+            else if(toevent4.event4flag == true && getedItem == false)
             {
                 messageSwitch = true;
                 PlayerManager.m_instance.m_speed = 0;
@@ -71,7 +70,7 @@ public class ItemGet3 : MonoBehaviour
                 inventry.Add(item);
             }
             //　もうここには用はない的なメッセージを書く
-            if(toevent4.event4flag == true && getedItem == true)
+            else if(toevent4.event4flag == true && getedItem == true)
             {
                 messageSwitch = true;
                 PlayerManager.m_instance.m_speed = 0;

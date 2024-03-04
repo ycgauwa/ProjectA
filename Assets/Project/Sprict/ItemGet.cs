@@ -22,10 +22,12 @@ public class ItemGet : MonoBehaviour
     public Item item;
     private bool isContacted = false;
     public static bool messageSwitch = false;
+    private bool itemGeted;
 
     private void Start()
     {
         messageSwitch = false;
+        itemGeted = false;
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -45,9 +47,10 @@ public class ItemGet : MonoBehaviour
 
     private void Update()
     {
-        if(isContacted && item.checkPossession == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
+        if(isContacted && itemGeted == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
             messageSwitch = true;
+            itemGeted = true;
             item.checkPossession = true;
             MessageManager.message_instance.MessageWindowActive(messages, names,images);
             inventry.Add(item);

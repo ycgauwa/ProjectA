@@ -48,29 +48,35 @@ public class NotEnter6 : MonoBehaviour
     public Text target;
     public Text nameText;
     public Image characterImage;
+    public Image redScreen;
     public Canvas choicePanel;
+
     public bool getKey;
     public bool toevent5;
     public bool choiced;
     public bool rescued;
     public bool seiitirouFlag;
+    public bool cameraSwitch = false;
+
     private IEnumerator coroutine;
     public ItemDateBase itemDateBase;
     public Inventry inventry;
+    public GameTeleportManager gameTeleportManager;
+    public ItemSprictW itemSprictW;
     public Item underKey;
     public AudioClip fearBGM;
     public AudioClip scream;
     public AudioClip heartSound;
     AudioSource audioSound;
     public AudioSource screamSound;
-    public Image redScreen;
+
     private int heartCounts;
-    public bool cameraSwitch = false;
     private float redNum = 0.0f;
+
     public GameObject player;
     public GameObject seiitirou;
     public GameObject enemy;
-    public GameTeleportManager gameTeleportManager;
+    public GameObject colisionBox;
 
     private void Start()
     {
@@ -156,6 +162,28 @@ public class NotEnter6 : MonoBehaviour
             Homing.m_instance.speed = 2;
         }
     }
+    IEnumerator ToResqueEvent()
+    {
+        heartCounts = 1000;
+        cameraSwitch = false;
+        choicePanel.gameObject.SetActive(false);
+        StopCoroutine(HeartSounds());
+        audioSound.Stop();
+        redScreen.gameObject.SetActive(false);
+        colisionBox.gameObject.SetActive(true);
+        choiced = true;
+        rescued = true;
+        yield return OnMessage3();
+        if(itemDateBase.items[8].checkPossession == true)
+        {
+            itemSprictW.ItemDelete();
+        }
+        if(!enemy.activeSelf)
+        {
+            Homing.m_instance.enemyEmerge = false;
+        }
+        StopCoroutine(coroutine);
+    }
     protected void showMessage(string message, string name, Sprite image)
     {
         target.text = message;
@@ -183,11 +211,21 @@ public class NotEnter6 : MonoBehaviour
     {
         for(int i = 0; i < messages3.Count; ++i)
         {
-            PlayerManager.m_instance.m_speed = 0;
-            Homing.m_instance.speed = 0;
+            //PlayerManager.m_instance.m_speed = 0;
+            //Homing.m_instance.speed = 0;
             // 1フレーム分 処理を待機(下記説明1)
             yield return null;
             showMessage(messages3[i], names3[i], images3[i]);
+            yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
+        }
+        yield break;
+    }
+    IEnumerator OnMessage3()
+    {
+        for(int i = 0; i < messages3.Count; ++i)
+        {
+            yield return null;
+            showMessage(rescuemessages[i], rescuenames[i], rescueimages[i]);
             yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
         }
         yield break;
@@ -234,18 +272,7 @@ public class NotEnter6 : MonoBehaviour
     public void OnRescueBotton()
     {
         // 助けに行くボタンを押したときのメソッド要素として音をすべて消す、メッセージ、行けない
-        MessageManager.message_instance.MessageWindowActive(rescuemessages, rescuenames, rescueimages);
-        heartCounts = 1000;
-        cameraSwitch = false;
-        choicePanel.gameObject.SetActive(false);
-        StopCoroutine(HeartSounds());
-        audioSound.Stop();
-        redScreen.gameObject.SetActive(false);
-        choiced = true;
-        rescued = true;
-        if(!enemy.activeSelf)
-        {
-            Homing.m_instance.enemyEmerge = false;
-        }
+        coroutine = ToResqueEvent();
+        StartCoroutine(coroutine);
     }
 }

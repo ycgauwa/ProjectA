@@ -22,15 +22,15 @@ public class ToEvent3 : MonoBehaviour
     private List<string> names;
     [SerializeField]
     private List<Sprite> images;
-    [SerializeField]
-    private List<string> messages2;
-    [SerializeField]
-    private List<string> names2;
-    [SerializeField]
-    private List<Sprite> images2;
+    //[SerializeField]
+    //private List<string> messages2;
+    //[SerializeField]
+    //private List<string> names2;
+    //[SerializeField]
+    //private List<Sprite> images2;
     public AudioSource chasedBGM;
     public Homing homing;
-    bool firstchased = false;
+    public bool firstchased = false;
 
     // Œø‰Ê‰¹
     AudioSource audioSound;
@@ -58,6 +58,7 @@ public class ToEvent3 : MonoBehaviour
                 MessageManager.message_instance.MessageWindowActive(messages,names,images);
                 audioSound.PlayOneShot(eatSound);
                 event3flag = true; //ƒtƒ‰ƒO‚ª—§‚Â
+                GameTeleportManager.chasedTime = true;
                 homing.enemyEmerge = true; // “G‚ªoŒ»‚·‚é
             }
         }

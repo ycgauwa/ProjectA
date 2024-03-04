@@ -33,10 +33,12 @@ public class RescueEvent : MonoBehaviour
     public AudioClip doorSound;
     public AudioSource ChasedBGM;
     public NotEnter6 notEnter6;
+    public ToEvent3 toEvent3;
     public GameTeleportManager gameTeleportManager;
     public GameObject Seiitirou;
     public GameObject Enemy;
     public GameObject Player;
+    public GameObject colisionBox;
     private bool SeiitirouMove;
     public bool RescueSwitch;
     private IEnumerator coroutine;
@@ -96,6 +98,10 @@ public class RescueEvent : MonoBehaviour
         {
             light2D.intensity = 1.0f;
         }
+        if(notEnter6.rescued == true && Homing.m_instance.enemyEmerge == false)
+        {
+            colisionBox.SetActive(true);
+        }
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -112,6 +118,8 @@ public class RescueEvent : MonoBehaviour
                 capsuleCollider.enabled = false;
                 coroutine = RescueSeiitirouEvent();
                 StartCoroutine(coroutine);
+                Homing.m_instance.enemyEmerge = true;
+                toEvent3.event3flag = true;
             }
         }
     }
@@ -125,6 +133,7 @@ public class RescueEvent : MonoBehaviour
 
         yield return new WaitForSeconds(2.0f);
         //ªˆê˜Y‚ªo‚Ä‚«‚Ä‰ï˜b‚·‚é
+        colisionBox.SetActive(false);
         GetComponent<AudioSource>().PlayOneShot(doorSound);
         Seiitirou.transform.position = new Vector2(35,71);
         yield return new WaitForSeconds(0.5f);

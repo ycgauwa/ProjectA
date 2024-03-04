@@ -110,6 +110,7 @@ public class CalenderMessage : MonoBehaviour
         StopCoroutine(coroutine);
         coroutine = null;
         PlayerManager.m_instance.m_speed = 0.075f;
+        Homing.m_instance.speed = 2f;
     }
 
     protected void showMessage(string message, string name, Sprite image)
@@ -143,18 +144,21 @@ public class CalenderMessage : MonoBehaviour
         {
             messageSwitch = true;
             PlayerManager.m_instance.m_speed = 0;
+            Homing.m_instance.speed = 0f;
             coroutine = CreateCoroutine();
             StartCoroutine(coroutine);
         }
         if (calender.gameObject.activeSelf)
         {
             PlayerManager.m_instance.m_speed = 0;
+            Homing.m_instance.speed = 0f;
             Time.timeScale = 0.0f;
             if(Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return))
             {
                 calender.gameObject.SetActive(false);
                 Time.timeScale = 1.0f;
                 PlayerManager.m_instance.m_speed = 0.075f;
+                Homing.m_instance.speed = 2f;
             }
         }
     }

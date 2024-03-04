@@ -46,9 +46,9 @@ public class NotEnter7 : MonoBehaviour
     {
         if (rescueEvent.RescueSwitch)
         {
-            this.gameObject.tag = "Untagged";
             if (collider.gameObject.tag.Equals("Player"))
             {
+                this.gameObject.tag = "Untagged";
                 if (GameManager.m_instance.deathCount == 0)
                 {
                     // 死んだ回数によって内容が変わる。（ex「開けてください。お願いします……もう何も見えないんです助けてください……痛いのはもう嫌だ……」）
@@ -75,6 +75,10 @@ public class NotEnter7 : MonoBehaviour
                     MessageManager.message_instance.MessageWindowActive(messages5, names5, images5);
                 }
             }
+        }
+        if(collider.gameObject.tag.Equals("Seiitirou"))
+        {
+            this.gameObject.tag = "Minnka1-18";
         }
     }
     // Start is called before the first frame update

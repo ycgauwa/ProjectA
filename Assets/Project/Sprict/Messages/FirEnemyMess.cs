@@ -20,10 +20,14 @@ public class FirEnemyMess : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!enemy.activeSelf)
+        if(GameTeleportManager.chasedTime == false)
         {
-            MessageManager.message_instance.MessageWindowActive(messages2, names2, images2);
-            Destroy(this);
+            if(!enemy.activeSelf)
+            {
+                MessageManager.message_instance.MessageWindowActive(messages2, names2, images2);
+                Destroy(this);
+            }
+                
         }
     }
 }

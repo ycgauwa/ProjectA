@@ -32,8 +32,8 @@ public class AnimationStateController : MonoBehaviour
         }
         // 入力からVector2インスタンスを作成
         Vector2 vector = new Vector2(
-            (int)Input.GetAxis("Horizontal"),
-            (int)Input.GetAxis("Vertical"));
+            Input.GetAxisRaw("Horizontal"),
+            Input.GetAxisRaw("Vertical"));
 
         // キー入力が続いている場合は、入力から作成したVector2を渡す
         // キー入力がなければ null

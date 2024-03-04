@@ -12,8 +12,15 @@ public class NotEnter5 : MonoBehaviour
     private List<string> names;
     [SerializeField]
     private List<Sprite> images;
+    [SerializeField]
+    private List<string> messages2;
+    [SerializeField]
+    private List<string> names2;
+    [SerializeField]
+    private List<Sprite> images2;
     public bool getKey2;
     public ItemDateBase itemDateBase;
+    public RescueEvent rescueEvent;
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -24,6 +31,14 @@ public class NotEnter5 : MonoBehaviour
                 MessageManager.message_instance.MessageWindowActive(messages, names, images);
             }
         }
+        else if(rescueEvent.RescueSwitch == true)
+        {
+            if(collider.gameObject.tag.Equals("Player"))
+            {
+                gameObject.tag = "Untagged";
+                MessageManager.message_instance.MessageWindowActive(messages2, names2, images2);
+            }
+        }
         else if(getKey2 == true)
         {
             if(collider.gameObject.tag.Equals("Player"))
@@ -32,6 +47,7 @@ public class NotEnter5 : MonoBehaviour
                 itemDateBase.Items5Delete();
             }
         }
+
     }
 
 }

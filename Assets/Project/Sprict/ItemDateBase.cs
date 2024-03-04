@@ -71,4 +71,9 @@ public class ItemDateBase : MonoBehaviour
     {
         inventry.Delete(items[3]);
     }
+    public void Items9Delete()
+    {
+        inventry.Delete(items[8]);
+        items[8].checkPossession = false;
+    }
 }

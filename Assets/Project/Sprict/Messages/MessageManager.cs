@@ -17,7 +17,7 @@ public class MessageManager : MonoBehaviour
     public Image characterImage;
     public static MessageManager message_instance;
     private Coroutine coroutine;
-    public static bool talk = false;
+    public static bool talking = false;
 
     //ここでメッセージスクリプトを呼び出すスクリプトを作成する
     void Start()
@@ -43,6 +43,7 @@ public class MessageManager : MonoBehaviour
         PlayerManager.m_instance.m_speed = 0.075f;
         Homing.m_instance.speed = 2;
         Time.timeScale = 1f;
+        talking = false;
         //StopCoroutine(coroutine);
         coroutine = null;
     }
@@ -82,11 +83,7 @@ public class MessageManager : MonoBehaviour
         this.messages = messages;
         this.names = names;
         this.image = image;
-        PlayerManager.m_instance.m_speed = 0;
-        Homing.m_instance.speed = 0;
-        Time.timeScale = 0;
-        coroutine = StartCoroutine(MessageCoroutine()); 
-
+        coroutine = StartCoroutine(MessageCoroutine());
         if(sound != null)
         {
             GetComponent<AudioSource>().PlayOneShot(sound);

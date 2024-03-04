@@ -38,17 +38,17 @@ public class NotEnter4 : MonoBehaviour
             if(collider.gameObject.tag.Equals("Player"))
             {
                 this.gameObject.tag = "Minnka1-17";
-                // ˆê’U“G‚ªo‚Ä‚±‚È‚¢‚æ‚¤‚É‚·‚éB
-                toevent3.event3flag = false;
+                // ˆê’U“G‚ªo‚Ä‚±‚È‚¢‚æ‚¤‚É‚·‚éB©o—ˆ‚Ä‚È‚¢B
                 itemDateBase.Items4Delete();
             }
         }
         
         if(rescueEvent.RescueSwitch == true)
         {
+            gameObject.tag = "Untagged";
             if(collider.gameObject.tag.Equals("Seiitirou"))
             {
-                if(!notEnter6.seiitirouFlag)
+                if(notEnter6.seiitirouFlag == false)
                 {
                     MessageManager.message_instance.MessageWindowActive(messages2, names2, images2);
                 }

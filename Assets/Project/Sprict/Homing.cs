@@ -16,6 +16,9 @@ public class Homing : MonoBehaviour
     [SerializeField] 
     public float speed = 2; //敵の動くスピード
     public ToEvent3 toevent3;
+    public RescueEvent rescueEvent;
+    public ItemDateBase itemDateBase;
+    public ItemSprictW itemSprictW;
     public GameObject player;
     public float enemyCount = 0.0f; //　敵が追いかけている時間
     public Canvas gameoverWindow;
@@ -35,7 +38,6 @@ public class Homing : MonoBehaviour
             if(Vector2.Distance(transform.position, playerTr.position) < 0.1f)
                 return;
             // プレイヤーに向けて進む
-            Debug.Log("test");
             transform.position = Vector2.MoveTowards(
                 transform.position,
                 new Vector2(playerTr.position.x, playerTr.position.y),
@@ -50,17 +52,25 @@ public class Homing : MonoBehaviour
     {
         if (collider.gameObject.tag.Equals("Player"))
         {
-            // 食べられた時のサウンドを流す
-            // ゲームオーバー画面を出すためのキャンバスとその数秒後にボタンを出す
-            gameoverWindow.gameObject.SetActive(true);
-            Invoke("AppearChoice", 2.5f);
+            // 藁人形を人形を持っているときの処理
+            if(itemDateBase.items[8].checkPossession == true)
+            {
+                itemSprictW.ItemEffect();
+            }
+            else
+            {
+                // 食べられた時のサウンドを流す
+                // ゲームオーバー画面を出すためのキャンバスとその数秒後にボタンを出す
+                gameoverWindow.gameObject.SetActive(true);
+                Invoke("AppearChoice", 2.5f);
+            }
         }
     }
 
     public void AppearChoice()
     {
-        PlayerManager.m_instance.m_speed = 0f;
-        Homing.m_instance.speed = 0f;
+        //PlayerManager.m_instance.m_speed = 0f;
+        //Homing.m_instance.speed = 0f;
         buttonPanel.gameObject.SetActive(true);
     }
 

@@ -9,13 +9,18 @@ public class PlayerMessage : MonoBehaviour
 {
     [SerializeField]
     private List<string> Messages;
+    [SerializeField]
+    private List<string> names;
     public Canvas window;
     public Text target;
+    public Text nameText;
     private IEnumerator playercoroutine;
     public static PlayerMessage instance;
+    public DifficultyLevelManager difficultylevelmanager;
     public bool StartActive;
     public bool firstActive;
     public Canvas Demo;
+    public Canvas DifficultyCanvas;
     public Image DemoImage;
     public Image DemoPanel;
     public Image Instruction;
@@ -28,12 +33,13 @@ public class PlayerMessage : MonoBehaviour
         firstActive = true;
         instance = this;
         playercoroutine = CreateCoroutine();
-        PlayerManager.m_instance.m_speed = 0; ;
+        PlayerManager.m_instance.m_speed = 0;
         // コルーチンの起動(下記説明2)
         StartCoroutine(playercoroutine);
     }
     private IEnumerator CreateCoroutine()
     {
+        yield return CanvasActive();
         // window起動
         window.gameObject.SetActive(true);
         // 抽象メソッド呼び出し 詳細は子クラスで実装
@@ -47,13 +53,16 @@ public class PlayerMessage : MonoBehaviour
         playercoroutine = null;
         StartActive = true;
         PlayerManager.m_instance.m_speed = 0.075f;
-        
-
-
     }
-    protected void showMessage(string message)
+    protected void showMessage(string message ,string name)
     {
         this.target.text = message;
+        nameText.text = name;
+    }
+    IEnumerator CanvasActive()
+    {
+        DifficultyCanvas.gameObject.SetActive(true);
+        yield return (difficultylevelmanager.ActiveCanvas == true);
     }
     IEnumerator OnAction()
     {
@@ -64,7 +73,7 @@ public class PlayerMessage : MonoBehaviour
             yield return null;
 
             // 会話をwindowのtextフィールドに表示
-            showMessage(Messages[i]);
+            showMessage(Messages[i], names[i]);
 
             // キー入力を待機 (下記説明1)
             yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
