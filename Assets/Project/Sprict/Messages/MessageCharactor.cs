@@ -83,6 +83,7 @@ public class MessageCharactor : MonoBehaviour
 
     IEnumerator CharaShowMessage()
     {
+        // 学校にいる間にしゃべらされる内容
         if(notEnter1.one == false)
         {
             charactername = character.charaName;
@@ -99,7 +100,7 @@ public class MessageCharactor : MonoBehaviour
             }
             yield break;
         }
-        else if(notEnter4.getKey1 == true)
+        else if(notEnter4.getKey1 == true)//居間に行けるようになってからの内容
         {
             charactername = character.charaName;
             images = character.characterImages2;

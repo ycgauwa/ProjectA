@@ -102,7 +102,6 @@ public class CalenderMessage : MonoBehaviour
 
         // 抽象メソッド呼び出し 詳細は子クラスで実装
         yield return OnAction();
-
         // window終了
         target.text = "";
         window.gameObject.SetActive(false);

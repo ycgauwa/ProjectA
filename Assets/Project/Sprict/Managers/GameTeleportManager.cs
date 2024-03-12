@@ -21,7 +21,10 @@ public class GameTeleportManager : MonoBehaviour
     public GameObject Yukito;
     public static bool chasedTime;
     public AudioSource chasedBGM;
-    public AudioClip openDoor;
+    public AudioClip minnkaDoor;
+    public AudioClip schoolDoor;
+    public AudioClip bathDoor;
+    public AudioClip climbStairs;
     public DifficultyLevelManager difficultyLevelManager;
 
     private void Start()
@@ -104,6 +107,8 @@ public class GameTeleportManager : MonoBehaviour
         new TeleportAddress(){tag="Minnka2-20",playerPosition = new Vector2(109, 147)},
         new TeleportAddress(){tag="Minnka2-21",playerPosition = new Vector2(65, 164)},
         new TeleportAddress(){tag="Minnka2-22",playerPosition = new Vector2(64, 150)},
+        new TeleportAddress(){name="Ladder1-1",playerPosition = new Vector2(103, 8)},
+        new TeleportAddress(){name="Ladder1-2",playerPosition = new Vector2(95, -19)},
     };
     public ToEvent3 toevent3;
 
@@ -113,7 +118,6 @@ public class GameTeleportManager : MonoBehaviour
     情報があればよいというのが考え方の違いがあった。こっちの方がおんなじクラスで導入しやすい*/
     public void OnPlayerTeleport(TeleportAddress playerTeleportAddress)
     {
-        chasedBGM.PlayOneShot(openDoor);
         //ETAにPTAを代入している
         enemyTeleportAddress = playerTeleportAddress;
         enemyRndNum = Random.Range(1, 101);
@@ -303,6 +307,21 @@ public class GameTeleportManager : MonoBehaviour
             if(teleports[i].tag==orderTag)
             {
                 return teleports[i]; 
+            }
+            else if (teleports[i].name == orderTag)
+            {
+                return teleports[i];
+            }
+        }
+        return null;
+    }
+    public TeleportAddress FindTeleportName(string orderName)
+    {
+        for (int i = 0; i < teleports.Length; i++)
+        {
+            if (teleports[i].name == orderName)
+            {
+                return teleports[i];
             }
         }
         return null;

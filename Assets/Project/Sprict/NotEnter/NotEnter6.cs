@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
@@ -85,7 +86,7 @@ public class NotEnter6 : MonoBehaviour
     }
     private void Update()
     {
-        //Debug.Log(heartCounts);
+
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -178,9 +179,9 @@ public class NotEnter6 : MonoBehaviour
         {
             itemSprictW.ItemDelete();
         }
-        if(!enemy.activeSelf)
+        else
         {
-            Homing.m_instance.enemyEmerge = false;
+            yield break;
         }
         StopCoroutine(coroutine);
     }

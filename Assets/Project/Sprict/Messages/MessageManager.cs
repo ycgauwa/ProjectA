@@ -39,6 +39,7 @@ public class MessageManager : MonoBehaviour
         window.gameObject.SetActive(false);
         Test1.messageSwitch = false;
         ItemGet2.messageSwitch = false;
+        NotEnterLadder.messageSwitch = false;
 
         PlayerManager.m_instance.m_speed = 0.075f;
         Homing.m_instance.speed = 2;

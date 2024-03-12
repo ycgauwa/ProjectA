@@ -42,10 +42,11 @@ public class GameManager : MonoBehaviour
     {
         if (messageCanvas.gameObject.activeSelf)
         {
-            PlayerManager.m_instance.m_speed = 0;
-            Homing.m_instance.speed = 0;
+            playerManager.playerstate = PlayerManager.PlayerState.Talk;
         }
-        if(!menuCanvas.gameObject.activeSelf)
+        else playerManager.playerstate = PlayerManager.PlayerState.Idol;
+        
+        if (!menuCanvas.gameObject.activeSelf)
         {
             if(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
             {
@@ -84,11 +85,51 @@ public class GameManager : MonoBehaviour
                 audioSource.PlayOneShot(cancel);
             }
         }
-        //  メニュー画面をESCで呼べる。呼んだあとESCで閉じれる。だけどメニュー画面から
-        //if(Input.GetKey(KeyCode.LeftShift))
-        //{
-        //    playerManager.m_speed = 0.5f;
-        //}
+        //０になるまでは通常の回復速度　０になってからスピードが0になって回復速度がMaxになるまで遅くなる。
+        if (Input.GetKey(KeyCode.LeftShift) && playerManager.playerstate != PlayerManager.PlayerState.Talk)
+        {
+            if (playerManager.stamina > 0 && playerManager.staminastate == PlayerManager.StaminaState.normal)
+            {
+                int test = 2;
+                playerManager.m_speed = 0.1f;
+                playerManager.Dashing(test);
+            }
+            else 
+            {
+                playerManager.m_speed = 0.075f;
+                playerManager.staminastate = PlayerManager.StaminaState.exhausted;
+            }
+        }
+        else
+        {
+            switch(playerManager.staminastate)
+            {
+                case PlayerManager.StaminaState.normal:
+                    playerManager.stamina += 2;
+                    break;
+                case PlayerManager.StaminaState.exhausted:
+                    playerManager.stamina += 1;
+                    if (playerManager.stamina == playerManager.staminaMax)
+                    {
+                        playerManager.staminastate = PlayerManager.StaminaState.normal;
+                    }
+                    break;
+            }
+                
+
+        }
+
+        switch (playerManager.playerstate)
+        {
+            case PlayerManager.PlayerState.Idol:
+                playerManager.m_speed = 0.075f;
+                break;
+            case PlayerManager.PlayerState.Talk:
+                PlayerManager.m_instance.m_speed = 0;
+                Homing.m_instance.speed = 0;
+                break;
+        }
+
     }
     public void OnClickInventryButton()
     {

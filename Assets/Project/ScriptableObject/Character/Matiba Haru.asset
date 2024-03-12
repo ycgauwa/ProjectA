@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charaName: "\u753A\u7FBD \u6674"
   description: 
-  characterImages:
-  - {fileID: 21300000, guid: 0cbd7c7d5a088c44ca9ebd200e2402c7, type: 3}
-  - {fileID: 21300000, guid: 718ae819490dfc045a0befdf52fb349f, type: 3}
-  - {fileID: 21300000, guid: cf666b58d4c9e754c9eb53e34afb7c93, type: 3}
-  messageTexts:
-  - "\u3084\u3041\u3001\u3069\u3046\u3057\u305F\u306E\uFF1F"
-  - "\u3053\u3093\u306B\u3061\u308F"
-  - 
-  - 
-  - 
+  characterImages1:
+  - {fileID: 21300000, guid: e9cf0302651812b4599858124a79e686, type: 3}
+  - {fileID: 21300000, guid: e9cf0302651812b4599858124a79e686, type: 3}
+  characterImages2: []
+  characterImages3: []
+  characterImages4: []
+  messageTexts1:
+  - "\u300C\u5E78\u4EBA\u541B\u304A\u306F\u3088\u3046\uFF01\u300D"
+  - "\u300C\u3088\u304F\u7720\u308C\u305F\uFF1F\u4ECA\u304B\u3089\u591C\u306E\u5B66\u6821\u63A2\u7D22\u3059\u308B\u306E\u30EF\u30AF\u30EF\u30AF\u3059\u308B\u306D\uFF5E\uFF01\u300D"
+  messageTexts2: []
+  messageTexts3: []
+  messageTexts4: []

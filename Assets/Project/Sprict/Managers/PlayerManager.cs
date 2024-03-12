@@ -1,23 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
     //メンバー変数として変数を定義してる。
     public float m_speed;//速さの定義
     public float Speed;
+    public int staminaMax;
+    public int stamina;
     //Staticを使ってたり、インスタンス化している
     public static PlayerManager m_instance;
     public GameTeleportManager teleportManager;
     public GameObject mainCamera;
     public Rigidbody2D m_Rigidbody;
     public GameObject enemy;
+    public Text StaminaString;
+    public string stringtext = "";
+    public enum PlayerState
+    {
+        Idol,
+        Run,
+        Walk,
+        Talk
+    }
+    public enum StaminaState
+    {
+        exhausted, //スタミナが０になってる状態から満タンまでの状態
+        normal　　// 通常通りの状態
+    }
+    public PlayerState playerstate;
+    public StaminaState staminastate;
     // Start is called before the first frame update
     void Start()
     {
         m_instance = this;
         m_speed = 0.075f;
+        stamina = staminaMax;
+        playerstate = PlayerState.Idol;
+        staminastate = StaminaState.normal;
     }
 
     // Update is called once per frame
@@ -30,9 +52,33 @@ public class PlayerManager : MonoBehaviour
         var velocity = new Vector3(h, v)* Speed;
         transform.localPosition += velocity;
     }
+    // 走っている時にスタミナが減るメソッド。
+    public void Dashing(int staminaConsume)
+    {
+        playerstate = PlayerState.Run;
+        stamina -= staminaConsume;
+        
+        if (0 < stamina) return;
+
+        // スタミナが0になったら少しの間動けなくなりゆっくりスタミナが回復する。
+        NoneStamina();
+    }
+    public void NoneStamina()
+    {
+        Speed = 0;
+        stamina += 1;
+        Debug.Log("test");
+
+    }
     private void Update()
     {
+        stringtext = stamina.ToString();
+        StaminaString.text = stringtext;
         Speed = m_speed;
+        if (stamina > staminaMax)
+        {
+            stamina = staminaMax;
+        }
     }
     //ワープポイントに触れるとTPするコード
     /// <summary>
@@ -78,9 +124,10 @@ public class PlayerManager : MonoBehaviour
             other.gameObject.CompareTag("Minnka2-17") || other.gameObject.CompareTag("Minnka2-18") ||
             other.gameObject.CompareTag("Minnka2-19") || other.gameObject.CompareTag("Minnka2-20") ||
             other.gameObject.CompareTag("Minnka2-21") || other.gameObject.CompareTag("Minnka2-22") ||
-            other.gameObject.CompareTag("Minnka2-23") || other.gameObject.CompareTag("Minnka2-24");
+            other.gameObject.CompareTag("Minnka2-23") || other.gameObject.CompareTag("Minnka2-24") ||
+            other.gameObject.name == ("Ladder1-1") || other.gameObject.name == ("Ladder1-2");
 
-        if(isTeleport == false) 
+        if (isTeleport == false) 
         {
             return;
 
@@ -220,37 +267,44 @@ public class PlayerManager : MonoBehaviour
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-1");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.climbStairs);
         }
         if(other.gameObject.CompareTag("Minnka1-2"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-2");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.climbStairs);
         }
         if(other.gameObject.CompareTag("Minnka1-3"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-3");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka1-4"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-4");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka1-5"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-5");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.bathDoor);
         }
         if(other.gameObject.CompareTag("Minnka1-6"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-6");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.bathDoor);
         }
         if(other.gameObject.CompareTag("Minnka1-7"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-7");
             transform.position = teleportAddress.playerPosition;
-            if(!enemy.activeSelf)
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.minnkaDoor);
+            if (!enemy.activeSelf)
             {
                 enemy.transform.position = new Vector2(0, 0);
                 Homing.m_instance.enemyEmerge = false;
@@ -264,7 +318,8 @@ public class PlayerManager : MonoBehaviour
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-8");
             transform.position = teleportAddress.playerPosition;
-            if(Homing.m_instance.enemyEmerge == false)
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.minnkaDoor);
+            if (Homing.m_instance.enemyEmerge == false)
             {
                 Homing.m_instance.enemyEmerge = true;
             }
@@ -273,62 +328,74 @@ public class PlayerManager : MonoBehaviour
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-9");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka1-10"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-10");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka1-11"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-11");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka1-12"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-12");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka1-13"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-13");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka1-14"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-14");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka1-15"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-15");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka1-16"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-16");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka1-17"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-17");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka1-18"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-18");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka1-19"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-19");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka1-20"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-20");
             transform.position = teleportAddress.playerPosition;
-            if(!enemy.activeSelf)
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.minnkaDoor);
+            if (!enemy.activeSelf)
             {
                 enemy.transform.position = new Vector2(0, 0);
                 Homing.m_instance.enemyEmerge = false;
@@ -342,16 +409,19 @@ public class PlayerManager : MonoBehaviour
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-21");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka1-22"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-22");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.climbStairs);
         }
         if(other.gameObject.CompareTag("Minnka1-23"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-23");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.chasedBGM.PlayOneShot(teleportManager.climbStairs);
         }
         if(other.gameObject.CompareTag("Minnka1-24"))
         {
@@ -476,6 +546,16 @@ public class PlayerManager : MonoBehaviour
         if(other.gameObject.CompareTag("Minnka2-23"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-23");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if (other.gameObject.name == "Ladder1-1")
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Ladder1-1");
+            transform.position = teleportAddress.playerPosition;
+        }
+        if (other.gameObject.name == ("Ladder1-2"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Ladder1-2");
             transform.position = teleportAddress.playerPosition;
         }
         //別クラスのメソッドの行使引数はteleportAddress

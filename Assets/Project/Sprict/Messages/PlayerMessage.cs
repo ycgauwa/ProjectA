@@ -11,9 +11,12 @@ public class PlayerMessage : MonoBehaviour
     private List<string> Messages;
     [SerializeField]
     private List<string> names;
+    [SerializeField]
+    private List<Sprite> image;
     public Canvas window;
     public Text target;
     public Text nameText;
+    public Image characterImage;
     private IEnumerator playercoroutine;
     public static PlayerMessage instance;
     public DifficultyLevelManager difficultylevelmanager;
@@ -54,10 +57,11 @@ public class PlayerMessage : MonoBehaviour
         StartActive = true;
         PlayerManager.m_instance.m_speed = 0.075f;
     }
-    protected void showMessage(string message ,string name)
+    protected void showMessage(string message ,string name ,Sprite image)
     {
         this.target.text = message;
         nameText.text = name;
+        characterImage.sprite = image;
     }
     IEnumerator CanvasActive()
     {
@@ -73,7 +77,7 @@ public class PlayerMessage : MonoBehaviour
             yield return null;
 
             // 会話をwindowのtextフィールドに表示
-            showMessage(Messages[i], names[i]);
+            showMessage(Messages[i], names[i], image[i]);
 
             // キー入力を待機 (下記説明1)
             yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
