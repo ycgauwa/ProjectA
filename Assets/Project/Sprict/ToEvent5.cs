@@ -32,6 +32,17 @@ public class ToEvent5 : MonoBehaviour
     public GameObject eventcamera;
     public GameObject haru;
     private bool phase1;
+//    まず晴は本棚と向き合ってる状態なので後ろ向きの状態で晴が気づく。
+//その状態から晴がこちらに近づいてきて会話が始まる。
+//会話が終わった後に晴は「ずっと僕はここにいるから何かあったら報告に来てね！」
+//イベントが終わるときにはフェードインアウトでいい感じにする
+//イベントが終わった時に晴と話せるのだが、その時に選択肢での質問形式にして話せるようにする。
+//また雑談という項目を作成して展開ごとに雑談の内容が変わるようにしたい。
+//イベントの流れ
+//・晴との邂逅
+//・二人での会話
+//・（ここで晴からアイテムも貰う？事も考え中）
+//・動けるようになる→話しかけられるようになる
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.tag.Equals("Player"))
@@ -44,24 +55,23 @@ public class ToEvent5 : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Debug.Log(cameraManager.playerCamera);
         if (eventcamera.transform.position.y < 72 && cameraManager.event5Camera == true)
         {
-            eventcamera.transform.position += new Vector3(0f,0.1f,0f);
+            eventcamera.transform.position += new Vector3(0f,0.05f,0f);
             //eventcamera.transform.Translate(new Vector3(0.0f, 0.1f, 0.0f * Time.deltaTime * speed));
         }
-        //if (eventcamera.transform.position.y > 72 && phase1 == true)
-        //{
-        //    if (eventcamera.transform.position.y > 69)
-        //    {
-        //        eventcamera.transform.Translate(new Vector2(0f, 0.05f * Time.deltaTime * speed));
-        //    }
-        //    if (haru.transform.position.y > 69)
-        //    {
-        //        haru.transform.Translate(new Vector2(0f, 0.05f * Time.deltaTime));
-        //    }
-        //}
-        
+        if (phase1 == true)
+        {
+            if (eventcamera.transform.position.y > 69)
+            {
+                eventcamera.transform.position += new Vector3(0f, -0.05f, 0f);
+            }
+            if (haru.transform.position.y > 69)
+            {
+                haru.transform.position += new Vector3(0f, -0.05f, 0f);
+            }
+        }
+
     }
     IEnumerator CreateCoroutine()
     {
@@ -70,7 +80,12 @@ public class ToEvent5 : MonoBehaviour
 
         Event5Camera();
         yield return new WaitForSeconds(4.0f);
+        window.gameObject.SetActive(true);
         yield return OnAction2();
+
+        yield return new WaitForSeconds(4.0f);
+        window.gameObject.SetActive(true);
+        yield return OnAction3();
     }
     private void Event5Camera()
     {
@@ -106,6 +121,19 @@ public class ToEvent5 : MonoBehaviour
         target.text = "";
         window.gameObject.SetActive(false);
         phase1 = true;
+        cameraManager.event5Camera = false;
+        yield break;
+    }
+    IEnumerator OnAction3()
+    {
+        for (int i = 0; i < messages3.Count; ++i)
+        {
+            yield return null;
+            showMessage(messages3[i], names3[i], images3[i]);
+            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
+        }
+        target.text = "";
+        window.gameObject.SetActive(false);
         yield break;
     }
 }
