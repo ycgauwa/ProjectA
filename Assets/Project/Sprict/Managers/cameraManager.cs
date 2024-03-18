@@ -12,6 +12,7 @@ public class cameraManager : MonoBehaviour
     public static bool playerCamera = true;
     public static bool girlCamera = false;
     public static bool seiitirouCamera = false;
+    public static bool event5Camera = false;
     public float cameraSize = 0.0f;
     public Camera cam;
     public NotEnter6 notEnter6;

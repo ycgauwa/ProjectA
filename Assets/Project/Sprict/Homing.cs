@@ -24,12 +24,20 @@ public class Homing : MonoBehaviour
     public Canvas gameoverWindow;
     public Image buttonPanel;
     public bool enemyEmerge;
+    public bool isMove;
+    Rigidbody2D rbody;
+    NPCAnimationController cr;
+    public Vector2 enemyPosition;
+    private Vector2 enemyMovement;
 
     private void Start()
     {
         m_instance = this;
         // プレイヤーのTransformを取得（プレイヤーのタグPlayerに設定必要）
         playerTr = GameObject.FindGameObjectWithTag("Player").transform;
+        cr = GetComponentInChildren<NPCAnimationController>();
+        isMove = true;
+        rbody = GetComponent<Rigidbody2D>();
     }
     private void Update()
     {
@@ -38,7 +46,12 @@ public class Homing : MonoBehaviour
             if(Vector2.Distance(transform.position, playerTr.position) < 0.1f)
                 return;
             // プレイヤーに向けて進む
-            transform.position = Vector2.MoveTowards(
+            enemyMovement = Vector2.MoveTowards(
+                transform.position,
+                new Vector2(playerTr.position.x, playerTr.position.y),
+                speed);
+
+        transform.position = Vector2.MoveTowards(
                 transform.position,
                 new Vector2(playerTr.position.x, playerTr.position.y),
                 speed * Time.deltaTime);
@@ -47,6 +60,20 @@ public class Homing : MonoBehaviour
         {
             enemyCount += Time.deltaTime;
         }
+    }
+    void FixedUpdate()
+    {
+        if (isMove)
+        {
+            Vector2 currentPos = rbody.position;
+
+            enemyPosition.x = transform.position.x - enemyPosition.x;
+            enemyPosition.y = transform.position.y - enemyPosition.y;
+            enemyMovement = new Vector2(enemyPosition.x,enemyPosition.y);
+            cr.SetDirection(enemyMovement);
+        }
+        enemyPosition.x = transform.position.x;
+        enemyPosition.y = transform.position.y;
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {

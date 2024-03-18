@@ -11,7 +11,7 @@ public class AnimationStateController : MonoBehaviour
         // 初期化
         // コントローラをセットしたオブジェクトに紐付いている
         // Animatorを取得する
-        this.animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     /**
