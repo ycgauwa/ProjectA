@@ -31,17 +31,27 @@ public class NPCMoving : MonoBehaviour
         {
             Vector2 currentPos = rbody.position;
 
-            float horizontalInput = Input.GetAxis("Horizontal");
-            float verticalInput = Input.GetAxis("Vertical");
-            Vector2 inputVector = new Vector2(horizontalInput, verticalInput);
-            inputVector = Vector2.ClampMagnitude(inputVector, 1);
-            Vector2 movement = inputVector * movementSpeed;
-
-            //動く時にこのMuveMentを通して移動させるとアニメーションがつくなお止めるときは速度を0にしないとアニメーションが止まらなくなる。
-            Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
+            movement.x = transform.position.x - movement.x;
+            movement.y = transform.position.y - movement.y;
+            movement = new Vector2(movement.x, movement.y);
             cr.SetDirection(movement);
-            rbody.MovePosition(newPos);
         }
+        movement.x = transform.position.x;
+        movement.y = transform.position.y;
+        //if (isMove)
+        //{
+        //    Vector2 currentPos = rbody.position;
 
+        //    float horizontalInput = Input.GetAxis("Horizontal");
+        //    float verticalInput = Input.GetAxis("Vertical");
+        //    Vector2 inputVector = new Vector2(horizontalInput, verticalInput);
+        //    inputVector = Vector2.ClampMagnitude(inputVector, 1);
+        //    Vector2 movement = inputVector * movementSpeed;
+
+        //    //動く時にこのMuveMentを通して移動させるとアニメーションがつくなお止めるときは速度を0にしないとアニメーションが止まらなくなる。
+        //    Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
+        //    cr.SetDirection(movement);
+        //    rbody.MovePosition(newPos);
+        //}
     }
 }
