@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +21,7 @@ public class GameManager : MonoBehaviour
     public Homing homing;
     public Canvas menuCanvas;
     public Canvas inventryCanvas;
+    public Canvas optionCanvas;
     public Canvas gameoverWindow;
     public Canvas InstructionsCanvas;
     public Canvas messageCanvas;
@@ -28,18 +31,22 @@ public class GameManager : MonoBehaviour
     public Image Instruction3;
     public ItemDateBase itemDate;
     public Inventry inventry;
-    public AudioSource audioSource;
     public AudioClip cancel;
     public AudioClip decision;
+    public ToEvent3 ToEvent3;
+    public SoundManager soundManager;
+    public Volume postVolume;
+    private Vignette vignette;
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
         m_instance = this;
+        postVolume.profile.TryGet(out vignette);
     }
     // Update is called once per frame
     void Update()
     {
+        vignette.intensity.value = playerManager.staminaIntensity;
         if (messageCanvas.gameObject.activeSelf)
         {
             playerManager.playerstate = PlayerManager.PlayerState.Talk;
@@ -53,7 +60,7 @@ public class GameManager : MonoBehaviour
                 PlayerManager.m_instance.m_speed = 0;
                 Time.timeScale = 0;
                 menuCanvas.gameObject.SetActive(true);
-                audioSource.PlayOneShot(cancel);
+                soundManager.PlaySe(cancel);
             }
         }
         else if(menuCanvas.gameObject.activeSelf)
@@ -63,7 +70,7 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1;
                 PlayerManager.m_instance.m_speed = 0.075f;
                 menuCanvas.gameObject.SetActive(false);
-                audioSource.PlayOneShot(cancel);
+                soundManager.PlaySe(cancel);
             }
         }
         if(inventryCanvas.gameObject.activeSelf)
@@ -73,7 +80,7 @@ public class GameManager : MonoBehaviour
                 inventryCanvas.gameObject.SetActive(false);
                 itemDate.SelectDiff();
                 menuCanvas.gameObject.SetActive(true);
-                audioSource.PlayOneShot(cancel);
+                soundManager.PlaySe(cancel);
             }
         }
         if (Instruction1.gameObject.activeSelf)
@@ -82,7 +89,16 @@ public class GameManager : MonoBehaviour
             {
                 Instruction1.gameObject.SetActive(false);
                 menuCanvas.gameObject.SetActive(true);
-                audioSource.PlayOneShot(cancel);
+                soundManager.PlaySe(cancel);
+            }
+        }
+        if(optionCanvas.gameObject.activeSelf)
+        {
+            if(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
+            {
+                optionCanvas.gameObject.SetActive(false);
+                menuCanvas.gameObject.SetActive(true);
+                soundManager.PlaySe(cancel);
             }
         }
         //０になるまでは通常の回復速度　０になってからスピードが0になって回復速度がMaxになるまで遅くなる。
@@ -106,9 +122,11 @@ public class GameManager : MonoBehaviour
             {
                 case PlayerManager.StaminaState.normal:
                     playerManager.stamina += 2;
+                    playerManager.staminaIntensity -= 0.01f;
                     break;
                 case PlayerManager.StaminaState.exhausted:
                     playerManager.stamina += 1;
+                    playerManager.staminaIntensity -= 0.005f;
                     if (playerManager.stamina == playerManager.staminaMax)
                     {
                         playerManager.staminastate = PlayerManager.StaminaState.normal;
@@ -131,13 +149,39 @@ public class GameManager : MonoBehaviour
         }
 
     }
+    public void OnClickBackButton()
+    {
+        if(menuCanvas.gameObject.activeSelf)
+        {
+            Time.timeScale = 1;
+            PlayerManager.m_instance.m_speed = 0.075f;
+            menuCanvas.gameObject.SetActive(false);
+            soundManager.PlaySe(cancel);
+        }
+    }
+    public void OnClickMenuButton()
+    {
+        if(!menuCanvas.gameObject.activeSelf)
+        {
+            PlayerManager.m_instance.m_speed = 0;
+            Time.timeScale = 0;
+            menuCanvas.gameObject.SetActive(true);
+            soundManager.PlaySe(cancel);
+        }
+    }
     public void OnClickInventryButton()
     {
         //　インベントリボタンをクリックしたときメニューキャンバスを消してインベントリを呼び出す
         //　インベントリだけ出てるのでESC押したらインベントリを消してメニューを呼べばよい
-        audioSource.PlayOneShot(decision);
+        soundManager.PlaySe(decision);
         menuCanvas.gameObject.SetActive(false);
         inventryCanvas.gameObject.SetActive(true);
+    }
+    public void OnclickOptionButton()
+    {
+        soundManager.PlaySe(decision);
+        menuCanvas.gameObject.SetActive(false);
+        optionCanvas.gameObject.SetActive(true);
     }
    public void OnclickRetryButton()
     {
@@ -153,7 +197,7 @@ public class GameManager : MonoBehaviour
             player.gameObject.SetActive(false);
             cameraManager.seiitirouCamera = true;
             rescueEvent = rescuePoint.GetComponent<RescueEvent>();
-            rescueEvent.ChasedBGM.Stop();
+            soundManager.StopBgm(rescueEvent.ChasedBGM);
             playerManager = seiitirou.AddComponent<PlayerManager>();
             playerManager = seiitirou.GetComponent<PlayerManager>();
             playerManager.teleportManager = teleportManager;
@@ -177,15 +221,30 @@ public class GameManager : MonoBehaviour
         {
             PlayerManager.m_instance.m_speed = 0.075f;
             Homing.m_instance.speed = 2;
-            audioSource.PlayOneShot(decision);
+            soundManager.PlaySe(decision);
             buttonPanel.gameObject.SetActive(false);
             gameoverWindow.gameObject.SetActive(false);
+            /*
+            シーンをロードして最初からにする。
             SceneManager.LoadScene("Game");
+            */
+            //　最初は民家１の玄関前に復活できるようにする。
+            //　2軒目に行く時点でチェックポイントを変える。
+            //　その際は敵を消しておく。
+            if(ToEvent3.firstchased == true)
+            {
+                player.transform.position = new Vector2(69, -46);
+                if(enemy.activeSelf)
+                {
+                    enemy.gameObject.SetActive(false);
+                    teleportManager.StopChased();
+                }
+            }
         }
     }
     public void OnClickTitleButton() 
     {
-        audioSource.PlayOneShot(decision);
+        soundManager.PlaySe(decision);
         buttonPanel.gameObject.SetActive(false);
         gameoverWindow.gameObject.SetActive(false);
         Time.timeScale = 1.0f;
@@ -195,7 +254,7 @@ public class GameManager : MonoBehaviour
     {
         menuCanvas.gameObject.SetActive(false);
         Instruction1.gameObject.SetActive(true);
-        audioSource.PlayOneShot(decision);
+        soundManager.PlaySe(decision);
     }
     public void OnClickNextHelpButton()
     {
@@ -203,13 +262,13 @@ public class GameManager : MonoBehaviour
         {
             Instruction1.gameObject.SetActive(false);
             Instruction2.gameObject.SetActive(true);
-            audioSource.PlayOneShot(decision);
+            soundManager.PlaySe(decision);
         }
         else if(Instruction2.gameObject.activeSelf)
         {
             Instruction2.gameObject.SetActive(false);
             Instruction3.gameObject.SetActive(true);
-            audioSource.PlayOneShot(decision);
+            soundManager.PlaySe(decision);
         }
     }
     public void OnClickBackHelpButton() 
@@ -219,19 +278,19 @@ public class GameManager : MonoBehaviour
         {
             Instruction1.gameObject.SetActive(false);
             menuCanvas.gameObject.SetActive(true);
-            audioSource.PlayOneShot(cancel);
+            soundManager.PlaySe(cancel);
         }
         else if (Instruction2.gameObject.activeSelf)
         {
             Instruction2.gameObject.SetActive(false);
             Instruction1.gameObject.SetActive(true);
-            audioSource.PlayOneShot(cancel);
+            soundManager.PlaySe(cancel);
         }
         else if(Instruction3.gameObject.activeSelf)
         {
             Instruction3.gameObject.SetActive(false);
             Instruction2.gameObject.SetActive(true);
-            audioSource.PlayOneShot(cancel);
+            soundManager.PlaySe(cancel);
         }
     }
 }

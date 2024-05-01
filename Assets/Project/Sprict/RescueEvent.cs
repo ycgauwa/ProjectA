@@ -30,8 +30,9 @@ public class RescueEvent : MonoBehaviour
     public Text target;
     public Text nameText;
 
+    public SoundManager soundManager;
     public AudioClip doorSound;
-    public AudioSource ChasedBGM;
+    public AudioClip ChasedBGM;
     public NotEnter6 notEnter6;
     public ToEvent3 toEvent3;
     public GameTeleportManager gameTeleportManager;
@@ -61,7 +62,8 @@ public class RescueEvent : MonoBehaviour
         if (RescueSwitch == true)
         {
             gameTeleportManager.enemyRndNum = 99;
-            gameTeleportManager.chasedBGM.Play();
+
+            soundManager.PlayBgm(ChasedBGM);
         }
         if (SeiitirouMove == true && RescueSwitch == false)
         {
@@ -134,7 +136,7 @@ public class RescueEvent : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         //征一郎が出てきて会話する
         colisionBox.SetActive(false);
-        GetComponent<AudioSource>().PlayOneShot(doorSound);
+        soundManager.PlaySe(doorSound);
         Seiitirou.transform.position = new Vector2(35,71);
         yield return new WaitForSeconds(0.5f);
         SeiitirouMove = true;
@@ -146,7 +148,7 @@ public class RescueEvent : MonoBehaviour
         //征一郎が去っていく。ドアの音とともに化け物が扉から出てくる
         PlayerManager.m_instance.m_speed = 0;
         yield return SeiitirouLeave();
-        GetComponent<AudioSource>().PlayOneShot(doorSound);
+        soundManager.PlaySe(doorSound);
         Seiitirou.transform.position = new Vector2(24, 0);
         yield return new WaitForSeconds(2.0f);
         
@@ -162,8 +164,8 @@ public class RescueEvent : MonoBehaviour
 
         PlayerManager.m_instance.m_speed = 0.075f;
         Homing.m_instance.speed = 2;
-        ChasedBGM = GetComponent<AudioSource>();
-        ChasedBGM.Play();
+
+        soundManager.PlayBgm(ChasedBGM);
 
         StopCoroutine(coroutine);
     }

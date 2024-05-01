@@ -20,16 +20,17 @@ public class GameTeleportManager : MonoBehaviour
     public GameObject enemy;
     public GameObject Yukito;
     public static bool chasedTime;
-    public AudioSource chasedBGM;
     public AudioClip minnkaDoor;
     public AudioClip schoolDoor;
     public AudioClip bathDoor;
     public AudioClip climbStairs;
+    public AudioClip chasedBGM;
     public DifficultyLevelManager difficultyLevelManager;
+    public SoundManager soundManager;
 
     private void Start()
     {
-        chasedBGM = GetComponent<AudioSource>();
+
     }
     /// <summary>
     /// この配列はテレポートのタグと位置をまとめたものであるこの配列がまとめられている
@@ -239,8 +240,7 @@ public class GameTeleportManager : MonoBehaviour
     {
         chasedTime = false;
         enemy.gameObject.SetActive(false);
-        chasedBGM.Stop();
-        toevent3.chasedBGM.Stop();
+        soundManager.StopBgm(toevent3.chasedBGM);
         Enemy.transform.position = new Vector2(0, 0);
         Homing.m_instance.enemyCount = 0;
     }
@@ -260,7 +260,7 @@ public class GameTeleportManager : MonoBehaviour
                 if(enemyRndNum > 92 && Homing.m_instance.enemyEmerge)
                 {
                     Enemy.gameObject.SetActive(true);
-                    chasedBGM.Play();
+                    soundManager.PlayBgm(toevent3.chasedBGM);
                     chasedTime = true;
                 }
                 break;
@@ -268,7 +268,7 @@ public class GameTeleportManager : MonoBehaviour
                 if(enemyRndNum > 85 && Homing.m_instance.enemyEmerge)
                 {
                     Enemy.gameObject.SetActive(true);
-                    chasedBGM.Play();
+                    soundManager.PlayBgm(toevent3.chasedBGM);
                     chasedTime = true;
                 }
                 break;
@@ -276,7 +276,7 @@ public class GameTeleportManager : MonoBehaviour
                 if(enemyRndNum > 78 && Homing.m_instance.enemyEmerge)
                 {
                     Enemy.gameObject.SetActive(true);
-                    chasedBGM.Play();
+                    soundManager.PlayBgm(toevent3.chasedBGM);
                     chasedTime = true;
                 }
                 break;
@@ -284,7 +284,7 @@ public class GameTeleportManager : MonoBehaviour
                 if(enemyRndNum > 62 && Homing.m_instance.enemyEmerge)
                 {
                     Enemy.gameObject.SetActive(true);
-                    chasedBGM.Play();
+                    soundManager.PlayBgm(toevent3.chasedBGM);
                     chasedTime = true;
                 }
                 break;

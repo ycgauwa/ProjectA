@@ -12,6 +12,7 @@ public class Slot : MonoBehaviour
     public GameManager gameManager;
     public GameObject iconSprite;
     public Image iconImage;
+    public SoundManager soundManager;
     Item item;
 
     public void AddItem(Item newItem)
@@ -27,7 +28,7 @@ public class Slot : MonoBehaviour
     public void ClearSlot()
     {
         item = null;
-        iconImage.color = new Color32(56,56,56,181); 
+        iconImage.color = new Color32(56,56,56,1); 
         iconImage.sprite = null;
     }
 
@@ -43,14 +44,14 @@ public class Slot : MonoBehaviour
             item.selectedItem = true;
             itemTextMessage.gameObject.SetActive(true);
             itemTextMessage.text = item.itemText;
-            gameManager.audioSource.PlayOneShot(gameManager.decision);
+            soundManager.PlaySe(gameManager.decision);
             itemDate.synthesis();
         }
         else
         {
             item.selectedItem = false;
             itemTextMessage.gameObject.SetActive(false);
-            gameManager.audioSource.PlayOneShot(gameManager.cancel);
+            soundManager.PlaySe(gameManager.decision);
         }
         //checkItem = item.checkPossession;
 

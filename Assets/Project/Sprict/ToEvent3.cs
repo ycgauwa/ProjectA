@@ -28,10 +28,11 @@ public class ToEvent3 : MonoBehaviour
     //private List<string> names2;
     //[SerializeField]
     //private List<Sprite> images2;
-    public AudioSource chasedBGM;
+    public AudioClip chasedBGM;
     public Homing homing;
     public bool firstchased = false;
 
+    public SoundManager soundManager;
     // Œø‰Ê‰¹
     AudioSource audioSound;
     public AudioClip eatSound;
@@ -40,7 +41,6 @@ public class ToEvent3 : MonoBehaviour
     void Start()
     {
         event3flag = false;
-        chasedBGM = GetComponent<AudioSource>();
         audioSound = GetComponent<AudioSource>();
     }
 
@@ -56,7 +56,7 @@ public class ToEvent3 : MonoBehaviour
             if(collider.gameObject.tag.Equals("Player"))
             {
                 MessageManager.message_instance.MessageWindowActive(messages,names,images);
-                audioSound.PlayOneShot(eatSound);
+                //audioSound.PlayOneShot(eatSound);
                 event3flag = true; //ƒtƒ‰ƒO‚ª—§‚Â
                 GameTeleportManager.chasedTime = true;
                 homing.enemyEmerge = true; // “G‚ªoŒ»‚·‚é
@@ -69,8 +69,8 @@ public class ToEvent3 : MonoBehaviour
         {
             if(!firstchased)
             {
-                audioSound.Stop();
-                chasedBGM.Play();
+                //audioSound.Stop();
+                soundManager.PlayBgm(chasedBGM);
                 firstchased = true;
             }
         }

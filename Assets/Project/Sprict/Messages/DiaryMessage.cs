@@ -29,12 +29,12 @@ public class DiaryMessage : MonoBehaviour
     public Image panel;
     private IEnumerator coroutine;
     private bool isContacted = false;
-    public AudioSource audioSource;
+    public SoundManager soundManager;
     public AudioClip pageSound;
     public AudioClip pageTojiSound;
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -99,11 +99,11 @@ public class DiaryMessage : MonoBehaviour
             yield return null;
             // 会話をwindowのtextフィールドに表示
             showDiaryMessage(sentences[i], dates[i]);
-            audioSource.PlayOneShot(pageSound);
+            soundManager.PlaySe(pageSound);
             yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
             if (i == sentences.Count - 1)
             {
-                audioSource.PlayOneShot(pageTojiSound);
+                soundManager.PlaySe(pageTojiSound);
             }
         }
         diaryWindow.gameObject.SetActive(false);

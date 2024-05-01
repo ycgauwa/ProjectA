@@ -76,6 +76,7 @@ TagManager:
   - Minnka2-23
   - Minnka2-24
   - Seiitirou
+  - SoundManager
   layers:
   - Default
   - TransparentFX

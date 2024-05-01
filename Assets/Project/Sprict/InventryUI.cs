@@ -31,7 +31,7 @@ public class InventryUI : MonoBehaviour
             
             if (slots[i].iconImage.sprite == null)
             {
-                slots[i].iconImage.color = new Color32(56, 56, 56, 181);
+                slots[i].iconImage.color = new Color32(56, 56, 56, 0);
             }
         }
     }

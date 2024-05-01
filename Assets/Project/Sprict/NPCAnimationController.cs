@@ -14,8 +14,7 @@ public class NPCAnimationController : MonoBehaviour
     Vector2 directionNum;
     private void Update()
     {
-        Debug.Log(directionArray);
-        Debug.Log(directionNum.magnitude);
+
     }
     private void Awake()
     {
