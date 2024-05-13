@@ -20,6 +20,9 @@ public class PlayerManager : MonoBehaviour
     public Rigidbody2D m_Rigidbody;
     public GameObject enemy;
     public Text StaminaString;
+    public Canvas choiceCanvas;
+    public Image stairChoice;
+    public bool canUp = false;
     public string stringtext = "";
     public enum PlayerState
     {
@@ -77,8 +80,8 @@ public class PlayerManager : MonoBehaviour
     }
     private void Update()
     {
-        stringtext = stamina.ToString();
-        StaminaString.text = stringtext;
+        //stringtext = stamina.ToString();
+        //StaminaString.text = stringtext;
         Speed = m_speed;
         if (stamina > staminaMax)
         {
@@ -221,8 +224,19 @@ public class PlayerManager : MonoBehaviour
         }
         if (other.gameObject.CompareTag("School9"))
         {
-            teleportAddress = teleportManager.FindTeleportAddress("School9");
-            transform.position = teleportAddress.playerPosition;
+            choiceCanvas.gameObject.SetActive(true);
+            stairChoice.gameObject.SetActive(true);
+            //if (canUp == true)
+            //{
+            //    stairChoice.gameObject.SetActive(false);
+            //    teleportAddress = teleportManager.FindTeleportAddress("School9");
+            //    transform.position = teleportAddress.playerPosition;
+            //    canUp = false;
+            //}S
+            //else
+            //{
+
+            //}
             //‚¢‚ç‚È‚¢
         }
         if (other.gameObject.CompareTag("School10"))
@@ -589,6 +603,21 @@ public class PlayerManager : MonoBehaviour
         //}
         //Rigidbody2D rb = GetComponent<Rigidbody2D>();
         //GameTeleportManager gametp = GetComponent<GameTeleportManager>();
+    }
+    public void YesUp()
+    {
+        Debug.Log("yyy");
+        canUp = true;
+        gameObject.transform.position = new Vector2(-7, -71);
+        stairChoice.gameObject.SetActive(false);
+        choiceCanvas.gameObject.SetActive(false);
+    }
+    public void NoUp()
+    {
+        Debug.Log("nnn");
+        canUp = false;
+        stairChoice.gameObject.SetActive(false);
+        choiceCanvas.gameObject.SetActive(false);
     }
 
 }

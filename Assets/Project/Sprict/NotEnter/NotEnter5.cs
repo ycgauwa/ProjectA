@@ -21,6 +21,8 @@ public class NotEnter5 : MonoBehaviour
     public bool getKey2;
     public ItemDateBase itemDateBase;
     public RescueEvent rescueEvent;
+    public GameObject enemy;
+    public Homing homing;
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -45,6 +47,11 @@ public class NotEnter5 : MonoBehaviour
             {
                 this.gameObject.tag = "Minnka1-20";
                 itemDateBase.Items5Delete();
+                if (enemy.gameObject.activeSelf)
+                {
+                    enemy.gameObject.SetActive(false);
+                    homing.enemyEmerge = false;
+                }
             }
         }
 

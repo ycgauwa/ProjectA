@@ -10,6 +10,8 @@ public class PlayerMessage : MonoBehaviour
     [SerializeField]
     private List<string> Messages;
     [SerializeField]
+    private List<string> Messages2;
+    [SerializeField]
     private List<string> names;
     [SerializeField]
     private List<Sprite> image;
@@ -20,7 +22,7 @@ public class PlayerMessage : MonoBehaviour
     private IEnumerator playercoroutine;
     public static PlayerMessage instance;
     public DifficultyLevelManager difficultylevelmanager;
-    public bool StartActive;
+    public bool StartActive = false;
     public bool firstActive;
     public Canvas Demo;
     public Canvas DifficultyCanvas;
@@ -35,9 +37,11 @@ public class PlayerMessage : MonoBehaviour
     {
         firstActive = true;
         instance = this;
-        playercoroutine = CreateCoroutine();
+        Instruction.gameObject.SetActive(true);
         PlayerManager.m_instance.m_speed = 0;
+        //やりたいことはメニューを閉じ終わった後にメッセージを閉じれる
         // コルーチンの起動(下記説明2)
+        playercoroutine = CreateCoroutine();
         StartCoroutine(playercoroutine);
     }
     private IEnumerator CreateCoroutine()
@@ -54,31 +58,48 @@ public class PlayerMessage : MonoBehaviour
 
         StopCoroutine(playercoroutine);
         playercoroutine = null;
-        StartActive = true;
+        //StartActive = true;
         PlayerManager.m_instance.m_speed = 0.075f;
     }
     protected void showMessage(string message ,string name ,Sprite image)
     {
-        this.target.text = message;
+        target.text = message;
         nameText.text = name;
         characterImage.sprite = image;
     }
     IEnumerator CanvasActive()
     {
         DifficultyCanvas.gameObject.SetActive(true);
-        yield return (difficultylevelmanager.ActiveCanvas == true);
+        yield return (difficultylevelmanager.ActiveCanvas == false);
     }
     IEnumerator OnAction()
     {
-        Debug.Log("PlayerMessage.OnAction");
         for (int i = 0; i < Messages.Count; ++i)
         {
             // 1フレーム分 処理を待機(下記説明1)
             yield return null;
 
-            // 会話をwindowのtextフィールドに表示
-            showMessage(Messages[i], names[i], image[i]);
-
+            if (StartActive == true)
+            {
+                // 会話をwindowのtextフィールドに表示
+                showMessage(Messages[i], names[i], image[i]);
+            }
+            else
+            {
+                showMessage(Messages2[i], names[i], image[i]);
+            }
+            if (!Instruction.gameObject.activeSelf)
+            {
+                if (StartActive == true)
+                {
+                    // 会話をwindowのtextフィールドに表示
+                    showMessage(Messages[i], names[i], image[i]);
+                }
+                else
+                {
+                    showMessage(Messages2[i], names[i], image[i]);
+                }
+            }
             // キー入力を待機 (下記説明1)
             yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
         }
@@ -100,12 +121,8 @@ public class PlayerMessage : MonoBehaviour
             {
                 DemoImage.gameObject.SetActive(false);
                 DemoPanel.gameObject.SetActive(false);
-                Instruction.gameObject.SetActive(true);
                 firstActive = false;
             }
-        }
-        else
-        {
         }
     }
 }

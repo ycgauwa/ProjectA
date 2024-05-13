@@ -30,6 +30,7 @@ public class DiaryMessage : MonoBehaviour
     private IEnumerator coroutine;
     private bool isContacted = false;
     public SoundManager soundManager;
+    public PlayerManager playerManager;
     public AudioClip pageSound;
     public AudioClip pageTojiSound;
     private void Start()
@@ -93,8 +94,10 @@ public class DiaryMessage : MonoBehaviour
         
         //何回か押すとテキストが消えて、日記の表示がされる。
         diaryWindow.gameObject.SetActive(true);
+        
         for(int i = 0; i < sentences.Count; ++i)
         {
+            playerManager.playerstate = PlayerManager.PlayerState.Talk;
             // 1フレーム分 処理を待機(下記説明1)
             yield return null;
             // 会話をwindowのtextフィールドに表示
@@ -105,9 +108,10 @@ public class DiaryMessage : MonoBehaviour
             {
                 soundManager.PlaySe(pageTojiSound);
             }
+
         }
         diaryWindow.gameObject.SetActive(false);
-        PlayerManager.m_instance.m_speed = 0.075f;
+        playerManager.playerstate = PlayerManager.PlayerState.Idol;
         coroutine = null;
         yield break;
     }

@@ -84,6 +84,17 @@ public class SoundManager : MonoBehaviour
 
         seAudioSource.PlayOneShot(clip);
     }
+    public void StopSe(AudioClip clip)
+    {
+        seAudioSource.clip = clip;
+
+        if (clip == null)
+        {
+            return;
+        }
+
+        seAudioSource.Stop();
+    }
 
     /// <summary>
     /// スライドバー値の変更イベント

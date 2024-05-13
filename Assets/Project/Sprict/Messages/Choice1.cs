@@ -35,6 +35,7 @@ public class Choice1 : MonoBehaviour
     public Text target;
     public Text nameText;
     public Image characterImage;
+    public Image selection;
     public Button yes;
     public Button no;
     private IEnumerator coroutine;
@@ -112,6 +113,7 @@ public class Choice1 : MonoBehaviour
             if(i == messages.Count - 1)
             {
                 Selectwindow.gameObject.SetActive(true);
+                selection.gameObject.SetActive(true);
                 isOpenSelect = true;
                 break;
             }
@@ -172,12 +174,14 @@ public class Choice1 : MonoBehaviour
     public void SelectAnswerYes()
     {
         answer = true;
+        selection.gameObject.SetActive(false);
         Selectwindow.gameObject.SetActive(false);
         isOpenSelect = false;
     }
     public void SelectAnswerNo()
     {
         answer = false;
+        selection.gameObject.SetActive(false);
         Selectwindow.gameObject.SetActive(false);
         isOpenSelect = false;
     }

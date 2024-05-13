@@ -40,6 +40,8 @@ public class RescueEvent : MonoBehaviour
     public GameObject Enemy;
     public GameObject Player;
     public GameObject colisionBox;
+    public GameObject yukitoProfile;
+    public GameObject seiitirouProfile;
     private bool SeiitirouMove;
     public bool RescueSwitch;
     private IEnumerator coroutine;
@@ -99,6 +101,11 @@ public class RescueEvent : MonoBehaviour
         else if (GameManager.m_instance.deathCount == 6)
         {
             light2D.intensity = 1.0f;
+            if (yukitoProfile.gameObject.activeSelf)
+            {
+                yukitoProfile.gameObject.SetActive(false);
+                seiitirouProfile.gameObject.SetActive(true);
+            }
         }
         if(notEnter6.rescued == true && Homing.m_instance.enemyEmerge == false)
         {
@@ -165,7 +172,8 @@ public class RescueEvent : MonoBehaviour
         PlayerManager.m_instance.m_speed = 0.075f;
         Homing.m_instance.speed = 2;
 
-        soundManager.PlayBgm(ChasedBGM);
+        soundManager.PlayBgm(ChasedBGM);//BGM‚É‚µ‚Ä‚é‚Æ—¬‚ê‚È‚¢
+        soundManager.PlaySe(ChasedBGM);
 
         StopCoroutine(coroutine);
     }

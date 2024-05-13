@@ -25,14 +25,18 @@ public class GameManager : MonoBehaviour
     public Canvas gameoverWindow;
     public Canvas InstructionsCanvas;
     public Canvas messageCanvas;
+    public Canvas diaryCanvas;
+    public Canvas diary2Canvas;
     public Image buttonPanel;
     public Image Instruction1;
     public Image Instruction2;
     public Image Instruction3;
+    public Image Instruction4;
     public ItemDateBase itemDate;
     public Inventry inventry;
     public AudioClip cancel;
     public AudioClip decision;
+    public AudioClip ikigire;
     public ToEvent3 ToEvent3;
     public SoundManager soundManager;
     public Volume postVolume;
@@ -47,7 +51,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         vignette.intensity.value = playerManager.staminaIntensity;
-        if (messageCanvas.gameObject.activeSelf)
+        if (messageCanvas.gameObject.activeSelf || diaryCanvas.gameObject.activeSelf || diary2Canvas.gameObject.activeSelf)
         {
             playerManager.playerstate = PlayerManager.PlayerState.Talk;
         }
@@ -197,7 +201,7 @@ public class GameManager : MonoBehaviour
             player.gameObject.SetActive(false);
             cameraManager.seiitirouCamera = true;
             rescueEvent = rescuePoint.GetComponent<RescueEvent>();
-            soundManager.StopBgm(rescueEvent.ChasedBGM);
+            soundManager.StopSe(rescueEvent.ChasedBGM);
             playerManager = seiitirou.AddComponent<PlayerManager>();
             playerManager = seiitirou.GetComponent<PlayerManager>();
             playerManager.teleportManager = teleportManager;
@@ -256,6 +260,27 @@ public class GameManager : MonoBehaviour
         Instruction1.gameObject.SetActive(true);
         soundManager.PlaySe(decision);
     }
+    public void OnClickToMenuButton()
+    {
+        if (Instruction4.gameObject.activeSelf)
+        {
+            Instruction4.gameObject.SetActive(false);
+            menuCanvas.gameObject.SetActive(true);
+            soundManager.PlaySe(cancel);
+        }
+        else if (inventryCanvas.gameObject.activeSelf)
+        {
+            inventryCanvas.gameObject.SetActive(false);
+            menuCanvas.gameObject.SetActive(true);
+            soundManager.PlaySe(cancel);
+        }
+        else if (optionCanvas.gameObject.activeSelf)
+        {
+            optionCanvas.gameObject.SetActive(false);
+            menuCanvas.gameObject.SetActive(true);
+            soundManager.PlaySe(cancel);
+        }
+    }
     public void OnClickNextHelpButton()
     {
         if(Instruction1.gameObject.activeSelf)
@@ -268,6 +293,12 @@ public class GameManager : MonoBehaviour
         {
             Instruction2.gameObject.SetActive(false);
             Instruction3.gameObject.SetActive(true);
+            soundManager.PlaySe(decision);
+        }
+        else if (Instruction3.gameObject.activeSelf)
+        {
+            Instruction3.gameObject.SetActive(false);
+            Instruction4.gameObject.SetActive(true);
             soundManager.PlaySe(decision);
         }
     }
@@ -290,6 +321,12 @@ public class GameManager : MonoBehaviour
         {
             Instruction3.gameObject.SetActive(false);
             Instruction2.gameObject.SetActive(true);
+            soundManager.PlaySe(cancel);
+        }
+        else if (Instruction4.gameObject.activeSelf)
+        {
+            Instruction4.gameObject.SetActive(false);
+            Instruction3.gameObject.SetActive(true);
             soundManager.PlaySe(cancel);
         }
     }

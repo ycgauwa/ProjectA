@@ -40,11 +40,16 @@ public class ItemSprictW : MonoBehaviour
         audioSource.PlayOneShot(bellSound);
         MessageManager.message_instance.MessageWindowActive(messages, names, images);
         gameTeleportManager.StopChased();
+        Invoke("Stop", 3f);
     }
     public void ItemDelete()
     {
         itemDateBase.Items9Delete();
         audioSource.PlayOneShot(bellSound);
         MessageManager.message_instance.MessageWindowActive(messages2, names2, images2);
+    }
+    public void Stop()
+    {
+        gameTeleportManager.StopChased();
     }
 }

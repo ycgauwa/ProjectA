@@ -68,8 +68,7 @@ public class NotEnter6 : MonoBehaviour
     public AudioClip fearBGM;
     public AudioClip scream;
     public AudioClip heartSound;
-    AudioSource audioSound;
-    public AudioSource screamSound;
+    public SoundManager soundManager;
 
     private int heartCounts;
     private float redNum = 0.0f;
@@ -81,7 +80,6 @@ public class NotEnter6 : MonoBehaviour
 
     private void Start()
     {
-        audioSound = GetComponent<AudioSource>();
         redScreen.color = Color.clear;
     }
     private void Update()
@@ -127,7 +125,7 @@ public class NotEnter6 : MonoBehaviour
             PlayerManager.m_instance.m_speed = 0;
             Homing.m_instance.speed = 0;
 
-            screamSound.PlayOneShot(scream);
+            soundManager.PlaySe(scream);
             yield return new WaitForSeconds(1.3f);
             //Time.timeScale = 0.0f;
             window.gameObject.SetActive(true);
@@ -137,7 +135,7 @@ public class NotEnter6 : MonoBehaviour
 
             yield return OnPanel1();
             StartCoroutine(HeartSounds());
-            audioSound.PlayOneShot(fearBGM);
+            soundManager.PlayBgm(fearBGM);
             yield return new WaitForSeconds(0.5f);
             cameraSwitch = true;
             yield return Red();
@@ -169,7 +167,7 @@ public class NotEnter6 : MonoBehaviour
         cameraSwitch = false;
         choicePanel.gameObject.SetActive(false);
         StopCoroutine(HeartSounds());
-        audioSound.Stop();
+        soundManager.StopSe(heartSound);
         redScreen.gameObject.SetActive(false);
         colisionBox.gameObject.SetActive(true);
         choiced = true;
@@ -244,7 +242,7 @@ public class NotEnter6 : MonoBehaviour
     {
         while(heartCounts < 1000)
         {
-            audioSound.PlayOneShot(heartSound);
+            soundManager.PlaySe(heartSound);
             heartCounts++;
             yield return new WaitForSeconds(1f);
         }
@@ -259,7 +257,7 @@ public class NotEnter6 : MonoBehaviour
         cameraSwitch = false;
         choicePanel.gameObject.SetActive(false);
         StopCoroutine(HeartSounds());
-        audioSound.Stop();
+        soundManager.StopSe(heartSound);
         redScreen.gameObject.SetActive(false);
         choiced = true;
         player.transform.position = new Vector3(128, 25, 0);

@@ -133,6 +133,7 @@ public class GameTeleportManager : MonoBehaviour
         if(chasedTime == true)
         {
             Invoke("OnEnemyTeleport", 0f);
+            Debug.Log("zzz");
         }
     }
     /*nullチェックもしておりエネミーがいなくなるとはじかれる。また、この関数は

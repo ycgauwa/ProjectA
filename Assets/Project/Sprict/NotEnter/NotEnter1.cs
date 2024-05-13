@@ -34,24 +34,27 @@ public class NotEnter1 : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        //イベントなしには通れない仕組み
-        //falseの時メッセージウィンドウの表示
-        //代入大事。同じ名前であっても下記のようなやり方で代入可能
-        this.one = ToEvent1.one;
-        if(one == false)
+        if (collider.gameObject.tag.Equals("Player"))
         {
-            PlayerManager.m_instance.m_speed = 0;
-            coroutine = CreateCoroutine();
-            // コルーチンの起動(下記説明2)
-            StartCoroutine(coroutine);
-        }
-        if(one == true)
-        {
-            player.transform.position = new Vector2(-10, -102);
-        }
+            //イベントなしには通れない仕組み
+            //falseの時メッセージウィンドウの表示
+            //代入大事。同じ名前であっても下記のようなやり方で代入可能
+            this.one = ToEvent1.one;
+            if (one == false)
+            {
+                PlayerManager.m_instance.m_speed = 0;
+                coroutine = CreateCoroutine();
+                // コルーチンの起動(下記説明2)
+                StartCoroutine(coroutine);
+            }
+            if (one == true)
+            {
+                player.transform.position = new Vector2(-10, -102);
+            }
 
+        }
     }
     public IEnumerator CreateCoroutine()
     {

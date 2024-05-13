@@ -7,6 +7,11 @@ using UnityEngine.LowLevel;
 public class DemoFinish : MonoBehaviour
 {
     public Canvas DemoFinishCanvas;
+    public GameObject player;
+    public Canvas gameModeCanvas;
+    public PlayerMessage playerMessage;
+    public string proMessage;
+    public string norMessage;
     private void OnTriggerEnter2D(Collider2D collider)
     {
         PlayerManager.m_instance.m_speed = 0;
@@ -16,12 +21,25 @@ public class DemoFinish : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameModeCanvas.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public void prologue()
+    {
+        player.transform.position = new Vector2(30,-35);
+        gameModeCanvas.gameObject.SetActive(false);
+        //playerMessage.
+    }
+    public void normal() 
+    {
+        player.transform.position = new Vector2(70, -45);
+        gameModeCanvas.gameObject.SetActive(false);
+        playerMessage.StartActive = true;
+        playerMessage.Demo.gameObject.SetActive(true);
     }
 }

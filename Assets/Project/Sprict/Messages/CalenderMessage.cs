@@ -91,6 +91,7 @@ public class CalenderMessage : MonoBehaviour
             if (TVScreen.gameObject.activeSelf)
             {
                 TVScreen.gameObject.SetActive(false);
+                calCanvas.gameObject.SetActive(false);
             }
         }
     }
@@ -155,6 +156,7 @@ public class CalenderMessage : MonoBehaviour
             if(Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return))
             {
                 calender.gameObject.SetActive(false);
+                calCanvas.gameObject.SetActive(false);
                 Time.timeScale = 1.0f;
                 PlayerManager.m_instance.m_speed = 0.075f;
                 Homing.m_instance.speed = 2f;

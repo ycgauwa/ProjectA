@@ -137,7 +137,7 @@ public class MessageCharactor : MonoBehaviour
             }
             yield break;
         }
-        else if(notEnter4.getKey1 == true)
+        else if(notEnter1.one == true)
         {
             for(i = 0; i < messages.Count; ++i)
             {
@@ -154,6 +154,13 @@ public class MessageCharactor : MonoBehaviour
             yield break;
         }
         yield break;
-
+        /*memo
+        「なんだもうとってきたのか」
+        「薄気味悪い道具だな、ってことは都市伝説は確実に本当ってことだな。」
+        「今回の都市伝説巡りはワクワクすることが起こる予感がするよ！」
+        「楽しみじゃない？」
+        「理科室に行ったのなら次は音楽室ね」
+        「とうとう例の都市伝説に挑戦するんだね。」
+        「お互いケガしないよう気をつけなきゃ」*/
     }
 }
