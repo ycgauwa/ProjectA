@@ -123,7 +123,7 @@ public class RescueEvent : MonoBehaviour
             if (notEnter6.rescued == true && RescueSwitch == false)
             {
                 CapsuleCollider2D capsuleCollider = Seiitirou.GetComponent<CapsuleCollider2D>();
-                PlayerManager.m_instance.m_speed = 0;
+                GameManager.m_instance.stopSwitch = true;
                 capsuleCollider.enabled = false;
                 coroutine = RescueSeiitirouEvent();
                 StartCoroutine(coroutine);
@@ -138,6 +138,7 @@ public class RescueEvent : MonoBehaviour
 
         window.gameObject.SetActive(true);
         yield return OnMessage1();
+        target.text = "";
         window.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(2.0f);
@@ -153,7 +154,6 @@ public class RescueEvent : MonoBehaviour
         target.text = "";
         window.gameObject.SetActive(false);
         //征一郎が去っていく。ドアの音とともに化け物が扉から出てくる
-        PlayerManager.m_instance.m_speed = 0;
         yield return SeiitirouLeave();
         soundManager.PlaySe(doorSound);
         Seiitirou.transform.position = new Vector2(24, 0);
@@ -169,6 +169,7 @@ public class RescueEvent : MonoBehaviour
         target.text = "";
         window.gameObject.SetActive(false);
 
+        GameManager.m_instance.stopSwitch = false;
         PlayerManager.m_instance.m_speed = 0.075f;
         Homing.m_instance.speed = 2;
 

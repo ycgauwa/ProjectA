@@ -52,6 +52,7 @@ public class NotEnter5 : MonoBehaviour
                     enemy.gameObject.SetActive(false);
                     homing.enemyEmerge = false;
                 }
+
             }
         }
 

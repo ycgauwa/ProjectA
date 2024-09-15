@@ -97,7 +97,7 @@ public class NotEnter6 : MonoBehaviour
         }
         if(getKey  == true)
         {
-            PlayerManager.m_instance.m_speed = 0;
+            GameManager.m_instance.stopSwitch = true;
             coroutine = ToEvent5();
             StartCoroutine(coroutine);
             ToEvent5();
@@ -170,6 +170,7 @@ public class NotEnter6 : MonoBehaviour
         soundManager.StopSe(heartSound);
         redScreen.gameObject.SetActive(false);
         colisionBox.gameObject.SetActive(true);
+        GameManager.m_instance.stopSwitch = false;
         choiced = true;
         rescued = true;
         yield return OnMessage3();
@@ -215,6 +216,7 @@ public class NotEnter6 : MonoBehaviour
             // 1フレーム分 処理を待機(下記説明1)
             yield return null;
             showMessage(messages3[i], names3[i], images3[i]);
+            GameManager.m_instance.stopSwitch = false;
             yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
         }
         yield break;
@@ -266,6 +268,7 @@ public class NotEnter6 : MonoBehaviour
         gameTeleportManager.soundManager.StopBgm(gameTeleportManager.chasedBGM);
         Homing.m_instance.enemyEmerge = false;
         underKey.checkPossession = false;
+        GameManager.m_instance.stopSwitch = false;
         inventry.Delete(itemDateBase.items[7]);
     }
     public void OnRescueBotton()

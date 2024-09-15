@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class ToEvent5 : MonoBehaviour
@@ -31,8 +32,12 @@ public class ToEvent5 : MonoBehaviour
     private IEnumerator coroutine;
     public GameObject eventcamera;
     public GameObject haru;
+    public ToEvent2 event2;
+    public Light2D light2D;
     private bool phase1;
-//    まず晴は本棚と向き合ってる状態なので後ろ向きの状態で晴が気づく。
+    private bool event5Start = false;
+
+//まず晴は本棚と向き合ってる状態なので後ろ向きの状態で晴が気づく。
 //その状態から晴がこちらに近づいてきて会話が始まる。
 //会話が終わった後に晴は「ずっと僕はここにいるから何かあったら報告に来てね！」
 //イベントが終わるときにはフェードインアウトでいい感じにする
@@ -45,10 +50,11 @@ public class ToEvent5 : MonoBehaviour
 //・動けるようになる→話しかけられるようになる
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag.Equals("Player"))
+        if (collider.gameObject.tag.Equals("Player") && event5Start == false)
         {
-            haru.transform.position = new Vector2(79,75);
-            PlayerManager.m_instance.m_speed = 0;
+            haru.transform.position = new Vector2(80,75);
+            GameManager.m_instance.stopSwitch = true;
+            event2.enabled = false;
             coroutine = CreateCoroutine();
             StartCoroutine(coroutine);
         }
@@ -60,7 +66,7 @@ public class ToEvent5 : MonoBehaviour
             eventcamera.transform.position += new Vector3(0f,0.05f,0f);
             //eventcamera.transform.Translate(new Vector3(0.0f, 0.1f, 0.0f * Time.deltaTime * speed));
         }
-        if (phase1 == true)
+        if(phase1 == true && event5Start == false)
         {
             if (eventcamera.transform.position.y > 69)
             {
@@ -134,6 +140,25 @@ public class ToEvent5 : MonoBehaviour
         }
         target.text = "";
         window.gameObject.SetActive(false);
+        StartCoroutine("Sleep");
+        GameManager.m_instance.stopSwitch = false;
         yield break;
+    }
+    private IEnumerator Sleep()
+    {
+        light2D.intensity = 1.0f;
+        GameManager.m_instance.stopSwitch = true;
+        while(light2D.intensity > 0.01f)
+        {
+            light2D.intensity -= 0.007f;
+            yield return null; //ここで１フレーム待ってくれてる
+        }
+        light2D.intensity = 1.0f;
+        event5Start = true;
+        haru.transform.position = new Vector2(80, 75);
+        cameraManager.event5Camera = false;
+        cameraManager.playerCamera = true;
+        GameManager.m_instance.stopSwitch = false;
+        gameObject.SetActive(false);
     }
 }

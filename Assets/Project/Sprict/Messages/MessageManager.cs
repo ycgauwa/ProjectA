@@ -40,6 +40,8 @@ public class MessageManager : MonoBehaviour
         Test1.messageSwitch = false;
         ItemGet2.messageSwitch = false;
         NotEnterLadder.messageSwitch = false;
+        Case1Object.messageSwitch = false;
+        Refrigerator.messageSwitch = false;
 
         PlayerManager.m_instance.m_speed = 0.075f;
         Homing.m_instance.speed = 2;

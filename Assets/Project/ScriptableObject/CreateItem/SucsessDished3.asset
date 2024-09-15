@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a47c5cf7a1069f43acc6cfe09d5d118, type: 3}
+  m_Name: SucsessDished3
+  m_EditorClassIdentifier: 
+  name: "\u9B5A\u306E\u30BD\u30C6\u30FC"
+  icon: {fileID: -387703008, guid: 2b2ea41f81d8d0e439887de16666a265, type: 3}
+  itemText: "\u3068\u3066\u3082\u304A\u3044\u3057\u305D\u3046\u306A\u9B5A\u306E\u30BD\u30C6\u30FC\u3060"
+  checkPossession: 0
+  selectedItem: 0

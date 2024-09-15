@@ -5,9 +5,17 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
+using UnityEditor.PackageManager.UI;
+using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
+    private List<string> cookedmessages;
+    [SerializeField]
+    private List<string> cookednames;
+    [SerializeField]
+    private List<Sprite> cookedimage;
     public static GameManager m_instance;
     public GameObject player;
     public GameObject seiitirou;
@@ -38,9 +46,14 @@ public class GameManager : MonoBehaviour
     public AudioClip decision;
     public AudioClip ikigire;
     public ToEvent3 ToEvent3;
+    public DishMessage chickenDish;
+    public DishMessage fishDish;
+    public DishMessage shrimpDish;
+    public Cooktop cooktop;
     public SoundManager soundManager;
     public Volume postVolume;
     private Vignette vignette;
+    public bool stopSwitch = false; 
 
     private void Start()
     {
@@ -55,16 +68,42 @@ public class GameManager : MonoBehaviour
         {
             playerManager.playerstate = PlayerManager.PlayerState.Talk;
         }
+        else if(stopSwitch == true)
+        {
+            playerManager.playerstate = PlayerManager.PlayerState.Stop;
+        }
         else playerManager.playerstate = PlayerManager.PlayerState.Idol;
         
         if (!menuCanvas.gameObject.activeSelf)
         {
-            if(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
+            if(cooktop.cooked.gameObject.activeSelf && !cooktop.ingredients.gameObject.activeSelf && !cooktop.interrupt.gameObject.activeSelf)
             {
-                PlayerManager.m_instance.m_speed = 0;
-                Time.timeScale = 0;
-                menuCanvas.gameObject.SetActive(true);
-                soundManager.PlaySe(cancel);
+                //中断するかを問う選択肢の出現
+                if(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
+                {
+                    MessageManager.message_instance.MessageWindowActive(cookedmessages, cookednames, cookedimage);
+                    cooktop.interrupt.gameObject.SetActive(true);
+                    soundManager.PlaySe(cancel);
+                }
+            }
+            else if(cooktop.cooked.gameObject.activeSelf && cooktop.ingredients.gameObject.activeSelf)
+            {
+                if(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
+                {
+                    //素材が出てる時に素材ウィンドウを消すメソッド
+                    cooktop.ingredients.gameObject.SetActive(false);
+                    soundManager.PlaySe(cancel);
+                }
+            }
+            else
+            {
+                if(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
+                {
+                    PlayerManager.m_instance.m_speed = 0;
+                    Time.timeScale = 0;
+                    menuCanvas.gameObject.SetActive(true);
+                    soundManager.PlaySe(cancel);
+                }
             }
         }
         else if(menuCanvas.gameObject.activeSelf)
@@ -106,7 +145,7 @@ public class GameManager : MonoBehaviour
             }
         }
         //０になるまでは通常の回復速度　０になってからスピードが0になって回復速度がMaxになるまで遅くなる。
-        if (Input.GetKey(KeyCode.LeftShift) && playerManager.playerstate != PlayerManager.PlayerState.Talk)
+        if (Input.GetKey(KeyCode.LeftShift) && playerManager.playerstate != PlayerManager.PlayerState.Talk && playerManager.playerstate != PlayerManager.PlayerState.Stop)
         {
             if (playerManager.stamina > 0 && playerManager.staminastate == PlayerManager.StaminaState.normal)
             {
@@ -150,8 +189,15 @@ public class GameManager : MonoBehaviour
                 PlayerManager.m_instance.m_speed = 0;
                 Homing.m_instance.speed = 0;
                 break;
+            case PlayerManager.PlayerState.Stop:
+                PlayerManager.m_instance.m_speed = 0;
+                break;
         }
-
+        //デバック用
+        if(Input.GetKeyDown(KeyCode.F1))
+        {
+            player.transform.position = new Vector3(147,100,0);
+        }
     }
     public void OnClickBackButton()
     {
@@ -330,4 +376,62 @@ public class GameManager : MonoBehaviour
             soundManager.PlaySe(cancel);
         }
     }
+    /*public void DishTaken()
+    {
+        if(shrimpDish.isContacted == true)
+        {
+            shrimpDish.selection.gameObject.SetActive(false);
+            shrimpDish.Selectwindow.gameObject.SetActive(false);
+            Debug.Log("test1");
+            shrimpDish.shrimp.checkPossession = true;
+            inventry.Add(shrimpDish.shrimp);
+            shrimpDish.isOpenSelect = false;
+            shrimpDish.window.gameObject.SetActive(false);
+            shrimpDish.dish.SetActive(false);
+        }
+        //とったアイテムが鳥の丸焼きの時
+        else if(chickenDish.isContacted == true)
+        {
+            chickenDish.selection.gameObject.SetActive(false);
+            chickenDish.Selectwindow.gameObject.SetActive(false);
+            Debug.Log("test2");
+            chickenDish.chicken.checkPossession = true;
+            inventry.Add(chickenDish.chicken);
+            chickenDish.isOpenSelect = false;
+            chickenDish.window.gameObject.SetActive(false);
+            chickenDish.dish.SetActive(false);
+        }
+        else if(fishDish.isContacted == true)
+        {
+            fishDish.selection.gameObject.SetActive(false);
+            fishDish.Selectwindow.gameObject.SetActive(false);
+            Debug.Log("test3");
+            fishDish.fish.checkPossession = true;
+            inventry.Add(fishDish.fish);
+            fishDish.isOpenSelect = false;
+            fishDish.window.gameObject.SetActive(false);
+            fishDish.dish.SetActive(false);
+        }
+    }
+    public void DishNotTaken()
+    {
+        if(shrimpDish.isContacted == true)
+        {
+            shrimpDish.selection.gameObject.SetActive(false);
+            shrimpDish.Selectwindow.gameObject.SetActive(false);
+            shrimpDish.isOpenSelect = false;
+        }
+        else if(chickenDish.isContacted == true)
+        {
+            chickenDish.selection.gameObject.SetActive(false);
+            chickenDish.Selectwindow.gameObject.SetActive(false);
+            chickenDish.isOpenSelect = false;
+        }
+        else if(fishDish.isContacted == true)
+        {
+            fishDish.selection.gameObject.SetActive(false);
+            fishDish.Selectwindow.gameObject.SetActive(false);
+            fishDish.isOpenSelect = false;
+        }
+    }*/
 }

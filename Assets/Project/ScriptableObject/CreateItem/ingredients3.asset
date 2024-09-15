@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a47c5cf7a1069f43acc6cfe09d5d118, type: 3}
+  m_Name: ingredients3
+  m_EditorClassIdentifier: 
+  name: "\u30CB\u30F3\u30CB\u30AF"
+  icon: {fileID: 21300000, guid: 3960f22ea369358488bf35f42d0b5051, type: 3}
+  itemText: "\u30CB\u30F3\u30CB\u30AF\u3060\u3002\u98DF\u3079\u904E\u304E\u308B\u3068\u304A\u306A\u304B\u3092\u58CA\u3059\u306E\u3067\u6CE8\u610F\u304C\u5FC5\u8981"
+  checkPossession: 0
+  selectedItem: 0

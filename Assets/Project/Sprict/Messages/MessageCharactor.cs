@@ -31,12 +31,24 @@ public class MessageCharactor : MonoBehaviour
     private IEnumerator coroutine;
     public NotEnter1 notEnter1;
     public NotEnter4 notEnter4;
+    private bool isContacted = false;
+    public static bool messageSwitch = false;
+    public CharacterItem characterItem;
+
+    private void Start()
+    {
+        isContacted = false;
+        GameObject myGameObject = gameObject;
+    }
+
+    //プレイヤーが接触する。その時にキャラクターによって呼ぶメソッドを変えたい→メソッドは同じでゲームオブジェクトを
+    //取得してそのオブジェクトで条件分岐させる？
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
+        Debug.Log($"colloder: {gameObject.name} ");
         if(collider.gameObject.tag.Equals("Player"))
         {
-            PlayerManager.m_instance.m_speed = 0;
             coroutine = CreateCoroutine();
             StartCoroutine(coroutine);
         }
@@ -45,7 +57,7 @@ public class MessageCharactor : MonoBehaviour
     {
         if(collider.gameObject.tag.Equals("Player"))
         {
-            
+            isContacted = false;
         }
     }
     public IEnumerator CreateCoroutine()
@@ -62,7 +74,6 @@ public class MessageCharactor : MonoBehaviour
 
         StopCoroutine(coroutine);
         coroutine = null;
-        PlayerManager.m_instance.m_speed = 0.075f;
 
     }
 
@@ -90,6 +101,10 @@ public class MessageCharactor : MonoBehaviour
             images = character.characterImages1;
             messages = character.messageTexts1;
             int i = 0;
+            if(gameObject.name == "Hosokawa Mitsuki")
+            {
+                characterItem.CharagivedItem();
+            }
             // 要素の数だけループが行われる。
             foreach(string str in messages)
             {
@@ -101,6 +116,22 @@ public class MessageCharactor : MonoBehaviour
             yield break;
         }
         else if(notEnter4.getKey1 == true)//居間に行けるようになってからの内容
+        {
+            charactername = character.charaName;
+            images = character.characterImages3;
+            messages = character.messageTexts3;
+            int i = 0;
+            // 要素の数だけループが行われる。
+            foreach(string str in messages)
+            {
+                yield return null;
+                showMessage(str, charactername, images[i]);
+                i++;
+                yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
+            }
+            yield break;
+        }
+        else if(notEnter1.one == true)//バチをとってからの内容
         {
             charactername = character.charaName;
             images = character.characterImages2;
@@ -116,6 +147,7 @@ public class MessageCharactor : MonoBehaviour
             }
             yield break;
         }
+        
     }
     IEnumerator OnAction()
     {
@@ -154,13 +186,50 @@ public class MessageCharactor : MonoBehaviour
             yield break;
         }
         yield break;
-        /*memo
-        「なんだもうとってきたのか」
-        「薄気味悪い道具だな、ってことは都市伝説は確実に本当ってことだな。」
-        「今回の都市伝説巡りはワクワクすることが起こる予感がするよ！」
-        「楽しみじゃない？」
-        「理科室に行ったのなら次は音楽室ね」
-        「とうとう例の都市伝説に挑戦するんだね。」
-        「お互いケガしないよう気をつけなきゃ」*/
     }
+    [System.Serializable]
+    public class CharacterItem:MonoBehaviour
+    {
+        //話しかけたらアイテムがもらえる仕様で、アイテムが所持している場合はもらえない仕様にする。
+        //欲を言えばアイテムを持っているときは話す内容が変化してほしい。
+        //仕様的に言えば、誰にいつ話しかけたかで、話しかけた後にアイテムをもらうメソッドを起動してほしい
+        //条件（誰にOK）（いつのタイミングでOK）（アイテムを持っているかOK）
+
+        public Item mitsukiItem;
+        public ItemDateBase itemDateBase;
+        public Inventry inventry;
+        public Canvas window;
+        public Canvas Selectwindow;
+        public Text target;
+        public Text nameText;
+        public Image characterImage;
+        public Image selection;
+        public SoundManager soundManager;
+        public AudioClip decision;
+        public bool answer;
+        private IEnumerator coroutine;
+        private bool isOpenSelect = false;
+
+        public void CharagivedItem()
+        {
+            if(mitsukiItem.checkPossession == false)
+            {
+                coroutine = OnAction();
+                StartCoroutine(coroutine);
+                inventry.Add(itemDateBase.items[10]);
+                mitsukiItem.checkPossession = true;
+            }
+        }
+        IEnumerator OnAction()
+        {
+            window.gameObject.SetActive(true);
+            yield return new WaitUntil(() => !isOpenSelect);
+            window.gameObject.SetActive(false);
+            PlayerManager.m_instance.m_speed = 0.075f;
+            coroutine = null;
+            yield break;
+
+        }
+    }
+
 }

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a47c5cf7a1069f43acc6cfe09d5d118, type: 3}
+  m_Name: FailDished2
+  m_EditorClassIdentifier: 
+  name: New Item
+  icon: {fileID: 21300000, guid: f334e1c9dfb5ce5408b8a0e98fa4dc46, type: 3}
+  itemText: "\u304A\u3044\u3057\u305D\u3046\u306A\u9CE5\u306E\u4E38\u713C\u304D\u3060"
+  checkPossession: 0
+  selectedItem: 0
