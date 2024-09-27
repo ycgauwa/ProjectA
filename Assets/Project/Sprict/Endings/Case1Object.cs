@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Case1Object : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class Case1Object : MonoBehaviour
     public SoundManager soundManager;
     public AudioClip ending1Sound;
     public AudioClip decision;
+    public GameObject firstSelect;
     public static bool messageSwitch = false;
     private bool isContacted = false;
 
@@ -39,7 +41,6 @@ public class Case1Object : MonoBehaviour
             isContacted = true;
         }
     }
-
     // colliderをもつオブジェクトの領域外にでたとき(下記で説明1)
     private void OnTriggerExit2D(Collider2D collider)
     {
@@ -73,7 +74,11 @@ public class Case1Object : MonoBehaviour
             if(messageSwitch == false && isContacted == false)
             {
                 end1retry.gameObject.SetActive(true);
-                end1Image.gameObject.SetActive(false);
+                if (end1Image.gameObject.activeSelf)
+                {
+                    EventSystem.current.SetSelectedGameObject(firstSelect);
+                    end1Image.gameObject.SetActive(false);
+                }
             }
         }
     }

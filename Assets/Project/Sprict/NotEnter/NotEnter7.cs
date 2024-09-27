@@ -81,15 +81,4 @@ public class NotEnter7 : MonoBehaviour
             this.gameObject.tag = "Minnka1-18";
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

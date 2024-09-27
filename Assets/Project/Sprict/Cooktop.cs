@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class Cooktop : MonoBehaviour
 {
@@ -71,9 +72,9 @@ public class Cooktop : MonoBehaviour
     public Image selection;
     public bool isOpenSelect = false;
     public bool isCooked = false;
-    private bool selectedDish1 = false;
-    private bool selectedDish2 = false;
-    private bool selectedDish3 = false;
+    public bool selectedDish1 = false;
+    public bool selectedDish2 = false;
+    public bool selectedDish3 = false;
     public AudioClip decision;
     public AudioClip cookingMusic;
     public Inventry inventry;
@@ -81,6 +82,7 @@ public class Cooktop : MonoBehaviour
     public SoundManager soundManager;
     public Refrigerator refrigerator;
     public GameManager gameManager;
+    public GameObject firstSelect;
     private void Start()
     {
 
@@ -114,6 +116,7 @@ public class Cooktop : MonoBehaviour
         {
             yield return null;
             showMessage(messages[i], names[i], image[i]);
+            EventSystem.current.SetSelectedGameObject(firstSelect);
             yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
         Selectwindow.gameObject.SetActive(true);
@@ -174,10 +177,6 @@ public class Cooktop : MonoBehaviour
 
     //ボタンのスクリプトの作成をする。必要なスクリプトはinterruptの中断するとしないボタン
     //その次はCookedボタンを押したときにingredientsがでてくるボタン
-    public void OnClickIngredientsButton()
-    {
-        //表示されているテキストによって
-    }
     public void OnClickinterruptButton()
     {
         soundManager.StopBgm(cookingMusic);
@@ -195,6 +194,11 @@ public class Cooktop : MonoBehaviour
     }
     public void OnClickDish1CookedButton() 
     {
+        if (selectedDish2 == true || selectedDish3 == true)
+        {
+            selectedDish2 = false;
+            selectedDish3 = false;
+        }
         if(itemDateBase.items[11].checkPossession == true)
         {
             ingredients.gameObject.SetActive(true);
@@ -240,7 +244,12 @@ public class Cooktop : MonoBehaviour
     }
     public void OnClickDish2CookedButton()
     {
-        if(itemDateBase.items[12].checkPossession == true)
+        if (selectedDish1 == true || selectedDish3 == true)
+        {
+            selectedDish1 = false;
+            selectedDish3 = false;
+        }
+        if (itemDateBase.items[12].checkPossession == true)
         {
             ingredients.gameObject.SetActive(true);
             soundManager.PlaySe(decision);
@@ -285,7 +294,12 @@ public class Cooktop : MonoBehaviour
     }
     public void OnClickDish3CookedButton()
     {
-        if(itemDateBase.items[13].checkPossession == true)
+        if (selectedDish2 == true || selectedDish1 == true)
+        {
+            selectedDish2 = false;
+            selectedDish1 = false;
+        }
+        if (itemDateBase.items[13].checkPossession == true)
         {
             ingredients.gameObject.SetActive(true);
             soundManager.PlaySe(decision);
@@ -434,7 +448,7 @@ public class Cooktop : MonoBehaviour
             selectedDish3 = false;
             ingredients3Text.text = "使用済み";
         }
-        else if(selectedDish1 == true || selectedDish3 == true)
+        else if(selectedDish1 == true || selectedDish2 == true)
         {
             MessageManager.message_instance.MessageWindowActive(dishNotMessages, dishNotNames, dishNotImage);
         }

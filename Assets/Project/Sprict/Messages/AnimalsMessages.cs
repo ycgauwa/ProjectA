@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,6 +34,7 @@ public class AnimalsMessages : MonoBehaviour
     public AnimalsMessages chicken;
     public AnimalsMessages mushroom;
     public Cooktop cooktop;
+    public SecondHouseManager secondHouseManager;
     private void Start()
     {
     }
@@ -76,7 +78,15 @@ public class AnimalsMessages : MonoBehaviour
         }
         yield return new WaitUntil(() => !isOpenSelect);
         target.text = "";
-        window.gameObject.SetActive(false);
+        //セカンドハウスの方でウィンドウ表示させても直後にこっちで消される。
+        if (secondHouseManager.window.gameObject.activeSelf)
+        {
+            yield break;
+        }
+        else
+        {
+            window.gameObject.SetActive(false);
+        }
         coroutine = null;
         yield break;
     }
@@ -86,6 +96,7 @@ public class AnimalsMessages : MonoBehaviour
         {
             if(cooktop.isCooked == true)
             {
+                Debug.Log("miss");
                 messageSwitch = true;
                 coroutine = OnAction();
                 StartCoroutine(coroutine);

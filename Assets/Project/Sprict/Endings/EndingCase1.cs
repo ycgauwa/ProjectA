@@ -116,7 +116,6 @@ public class EndingCase1 : MonoBehaviour
         yield return new WaitUntil(() => !isOpenSelect);
         target.text = "";
         window.gameObject.SetActive(false);
-        PlayerManager.m_instance.m_speed = 0.075f;
         coroutine = null;
         yield break;
 

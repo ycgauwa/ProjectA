@@ -1,14 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class DishMessage : MonoBehaviour
 {
-    // 話しかけた時にメッセージウィンドウを表示。ウィンドウが非表示になった後にカレンダーをアクティブにする
-    // 話しかけて画像が出てきて、画像が出てるときはタイムスケールを０にする。そしてエンターを押すとテキスト
-    // メッセージが出てきて、表示し終わったら画像も消してタイムスケールを元に戻す。
-
     [SerializeField]
     private List<string> messages;
     [SerializeField]
@@ -30,6 +27,7 @@ public class DishMessage : MonoBehaviour
     public Item chicken;
     public Item fish;
     public GameObject dish;
+    public GameObject firstSelect;
     private void Start()
     {
         dish = gameObject;
@@ -63,7 +61,6 @@ public class DishMessage : MonoBehaviour
         window.gameObject.SetActive(true);
         for(int i = 0; i < messages.Count; ++i)
         {
-            // 1フレーム分 処理を待機(下記説明1)
             yield return null;
             // 会話をwindowのtextフィールドに表示
             showMessage(messages[i], names[i], image[i]);
@@ -71,11 +68,13 @@ public class DishMessage : MonoBehaviour
             {
                 Selectwindow.gameObject.SetActive(true);
                 selection.gameObject.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(firstSelect);
                 isOpenSelect = true;
                 break;
             }
             yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
+        yield return new WaitForSeconds(0.2f);
         yield return new WaitUntil(() => !isOpenSelect);
         target.text = "";
         window.gameObject.SetActive(false);

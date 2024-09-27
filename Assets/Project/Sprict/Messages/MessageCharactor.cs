@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static MessageCharactor;
 //using static UnityEditor.Progress;
 
 /**
@@ -10,7 +12,6 @@ using UnityEngine.UI;
  */
 public class MessageCharactor : MonoBehaviour
 {
-
     // Unityのインスペクタ(UI上)で、前項でつくったオブジェクトをバインドする。
     // （次項 : インスペクタでscriptを追加して、設定をする で説明）
     //　特定のフラグを回収した状態で話しかけると会話内容が変わる。
@@ -38,7 +39,7 @@ public class MessageCharactor : MonoBehaviour
     private void Start()
     {
         isContacted = false;
-        GameObject myGameObject = gameObject;
+        characterItem.thisGameObject = gameObject;
     }
 
     //プレイヤーが接触する。その時にキャラクターによって呼ぶメソッドを変えたい→メソッドは同じでゲームオブジェクトを
@@ -46,7 +47,7 @@ public class MessageCharactor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log($"colloder: {gameObject.name} ");
+        Debug.Log($"colloder: {gameObject.name}");
         if(collider.gameObject.tag.Equals("Player"))
         {
             coroutine = CreateCoroutine();
@@ -64,13 +65,14 @@ public class MessageCharactor : MonoBehaviour
     {
         // window起動
         window.gameObject.SetActive(true);
-
         // 抽象メソッド呼び出し 詳細は子クラスで実装
         yield return CharaShowMessage();
 
-        // window終了
-        target.text = "";
-        window.gameObject.SetActive(false);
+        if (!characterItem.selection.gameObject.activeSelf)
+        {
+            window.gameObject.SetActive(false);
+            target.text = "";
+        }
 
         StopCoroutine(coroutine);
         coroutine = null;
@@ -91,7 +93,6 @@ public class MessageCharactor : MonoBehaviour
     特定の条件の時にはList1、別の条件ではList2を呼び出すことによってListを呼び出しながらも会話内容を変えることができる
     今悩んでいるのは、foreachを使った場合stringのListは回してくれるけどImageのListはどうなるの？ってはなし
     でもメッセージと画像は一対一対応してるから別にforeachじゃなくてもよくね？*/
-
     IEnumerator CharaShowMessage()
     {
         // 学校にいる間にしゃべらされる内容
@@ -101,16 +102,17 @@ public class MessageCharactor : MonoBehaviour
             images = character.characterImages1;
             messages = character.messageTexts1;
             int i = 0;
-            if(gameObject.name == "Hosokawa Mitsuki")
-            {
-                characterItem.CharagivedItem();
-            }
             // 要素の数だけループが行われる。
-            foreach(string str in messages)
+            foreach (string str in messages)
             {
                 yield return null;
                 showMessage(str, charactername, images[i]);
                 i++;
+                if (gameObject.name == "Hosokawa Mitsuki" && i == 3)
+                {
+                    //こいつの中に初回限定のメッセージ文を（⑤）を入れてあげればいける。
+                    characterItem.CharagivedItem();
+                }
                 yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
             }
             yield break;
@@ -147,55 +149,39 @@ public class MessageCharactor : MonoBehaviour
             }
             yield break;
         }
-        
     }
-    IEnumerator OnAction()
+    public void MitsukiCoroutine()
     {
-        int i = 0;
-        charactername = character.charaName;
-        //　家ごとにセリフを割り当てる。
-        if(notEnter1.one == false)
-        {
-            for(i = 0; i < messages.Count; ++i)
-            {
-                messages[i] = character.messageTexts1[i];
-                images = character.characterImages1;
-                // 1フレーム分 処理を待機(下記説明1)
-                yield return null;
-
-                // 会話をwindowのtextフィールドに表示
-                showMessage(messages[i], charactername, images[i]);
-                yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
-            }
-            yield break;
-        }
-        else if(notEnter1.one == true)
-        {
-            for(i = 0; i < messages.Count; ++i)
-            {
-                messages[i] = character.messageTexts2[i];
-                images = character.characterImages2;
-                // 1フレーム分 処理を待機(下記説明1)
-                yield return null;
-
-                // 会話をwindowのtextフィールドに表示
-                showMessage(messages[i], charactername, images[i]);
-
-                yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
-            }
-            yield break;
-        }
-        yield break;
+        characterItem.coroutine = characterItem.OnAction();
+        StartCoroutine(characterItem.coroutine);
+    }
+    public void MitsukiItemYes()
+    {
+        characterItem.soundManager.PlaySe(characterItem.decision);
+        characterItem.selection.gameObject.SetActive(false);
+        characterItem.Selectwindow.gameObject.SetActive(false);
+        characterItem.inventry.Add(characterItem.itemDateBase.items[10]);
+        characterItem.givedItem.checkPossession = true;
+        characterItem.answer = true;
+        characterItem.isOpenSelect = false;
+    }
+    public void MitsukiItemNo()
+    {
+        characterItem.soundManager.PlaySe(characterItem.decision);
+        characterItem.selection.gameObject.SetActive(false);
+        characterItem.Selectwindow.gameObject.SetActive(false);
+        characterItem.answer = true;
+        characterItem.isOpenSelect = false;
     }
     [System.Serializable]
-    public class CharacterItem:MonoBehaviour
+    public class CharacterItem
     {
         //話しかけたらアイテムがもらえる仕様で、アイテムが所持している場合はもらえない仕様にする。
         //欲を言えばアイテムを持っているときは話す内容が変化してほしい。
         //仕様的に言えば、誰にいつ話しかけたかで、話しかけた後にアイテムをもらうメソッドを起動してほしい
         //条件（誰にOK）（いつのタイミングでOK）（アイテムを持っているかOK）
 
-        public Item mitsukiItem;
+        public Item givedItem;
         public ItemDateBase itemDateBase;
         public Inventry inventry;
         public Canvas window;
@@ -207,28 +193,47 @@ public class MessageCharactor : MonoBehaviour
         public SoundManager soundManager;
         public AudioClip decision;
         public bool answer;
-        private IEnumerator coroutine;
-        private bool isOpenSelect = false;
+        public IEnumerator coroutine;
+        public bool isOpenSelect = false;
+        public GameObject thisGameObject;
+        public static CharacterItem instance;
+        [SerializeField]
+        private MessageCharactor messageCharactor;
+        //やりたいこと、コルーチンを別スクリプトから引っ張ってきて発動する。messagecharactorがnullのままになってる
 
-        public void CharagivedItem()
+        void Awake()
         {
-            if(mitsukiItem.checkPossession == false)
+            if (instance == null)
             {
-                coroutine = OnAction();
-                StartCoroutine(coroutine);
-                inventry.Add(itemDateBase.items[10]);
-                mitsukiItem.checkPossession = true;
+                instance = this;
             }
         }
-        IEnumerator OnAction()
+        public void CharagivedItem()
+        {
+            if (thisGameObject.name == "Hosokawa Mitsuki")
+            {
+                if (givedItem.checkPossession == false)
+                {
+                    messageCharactor.MitsukiCoroutine();
+                    Debug.Log("c");
+                }
+                else if (givedItem.checkPossession == true)
+                {
+                    return;
+                }
+            }
+        }
+        public IEnumerator OnAction()
         {
             window.gameObject.SetActive(true);
+            Selectwindow.gameObject.SetActive(true);
+            selection.gameObject.SetActive(true);
+            isOpenSelect = true;
             yield return new WaitUntil(() => !isOpenSelect);
+            Debug.Log("d");
             window.gameObject.SetActive(false);
-            PlayerManager.m_instance.m_speed = 0.075f;
             coroutine = null;
             yield break;
-
         }
     }
 

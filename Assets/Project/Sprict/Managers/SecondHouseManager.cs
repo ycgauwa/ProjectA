@@ -14,17 +14,35 @@ public class SecondHouseManager : MonoBehaviour
     [SerializeField]
     private List<Sprite> bearimage;
     [SerializeField]
+    private List<string> bearfailmessages;
+    [SerializeField]
+    private List<string> bearfailnames;
+    [SerializeField]
+    private List<Sprite> bearfailimage;
+    [SerializeField]
     private List<string> chickenmessages;
     [SerializeField]
     private List<string> chickennames;
     [SerializeField]
     private List<Sprite> chickenimage;
     [SerializeField]
+    private List<string> chickenfailmessages;
+    [SerializeField]
+    private List<string> chickenfailnames;
+    [SerializeField]
+    private List<Sprite> chickenfailimage;
+    [SerializeField]
     private List<string> mushroommessages;
     [SerializeField]
     private List<string> mushroomnames;
     [SerializeField]
     private List<Sprite> mushroomimage;
+    [SerializeField]
+    private List<string> mushroomfailmessages;
+    [SerializeField]
+    private List<string> mushroomfailnames;
+    [SerializeField]
+    private List<Sprite> mushroomfailimage;
     [SerializeField]
     private List<string> keyOpenMessages;
     [SerializeField]
@@ -39,7 +57,7 @@ public class SecondHouseManager : MonoBehaviour
     private bool bearKey = false;
     private bool chickenKey = false;
     private bool mushroomKey = false;
-    private bool secondkey = false;
+    public bool secondkey = false;
     public Inventry inventry;
     public ItemDateBase itemDate;
     public DishMessage chickenDish;
@@ -73,6 +91,7 @@ public class SecondHouseManager : MonoBehaviour
     }
     IEnumerator OpenKey()
     {
+        window.gameObject.SetActive(true);
         GameManager.m_instance.stopSwitch = true;
         soundManager.PlaySe(keyOpen);
         yield return new WaitForSeconds(2.0f);
@@ -89,7 +108,7 @@ public class SecondHouseManager : MonoBehaviour
     IEnumerator OnAction2()
     {
         window.gameObject.SetActive(true);
-        if(bear.isContacted == true)
+        if (bear.isContacted == true)
         {
             for(int i = 0; i < bearmessages.Count; ++i)
             {
@@ -116,20 +135,43 @@ public class SecondHouseManager : MonoBehaviour
                 yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
             }
         }
-        for(int i = 0; i < bearmessages.Count; ++i)
-        {
-            yield return null;
-            if(bear.isContacted == true) showMessage(bearmessages[i], bearnames[i], bearimage[i]);
-            else if(chicken.isContacted == true) showMessage(chickenmessages[i], chickennames[i], chickenimage[i]);
-            else if(mushroom.isContacted == true) showMessage(mushroommessages[i], mushroomnames[i], mushroomimage[i]);
-            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
-        }
         target.text = "";
         window.gameObject.SetActive(false);
-        if(bear.isContacted == true) bear.gameObject.SetActive(false);
+        if (bear.isContacted == true) bear.gameObject.SetActive(false);
         else if(chicken.isContacted == true) chicken.gameObject.SetActive(false);
         else if(mushroom.isContacted == true) mushroom.gameObject.SetActive(false);
         coroutine = null;
+        yield break;
+    }
+    IEnumerator OnFailAction()
+    {
+        if (bear.isContacted == true)
+        {
+            for (int i = 0; i < bearfailmessages.Count; ++i)
+            {
+                yield return null;
+                showMessage(bearfailmessages[i], bearfailnames[i], bearfailimage[i]);
+                yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
+            }
+        }
+        else if (chicken.isContacted == true)
+        {
+            for (int i = 0; i < chickenfailmessages.Count; ++i)
+            {
+                yield return null;
+                showMessage(chickenfailmessages[i], chickenfailnames[i], chickenfailimage[i]);
+                yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
+            }
+        }
+        else if (mushroom.isContacted == true)
+        {
+            for (int i = 0; i < mushroomfailmessages.Count; ++i)
+            {
+                yield return null;
+                showMessage(mushroomfailmessages[i], mushroomfailnames[i], mushroomfailimage[i]);
+                yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
+            }
+        }
         yield break;
     }
     public void AnimalGiveDish()
@@ -149,7 +191,11 @@ public class SecondHouseManager : MonoBehaviour
             }
             else if(itemDate.items[28].checkPossession == true)
             {//メッセージが出た後に死ぬ
-
+                inventry.Delete(itemDate.items[28]);
+                itemDate.items[28].checkPossession = false;
+                bear.isOpenSelect = false;
+                coroutine = OnFailAction();
+                StartCoroutine(coroutine);
             }
         }
         if(chicken.isContacted == true)
@@ -216,7 +262,6 @@ public class SecondHouseManager : MonoBehaviour
         {
             shrimpDish.selection.gameObject.SetActive(false);
             shrimpDish.Selectwindow.gameObject.SetActive(false);
-            Debug.Log("test1");
             shrimpDish.shrimp.checkPossession = true;
             inventry.Add(shrimpDish.shrimp);
             shrimpDish.isOpenSelect = false;
@@ -228,7 +273,6 @@ public class SecondHouseManager : MonoBehaviour
         {
             chickenDish.selection.gameObject.SetActive(false);
             chickenDish.Selectwindow.gameObject.SetActive(false);
-            Debug.Log("test2");
             chickenDish.chicken.checkPossession = true;
             inventry.Add(chickenDish.chicken);
             chickenDish.isOpenSelect = false;
@@ -239,7 +283,6 @@ public class SecondHouseManager : MonoBehaviour
         {
             fishDish.selection.gameObject.SetActive(false);
             fishDish.Selectwindow.gameObject.SetActive(false);
-            Debug.Log("test3");
             fishDish.fish.checkPossession = true;
             inventry.Add(fishDish.fish);
             fishDish.isOpenSelect = false;

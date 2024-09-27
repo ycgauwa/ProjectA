@@ -7,6 +7,7 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 using UnityEditor.PackageManager.UI;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,6 +25,12 @@ public class GameManager : MonoBehaviour
     public RescueEvent rescueEvent;
     public GameObject rescuePoint;
     public GameObject yukitoDead;
+    public GameObject menuFirstSelect;
+    public GameObject instructionFirstSelect;
+    public GameObject instructionSecondSelect;
+    public GameObject instructionThirdSelect;
+    public GameObject instructionFourthSelect;
+    public GameObject instructionFifthSelect;
     public int deathCount;
     public GameObject enemy;
     public Homing homing;
@@ -40,6 +47,7 @@ public class GameManager : MonoBehaviour
     public Image Instruction2;
     public Image Instruction3;
     public Image Instruction4;
+    public Image Instruction5;
     public ItemDateBase itemDate;
     public Inventry inventry;
     public AudioClip cancel;
@@ -57,6 +65,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        EventSystem.current.SetSelectedGameObject(instructionFirstSelect);
         m_instance = this;
         postVolume.profile.TryGet(out vignette);
     }
@@ -92,6 +101,10 @@ public class GameManager : MonoBehaviour
                 {
                     //素材が出てる時に素材ウィンドウを消すメソッド
                     cooktop.ingredients.gameObject.SetActive(false);
+                    if(cooktop.selectedDish1)cooktop.selectedDish1 = false;
+                    else if(cooktop.selectedDish2)cooktop.selectedDish2 = false;
+                    else if(cooktop.selectedDish3)cooktop.selectedDish3 = false;
+                    EventSystem.current.SetSelectedGameObject(cooktop.firstSelect);
                     soundManager.PlaySe(cancel);
                 }
             }
@@ -102,6 +115,7 @@ public class GameManager : MonoBehaviour
                     PlayerManager.m_instance.m_speed = 0;
                     Time.timeScale = 0;
                     menuCanvas.gameObject.SetActive(true);
+                    EventSystem.current.SetSelectedGameObject(menuFirstSelect);
                     soundManager.PlaySe(cancel);
                 }
             }
@@ -123,6 +137,7 @@ public class GameManager : MonoBehaviour
                 inventryCanvas.gameObject.SetActive(false);
                 itemDate.SelectDiff();
                 menuCanvas.gameObject.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(menuFirstSelect);
                 soundManager.PlaySe(cancel);
             }
         }
@@ -132,6 +147,7 @@ public class GameManager : MonoBehaviour
             {
                 Instruction1.gameObject.SetActive(false);
                 menuCanvas.gameObject.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(menuFirstSelect);
                 soundManager.PlaySe(cancel);
             }
         }
@@ -141,6 +157,7 @@ public class GameManager : MonoBehaviour
             {
                 optionCanvas.gameObject.SetActive(false);
                 menuCanvas.gameObject.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(menuFirstSelect);
                 soundManager.PlaySe(cancel);
             }
         }
@@ -216,6 +233,7 @@ public class GameManager : MonoBehaviour
             PlayerManager.m_instance.m_speed = 0;
             Time.timeScale = 0;
             menuCanvas.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(menuFirstSelect);
             soundManager.PlaySe(cancel);
         }
     }
@@ -304,26 +322,30 @@ public class GameManager : MonoBehaviour
     {
         menuCanvas.gameObject.SetActive(false);
         Instruction1.gameObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(instructionFirstSelect);
         soundManager.PlaySe(decision);
     }
     public void OnClickToMenuButton()
     {
-        if (Instruction4.gameObject.activeSelf)
+        if (Instruction5.gameObject.activeSelf)
         {
-            Instruction4.gameObject.SetActive(false);
+            Instruction5.gameObject.SetActive(false);
             menuCanvas.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(menuFirstSelect);
             soundManager.PlaySe(cancel);
         }
         else if (inventryCanvas.gameObject.activeSelf)
         {
             inventryCanvas.gameObject.SetActive(false);
             menuCanvas.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(menuFirstSelect);
             soundManager.PlaySe(cancel);
         }
         else if (optionCanvas.gameObject.activeSelf)
         {
             optionCanvas.gameObject.SetActive(false);
             menuCanvas.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(menuFirstSelect);
             soundManager.PlaySe(cancel);
         }
     }
@@ -333,18 +355,28 @@ public class GameManager : MonoBehaviour
         {
             Instruction1.gameObject.SetActive(false);
             Instruction2.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(instructionSecondSelect);
             soundManager.PlaySe(decision);
         }
         else if(Instruction2.gameObject.activeSelf)
         {
             Instruction2.gameObject.SetActive(false);
             Instruction3.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(instructionThirdSelect);
             soundManager.PlaySe(decision);
         }
         else if (Instruction3.gameObject.activeSelf)
         {
             Instruction3.gameObject.SetActive(false);
             Instruction4.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(instructionFourthSelect);
+            soundManager.PlaySe(decision);
+        }
+        else if (Instruction4.gameObject.activeSelf)
+        {
+            Instruction4.gameObject.SetActive(false);
+            Instruction5.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(instructionFifthSelect);
             soundManager.PlaySe(decision);
         }
     }
@@ -355,83 +387,36 @@ public class GameManager : MonoBehaviour
         {
             Instruction1.gameObject.SetActive(false);
             menuCanvas.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(menuFirstSelect);
             soundManager.PlaySe(cancel);
         }
         else if (Instruction2.gameObject.activeSelf)
         {
             Instruction2.gameObject.SetActive(false);
             Instruction1.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(instructionFirstSelect);
             soundManager.PlaySe(cancel);
         }
         else if(Instruction3.gameObject.activeSelf)
         {
             Instruction3.gameObject.SetActive(false);
             Instruction2.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(instructionSecondSelect);
             soundManager.PlaySe(cancel);
         }
         else if (Instruction4.gameObject.activeSelf)
         {
             Instruction4.gameObject.SetActive(false);
             Instruction3.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(instructionThirdSelect);
+            soundManager.PlaySe(cancel);
+        }
+        else if (Instruction5.gameObject.activeSelf)
+        {
+            Instruction5.gameObject.SetActive(false);
+            Instruction4.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(instructionFourthSelect);
             soundManager.PlaySe(cancel);
         }
     }
-    /*public void DishTaken()
-    {
-        if(shrimpDish.isContacted == true)
-        {
-            shrimpDish.selection.gameObject.SetActive(false);
-            shrimpDish.Selectwindow.gameObject.SetActive(false);
-            Debug.Log("test1");
-            shrimpDish.shrimp.checkPossession = true;
-            inventry.Add(shrimpDish.shrimp);
-            shrimpDish.isOpenSelect = false;
-            shrimpDish.window.gameObject.SetActive(false);
-            shrimpDish.dish.SetActive(false);
-        }
-        //とったアイテムが鳥の丸焼きの時
-        else if(chickenDish.isContacted == true)
-        {
-            chickenDish.selection.gameObject.SetActive(false);
-            chickenDish.Selectwindow.gameObject.SetActive(false);
-            Debug.Log("test2");
-            chickenDish.chicken.checkPossession = true;
-            inventry.Add(chickenDish.chicken);
-            chickenDish.isOpenSelect = false;
-            chickenDish.window.gameObject.SetActive(false);
-            chickenDish.dish.SetActive(false);
-        }
-        else if(fishDish.isContacted == true)
-        {
-            fishDish.selection.gameObject.SetActive(false);
-            fishDish.Selectwindow.gameObject.SetActive(false);
-            Debug.Log("test3");
-            fishDish.fish.checkPossession = true;
-            inventry.Add(fishDish.fish);
-            fishDish.isOpenSelect = false;
-            fishDish.window.gameObject.SetActive(false);
-            fishDish.dish.SetActive(false);
-        }
-    }
-    public void DishNotTaken()
-    {
-        if(shrimpDish.isContacted == true)
-        {
-            shrimpDish.selection.gameObject.SetActive(false);
-            shrimpDish.Selectwindow.gameObject.SetActive(false);
-            shrimpDish.isOpenSelect = false;
-        }
-        else if(chickenDish.isContacted == true)
-        {
-            chickenDish.selection.gameObject.SetActive(false);
-            chickenDish.Selectwindow.gameObject.SetActive(false);
-            chickenDish.isOpenSelect = false;
-        }
-        else if(fishDish.isContacted == true)
-        {
-            fishDish.selection.gameObject.SetActive(false);
-            fishDish.Selectwindow.gameObject.SetActive(false);
-            fishDish.isOpenSelect = false;
-        }
-    }*/
 }
