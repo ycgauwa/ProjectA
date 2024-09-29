@@ -213,7 +213,7 @@ public class GameManager : MonoBehaviour
         //デバック用
         if(Input.GetKeyDown(KeyCode.F1))
         {
-            player.transform.position = new Vector3(147,100,0);
+            player.transform.position = new Vector3(-12,-38,0);
         }
     }
     public void OnClickBackButton()

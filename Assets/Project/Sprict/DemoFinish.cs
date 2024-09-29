@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 //using UnityEditor.VersionControl;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.LowLevel;
 
 public class DemoFinish : MonoBehaviour
@@ -12,6 +13,8 @@ public class DemoFinish : MonoBehaviour
     public PlayerMessage playerMessage;
     public string proMessage;
     public string norMessage;
+    public GameObject firstSelect1;
+    public GameObject firstSelect2;
     private void OnTriggerEnter2D(Collider2D collider)
     {
         PlayerManager.m_instance.m_speed = 0;
@@ -19,9 +22,10 @@ public class DemoFinish : MonoBehaviour
         DemoFinishCanvas.gameObject.SetActive(true);
     }
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         gameModeCanvas.gameObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(firstSelect1);
     }
 
     // Update is called once per frame
@@ -33,12 +37,14 @@ public class DemoFinish : MonoBehaviour
     {
         player.transform.position = new Vector2(30,-35);
         gameModeCanvas.gameObject.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(firstSelect2);
         //playerMessage.
     }
     public void normal() 
     {
         player.transform.position = new Vector2(70, -45);
         gameModeCanvas.gameObject.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(firstSelect2);
         playerMessage.StartActive = true;
         playerMessage.Demo.gameObject.SetActive(true);
     }

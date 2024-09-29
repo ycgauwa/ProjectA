@@ -67,11 +67,10 @@ public class MessageCharactor : MonoBehaviour
         window.gameObject.SetActive(true);
         // 抽象メソッド呼び出し 詳細は子クラスで実装
         yield return CharaShowMessage();
-
-        if (!characterItem.selection.gameObject.activeSelf)
+        if (!characterItem.selection.gameObject.activeSelf && characterItem.answer == true)
         {
-            window.gameObject.SetActive(false);
             target.text = "";
+            window.gameObject.SetActive(false);
         }
 
         StopCoroutine(coroutine);
@@ -108,12 +107,17 @@ public class MessageCharactor : MonoBehaviour
                 yield return null;
                 showMessage(str, charactername, images[i]);
                 i++;
-                if (gameObject.name == "Hosokawa Mitsuki" && i == 3)
-                {
-                    //こいつの中に初回限定のメッセージ文を（⑤）を入れてあげればいける。
-                    characterItem.CharagivedItem();
-                }
                 yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
+            }
+            if(gameObject.name == "Hosokawa Mitsuki" && characterItem.answer == false)
+            {
+                //こいつの中に初回限定のメッセージ文を（⑤）を入れてあげればいける。
+                characterItem.CharagivedItem();
+            }
+            else
+            {
+                target.text = "";
+                window.gameObject.SetActive(false);
             }
             yield break;
         }
@@ -147,11 +151,22 @@ public class MessageCharactor : MonoBehaviour
                 i++;
                 yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
             }
+            if(gameObject.name == "Hosokawa Mitsuki" && characterItem.answer == false)
+            {
+                //こいつの中に初回限定のメッセージ文を（⑤）を入れてあげればいける。
+                characterItem.CharagivedItem();
+            }
+            else
+            {
+                target.text = "";
+                window.gameObject.SetActive(false);
+            }
             yield break;
         }
     }
     public void MitsukiCoroutine()
     {
+        window.gameObject.SetActive(true);
         characterItem.coroutine = characterItem.OnAction();
         StartCoroutine(characterItem.coroutine);
     }
@@ -215,7 +230,6 @@ public class MessageCharactor : MonoBehaviour
                 if (givedItem.checkPossession == false)
                 {
                     messageCharactor.MitsukiCoroutine();
-                    Debug.Log("c");
                 }
                 else if (givedItem.checkPossession == true)
                 {
@@ -225,12 +239,25 @@ public class MessageCharactor : MonoBehaviour
         }
         public IEnumerator OnAction()
         {
+            messageCharactor.charactername = messageCharactor.character.charaName;
+            messageCharactor.images = messageCharactor.character.itemGiveImage1;
+            messageCharactor.messages = messageCharactor.character.itemGiveMessage1;
+            int i = 0;
+            Debug.Log("a");
+            // 要素の数だけループが行われる。
+            foreach(string str in messageCharactor.messages)
+            {
+                yield return null;
+                messageCharactor.showMessage(str, messageCharactor.charactername, messageCharactor.images[i]);
+                i++;
+                yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
+            }
+            Debug.Log("b");
             window.gameObject.SetActive(true);
             Selectwindow.gameObject.SetActive(true);
             selection.gameObject.SetActive(true);
             isOpenSelect = true;
             yield return new WaitUntil(() => !isOpenSelect);
-            Debug.Log("d");
             window.gameObject.SetActive(false);
             coroutine = null;
             yield break;
