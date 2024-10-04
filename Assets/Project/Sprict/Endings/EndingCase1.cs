@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class EndingCase1 : MonoBehaviour
 {
@@ -42,6 +43,8 @@ public class EndingCase1 : MonoBehaviour
     public SoundManager soundManager;
     public AudioClip runSound;
     public AudioClip decision;
+    public AudioClip tensionBGM;
+    public GameObject firstSelect;
     private IEnumerator coroutine;
 
     //アンサーとして何を答えたか
@@ -100,14 +103,15 @@ public class EndingCase1 : MonoBehaviour
         window.gameObject.SetActive(true);
         for(int i = 0; i < messages.Count; ++i)
         {
-            // 1フレーム分 処理を待機(下記説明1)
             yield return null;
-            // 会話をwindowのtextフィールドに表示
+
             showMessage(messages[i], names[i], image[i]);
             if(i == messages.Count - 1)
             {
+                soundManager.PlayBgm(tensionBGM);
                 Selectwindow.gameObject.SetActive(true);
                 selection.gameObject.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(firstSelect);
                 isOpenSelect = true;
                 break;
             }
@@ -126,14 +130,10 @@ public class EndingCase1 : MonoBehaviour
 
         for(int i = 0; i < messages4.Count; ++i)
         {
-            // 1フレーム分 処理を待機(下記説明1)
             yield return null;
 
-            //すでにもってる
             showMessage(messages4[i], names4[i], image4[i]);
 
-
-            // キー入力を待機 (下記説明1)
             yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
         window.gameObject.SetActive(false);
@@ -149,6 +149,7 @@ public class EndingCase1 : MonoBehaviour
         selection.gameObject.SetActive(false);
         Selectwindow.gameObject.SetActive(false);
         isOpenSelect = false;
+        soundManager.StopBgm(tensionBGM);
     }
     public void End1SelectNo()
     {
@@ -158,6 +159,7 @@ public class EndingCase1 : MonoBehaviour
         Selectwindow.gameObject.SetActive(false);
         answer = true;
         isOpenSelect = false;
+        soundManager.StopBgm(tensionBGM);
     }
     private IEnumerator Blackout()
     {
