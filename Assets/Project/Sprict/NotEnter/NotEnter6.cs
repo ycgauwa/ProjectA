@@ -265,7 +265,7 @@ public class NotEnter6 : MonoBehaviour
         player.transform.position = new Vector3(128, 25, 0);
         enemy.transform.position = new Vector2(0, 0);
         enemy.gameObject.SetActive(false);
-        gameTeleportManager.soundManager.StopBgm(gameTeleportManager.chasedBGM);
+        gameTeleportManager.soundManager.StopBgm(gameTeleportManager.toevent3.chasedBGM);
         Homing.m_instance.enemyEmerge = false;
         underKey.checkPossession = false;
         GameManager.m_instance.stopSwitch = false;

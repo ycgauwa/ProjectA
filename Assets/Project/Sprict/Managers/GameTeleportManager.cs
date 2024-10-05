@@ -24,7 +24,6 @@ public class GameTeleportManager : MonoBehaviour
     public AudioClip schoolDoor;
     public AudioClip bathDoor;
     public AudioClip climbStairs;
-    public AudioClip chasedBGM;
     public DifficultyLevelManager difficultyLevelManager;
     public SoundManager soundManager;
 

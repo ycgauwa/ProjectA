@@ -7,6 +7,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     AudioSource bgmAudioSource;
     [SerializeField]
+    AudioSource bgmAudioSource2;
+    [SerializeField]
     AudioSource seAudioSource;
 
     public float BgmVolume
@@ -18,6 +20,17 @@ public class SoundManager : MonoBehaviour
         set
         {
             bgmAudioSource.volume = Mathf.Clamp01(value);
+        }
+    }
+    public float BgmVolume2
+    {
+        get
+        {
+            return bgmAudioSource2.volume;
+        }
+        set
+        {
+            bgmAudioSource2.volume = Mathf.Clamp01(value);
         }
     }
 
@@ -38,13 +51,6 @@ public class SoundManager : MonoBehaviour
     {
         GameObject soundManager = CheckOtherSoundManager();
         bool checkResult = soundManager != null && soundManager != gameObject;
-
-        //if(checkResult)
-        //{
-        //    Destroy(gameObject);
-        //}
-
-        //DontDestroyOnLoad(gameObject);
     }
 
     GameObject CheckOtherSoundManager()
@@ -54,25 +60,46 @@ public class SoundManager : MonoBehaviour
 
     public void PlayBgm(AudioClip clip)
     {
-        bgmAudioSource.clip = clip;
+        if (bgmAudioSource.clip == clip || bgmAudioSource.clip == clip) return;
+        bool bgmSwitch = false;
+        if (bgmAudioSource.clip != null)
+        {
+            bgmAudioSource2.clip = clip;
+        }
+        else
+        {
+            bgmAudioSource.clip = clip;
+            bgmSwitch = true;
+        }
 
         if(clip == null)
         {
             return;
         }
 
-        bgmAudioSource.Play();
+        if(bgmSwitch == true)bgmAudioSource.Play();
+        bgmSwitch = false;
+        if(bgmAudioSource2.clip != null) bgmAudioSource2.Play();
     }
     public void StopBgm(AudioClip clip)
     {
-        bgmAudioSource.clip = clip;
-
-        if(clip == null)
+        Debug.Log(clip);
+        if(bgmAudioSource.clip != clip)
         {
+            Debug.Log("ちがうよ１");
+            if (bgmAudioSource2.clip == clip)
+            {
+                Debug.Log("けすよ2");
+                bgmAudioSource2.Stop();
+                bgmAudioSource2.clip = null;
+            }
+            Debug.Log("ちがうよ2");
             return;
         }
-
+        Debug.Log("けすよ１");
         bgmAudioSource.Stop();
+        bgmAudioSource.clip = null;
+        
     }
 
     public void PlaySe(AudioClip clip)
@@ -94,6 +121,7 @@ public class SoundManager : MonoBehaviour
         }
 
         seAudioSource.Stop();
+        seAudioSource.clip = null;
     }
 
     /// <summary>
@@ -104,6 +132,7 @@ public class SoundManager : MonoBehaviour
     {
         // 音楽の音量をスライドバーの値に変更
         bgmAudioSource.volume = newSliderValue;
+        bgmAudioSource2.volume = newSliderValue;
     }
     public void SESoundSliderOnValueChange(float newSliderValue)
     {

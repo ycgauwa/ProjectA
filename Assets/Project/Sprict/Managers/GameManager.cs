@@ -164,6 +164,7 @@ public class GameManager : MonoBehaviour
         //０になるまでは通常の回復速度　０になってからスピードが0になって回復速度がMaxになるまで遅くなる。
         if (Input.GetKey(KeyCode.LeftShift) && playerManager.playerstate != PlayerManager.PlayerState.Talk && playerManager.playerstate != PlayerManager.PlayerState.Stop)
         {
+            if (playerManager.playercondition == PlayerManager.PlayerCondition.Suffocation || playerManager.playercondition == PlayerManager.PlayerCondition.Suffocation2) return;
             if (playerManager.stamina > 0 && playerManager.staminastate == PlayerManager.StaminaState.normal)
             {
                 int test = 2;
@@ -201,6 +202,7 @@ public class GameManager : MonoBehaviour
         {
             case PlayerManager.PlayerState.Idol:
                 playerManager.m_speed = 0.075f;
+                if(playerManager.playercondition == PlayerManager.PlayerCondition.Suffocation2) playerManager.m_speed = 0.05f;
                 break;
             case PlayerManager.PlayerState.Talk:
                 PlayerManager.m_instance.m_speed = 0;

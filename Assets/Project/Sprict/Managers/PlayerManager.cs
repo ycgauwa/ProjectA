@@ -37,8 +37,16 @@ public class PlayerManager : MonoBehaviour
         exhausted, //スタミナが０になってる状態から満タンまでの状態
         normal　　// 通常通りの状態
     }
+    public enum PlayerCondition
+    {
+        Health,
+        Suffocation,
+        Suffocation2,
+        Suffocation3
+    }
     public PlayerState playerstate;
     public StaminaState staminastate;
+    public PlayerCondition playercondition;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +55,7 @@ public class PlayerManager : MonoBehaviour
         stamina = staminaMax;
         playerstate = PlayerState.Idol;
         staminastate = StaminaState.normal;
+        playercondition = PlayerCondition.Health;
     }
 
     // Update is called once per frame
