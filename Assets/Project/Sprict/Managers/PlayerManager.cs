@@ -16,6 +16,8 @@ public class PlayerManager : MonoBehaviour
     //Staticを使ってたり、インスタンス化している
     public static PlayerManager m_instance;
     public GameTeleportManager teleportManager;
+    public SoundManager soundManager;
+    public AudioClip shortnessSound;
     public GameObject mainCamera;
     public Rigidbody2D m_Rigidbody;
     public GameObject enemy;
@@ -85,8 +87,8 @@ public class PlayerManager : MonoBehaviour
         Speed = 0;
         stamina += 1;
         staminaIntensity -= 0.01f;
-        Debug.Log("test");
-
+        //息切れを加えてスピードを遅くする。
+        soundManager.PlaySe(shortnessSound);
     }
     private void Update()
     {

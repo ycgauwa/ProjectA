@@ -25,13 +25,14 @@ public class NotEnterLadder : MonoBehaviour
     public ToEvent3 toevent3;
     private bool isContacted = false;
     public static bool messageSwitch = false;
-    public AudioSource audioSource;
-    public AudioClip ladderSoundl;
+    public SoundManager soundManager;
+    public AudioClip ladderSound;
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.tag.Equals("Player"))
         {
             isContacted = true;
+            if(gameObject.name == "Ladder1-1") soundManager.PlaySe(ladderSound);
         }
         // イベントが終わった後にTPできるようにしたい
     }

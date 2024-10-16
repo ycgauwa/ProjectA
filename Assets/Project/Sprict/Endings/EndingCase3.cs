@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
@@ -134,13 +133,15 @@ public class EndingCase3 : MonoBehaviour
         target.text = "";
         window.gameObject.SetActive(false);
         coroutine = null;
+        homing.speed = 2;
         yield break;
     }
     private void Update()
     {
         if(isContacted && messageSwitch == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
-            if(questionCount == 0 &&enemy.activeSelf)
+            //これでも2回目以降の梯子からタンスかくれるは通用しない。
+            if(questionCount == 0 && homing.enemyCount > 0)
             {
                 messageSwitch = true;
                 coroutine = OnAction();
@@ -188,7 +189,6 @@ public class EndingCase3 : MonoBehaviour
         Selectwindow.gameObject.SetActive(false);
         selection.gameObject.SetActive(false);
         isOpenSelect = false;
-        homing.speed = 2;
     }
     private IEnumerator Blackout()
     {

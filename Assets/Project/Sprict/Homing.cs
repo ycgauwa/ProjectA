@@ -89,6 +89,7 @@ public class Homing : MonoBehaviour
                 // 食べられた時のサウンドを流す
                 // ゲームオーバー画面を出すためのキャンバスとその数秒後にボタンを出す
                 gameoverWindow.gameObject.SetActive(true);
+                GameManager.m_instance.stopSwitch = true;
                 Invoke("AppearChoice", 2.5f);
             }
         }
@@ -96,8 +97,6 @@ public class Homing : MonoBehaviour
 
     public void AppearChoice()
     {
-        //PlayerManager.m_instance.m_speed = 0f;
-        //Homing.m_instance.speed = 0f;
         buttonPanel.gameObject.SetActive(true);
     }
 

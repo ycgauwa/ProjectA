@@ -86,7 +86,7 @@ public class EndingCase2 : MonoBehaviour
         {
             if (isContacted == true && coroutine == null)
             {
-                if (homing.enemyEmerge == true && messageSwitch == false)
+                if (homing.enemyCount > 0 && messageSwitch == false)
                 {
                     messageSwitch = true;
                     MessageManager.message_instance.MessageWindowActive(messages5, names5, image5);
@@ -154,6 +154,7 @@ public class EndingCase2 : MonoBehaviour
         }
         window.gameObject.SetActive(false);
         coroutine = null;
+        target.text = "";
         yield break;
     }
     private IEnumerator Blackout()

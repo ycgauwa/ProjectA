@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
-using UnityEditor.PackageManager.UI;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
@@ -79,6 +78,7 @@ public class GameManager : MonoBehaviour
         }
         else if(stopSwitch == true)
         {
+            Debug.Log(stopSwitch);
             playerManager.playerstate = PlayerManager.PlayerState.Stop;
         }
         else playerManager.playerstate = PlayerManager.PlayerState.Idol;
@@ -183,11 +183,11 @@ public class GameManager : MonoBehaviour
             {
                 case PlayerManager.StaminaState.normal:
                     playerManager.stamina += 2;
-                    playerManager.staminaIntensity -= 0.01f;
+                    playerManager.staminaIntensity -= 0.005f;
                     break;
                 case PlayerManager.StaminaState.exhausted:
                     playerManager.stamina += 1;
-                    playerManager.staminaIntensity -= 0.005f;
+                    playerManager.staminaIntensity -= 0.002f;
                     if (playerManager.stamina == playerManager.staminaMax)
                     {
                         playerManager.staminastate = PlayerManager.StaminaState.normal;
@@ -203,6 +203,7 @@ public class GameManager : MonoBehaviour
             case PlayerManager.PlayerState.Idol:
                 playerManager.m_speed = 0.075f;
                 if(playerManager.playercondition == PlayerManager.PlayerCondition.Suffocation2) playerManager.m_speed = 0.05f;
+                if(playerManager.staminastate == PlayerManager.StaminaState.exhausted) playerManager.m_speed = 0.05f;
                 break;
             case PlayerManager.PlayerState.Talk:
                 PlayerManager.m_instance.m_speed = 0;
@@ -215,7 +216,7 @@ public class GameManager : MonoBehaviour
         //デバック用
         if(Input.GetKeyDown(KeyCode.F1))
         {
-            player.transform.position = new Vector3(-12,-38,0);
+            player.transform.position = new Vector3(32,65,0);
         }
     }
     public void OnClickBackButton()
@@ -255,6 +256,8 @@ public class GameManager : MonoBehaviour
     }
    public void OnclickRetryButton()
     {
+        GameManager.m_instance.stopSwitch = false;
+        if(homing.speed == 0)homing.speed = 2;
         if (deathCount > 4)
         {
             itemDate.items[7].checkPossession = false;

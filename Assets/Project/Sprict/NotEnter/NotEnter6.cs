@@ -76,7 +76,6 @@ public class NotEnter6 : MonoBehaviour
     public GameObject player;
     public GameObject seiitirou;
     public GameObject enemy;
-    public GameObject colisionBox;
 
     private void Start()
     {
@@ -169,11 +168,11 @@ public class NotEnter6 : MonoBehaviour
         StopCoroutine(HeartSounds());
         soundManager.StopSe(heartSound);
         redScreen.gameObject.SetActive(false);
-        colisionBox.gameObject.SetActive(true);
         GameManager.m_instance.stopSwitch = false;
         choiced = true;
         rescued = true;
         yield return OnMessage3();
+        soundManager.StopBgm(fearBGM);
         if(itemDateBase.items[8].checkPossession == true)
         {
             itemSprictW.ItemDelete();
@@ -270,6 +269,7 @@ public class NotEnter6 : MonoBehaviour
         underKey.checkPossession = false;
         GameManager.m_instance.stopSwitch = false;
         inventry.Delete(itemDateBase.items[7]);
+        soundManager.StopBgm(fearBGM);
     }
     public void OnRescueBotton()
     {

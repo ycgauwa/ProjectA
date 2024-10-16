@@ -37,9 +37,10 @@ public class RescueEvent : MonoBehaviour
     public ToEvent3 toEvent3;
     public GameTeleportManager gameTeleportManager;
     public GameObject Seiitirou;
+    public GameObject SeiitirouAnimation;
+    public AnimationStateController animationStateController;
     public GameObject Enemy;
     public GameObject Player;
-    public GameObject colisionBox;
     public GameObject yukitoProfile;
     public GameObject seiitirouProfile;
     private bool SeiitirouMove;
@@ -64,8 +65,7 @@ public class RescueEvent : MonoBehaviour
         if (RescueSwitch == true)
         {
             gameTeleportManager.enemyRndNum = 99;
-
-            soundManager.PlayBgm(ChasedBGM);
+            if(Player.activeSelf)soundManager.PlayBgm(ChasedBGM);
         }
         if (SeiitirouMove == true && RescueSwitch == false)
         {
@@ -105,11 +105,14 @@ public class RescueEvent : MonoBehaviour
             {
                 yukitoProfile.gameObject.SetActive(false);
                 seiitirouProfile.gameObject.SetActive(true);
+                notEnter6.inventry.Delete(notEnter6.itemDateBase.items[5]);
+                notEnter6.inventry.Delete(notEnter6.itemDateBase.items[6]);
+                soundManager.StopBgm(toEvent3.chasedBGM);
+                if(SeiitirouAnimation.GetComponent<AnimationStateController>().enabled == false)
+                {
+                    SeiitirouAnimation.GetComponent<AnimationStateController>().enabled = true;
+                }
             }
-        }
-        if(notEnter6.rescued == true && Homing.m_instance.enemyEmerge == false)
-        {
-            colisionBox.SetActive(true);
         }
     }
     private void OnTriggerEnter2D(Collider2D collider)
@@ -143,7 +146,6 @@ public class RescueEvent : MonoBehaviour
 
         yield return new WaitForSeconds(2.0f);
         //ªˆê˜Y‚ªo‚Ä‚«‚Ä‰ï˜b‚·‚é
-        colisionBox.SetActive(false);
         soundManager.PlaySe(doorSound);
         Seiitirou.transform.position = new Vector2(35,71);
         yield return new WaitForSeconds(0.5f);
@@ -172,9 +174,7 @@ public class RescueEvent : MonoBehaviour
         GameManager.m_instance.stopSwitch = false;
         PlayerManager.m_instance.m_speed = 0.075f;
         Homing.m_instance.speed = 2;
-
-        soundManager.PlayBgm(ChasedBGM);//BGM‚É‚µ‚Ä‚é‚Æ—¬‚ê‚È‚¢
-        soundManager.PlaySe(ChasedBGM);
+        soundManager.PlayBgm(ChasedBGM);
 
         StopCoroutine(coroutine);
     }
@@ -219,7 +219,19 @@ public class RescueEvent : MonoBehaviour
     }
     IEnumerator SeiitirouLeave()
     {
-        while (Seiitirou.transform.position.y > 60)
+        while (Seiitirou.transform.position.y > 69.4)
+        {
+            yield return null;
+            Seiitirou.transform.Translate(new Vector3(0f, -0.05f, 0.0f * Time.deltaTime));
+        }
+        yield return new WaitForSeconds(0.3f);
+        while(Seiitirou.transform.position.x > 31)
+        {
+            yield return null;
+            Seiitirou.transform.Translate(new Vector3(-0.05f, 0f, 0.0f * Time.deltaTime));
+        }
+        yield return new WaitForSeconds(0.2f);
+        while(Seiitirou.transform.position.y > 60)
         {
             yield return null;
             Seiitirou.transform.Translate(new Vector3(0f, -0.05f, 0.0f * Time.deltaTime));

@@ -29,6 +29,7 @@ public class DiaryMessage : MonoBehaviour
     public Image panel;
     private IEnumerator coroutine;
     private bool isContacted = false;
+    public Homing homing;
     public SoundManager soundManager;
     public PlayerManager playerManager;
     public AudioClip pageSound;
@@ -55,10 +56,10 @@ public class DiaryMessage : MonoBehaviour
     }
     private void Update()
     {
-        //話しかける(条件は動的なものと今回のboolのように恒常的なもので分けた方がいい)
-        if(Input.GetKeyDown(KeyCode.Return))
+        if(isContacted == true && coroutine == null && diaryWindow.gameObject.activeInHierarchy == false)
         {
-            if(isContacted == true && coroutine == null && diaryWindow.gameObject.activeInHierarchy == false)
+            //話しかける(条件は動的なものと今回のboolのように恒常的なもので分けた方がいい)
+            if(Input.GetKeyDown(KeyCode.Return))
             {
                 coroutine = WindowAction();
                 PlayerManager.m_instance.m_speed = 0;
@@ -80,7 +81,6 @@ public class DiaryMessage : MonoBehaviour
     IEnumerator WindowAction()
     {
         //話しかけるとまずテキストで表示。
-        
         window.gameObject.SetActive(true);
         for(int i = 0; i < messages.Count; ++i)
         {
@@ -113,6 +113,8 @@ public class DiaryMessage : MonoBehaviour
         diaryWindow.gameObject.SetActive(false);
         playerManager.playerstate = PlayerManager.PlayerState.Idol;
         coroutine = null;
+        target.text = "";
+        homing.speed = 2;
         yield break;
     }
 }

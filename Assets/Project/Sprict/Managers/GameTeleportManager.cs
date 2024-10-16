@@ -16,7 +16,8 @@ public class GameTeleportManager : MonoBehaviour
 
     // この変数は確率を起こすために乱数を格納するもの
     public int enemyRndNum;
-    private float enemyTeleportTime;
+    public float enemyTeleportTime;
+    private bool enemyTeleportSwitch = false;
     public GameObject enemy;
     public GameObject Yukito;
     public static bool chasedTime;
@@ -27,7 +28,7 @@ public class GameTeleportManager : MonoBehaviour
     public DifficultyLevelManager difficultyLevelManager;
     public SoundManager soundManager;
 
-    private void Start()
+    private void Update()
     {
 
     }
@@ -132,7 +133,6 @@ public class GameTeleportManager : MonoBehaviour
         if(chasedTime == true)
         {
             Invoke("OnEnemyTeleport", 0f);
-            Debug.Log("zzz");
         }
     }
     /*nullチェックもしておりエネミーがいなくなるとはじかれる。また、この関数は
@@ -154,18 +154,12 @@ public class GameTeleportManager : MonoBehaviour
                     {
                         enemy.gameObject.SetActive(false);
                         //左は向かう先、右辺はプレイヤーが踏んだTPの位置
-                        Enemy.transform.position = enemyTeleportAddress.playerPosition;
                         enemyTeleportTime += Time.deltaTime;
-                        Debug.Log(enemyTeleportTime);
-                        //EnemyがTPする前に自分がTPしたらTP先が更新されるのを防ぐ→TPして0.5秒は
-                        //流れとして、敵が同時に同じ位置にTPする。SetActiveが偽になってる。0.5fしたら真にする。
-                        if(enemyTeleportTime > 0.5)
+                        if(enemyTeleportTime > 0)
                         {
-                            Invoke("EnemyEmerge", 1f);
-                        }
-                        else
-                        {
+                            if(enemyTeleportSwitch) CancelInvoke("EnemyEmerge");
                             Invoke("EnemyEmerge", 2f);
+                            enemyTeleportSwitch = true;
                         }
                     }
                     else
@@ -177,15 +171,12 @@ public class GameTeleportManager : MonoBehaviour
                     if(Homing.m_instance.enemyCount < 12.0f)
                     {
                         enemy.gameObject.SetActive(false);
-                        Enemy.transform.position = enemyTeleportAddress.playerPosition;
                         enemyTeleportTime += Time.deltaTime;
-                        if(enemyTeleportTime > 0.5)
+                        if(enemyTeleportTime > 0)
                         {
-                            Invoke("EnemyEmerge", 1f);
-                        }
-                        else
-                        {
+                            if(enemyTeleportSwitch) CancelInvoke("EnemyEmerge");
                             Invoke("EnemyEmerge", 2f);
+                            enemyTeleportSwitch = true;
                         }
                     }
                     else
@@ -197,15 +188,12 @@ public class GameTeleportManager : MonoBehaviour
                     if(Homing.m_instance.enemyCount < 16.0f)
                     {
                         enemy.gameObject.SetActive(false);
-                        Enemy.transform.position = enemyTeleportAddress.playerPosition;
                         enemyTeleportTime += Time.deltaTime;
-                        if(enemyTeleportTime > 0.5)
+                        if(enemyTeleportTime > 0)
                         {
-                            Invoke("EnemyEmerge", 1f);
-                        }
-                        else
-                        {
+                            if(enemyTeleportSwitch) CancelInvoke("EnemyEmerge");
                             Invoke("EnemyEmerge", 2f);
+                            enemyTeleportSwitch = true;
                         }
                     }
                     else
@@ -217,15 +205,12 @@ public class GameTeleportManager : MonoBehaviour
                     if(Homing.m_instance.enemyCount < 15.0f)
                     {
                         enemy.gameObject.SetActive(false);
-                        Enemy.transform.position = enemyTeleportAddress.playerPosition;
                         enemyTeleportTime += Time.deltaTime;
-                        if(enemyTeleportTime > 0.5)
+                        if(enemyTeleportTime > 0)
                         {
-                            Invoke("EnemyEmerge", 1f);
-                        }
-                        else
-                        {
+                            if(enemyTeleportSwitch) CancelInvoke("EnemyEmerge");
                             Invoke("EnemyEmerge", 2f);
+                            enemyTeleportSwitch = true;
                         }
                     }
                     else
@@ -249,6 +234,8 @@ public class GameTeleportManager : MonoBehaviour
         if(!enemy.activeSelf)
         {
             enemy.gameObject.SetActive(true);
+            enemyTeleportSwitch = false;
+            Enemy.transform.position = enemyTeleportAddress.playerPosition;
             enemyTeleportTime = 0;
         }
     }
@@ -261,30 +248,34 @@ public class GameTeleportManager : MonoBehaviour
                 {
                     Enemy.gameObject.SetActive(true);
                     soundManager.PlayBgm(toevent3.chasedBGM);
+                    Homing.m_instance.enemyCount += 0.1f;
                     chasedTime = true;
                 }
                 break;
             case DifficultyLevelManager.DifficultyLevel.Normal:
-                if(enemyRndNum > 85 && Homing.m_instance.enemyEmerge)
+                if(enemyRndNum > 87 && Homing.m_instance.enemyEmerge)
                 {
                     Enemy.gameObject.SetActive(true);
                     soundManager.PlayBgm(toevent3.chasedBGM);
+                    Homing.m_instance.enemyCount += 0.1f;
                     chasedTime = true;
                 }
                 break;
             case DifficultyLevelManager.DifficultyLevel.Hard:
-                if(enemyRndNum > 78 && Homing.m_instance.enemyEmerge)
+                if(enemyRndNum > 82 && Homing.m_instance.enemyEmerge)
                 {
                     Enemy.gameObject.SetActive(true);
                     soundManager.PlayBgm(toevent3.chasedBGM);
+                    Homing.m_instance.enemyCount += 0.1f;
                     chasedTime = true;
                 }
                 break;
             case DifficultyLevelManager.DifficultyLevel.Extreme:
-                if(enemyRndNum > 62 && Homing.m_instance.enemyEmerge)
+                if(enemyRndNum > 74 && Homing.m_instance.enemyEmerge)
                 {
                     Enemy.gameObject.SetActive(true);
                     soundManager.PlayBgm(toevent3.chasedBGM);
+                    Homing.m_instance.enemyCount += 0.1f;
                     chasedTime = true;
                 }
                 break;

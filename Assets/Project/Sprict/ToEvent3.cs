@@ -56,7 +56,7 @@ public class ToEvent3 : MonoBehaviour
             if(collider.gameObject.tag.Equals("Player"))
             {
                 MessageManager.message_instance.MessageWindowActive(messages,names,images);
-                //audioSound.PlayOneShot(eatSound);
+                soundManager.PlaySe(eatSound);
                 event3flag = true; //ƒtƒ‰ƒO‚ª—§‚Â
                 GameTeleportManager.chasedTime = true;
                 homing.enemyEmerge = true; // “G‚ªoŒ»‚·‚é
@@ -69,7 +69,7 @@ public class ToEvent3 : MonoBehaviour
         {
             if(!firstchased)
             {
-                //audioSound.Stop();
+                soundManager.StopSe(eatSound);
                 soundManager.PlayBgm(chasedBGM);
                 firstchased = true;
             }
