@@ -78,7 +78,6 @@ public class GameManager : MonoBehaviour
         }
         else if(stopSwitch == true)
         {
-            Debug.Log(stopSwitch);
             playerManager.playerstate = PlayerManager.PlayerState.Stop;
         }
         else playerManager.playerstate = PlayerManager.PlayerState.Idol;
@@ -216,7 +215,7 @@ public class GameManager : MonoBehaviour
         //デバック用
         if(Input.GetKeyDown(KeyCode.F1))
         {
-            player.transform.position = new Vector3(32,65,0);
+            player.transform.position = new Vector3(-80,21,0);
         }
     }
     public void OnClickBackButton()

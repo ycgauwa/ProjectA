@@ -104,6 +104,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySe(AudioClip clip)
     {
+        Debug.Log(seAudioSource);
         if(clip == null)
         {
             return;
@@ -113,6 +114,9 @@ public class SoundManager : MonoBehaviour
     }
     public void StopSe(AudioClip clip)
     {
+        Debug.Log(seAudioSource);
+        Debug.Log(clip);
+        Debug.Log("aaaa");
         seAudioSource.clip = clip;
 
         if (clip == null)

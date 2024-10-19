@@ -468,7 +468,7 @@ public class EndingCase3 : MonoBehaviour
             yield return null; //ここで１フレーム待ってくれてる
         }
         messages2[0] = "なんとか生きて戻れたな。あんな思いするのはもうこりごりだ。";
-        messages2[1] = "にしても、タンスに張り付いてたみたいなこと言っていたがもし苦しさに負けて開けていたらと考えると恐ろしいな。";
+        messages2[1] = "にしても、タンスに張り付いてたみたいなこと言っていたが……もし苦しさに負けて開けていたらと考えると恐ろしいな。";
         for (int i = 0; i < messages2.Count; ++i)
         {
             window.gameObject.SetActive(true);

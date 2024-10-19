@@ -42,6 +42,12 @@ public class ToEvent2 : MonoBehaviour
     private List<string> names5;
     [SerializeField]
     private List<Sprite> images5;
+    [SerializeField]
+    private List<string> beforeMessages;
+    [SerializeField]
+    private List<string> beforeNames;
+    [SerializeField]
+    private List<Sprite> beforeImages;
     public Canvas window;
     public Text target;
     public Text nameText;
@@ -49,8 +55,11 @@ public class ToEvent2 : MonoBehaviour
     public static bool one;
     private IEnumerator coroutine;
     private bool isContacted = false;
+    public SoundManager soundManager;
     public AudioClip sound;
     public AudioClip doorSound;
+    public AudioClip flashSe;
+    public AudioClip suspiciousBgm;
     public Light2D light2D;
     public GameObject player;
     public GameObject[] friends;
@@ -62,7 +71,7 @@ public class ToEvent2 : MonoBehaviour
     public Item item;
     private bool playerCamera;
 
-    //イベント2のためのコルーチン。大枠の役割を果たしてくれる。
+    //効果音とBGMの追加。
     IEnumerator Event2()
     {
         yield return new WaitForSeconds(1);
@@ -87,10 +96,6 @@ public class ToEvent2 : MonoBehaviour
         {
             light2D = gameObject.GetComponent<Light2D>();
             coroutine = CreateCoroutine();
-            friends[0].transform.position = new Vector3(-77, 20, 0);
-            friends[1].transform.position = new Vector3(-83, 20, 0);
-            friends[2].transform.position = new Vector3(-83, 17, 0);
-            friends[3].transform.position = new Vector3(-78, 17, 0);
             PlayerManager.m_instance.m_speed = 0;
             // コルーチンの起動(下記説明2)
             StartCoroutine(coroutine);
@@ -112,14 +117,18 @@ public class ToEvent2 : MonoBehaviour
 
     IEnumerator CreateCoroutine()
     {
+
         inventry.Delete(item);
+        yield return OnAction6();
+        StartCoroutine("Blackout");
+        yield return new WaitForSeconds(1.5f);
         window.gameObject.SetActive(true);
 
         yield return OnAction();
 
         target.text = "";
         window.gameObject.SetActive(false);
-        GetComponent<AudioSource>().PlayOneShot(sound);
+        soundManager.PlaySe(sound);
        
         yield return new WaitForSeconds(2.0f);
         yield return Flash();
@@ -127,6 +136,8 @@ public class ToEvent2 : MonoBehaviour
         //startCoroutineではなくてyield　return を書いてあげると動く（yield returnの意味を調べておく）
         yield return new WaitForSeconds(3.0f);
         light2D.intensity = 1.0f;
+        soundManager.StopSe(flashSe);
+        soundManager.PlayBgm(suspiciousBgm);
         //cameraの処理
         Event2Camera();
 
@@ -140,7 +151,7 @@ public class ToEvent2 : MonoBehaviour
         
         cameraManager.girlCamera = true;
         yield return new WaitForSeconds(2.0f);
-        GetComponent<AudioSource>().PlayOneShot(doorSound);
+        soundManager.PlaySe(doorSound);
         yield return new WaitForSeconds(2.0f);
         
         guards.transform.position = new Vector3(-76, 5, 0);
@@ -160,6 +171,7 @@ public class ToEvent2 : MonoBehaviour
 
         girl.transform.position = new Vector3(0, 0, 0);
         light2D.intensity = 1.0f;
+        soundManager.StopSe(flashSe);
         window.gameObject.SetActive(true);
         yield return OnAction4();
 
@@ -167,7 +179,7 @@ public class ToEvent2 : MonoBehaviour
         window.gameObject.SetActive(false);
         
         yield return new WaitForSeconds(1.0f);
-
+        soundManager.StopBgm(suspiciousBgm);
         cameraManager.playerCamera = true;
         
         yield return new WaitForSeconds(1.0f);
@@ -177,7 +189,7 @@ public class ToEvent2 : MonoBehaviour
 
         target.text = "";
         window.gameObject.SetActive(false);
-        PlayerManager.m_instance.m_speed = 0.075f;
+        GameManager.m_instance.stopSwitch = false;
 
         StopCoroutine(coroutine);
         coroutine = null;
@@ -186,7 +198,7 @@ public class ToEvent2 : MonoBehaviour
     {
         light2D = gameObject.GetComponent<Light2D>();
         light2D.intensity = 1.0f;
-
+        soundManager.PlaySe(flashSe);
         while(light2D.intensity < 7.0f)
         {
             light2D.intensity += 0.1f;
@@ -257,76 +269,68 @@ public class ToEvent2 : MonoBehaviour
 
         for(int i = 0; i < messages2.Count; ++i)
         {
-            // 1フレーム分 処理を待機(下記説明1)
             yield return null;
-
-            // 会話をwindowのtextフィールドに表示
             showMessage(messages2[i], names2[i], images2[i]);
-
-
-            // キー入力を待機 (下記説明1)
             yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
-
         yield break;
-
     }
     IEnumerator OnAction3()
     {
-
         for(int i = 0; i < messages3.Count; ++i)
         {
-            // 1フレーム分 処理を待機(下記説明1)
             yield return null;
-
-            // 会話をwindowのtextフィールドに表示
             showMessage(messages3[i], names3[i], images3[i]);
-
-
-            // キー入力を待機 (下記説明1)
             yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
-
         yield break;
-
     }
     IEnumerator OnAction4()
     {
 
         for(int i = 0; i < messages4.Count; ++i)
         {
-            // 1フレーム分 処理を待機(下記説明1)
             yield return null;
-
-            // 会話をwindowのtextフィールドに表示
             showMessage(messages4[i], names4[i], images4[i]);
-
-
-            // キー入力を待機 (下記説明1)
             yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
-
         yield break;
-
     }
     IEnumerator OnAction5()
     {
-
         for(int i = 0; i < messages5.Count; ++i)
         {
-            // 1フレーム分 処理を待機(下記説明1)
             yield return null;
-
-            // 会話をwindowのtextフィールドに表示
             showMessage(messages5[i], names5[i], images5[i]);
-
-
-            // キー入力を待機 (下記説明1)
             yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
-
         yield break;
-
     }
-
+    IEnumerator OnAction6()
+    {
+        window.gameObject.SetActive(true);
+        for (int i = 0; i < beforeMessages.Count; ++i)
+        {
+            yield return null;
+            showMessage(beforeMessages[i], beforeNames[i], beforeImages[i]);
+            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
+        }
+        window.gameObject.SetActive(false);
+        yield break;
+    }
+    private IEnumerator Blackout()
+    {
+        light2D.intensity = 1.0f;
+        GameManager.m_instance.stopSwitch = true;
+        while (light2D.intensity > 0.01f)
+        {
+            light2D.intensity -= 0.012f;
+            yield return null; //ここで１フレーム待ってくれてる
+        }
+        friends[0].transform.position = new Vector3(-81, 19, 0);
+        friends[1].transform.position = new Vector3(-81, 21, 0);
+        friends[2].transform.position = new Vector3(-79, 21, 0);
+        friends[3].transform.position = new Vector3(-78, 20, 0);
+        light2D.intensity = 1.0f;
+    }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
@@ -38,6 +39,7 @@ public class Choice1 : MonoBehaviour
     public Image selection;
     public Button yes;
     public Button no;
+    public GameObject firstSelect;
     private IEnumerator coroutine;
     public Inventry inventry;
     public Item item;
@@ -112,6 +114,7 @@ public class Choice1 : MonoBehaviour
             showMessage(messages[i], names[i], image[i]);
             if(i == messages.Count - 1)
             {
+                EventSystem.current.SetSelectedGameObject(firstSelect);
                 Selectwindow.gameObject.SetActive(true);
                 selection.gameObject.SetActive(true);
                 isOpenSelect = true;
