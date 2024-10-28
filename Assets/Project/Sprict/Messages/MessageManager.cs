@@ -36,6 +36,7 @@ public class MessageManager : MonoBehaviour
 
         // windowI—¹
         target.text = "";
+        GameManager.m_instance.ImageErase(characterImage);
         window.gameObject.SetActive(false);
         Test1.messageSwitch = false;
         ItemGet2.messageSwitch = false;

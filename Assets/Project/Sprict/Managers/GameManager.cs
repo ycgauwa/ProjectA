@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public GameObject rescuePoint;
     public GameObject yukitoDead;
     public GameObject menuFirstSelect;
+    public GameObject gamemodeFirstSelect;
     public GameObject instructionFirstSelect;
     public GameObject instructionSecondSelect;
     public GameObject instructionThirdSelect;
@@ -38,15 +39,18 @@ public class GameManager : MonoBehaviour
     public Canvas optionCanvas;
     public Canvas gameoverWindow;
     public Canvas InstructionsCanvas;
+    public Canvas galleryCanvas;
     public Canvas messageCanvas;
     public Canvas diaryCanvas;
     public Canvas diary2Canvas;
+    public Image charaImage;
     public Image buttonPanel;
     public Image Instruction1;
     public Image Instruction2;
     public Image Instruction3;
     public Image Instruction4;
     public Image Instruction5;
+    public Sprite noneImage;
     public ItemDateBase itemDate;
     public Inventry inventry;
     public AudioClip cancel;
@@ -64,7 +68,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        EventSystem.current.SetSelectedGameObject(instructionFirstSelect);
+        EventSystem.current.SetSelectedGameObject(gamemodeFirstSelect);
         m_instance = this;
         postVolume.profile.TryGet(out vignette);
     }
@@ -253,7 +257,13 @@ public class GameManager : MonoBehaviour
         menuCanvas.gameObject.SetActive(false);
         optionCanvas.gameObject.SetActive(true);
     }
-   public void OnclickRetryButton()
+    public void OnclickGalleryButton()
+    {
+        soundManager.PlaySe(decision);
+        menuCanvas.gameObject.SetActive(false);
+        galleryCanvas.gameObject.SetActive(true);
+    }
+    public void OnclickRetryButton()
     {
         GameManager.m_instance.stopSwitch = false;
         if(homing.speed == 0)homing.speed = 2;
@@ -272,6 +282,7 @@ public class GameManager : MonoBehaviour
             soundManager.StopSe(rescueEvent.ChasedBGM);
             playerManager = seiitirou.AddComponent<PlayerManager>();
             playerManager = seiitirou.GetComponent<PlayerManager>();
+            playerManager.staminaMax = 300;
             playerManager.teleportManager = teleportManager;
             Rigidbody2D rb = seiitirou.GetComponent<Rigidbody2D>();
             rb.constraints = RigidbodyConstraints2D.None;
@@ -337,6 +348,7 @@ public class GameManager : MonoBehaviour
             menuCanvas.gameObject.SetActive(true);
             EventSystem.current.SetSelectedGameObject(menuFirstSelect);
             soundManager.PlaySe(cancel);
+            if (PlayerMessage.instance.firstActive == false) PlayerMessage.instance.firstActive = true;
         }
         else if (inventryCanvas.gameObject.activeSelf)
         {
@@ -348,6 +360,13 @@ public class GameManager : MonoBehaviour
         else if (optionCanvas.gameObject.activeSelf)
         {
             optionCanvas.gameObject.SetActive(false);
+            menuCanvas.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(menuFirstSelect);
+            soundManager.PlaySe(cancel);
+        }
+        else if (galleryCanvas.gameObject.activeSelf)
+        {
+            galleryCanvas.gameObject.SetActive(false);
             menuCanvas.gameObject.SetActive(true);
             EventSystem.current.SetSelectedGameObject(menuFirstSelect);
             soundManager.PlaySe(cancel);
@@ -393,6 +412,7 @@ public class GameManager : MonoBehaviour
             menuCanvas.gameObject.SetActive(true);
             EventSystem.current.SetSelectedGameObject(menuFirstSelect);
             soundManager.PlaySe(cancel);
+            if (PlayerMessage.instance.firstActive == false) PlayerMessage.instance.firstActive = true;
         }
         else if (Instruction2.gameObject.activeSelf)
         {
@@ -422,5 +442,9 @@ public class GameManager : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(instructionFourthSelect);
             soundManager.PlaySe(cancel);
         }
+    }
+    public void ImageErase(Image image)
+    {
+        charaImage.sprite = noneImage;
     }
 }

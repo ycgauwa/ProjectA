@@ -41,24 +41,20 @@ public class PlayerMessage : MonoBehaviour
         PlayerManager.m_instance.m_speed = 0;
         //やりたいことはメニューを閉じ終わった後にメッセージを閉じれる
         // コルーチンの起動(下記説明2)
-        playercoroutine = CreateCoroutine();
-        StartCoroutine(playercoroutine);
     }
     private IEnumerator CreateCoroutine()
     {
         yield return CanvasActive();
-        // window起動
-        window.gameObject.SetActive(true);
-        // 抽象メソッド呼び出し 詳細は子クラスで実装
+        yield return new WaitUntil(() => StartActive);
         yield return OnAction();
 
-        // window終了
         this.target.text = "";
         this.window.gameObject.SetActive(false);
 
         StopCoroutine(playercoroutine);
         playercoroutine = null;
         //StartActive = true;
+        GameManager.m_instance.stopSwitch = false;
         PlayerManager.m_instance.m_speed = 0.075f;
     }
     protected void showMessage(string message ,string name ,Sprite image)
@@ -74,11 +70,11 @@ public class PlayerMessage : MonoBehaviour
     }
     IEnumerator OnAction()
     {
+        window.gameObject.SetActive(true);
         for (int i = 0; i < Messages.Count; ++i)
         {
             // 1フレーム分 処理を待機(下記説明1)
             yield return null;
-
             if (StartActive == true)
             {
                 // 会話をwindowのtextフィールドに表示
@@ -88,19 +84,6 @@ public class PlayerMessage : MonoBehaviour
             {
                 showMessage(Messages2[i], names[i], image[i]);
             }
-            if (!Instruction.gameObject.activeSelf)
-            {
-                if (StartActive == true)
-                {
-                    // 会話をwindowのtextフィールドに表示
-                    showMessage(Messages[i], names[i], image[i]);
-                }
-                else
-                {
-                    showMessage(Messages2[i], names[i], image[i]);
-                }
-            }
-            // キー入力を待機 (下記説明1)
             yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
         }
 
@@ -116,7 +99,7 @@ public class PlayerMessage : MonoBehaviour
         }
         if (DemoImage.gameObject.activeSelf)
         {
-            PlayerManager.m_instance.m_speed = 0;
+            //GameManager.m_instance.stopSwitch = true;
             if (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return))
             {
                 DemoImage.gameObject.SetActive(false);

@@ -38,6 +38,7 @@ public class Homing : MonoBehaviour
         cr = GetComponentInChildren<NPCAnimationController>();
         isMove = true;
         rbody = GetComponent<Rigidbody2D>();
+        enemyCount = 0;
     }
     private void Update()
     {
@@ -56,7 +57,7 @@ public class Homing : MonoBehaviour
                 new Vector2(playerTr.position.x, playerTr.position.y),
                 speed * Time.deltaTime);
         }
-        if(speed > 0)
+        if(enemyEmerge == true && speed > 0)
         {
             enemyCount += Time.deltaTime;
         }
@@ -98,6 +99,7 @@ public class Homing : MonoBehaviour
     public void AppearChoice()
     {
         buttonPanel.gameObject.SetActive(true);
+        if (gameObject.activeSelf && rescueEvent.RescueSwitch == false) teleportManager.StopChased();
     }
 
     // 敵が一定の距離を動いた状態でプレイヤーがワープしたら追っかけてこなくなる

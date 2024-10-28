@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 //using UnityEditor.VersionControl;
@@ -68,10 +69,11 @@ public class DiaryMessage : MonoBehaviour
             }
         }
     }
-    protected void showMessage(string message, string name)
+    protected void showMessage(string message, string name, Sprite image)
     {
         target.text = message;
         nameText.text = name;
+        characterImage.sprite = image;
     }
     protected void showDiaryMessage(string message, string name)
     {
@@ -87,9 +89,11 @@ public class DiaryMessage : MonoBehaviour
             // 1フレーム分 処理を待機(下記説明1)
             yield return null;
             // 会話をwindowのtextフィールドに表示
-            showMessage(messages[i], names[i]);
+            showMessage(messages[i], names[i], image[i]);
             yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
+        target.text = "";
+        GameManager.m_instance.ImageErase(characterImage);
         window.gameObject.SetActive(false);
         
         //何回か押すとテキストが消えて、日記の表示がされる。
@@ -110,10 +114,11 @@ public class DiaryMessage : MonoBehaviour
             }
 
         }
+        sentence.text = "";
+        date.text = "";
         diaryWindow.gameObject.SetActive(false);
         playerManager.playerstate = PlayerManager.PlayerState.Idol;
         coroutine = null;
-        target.text = "";
         homing.speed = 2;
         yield break;
     }

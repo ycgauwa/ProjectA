@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
@@ -21,9 +22,11 @@ public class PlayerManager : MonoBehaviour
     public GameObject mainCamera;
     public Rigidbody2D m_Rigidbody;
     public GameObject enemy;
+    public Homing homing;
     public Text StaminaString;
     public Canvas choiceCanvas;
     public Image stairChoice;
+    public GameObject firstChoice;
     public bool canUp = false;
     public string stringtext = "";
     public enum PlayerState
@@ -74,8 +77,11 @@ public class PlayerManager : MonoBehaviour
     public void Dashing(int staminaConsume)
     {
         playerstate = PlayerState.Run;
-        stamina -= staminaConsume;
-        staminaIntensity += 0.005f;
+        if (homing.enemyCount >0.2f)
+        {
+            stamina -= staminaConsume;
+            staminaIntensity += 0.005f;
+        }
         
         if (0 < stamina) return;
 
@@ -239,6 +245,7 @@ public class PlayerManager : MonoBehaviour
             GameManager.m_instance.stopSwitch = true;
             choiceCanvas.gameObject.SetActive(true);
             stairChoice.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(firstChoice);
         }
         if (other.gameObject.CompareTag("School10"))
         {

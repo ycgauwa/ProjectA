@@ -48,13 +48,14 @@ public class EndingCase1 : MonoBehaviour
     private IEnumerator coroutine;
 
     //アンサーとして何を答えたか
-    public  bool answer;
+    public  int answerNum;
     private bool isOpenSelect = false;
     private bool isContacted = false;
     // Start is called before the first frame update
     void Start()
     {
-        answer = false;
+        answerNum = 0;
+        //0が初期値1が否定した後2肯定した後
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -78,17 +79,18 @@ public class EndingCase1 : MonoBehaviour
         {
             if(isContacted == true && coroutine == null)
             {
-                if(answer == true)
+                if (answerNum == 1)
                 {
                     coroutine = OnAction2();
                     PlayerManager.m_instance.m_speed = 0;
                     StartCoroutine(coroutine);
                 }
-                else
+                else if (answerNum == 0)
                 {
                     coroutine = OnAction();
                     StartCoroutine(coroutine);
                 }
+                else return;
             }
         }
     }
@@ -145,6 +147,7 @@ public class EndingCase1 : MonoBehaviour
     {
         //画面がどんどん暗くなっていき、真っ暗な間にTPしてる。TPするタイミングで移動音なんかを加えるとよい
         soundManager.PlaySe(decision);
+        answerNum = 2;
         StartCoroutine("Blackout");
         selection.gameObject.SetActive(false);
         Selectwindow.gameObject.SetActive(false);
@@ -157,7 +160,7 @@ public class EndingCase1 : MonoBehaviour
         soundManager.PlaySe(decision);
         selection.gameObject.SetActive(false);
         Selectwindow.gameObject.SetActive(false);
-        answer = true;
+        answerNum = 1;
         isOpenSelect = false;
         soundManager.StopBgm(tensionBGM);
     }

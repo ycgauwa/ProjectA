@@ -135,6 +135,7 @@ public class Choice1 : MonoBehaviour
                 yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
             }
             inventry.Add(item);
+            item.checkPossession = true;
         }
         else
         {
@@ -146,7 +147,7 @@ public class Choice1 : MonoBehaviour
                 yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
             }
         }
-        
+        target.text = "";
         window.gameObject.SetActive(false);
         PlayerManager.m_instance.m_speed = 0.075f;
         coroutine = null;
@@ -169,6 +170,7 @@ public class Choice1 : MonoBehaviour
             // キー入力を待機 (下記説明1)
             yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
+        target.text = "";
         window.gameObject.SetActive(false);
         PlayerManager.m_instance.m_speed = 0.075f;
         coroutine = null;

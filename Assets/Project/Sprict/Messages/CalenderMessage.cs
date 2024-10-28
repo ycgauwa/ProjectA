@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CalenderMessage : MonoBehaviour
@@ -28,6 +29,7 @@ public class CalenderMessage : MonoBehaviour
     public Image characterImage;
     public Image calender;
     public Image TVScreen;
+    public GameObject firstSelect;
     private IEnumerator coroutine;
     public bool messageSwitch = false;
     private bool isContacted = false;
@@ -105,12 +107,13 @@ public class CalenderMessage : MonoBehaviour
         yield return OnAction();
         // windowèIóπ
         target.text = "";
+        GameManager.m_instance.ImageErase(characterImage);
         window.gameObject.SetActive(false);
+        Homing.m_instance.speed = 2.0f;
 
         StopCoroutine(coroutine);
         coroutine = null;
-        PlayerManager.m_instance.m_speed = 0.075f;
-        Homing.m_instance.speed = 2f;
+        GameManager.m_instance.stopSwitch = false;
     }
 
     protected void showMessage(string message, string name, Sprite image)
@@ -135,6 +138,8 @@ public class CalenderMessage : MonoBehaviour
         }
         calCanvas.gameObject.SetActive(true);
         calender.gameObject.SetActive(true);
+        if(firstSelect == null)yield break;
+        EventSystem.current.SetSelectedGameObject(firstSelect);
         yield break;
 
     }
@@ -143,23 +148,21 @@ public class CalenderMessage : MonoBehaviour
         if (isContacted && messageSwitch == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
             messageSwitch = true;
-            PlayerManager.m_instance.m_speed = 0;
-            Homing.m_instance.speed = 0f;
+            GameManager.m_instance.stopSwitch = true;
             coroutine = CreateCoroutine();
             StartCoroutine(coroutine);
         }
         if (calender.gameObject.activeSelf)
         {
-            PlayerManager.m_instance.m_speed = 0;
-            Homing.m_instance.speed = 0f;
+            GameManager.m_instance.stopSwitch = true;
             Time.timeScale = 0.0f;
             if(Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return))
             {
                 calender.gameObject.SetActive(false);
                 calCanvas.gameObject.SetActive(false);
                 Time.timeScale = 1.0f;
-                PlayerManager.m_instance.m_speed = 0.075f;
-                Homing.m_instance.speed = 2f;
+                Homing.m_instance.speed = 2.0f;
+                GameManager.m_instance.stopSwitch = false;
             }
         }
     }

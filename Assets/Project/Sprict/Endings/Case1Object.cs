@@ -56,12 +56,12 @@ public class Case1Object : MonoBehaviour
         {
             if(isContacted == true)
             {
-                if(endingCase1.answer == true)
+                if(endingCase1.answerNum == 1)
                 {
                     messageSwitch = true;
                     StartCoroutine("Sleep");
                 }
-                else if(endingCase1.answer == false)
+                else if(endingCase1.answerNum == 0)
                 {
                     messageSwitch = true;
                     MessageManager.message_instance.MessageWindowActive(messages, names, image);
@@ -105,6 +105,7 @@ public class Case1Object : MonoBehaviour
         endingCase1.player.transform.position = new Vector3(30, -35, 0);
         soundManager.StopBgm(ending1Sound);
         GameManager.m_instance.stopSwitch = false;
-        endingCase1.answer = false;
+        EndingGalleryManager.m_gallery.endingGallerys[0].sprite = end1retry.sprite;
+        endingCase1.answerNum = 0;
     }
 }

@@ -86,7 +86,7 @@ public class EndingCase2 : MonoBehaviour
         {
             if (isContacted == true && coroutine == null)
             {
-                if (homing.enemyCount > 0 && messageSwitch == false)
+                if (homing.enemyCount > 0.2 && messageSwitch == false)
                 {
                     messageSwitch = true;
                     MessageManager.message_instance.MessageWindowActive(messages5, names5, image5);
@@ -174,10 +174,17 @@ public class EndingCase2 : MonoBehaviour
         light2D.intensity = 1.0f;
         GameManager.m_instance.stopSwitch = true;
         //‰æ‘œ‚Ì–¾‚é‚³‚ð‰º‚°‚Ä^‚ÁˆÃ‚É‚·‚éB
-        yield return new WaitForSeconds(3.0f);
+        Debug.Log("test1");
+        while (light2D.intensity > 0.01f)
+        {
+            Debug.Log("test2");
+            light2D.intensity -= 0.012f;
+            yield return null;
+        }
         end2Image2.gameObject.SetActive(false);
         end2Image3.gameObject.SetActive(true);
         light2D.intensity = 1.0f;
+        Debug.Log("test3");
         yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         for (int i = 0; i < messages4.Count; ++i)
         {
@@ -185,9 +192,14 @@ public class EndingCase2 : MonoBehaviour
             showMessage(messages4[i], names4[i], image4[i]);
             yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
-        yield return new WaitForSeconds(2.0f);
+        while (light2D.intensity > 0.01f)
+        {
+            light2D.intensity -= 0.012f;
+            yield return null;
+        }
         yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         end2retry.gameObject.SetActive(true);
+        Debug.Log("test4");
         end2Image3.gameObject.SetActive(false);
         window.gameObject.SetActive(false);
         coroutine = null;

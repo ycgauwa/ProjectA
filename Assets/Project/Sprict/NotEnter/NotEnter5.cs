@@ -49,7 +49,7 @@ public class NotEnter5 : MonoBehaviour
                 itemDateBase.Items5Delete();
                 if (enemy.gameObject.activeSelf)
                 {
-                    enemy.gameObject.SetActive(false);
+                    homing.teleportManager.StopChased();
                     homing.enemyEmerge = false;
                 }
 

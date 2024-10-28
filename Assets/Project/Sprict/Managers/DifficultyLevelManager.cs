@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class DifficultyLevelManager : MonoBehaviour
 {
     public Homing homing;
     public Canvas DifficultyCanvas;
+    public GameObject firstSelect;
     public bool ActiveCanvas = false;
     public enum DifficultyLevel
     {
@@ -30,18 +32,21 @@ public class DifficultyLevelManager : MonoBehaviour
     {
         difficultyLevel = DifficultyLevel.Easy;
         DifficultyCanvas.gameObject.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(firstSelect);
         ActiveCanvas = true;
     }
     public void NormalButton()
     {
         difficultyLevel = DifficultyLevel.Normal;
         DifficultyCanvas.gameObject.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(firstSelect);
         ActiveCanvas = true;
     }
     public void HardButton()
     {
         difficultyLevel = DifficultyLevel.Hard;
         DifficultyCanvas.gameObject.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(firstSelect);
         ActiveCanvas = true;
     }
     public void ExtremeButton()

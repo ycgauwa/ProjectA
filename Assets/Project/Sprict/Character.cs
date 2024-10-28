@@ -16,11 +16,13 @@ public class Character : ScriptableObject
     public List<Sprite> characterImages4;
     public List<Sprite> itemGiveImage1;
     public List<Sprite> itemGiveImage2;
+    public List<Sprite> itemGivedImage;
     public List<string> messageTexts1;
     public List<string> messageTexts2;
     public List<string> messageTexts3;
     public List<string> messageTexts4;
     public List<string> itemGiveMessage1;
     public List<string> itemGiveMessage2;
+    public List<string> itemGivedMessage;
 
 }

@@ -13,7 +13,6 @@ public class DemoFinish : MonoBehaviour
     public PlayerMessage playerMessage;
     public string proMessage;
     public string norMessage;
-    public GameObject firstSelect1;
     public GameObject firstSelect2;
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -25,7 +24,6 @@ public class DemoFinish : MonoBehaviour
     void Awake()
     {
         gameModeCanvas.gameObject.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(firstSelect1);
     }
 
     // Update is called once per frame

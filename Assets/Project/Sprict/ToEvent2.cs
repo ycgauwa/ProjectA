@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
+using UnityEngine.Playables;
 
 public class ToEvent2 : MonoBehaviour
 {
@@ -66,10 +67,13 @@ public class ToEvent2 : MonoBehaviour
     public GameObject girl;
     public GameObject guards;
     public GameObject eventcamera;
+    public GameObject gameMenuUI;
     public float speed;
     public Inventry inventry;
     public Item item;
     private bool playerCamera;
+    public PlayableDirector playableDirector;
+    public Animator cameraAnimator;
 
     //効果音とBGMの追加。
     IEnumerator Event2()
@@ -94,11 +98,13 @@ public class ToEvent2 : MonoBehaviour
     {
         if(isContacted && coroutine == null && Input.GetButton("Submit") && Input.GetKeyDown(KeyCode.Return))
         {
-            light2D = gameObject.GetComponent<Light2D>();
-            coroutine = CreateCoroutine();
-            PlayerManager.m_instance.m_speed = 0;
-            // コルーチンの起動(下記説明2)
-            StartCoroutine(coroutine);
+            if (item.checkPossession)
+            {
+                light2D = gameObject.GetComponent<Light2D>();
+                item.checkPossession = false;
+                coroutine = CreateCoroutine();
+                StartCoroutine(coroutine);
+            }
         }
         if(eventcamera.transform.position.y > 6 && cameraManager.playerCamera == false)
         {
@@ -114,7 +120,6 @@ public class ToEvent2 : MonoBehaviour
             eventcamera.transform.Translate(new Vector3(0.07f, 0.0f, 0.0f * Time.deltaTime * speed));
         }
     }
-
     IEnumerator CreateCoroutine()
     {
 
@@ -122,6 +127,7 @@ public class ToEvent2 : MonoBehaviour
         yield return OnAction6();
         StartCoroutine("Blackout");
         yield return new WaitForSeconds(1.5f);
+        light2D.intensity = 1.0f;
         window.gameObject.SetActive(true);
 
         yield return OnAction();
@@ -179,15 +185,26 @@ public class ToEvent2 : MonoBehaviour
         window.gameObject.SetActive(false);
         
         yield return new WaitForSeconds(1.0f);
+        StartCoroutine("Blackout2");
+        yield return new WaitForSeconds(1.5f);
         soundManager.StopBgm(suspiciousBgm);
         cameraManager.playerCamera = true;
-        
-        yield return new WaitForSeconds(1.0f);
+        cameraAnimator.enabled = true;
+        light2D.intensity = 1.0f;
+        gameMenuUI.SetActive(false);
+        playableDirector.Play();
+        yield return new WaitForSeconds(70f);
+        StartCoroutine("Blackout2");
+        yield return new WaitForSeconds(1.5f);
+        cameraAnimator.enabled = false;
+        light2D.intensity = 1.0f;
+        gameMenuUI.SetActive(true);
 
         window.gameObject.SetActive(true);
         yield return OnAction5();
 
         target.text = "";
+        GameManager.m_instance.ImageErase(characterImage);
         window.gameObject.SetActive(false);
         GameManager.m_instance.stopSwitch = false;
 
@@ -206,8 +223,6 @@ public class ToEvent2 : MonoBehaviour
                               //yield return null をつけるからもともとのメソッドを
                               //void じゃなくて IEnumerator にしなきゃいけない。
         }
-        
-        
         /*Light2D x = light2D;
         x.intensity = 1.0f;
         while(x.intensity < 7.0f)
@@ -331,6 +346,15 @@ public class ToEvent2 : MonoBehaviour
         friends[1].transform.position = new Vector3(-81, 21, 0);
         friends[2].transform.position = new Vector3(-79, 21, 0);
         friends[3].transform.position = new Vector3(-78, 20, 0);
+    }
+    private IEnumerator Blackout2()
+    {
         light2D.intensity = 1.0f;
+        GameManager.m_instance.stopSwitch = true;
+        while (light2D.intensity > 0.01f)
+        {
+            light2D.intensity -= 0.012f;
+            yield return null; //ここで１フレーム待ってくれてる
+        }
     }
 }

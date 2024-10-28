@@ -68,6 +68,7 @@ public class EndingCase3 : MonoBehaviour
     public Image enemyImage;
     public Image end3Image;
     public Image end4Image;
+    public Color color;
     public bool isOpenSelect = false;
     private int questionCount = 0;
     private int debuffPercent;
@@ -80,11 +81,13 @@ public class EndingCase3 : MonoBehaviour
     public Homing homing;
     public GameTeleportManager gameTeleportManager;
     public SoundManager soundManager;
+    public AudioClip ending3Sound;
     public AudioClip chestsSound;
     public AudioClip decision;
     public AudioClip heartSound;
     public AudioClip shortnessSound;
     public AudioClip sighSound;
+    public AudioClip eatSound;
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.tag.Equals("Player"))
@@ -269,6 +272,7 @@ public class EndingCase3 : MonoBehaviour
             else if (debuffPercent <= 7)
             {
                 yield return debuffEvent();
+                if (debuffcount == 3) yield break;
             }
             soundManager.PlayBgm(shortnessSound);
             yield return new WaitForSeconds(2f);
@@ -295,6 +299,7 @@ public class EndingCase3 : MonoBehaviour
             else if (debuffPercent <= 13)
             {
                 yield return debuffEvent();
+                if (debuffcount == 3) yield break;
             }
             soundManager.PlayBgm(shortnessSound);
             yield return new WaitForSeconds(2f);
@@ -321,6 +326,7 @@ public class EndingCase3 : MonoBehaviour
             else if (debuffPercent <= 20)
             {
                 yield return debuffEvent();
+                if (debuffcount == 3) yield break;
             }
             soundManager.PlayBgm(shortnessSound);
             yield return new WaitForSeconds(2f);
@@ -347,6 +353,7 @@ public class EndingCase3 : MonoBehaviour
             else if (debuffPercent <= 30)
             {
                 yield return debuffEvent();
+                if (debuffcount == 3) yield break;
             }
             soundManager.PlayBgm(sighSound);
             yield return new WaitForSeconds(2f);
@@ -376,6 +383,7 @@ public class EndingCase3 : MonoBehaviour
             else if (debuffPercent <= 40)
             {
                 yield return debuffEvent();
+                if (debuffcount == 3) yield break;
             }
             yield return new WaitForSeconds(2f);
             hidingMessages[0] = "（いつまであいつはいるんだ！？まさか出られないのを知って遊んでるのか！？）";
@@ -436,20 +444,62 @@ public class EndingCase3 : MonoBehaviour
             for (int i = 0; i < debuffMessages.Count; ++i)
             {
                 debuffMessages[0] = "「息が……！酸素が吸えない！短時間でこんなことになるのか！？不味い……頭が……真っ白に…。」";
-                debuffMessages[1] = "状態異常　酸欠Ⅲとなりました。あなたは呼吸が出来なくなり死にます。";
+                debuffMessages[1] = "状態異常　酸欠Ⅲとなりました。あなたは呼吸が出来なくなりました。";
                 window.gameObject.SetActive(true);
                 yield return null;
-                // 会話をwindowのtextフィールドに表示
                 showMessage(debuffMessages[i], debuffNames[i], debuffImage[i]);
                 yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
             }
+            window.gameObject.SetActive(false);
             coroutine = null;
+            Selectwindow.gameObject.SetActive(false);
+            selection2.gameObject.SetActive(false);
+            StartCoroutine("Suffocation");
         }
         yield break;
     }
+    private IEnumerator Suffocation()
+    {
+        GameManager.m_instance.stopSwitch = true;
+        soundManager.StopBgm(shortnessSound);
+        soundManager.StopBgm(heartSound);
+        soundManager.PlayBgm(ending3Sound);
+        for (int i = 0; i < end3Messages.Count; ++i)
+        {
+            window.gameObject.SetActive(true);
+            yield return null;
+            // 会話をwindowのtextフィールドに表示
+            showMessage(end3Messages[i], end3Names[i], end3Images[i]);
+            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
+        }
+        target.text = "";
+        window.gameObject.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        end3Canvas.gameObject.SetActive(true);
+        isContacted = false;
+        yield break;
+    }
+    public void OnclickEnd3Retry()
+    {
+        end3Canvas.gameObject.SetActive(false);
+        light2D.intensity = 1.0f;
+        soundManager.StopBgm(ending3Sound);
+        GameManager.m_instance.OnclickRetryButton();
+        EndingGalleryManager.m_gallery.endingGallerys[2].sprite = end3Image.sprite;
+        this.gameObject.SetActive(false);
+    }
+    public void OnclickEnd4Retry()
+    {
+        end4Image.gameObject.SetActive(false);
+        end4Canvas.gameObject.SetActive(false);
+        light2D.intensity = 1.0f;
+        soundManager.StopSe(eatSound);
+        GameManager.m_instance.OnclickRetryButton();
+        EndingGalleryManager.m_gallery.endingGallerys[3].sprite = end4Image.sprite;
+        this.gameObject.SetActive(false);
+    }
     private IEnumerator ExitEvent()
     {
-        Debug.Log("exit");
         soundManager.StopBgm(shortnessSound);
         soundManager.StopBgm(sighSound);
         for (int i = 0; i < exitMessages.Count; ++i)
@@ -467,8 +517,8 @@ public class EndingCase3 : MonoBehaviour
             light2D.intensity += 0.01f;
             yield return null; //ここで１フレーム待ってくれてる
         }
-        messages2[0] = "なんとか生きて戻れたな。あんな思いするのはもうこりごりだ。";
-        messages2[1] = "にしても、タンスに張り付いてたみたいなこと言っていたが……もし苦しさに負けて開けていたらと考えると恐ろしいな。";
+        messages2[0] = "「なんとか生きて戻れたな。あんな思いするのはもうこりごりだ。」";
+        messages2[1] = "「にしても、タンスに張り付いてたみたいなこと言っていたが……もし苦しさに負けて開けていたらと考えると恐ろしいな。」";
         for (int i = 0; i < messages2.Count; ++i)
         {
             window.gameObject.SetActive(true);
@@ -487,40 +537,50 @@ public class EndingCase3 : MonoBehaviour
         //画像が出て死にます。
         soundManager.StopBgm(shortnessSound);
         soundManager.StopBgm(sighSound);
-        soundManager.PlaySe(chestsSound);
         for (int i = 0; i < end3Messages.Count; ++i)
         {
             window.gameObject.SetActive(true);
             yield return null;
-            // 会話をwindowのtextフィールドに表示
-            showMessage(end3Messages[i], end3Names[i], end3Images[i]);
+            showMessage(end4Messages[i], end4Names[i], end4Images[i]);
             yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
         soundManager.StopBgm(heartSound);
-        end3Canvas.gameObject.SetActive(true);
-        end3Image.gameObject.SetActive(true);
-        while (light2D.intensity < 1f)
+        soundManager.PlaySe(chestsSound);
+        color = enemyImage.GetComponent<Image>().color;
+        end4Canvas.gameObject.SetActive(true);
+        enemyImage.gameObject.SetActive(true);
+        color.a = 0f;
+        enemyImage.GetComponent<Image>().color = color;
+        while (color.a < 1)
         {
-            light2D.intensity += 0.006f;
-            yield return null; //ここで１フレーム待ってくれてる
+            color.a += 0.006f;
+            enemyImage.color = color;
+            yield return null;
         }
         yield return new WaitForSeconds(2f);
-        end3Messages[0] = "……はは。嘘だろ";
-        end3Messages[1] = "きっと悪い夢だ。こんな悪夢覚めなきゃおかしいな。目を瞑ったらきっと……。";
-        for (int i = 0; i < end3Messages.Count; ++i)
+        end4Messages[0] = "……はは。嘘だろ";
+        end4Messages[1] = "きっと悪い夢だ。こんな悪夢覚めなきゃおかしいな。目を瞑ったらきっと……。";
+        for (int i = 0; i < end4Messages.Count; ++i)
         {
             window.gameObject.SetActive(true);
             yield return null;
-            // 会話をwindowのtextフィールドに表示
-            showMessage(end3Messages[i], end3Names[i], end3Images[i]);
+            showMessage(end4Messages[i], end4Names[i], end4Images[i]);
             yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
-        while (light2D.intensity > 0.01f)
+        while (color.a > 0.01f)
         {
-            light2D.intensity -= 0.01f;
-            yield return null; //ここで１フレーム待ってくれてる
+            color.a -= 0.007f;
+            enemyImage.color = color;
+            yield return null;
         }
         //食われる音。ここからエンディング画像出す
+        soundManager.PlaySe(eatSound);
+        yield return new WaitForSeconds(2f);
+        end4Image.gameObject.SetActive(true);
+        target.text = "";
+        enemyImage.gameObject.SetActive(false);
+        window.gameObject.SetActive(false);
+
         yield break;
     }
 }

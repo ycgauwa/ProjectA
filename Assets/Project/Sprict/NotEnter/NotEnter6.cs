@@ -96,10 +96,13 @@ public class NotEnter6 : MonoBehaviour
         }
         if(getKey  == true)
         {
-            GameManager.m_instance.stopSwitch = true;
+            if (collider.gameObject.tag.Equals("Player"))
+            {
+                 GameManager.m_instance.stopSwitch = true;
             coroutine = ToEvent5();
             StartCoroutine(coroutine);
             ToEvent5();
+            }
         }
 
         if(collider.gameObject.tag.Equals("Seiitirou"))
@@ -137,15 +140,11 @@ public class NotEnter6 : MonoBehaviour
             soundManager.PlayBgm(fearBGM);
             yield return new WaitForSeconds(0.5f);
             cameraSwitch = true;
-            yield return Red();
+            //yield return Red();
 
 
             //window.gameObject.SetActive(true);
             //yield return OnMessage2();
-
-            target.text = "";
-            window.gameObject.SetActive(false);
-
             PlayerManager.m_instance.m_speed = 0.075f;
             Homing.m_instance.speed = 2;
             StopCoroutine(coroutine);
@@ -155,6 +154,7 @@ public class NotEnter6 : MonoBehaviour
         {
             window.gameObject.SetActive(true);
             yield return OnMessage2();
+            target.text = "";
             window.gameObject.SetActive(false);
             PlayerManager.m_instance.m_speed = 0.075f;
             Homing.m_instance.speed = 2;
@@ -173,7 +173,9 @@ public class NotEnter6 : MonoBehaviour
         rescued = true;
         yield return OnMessage3();
         soundManager.StopBgm(fearBGM);
-        if(itemDateBase.items[8].checkPossession == true)
+        target.text = "";
+        window.gameObject.SetActive(false);
+        if (itemDateBase.items[8].checkPossession == true)
         {
             itemSprictW.ItemDelete();
         }
@@ -222,12 +224,13 @@ public class NotEnter6 : MonoBehaviour
     }
     IEnumerator OnMessage3()
     {
-        for(int i = 0; i < messages3.Count; ++i)
+        for(int i = 0; i < rescuemessages.Count; ++i)
         {
             yield return null;
             showMessage(rescuemessages[i], rescuenames[i], rescueimages[i]);
             yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
         }
+        if (cameraSwitch == true) cameraSwitch = false;
         yield break;
     }
     private IEnumerator Red()

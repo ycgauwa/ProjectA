@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47c5cf7a1069f43acc6cfe09d5d118, type: 3}
   m_Name: Mitsuki Item
   m_EditorClassIdentifier: 
-  name: Mitsuki Item
-  icon: {fileID: 21300000, guid: 8845fee47ab684c4386ced1a53415cd8, type: 3}
-  itemText: "\u30A2\u30A4\u30C6\u30E0\u30C6\u30AD\u30B9\u30C8"
-  checkPossession: 1
+  name: "\u5145\u5E0C\u306E\u5FA1\u5B88"
+  icon: {fileID: 21300000, guid: 1509f9e462a412e42bcbd90e94a37595, type: 3}
+  itemText: "\u5145\u5E0C\u304B\u3089\u8CB0\u3063\u305F\u5FA1\u5B88\u3002\u4F55\u304B\u5F79\u306B\u7ACB\u3064\u304B\u3082\u77E5\u308C\u306A\u3044"
+  checkPossession: 0
   selectedItem: 0

@@ -15,9 +15,12 @@ public class NotEnter2 : MonoBehaviour
     private List<string> messages;
     [SerializeField]
     private List<string> names;
+    [SerializeField]
+    private List<Sprite> images;
     public Canvas window;
     public Text target;
     public Text nameText;
+    public Image characterImage;
     private IEnumerator coroutine;
     public GameObject player;
     // Start is called before the first frame update
@@ -58,10 +61,11 @@ public class NotEnter2 : MonoBehaviour
 
 
     }
-    protected void showMessage(string message, string name)
+    protected void showMessage(string message, string name, Sprite image)
     {
         this.target.text = message;
         this.nameText.text = name;
+        characterImage.sprite = image;
     }
 
     IEnumerator OnAction()
@@ -73,7 +77,7 @@ public class NotEnter2 : MonoBehaviour
             yield return null;
 
             // 会話をwindowのtextフィールドに表示
-            showMessage(messages[i], names[i]);
+            showMessage(messages[i], names[i], images[i]);
 
 
             // キー入力を待機 (下記説明1)

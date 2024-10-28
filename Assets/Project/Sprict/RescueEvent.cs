@@ -25,6 +25,12 @@ public class RescueEvent : MonoBehaviour
     private List<string> names3;
     [SerializeField]
     private List<Sprite> images3;
+    [SerializeField]
+    private List<string> firstDeathMessages;
+    [SerializeField]
+    private List<string> firstDeathNames;
+    [SerializeField]
+    private List<Sprite> firstDeathImages;
     public Image characterImage;
     public Canvas window;
     public Text target;
@@ -43,6 +49,7 @@ public class RescueEvent : MonoBehaviour
     public GameObject Player;
     public GameObject yukitoProfile;
     public GameObject seiitirouProfile;
+    public static bool messageSwitch = false;
     private bool SeiitirouMove;
     public bool RescueSwitch;
     private IEnumerator coroutine;
@@ -80,6 +87,11 @@ public class RescueEvent : MonoBehaviour
         // リトライボタンを押すと自動的に例の場所に戻される。
         if (GameManager.m_instance.deathCount == 1)
         {
+            if (messageSwitch == false)
+            {
+                messageSwitch = true;
+                MessageManager.message_instance.MessageWindowActive(firstDeathMessages, firstDeathNames, firstDeathImages);
+            }
             light2D.intensity = 0.8f;
         }
         else if (GameManager.m_instance.deathCount == 2)
