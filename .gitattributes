@@ -1,3 +1,7 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+<<<<<<< HEAD
 *.resS filter=lfs diff=lfs merge=lfs -text
+=======
+ビルド/怨嗟の村_Data/sharedasset1.asset.resS filter=lfs diff=lfs merge=lfs -text
+>>>>>>> 500a9c54917ce7c2c0b5f088ee93b10f16add18d
