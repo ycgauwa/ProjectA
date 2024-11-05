@@ -1,18 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameTeleportManager : MonoBehaviour
 {
     [SerializeField] private Homing Enemy = null;
-    
+
     //TeleportAddress型の変数、であり初期値はnull
     //これが本当にTeleportAddress型なのか確認するそしてなぜそっちじゃなくてこっちのスプリクトでかくのか？
     private TeleportAddress enemyTeleportAddress = null;
-
-    //テレポートまでの時間を設定する変数
-    [SerializeField] private float enemyTeleportTimer;
 
     // この変数は確率を起こすために乱数を格納するもの
     public int enemyRndNum;
@@ -21,6 +15,7 @@ public class GameTeleportManager : MonoBehaviour
     public GameObject enemy;
     public GameObject Yukito;
     public static bool chasedTime;
+    private bool enemyStartTPTime;
     public AudioClip minnkaDoor;
     public AudioClip schoolDoor;
     public AudioClip bathDoor;
@@ -30,7 +25,15 @@ public class GameTeleportManager : MonoBehaviour
 
     private void Update()
     {
-
+        if(PlayerManager.m_instance.playerstate != PlayerManager.PlayerState.Talk && PlayerManager.m_instance.playerstate != PlayerManager.PlayerState.Stop && chasedTime == true)
+        {
+            enemyTeleportTime += Time.deltaTime;
+            if(enemyStartTPTime == true && enemyTeleportTime > 2.0f)
+            {
+                Invoke("OnEnemyTeleport", 0f);
+                enemyStartTPTime = false;
+            }
+        }
     }
     /// <summary>
     /// この配列はテレポートのタグと位置をまとめたものであるこの配列がまとめられている
@@ -132,7 +135,10 @@ public class GameTeleportManager : MonoBehaviour
         // 敵がいようがいまいがTPしてしまう。→敵から追いかけられているときだけTPする。
         if(chasedTime == true)
         {
-            Invoke("OnEnemyTeleport", 0f);
+            enemy.gameObject.SetActive(false);
+            if(enemyTeleportTime > 0f)
+                enemyTeleportTime = 0;
+            enemyStartTPTime = true;
         }
     }
     /*nullチェックもしておりエネミーがいなくなるとはじかれる。また、この関数は
@@ -153,14 +159,10 @@ public class GameTeleportManager : MonoBehaviour
                     if(Homing.m_instance.enemyCount < 10.0f)
                     {
                         enemy.gameObject.SetActive(false);
-                        //左は向かう先、右辺はプレイヤーが踏んだTPの位置
                         enemyTeleportTime += Time.deltaTime;
-                        if(enemyTeleportTime > 0)
-                        {
-                            if(enemyTeleportSwitch) CancelInvoke("EnemyEmerge");
-                            Invoke("EnemyEmerge", 2f);
-                            enemyTeleportSwitch = true;
-                        }
+                        if(enemyTeleportSwitch) CancelInvoke("EnemyEmerge");
+                        Invoke("EnemyEmerge", 0f);
+                        enemyTeleportSwitch = true;
                     }
                     else
                     {
@@ -172,12 +174,9 @@ public class GameTeleportManager : MonoBehaviour
                     {
                         enemy.gameObject.SetActive(false);
                         enemyTeleportTime += Time.deltaTime;
-                        if(enemyTeleportTime > 0)
-                        {
-                            if(enemyTeleportSwitch) CancelInvoke("EnemyEmerge");
-                            Invoke("EnemyEmerge", 2f);
-                            enemyTeleportSwitch = true;
-                        }
+                        if(enemyTeleportSwitch) CancelInvoke("EnemyEmerge");
+                        Invoke("EnemyEmerge", 0f);
+                        enemyTeleportSwitch = true;
                     }
                     else
                     {
@@ -189,12 +188,9 @@ public class GameTeleportManager : MonoBehaviour
                     {
                         enemy.gameObject.SetActive(false);
                         enemyTeleportTime += Time.deltaTime;
-                        if(enemyTeleportTime > 0)
-                        {
-                            if(enemyTeleportSwitch) CancelInvoke("EnemyEmerge");
-                            Invoke("EnemyEmerge", 2f);
-                            enemyTeleportSwitch = true;
-                        }
+                        if(enemyTeleportSwitch) CancelInvoke("EnemyEmerge");
+                        Invoke("EnemyEmerge", 0f);
+                        enemyTeleportSwitch = true;
                     }
                     else
                     {
@@ -295,11 +291,11 @@ public class GameTeleportManager : MonoBehaviour
     {
         for(int i = 0; i < teleports.Length; i++)
         {
-            if(teleports[i].tag==orderTag)
+            if(teleports[i].tag == orderTag)
             {
-                return teleports[i]; 
+                return teleports[i];
             }
-            else if (teleports[i].name == orderTag)
+            else if(teleports[i].name == orderTag)
             {
                 return teleports[i];
             }
@@ -308,9 +304,9 @@ public class GameTeleportManager : MonoBehaviour
     }
     public TeleportAddress FindTeleportName(string orderName)
     {
-        for (int i = 0; i < teleports.Length; i++)
+        for(int i = 0; i < teleports.Length; i++)
         {
-            if (teleports[i].name == orderName)
+            if(teleports[i].name == orderName)
             {
                 return teleports[i];
             }

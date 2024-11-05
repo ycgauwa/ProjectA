@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class NotEnter3 : MonoBehaviour
@@ -22,7 +23,7 @@ public class NotEnter3 : MonoBehaviour
         {
             if(collider.gameObject.tag.Equals("Player"))
             {
-                MessageManager.message_instance.MessageWindowActive(messages, names, images);
+                MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
             }
         }
         // イベントが終わった後にTPできるようにしたい

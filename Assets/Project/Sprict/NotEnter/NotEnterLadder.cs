@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class NotEnterLadder : MonoBehaviour
@@ -24,7 +25,6 @@ public class NotEnterLadder : MonoBehaviour
     public GameObject player;
     public ToEvent3 toevent3;
     private bool isContacted = false;
-    public static bool messageSwitch = false;
     public SoundManager soundManager;
     public AudioClip ladderSound;
     private void OnTriggerEnter2D(Collider2D collider)
@@ -45,17 +45,12 @@ public class NotEnterLadder : MonoBehaviour
     }
     private void Update()
     {
-        if (isContacted && messageSwitch == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
+        if (isContacted && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
-            if (toevent3.event3flag == false)
-            {
-                messageSwitch = true;
-                MessageManager.message_instance.MessageWindowActive(messages, names, images);
-            }
+            if (toevent3.event3flag == false) MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
             else if (toevent3.event3flag == true)
             {
-                messageSwitch = true;
-                MessageManager.message_instance.MessageWindowActive(messages2, names2, images2);
+                MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken).Forget();
                 gameObject.name = "Ladder1-1";
             }
         }

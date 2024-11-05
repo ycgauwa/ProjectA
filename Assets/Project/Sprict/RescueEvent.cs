@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
+using Cysharp.Threading.Tasks;
 
 public class RescueEvent : MonoBehaviour
 {
@@ -90,7 +91,7 @@ public class RescueEvent : MonoBehaviour
             if (messageSwitch == false)
             {
                 messageSwitch = true;
-                MessageManager.message_instance.MessageWindowActive(firstDeathMessages, firstDeathNames, firstDeathImages);
+                MessageManager.message_instance.MessageWindowActive(firstDeathMessages, firstDeathNames, firstDeathImages, ct: destroyCancellationToken).Forget();
             }
             light2D.intensity = 0.8f;
         }

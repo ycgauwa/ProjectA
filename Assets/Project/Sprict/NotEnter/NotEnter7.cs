@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class NotEnter7 : MonoBehaviour
@@ -50,30 +51,17 @@ public class NotEnter7 : MonoBehaviour
             {
                 this.gameObject.tag = "Untagged";
                 if (GameManager.m_instance.deathCount == 0)
-                {
-                    // 死んだ回数によって内容が変わる。（ex「開けてください。お願いします……もう何も見えないんです助けてください……痛いのはもう嫌だ……」）
-                    MessageManager.message_instance.MessageWindowActive(messages, names, images);
-                }
+                    MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
                 else if (GameManager.m_instance.deathCount == 1)
-                {
-                    MessageManager.message_instance.MessageWindowActive(messages1, names1, images1);
-                }
+                    MessageManager.message_instance.MessageWindowActive(messages1, names1, images1, ct: destroyCancellationToken).Forget();
                 else if (GameManager.m_instance.deathCount == 2)
-                {
-                    MessageManager.message_instance.MessageWindowActive(messages2, names2, images2);
-                }
+                    MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken).Forget();
                 else if (GameManager.m_instance.deathCount == 3)
-                {
-                    MessageManager.message_instance.MessageWindowActive(messages3, names3, images3);
-                }
+                    MessageManager.message_instance.MessageWindowActive(messages3, names3, images3, ct: destroyCancellationToken).Forget();
                 else if (GameManager.m_instance.deathCount == 4)
-                {
-                    MessageManager.message_instance.MessageWindowActive(messages4, names4, images4);
-                }
+                    MessageManager.message_instance.MessageWindowActive(messages4, names4, images4, ct: destroyCancellationToken).Forget();
                 else if (GameManager.m_instance.deathCount == 5)
-                {
-                    MessageManager.message_instance.MessageWindowActive(messages5, names5, images5);
-                }
+                    MessageManager.message_instance.MessageWindowActive(messages5, names5, images5, ct: destroyCancellationToken).Forget();
             }
         }
         if(collider.gameObject.tag.Equals("Seiitirou"))

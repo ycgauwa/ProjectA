@@ -6,6 +6,8 @@ using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 using UnityEngine.Playables;
+using Cysharp.Threading.Tasks;
+using System;
 
 public class ToEvent2 : MonoBehaviour
 {
@@ -54,7 +56,6 @@ public class ToEvent2 : MonoBehaviour
     public Text nameText;
     public Image characterImage;
     public static bool one;
-    private IEnumerator coroutine;
     private bool isContacted = false;
     public SoundManager soundManager;
     public AudioClip sound;
@@ -75,35 +76,27 @@ public class ToEvent2 : MonoBehaviour
     public PlayableDirector playableDirector;
     public Animator cameraAnimator;
 
-    //効果音とBGMの追加。
-    IEnumerator Event2()
-    {
-        yield return new WaitForSeconds(1);
-        coroutine = CreateCoroutine();
-        // コルーチンの起動(下記説明2)
-        StartCoroutine(coroutine);
-
-    }
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        isContacted = collider.gameObject.tag.Equals("Player");
+        if(collider.gameObject.tag.Equals("Player"))
+            isContacted = true;
     }
 
     // colliderをもつオブジェクトの領域外にでたとき(下記で説明1)
     private void OnTriggerExit2D(Collider2D collider)
     {
-        isContacted = !collider.gameObject.tag.Equals("Player");
+        if(collider.gameObject.tag.Equals("Player"))
+            isContacted = false;
     }
     private void FixedUpdate()
     {
-        if(isContacted && coroutine == null && Input.GetButton("Submit") && Input.GetKeyDown(KeyCode.Return))
+        if(isContacted == true  && Input.GetButton("Submit") && Input.GetKeyDown(KeyCode.Return))
         {
             if (item.checkPossession)
             {
                 light2D = gameObject.GetComponent<Light2D>();
                 item.checkPossession = false;
-                coroutine = CreateCoroutine();
-                StartCoroutine(coroutine);
+                CreateCoroutine().Forget();
             }
         }
         if(eventcamera.transform.position.y > 6 && cameraManager.playerCamera == false)
@@ -120,98 +113,94 @@ public class ToEvent2 : MonoBehaviour
             eventcamera.transform.Translate(new Vector3(0.07f, 0.0f, 0.0f * Time.deltaTime * speed));
         }
     }
-    IEnumerator CreateCoroutine()
+    async UniTask CreateCoroutine()
     {
-
         inventry.Delete(item);
-        yield return OnAction6();
-        StartCoroutine("Blackout");
-        yield return new WaitForSeconds(1.5f);
+        await MessageManager.message_instance.MessageWindowOnceActive(beforeMessages, beforeNames, beforeImages, ct: destroyCancellationToken);
+
+        await Blackout();
+        await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         light2D.intensity = 1.0f;
         window.gameObject.SetActive(true);
 
-        yield return OnAction();
+        await MessageManager.message_instance.MessageWindowOnceActive(messages, names, images, ct: destroyCancellationToken);
 
         target.text = "";
         window.gameObject.SetActive(false);
         soundManager.PlaySe(sound);
-       
-        yield return new WaitForSeconds(2.0f);
-        yield return Flash();
-        
+
+        await UniTask.Delay(TimeSpan.FromSeconds(2.0f));
+        await Flash();
+
         //startCoroutineではなくてyield　return を書いてあげると動く（yield returnの意味を調べておく）
-        yield return new WaitForSeconds(3.0f);
+        await UniTask.Delay(TimeSpan.FromSeconds(2.0f));
         light2D.intensity = 1.0f;
         soundManager.StopSe(flashSe);
         soundManager.PlayBgm(suspiciousBgm);
         //cameraの処理
         Event2Camera();
 
-        yield return new WaitForSeconds(6.0f);
+        await UniTask.Delay(TimeSpan.FromSeconds(6.0f));
 
         window.gameObject.SetActive(true);
-        yield return OnAction2();
+        await MessageManager.message_instance.MessageWindowOnceActive(messages2, names2, images2, ct: destroyCancellationToken);
         
         target.text = "";
         window.gameObject.SetActive(false);
         
         cameraManager.girlCamera = true;
-        yield return new WaitForSeconds(2.0f);
+        await UniTask.Delay(TimeSpan.FromSeconds(2.0f));
         soundManager.PlaySe(doorSound);
-        yield return new WaitForSeconds(2.0f);
+        await UniTask.Delay(TimeSpan.FromSeconds(2.0f));
         
         guards.transform.position = new Vector3(-76, 5, 0);
         cameraManager.girlCamera = false;
-        
-        yield return new WaitForSeconds(3.0f);
+
+        await UniTask.Delay(TimeSpan.FromSeconds(3.0f));
         
         window.gameObject.SetActive(true);
-        yield return OnAction3();
+        await MessageManager.message_instance.MessageWindowOnceActive(messages3, names3, images3, ct: destroyCancellationToken);
 
         target.text = "";
         window.gameObject.SetActive(false);
-        
-        yield return Flash();
 
-        yield return new WaitForSeconds(3.0f);
+        await Flash();
+
+        await UniTask.Delay(TimeSpan.FromSeconds(3.0f));
 
         girl.transform.position = new Vector3(0, 0, 0);
         light2D.intensity = 1.0f;
         soundManager.StopSe(flashSe);
         window.gameObject.SetActive(true);
-        yield return OnAction4();
+        await MessageManager.message_instance.MessageWindowOnceActive(messages4, names4, images4, ct: destroyCancellationToken);
 
         target.text = "";
         window.gameObject.SetActive(false);
-        
-        yield return new WaitForSeconds(1.0f);
-        StartCoroutine("Blackout2");
-        yield return new WaitForSeconds(1.5f);
+        await UniTask.Delay(TimeSpan.FromSeconds(1f));
+        await Blackout2();
+        await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         soundManager.StopBgm(suspiciousBgm);
         cameraManager.playerCamera = true;
         cameraAnimator.enabled = true;
         light2D.intensity = 1.0f;
         gameMenuUI.SetActive(false);
         playableDirector.Play();
-        yield return new WaitForSeconds(70f);
-        StartCoroutine("Blackout2");
-        yield return new WaitForSeconds(1.5f);
+        await UniTask.Delay(TimeSpan.FromSeconds(68f));
+        await Blackout2();
+        await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         cameraAnimator.enabled = false;
         light2D.intensity = 1.0f;
         gameMenuUI.SetActive(true);
 
         window.gameObject.SetActive(true);
-        yield return OnAction5();
+        await MessageManager.message_instance.MessageWindowOnceActive(messages5, names5, images5, ct: destroyCancellationToken);
 
         target.text = "";
         GameManager.m_instance.ImageErase(characterImage);
         window.gameObject.SetActive(false);
         GameManager.m_instance.stopSwitch = false;
-
-        StopCoroutine(coroutine);
-        coroutine = null;
     }
-    private IEnumerator Flash()
+    private async UniTask Flash()
     {
         light2D = gameObject.GetComponent<Light2D>();
         light2D.intensity = 1.0f;
@@ -219,9 +208,7 @@ public class ToEvent2 : MonoBehaviour
         while(light2D.intensity < 7.0f)
         {
             light2D.intensity += 0.1f;
-            yield return null;//ここで１フレーム待ってくれてる
-                              //yield return null をつけるからもともとのメソッドを
-                              //void じゃなくて IEnumerator にしなきゃいけない。
+            await UniTask.Delay(1);
         }
         /*Light2D x = light2D;
         x.intensity = 1.0f;
@@ -265,62 +252,6 @@ public class ToEvent2 : MonoBehaviour
         characterImage.sprite = image;
     }
 
-
-    IEnumerator OnAction()
-    {
-        for(int i = 0; i < messages.Count; ++i)
-        {
-            // 1フレーム分 処理を待機(下記説明1)
-            yield return null;
-            // 会話をwindowのtextフィールドに表示
-            showMessage(messages[i], names[i], images[i]);
-            // キー入力を待機 (下記説明1)
-            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
-        }
-        yield break;
-    }
-    IEnumerator OnAction2()
-    {
-
-        for(int i = 0; i < messages2.Count; ++i)
-        {
-            yield return null;
-            showMessage(messages2[i], names2[i], images2[i]);
-            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
-        }
-        yield break;
-    }
-    IEnumerator OnAction3()
-    {
-        for(int i = 0; i < messages3.Count; ++i)
-        {
-            yield return null;
-            showMessage(messages3[i], names3[i], images3[i]);
-            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
-        }
-        yield break;
-    }
-    IEnumerator OnAction4()
-    {
-
-        for(int i = 0; i < messages4.Count; ++i)
-        {
-            yield return null;
-            showMessage(messages4[i], names4[i], images4[i]);
-            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
-        }
-        yield break;
-    }
-    IEnumerator OnAction5()
-    {
-        for(int i = 0; i < messages5.Count; ++i)
-        {
-            yield return null;
-            showMessage(messages5[i], names5[i], images5[i]);
-            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
-        }
-        yield break;
-    }
     IEnumerator OnAction6()
     {
         window.gameObject.SetActive(true);
@@ -333,28 +264,28 @@ public class ToEvent2 : MonoBehaviour
         window.gameObject.SetActive(false);
         yield break;
     }
-    private IEnumerator Blackout()
+    private async UniTask Blackout()
     {
         light2D.intensity = 1.0f;
         GameManager.m_instance.stopSwitch = true;
         while (light2D.intensity > 0.01f)
         {
             light2D.intensity -= 0.012f;
-            yield return null; //ここで１フレーム待ってくれてる
+            await UniTask.Delay(1);
         }
         friends[0].transform.position = new Vector3(-81, 19, 0);
         friends[1].transform.position = new Vector3(-81, 21, 0);
         friends[2].transform.position = new Vector3(-79, 21, 0);
         friends[3].transform.position = new Vector3(-78, 20, 0);
     }
-    private IEnumerator Blackout2()
+    private async UniTask Blackout2()
     {
         light2D.intensity = 1.0f;
         GameManager.m_instance.stopSwitch = true;
         while (light2D.intensity > 0.01f)
         {
             light2D.intensity -= 0.012f;
-            yield return null; //ここで１フレーム待ってくれてる
+            await UniTask.Delay(1);
         }
     }
 }

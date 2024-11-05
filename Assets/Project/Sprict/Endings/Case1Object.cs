@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Cysharp.Threading.Tasks;
 
 public class Case1Object : MonoBehaviour
 {
@@ -31,8 +32,8 @@ public class Case1Object : MonoBehaviour
     public AudioClip ending1Sound;
     public AudioClip decision;
     public GameObject firstSelect;
-    public static bool messageSwitch = false;
     private bool isContacted = false;
+    private bool endImageActive = false;
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -52,33 +53,20 @@ public class Case1Object : MonoBehaviour
     private void Update()//入力チェックはUpdateに書く
     {
         //メッセージウィンドウ閉じるときはこのメソッドを
-        if(isContacted && messageSwitch == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
+        if(isContacted == true && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
-            if(isContacted == true)
-            {
-                if(endingCase1.answerNum == 1)
-                {
-                    messageSwitch = true;
-                    StartCoroutine("Sleep");
-                }
-                else if(endingCase1.answerNum == 0)
-                {
-                    messageSwitch = true;
-                    MessageManager.message_instance.MessageWindowActive(messages, names, image);
-                }
-            }
+            isContacted = false;
+            if(endingCase1.answerNum == 1) StartCoroutine("Sleep");
+            else if(endingCase1.answerNum == 0) MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken).Forget();
         }
         //ここでメッセージをすべて出し終わったら画面を切り替えたい。
-        if(endWindow.gameObject.activeSelf)
+        if(endWindow.gameObject.activeSelf && MessageManager.message_instance.talking == false)
         {
-            if(messageSwitch == false && isContacted == false)
+            end1retry.gameObject.SetActive(true);
+            if(end1Image.gameObject.activeSelf)
             {
-                end1retry.gameObject.SetActive(true);
-                if (end1Image.gameObject.activeSelf)
-                {
-                    EventSystem.current.SetSelectedGameObject(firstSelect);
-                    end1Image.gameObject.SetActive(false);
-                }
+                EventSystem.current.SetSelectedGameObject(firstSelect);
+                end1Image.gameObject.SetActive(false);
             }
         }
     }
@@ -94,9 +82,8 @@ public class Case1Object : MonoBehaviour
         soundManager.PlayBgm(ending1Sound);
         light2D.intensity = 1.0f;
         endWindow.gameObject.SetActive(true);
-        messageSwitch = true;
-        MessageManager.message_instance.MessageWindowActive(messages2, names2, image2);
-        isContacted = false;
+        MessageManager.message_instance.MessageWindowActive(messages2, names2, image2, ct: destroyCancellationToken).Forget();
+        endImageActive = true;
     }
     public void OnclickEnd1Retry()
     {
@@ -106,6 +93,7 @@ public class Case1Object : MonoBehaviour
         soundManager.StopBgm(ending1Sound);
         GameManager.m_instance.stopSwitch = false;
         EndingGalleryManager.m_gallery.endingGallerys[0].sprite = end1retry.sprite;
+        EndingGalleryManager.m_gallery.endingFlag[0] = true;
         endingCase1.answerNum = 0;
     }
 }

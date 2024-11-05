@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Cysharp.Threading.Tasks;
 
 public class EndingCase2 : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class EndingCase2 : MonoBehaviour
     public Image end2Image2;
     public Image end2Image3;
     public Image end2retry;
+    public Color color;
     public SoundManager soundManager;
     public Homing homing;
     public AudioClip decision;
@@ -57,7 +59,6 @@ public class EndingCase2 : MonoBehaviour
     public static bool messageSwitch = false;
     private bool isContacted = false;
     public bool answer;
-    private bool isOpenSelect = false;
     public GameObject firstSelect;
     public GameObject firstSelect2;
 
@@ -67,18 +68,14 @@ public class EndingCase2 : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.tag.Equals("Player"))
-        {
             isContacted = true;
-        }
     }
 
     // colliderをもつオブジェクトの領域外にでたとき(下記で説明1)
     private void OnTriggerExit2D(Collider2D collider)
     {
         if (collider.gameObject.tag.Equals("Player"))
-        {
             isContacted = false;
-        }
     }
     private void Update()//入力チェックはUpdateに書く
     {
@@ -89,73 +86,20 @@ public class EndingCase2 : MonoBehaviour
                 if (homing.enemyCount > 0.2 && messageSwitch == false)
                 {
                     messageSwitch = true;
-                    MessageManager.message_instance.MessageWindowActive(messages5, names5, image5);
+                    MessageManager.message_instance.MessageWindowActive(messages5, names5, image5, ct: destroyCancellationToken).Forget();
                 }
                 else if (answer == true)
-                {
-                    coroutine = OnAction2();
-                    StartCoroutine(coroutine);
-                }
+                    MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken).Forget();
                 else
-                {
-                    coroutine = OnAction();
-                    StartCoroutine(coroutine);
-                }
+                    MessageManager.message_instance.MessageSelectWindowActive(messages2, names2, image2, Selectwindow, selection, firstSelect, ct: destroyCancellationToken).Forget();
             }
         }
-        
-        //ここでメッセージをすべて出し終わったら画面を切り替えたい。
-        /*if (endWindow.gameObject.activeSelf)
-        {
-            if (messageSwitch == false && isContacted == false)
-            {
-                end2retry.gameObject.SetActive(true);
-                end2Image.gameObject.SetActive(false);
-            }
-        }*/
     }
     protected void showMessage(string message, string name, Sprite image)
     {
-        this.target.text = message;
-        this.nameText.text = name;
+        target.text = message;
+        nameText.text = name;
         characterImage.sprite = image;
-    }
-    IEnumerator OnAction()
-    {
-        window.gameObject.SetActive(true);
-        for (int i = 0; i < messages2.Count; ++i)
-        {
-            yield return null;
-            showMessage(messages2[i], names2[i], image2[i]);
-            if (i == messages2.Count - 1)
-            {
-                Selectwindow.gameObject.SetActive(true);
-                selection.gameObject.SetActive(true);
-                EventSystem.current.SetSelectedGameObject(firstSelect);
-                isOpenSelect = true;
-                break;
-            }
-            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
-        }
-        yield return new WaitUntil(() => !isOpenSelect);
-        target.text = "";
-        yield break;
-    }
-    IEnumerator OnAction2()
-    {
-        window.gameObject.SetActive(true);
-
-        for (int i = 0; i < messages.Count; ++i)
-        {
-            // 1フレーム分 処理を待機(下記説明1)
-            yield return null;
-            showMessage(messages[i], names[i], image[i]);
-            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
-        }
-        window.gameObject.SetActive(false);
-        coroutine = null;
-        target.text = "";
-        yield break;
     }
     private IEnumerator Blackout()
     {
@@ -167,24 +111,19 @@ public class EndingCase2 : MonoBehaviour
             if (i == messages3.Count - 1)
             {
                 end2Image2.gameObject.SetActive(true);
+                color.a = 0f;
                 break;
             }
             yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
-        light2D.intensity = 1.0f;
+        light2D.intensity = 0f;
+        color = end2Image3.GetComponent<Image>().color;
         GameManager.m_instance.stopSwitch = true;
+        yield return new WaitForSeconds(2f);
+        yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         //画像の明るさを下げて真っ暗にする。
-        Debug.Log("test1");
-        while (light2D.intensity > 0.01f)
-        {
-            Debug.Log("test2");
-            light2D.intensity -= 0.012f;
-            yield return null;
-        }
         end2Image2.gameObject.SetActive(false);
         end2Image3.gameObject.SetActive(true);
-        light2D.intensity = 1.0f;
-        Debug.Log("test3");
         yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         for (int i = 0; i < messages4.Count; ++i)
         {
@@ -192,16 +131,16 @@ public class EndingCase2 : MonoBehaviour
             showMessage(messages4[i], names4[i], image4[i]);
             yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
-        while (light2D.intensity > 0.01f)
+        window.gameObject.SetActive(false);
+        while(color.a > 0.01f)
         {
-            light2D.intensity -= 0.012f;
+            color.a -= 0.004f;
+            end2Image3.color = color;
             yield return null;
         }
         yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         end2retry.gameObject.SetActive(true);
-        Debug.Log("test4");
         end2Image3.gameObject.SetActive(false);
-        window.gameObject.SetActive(false);
         coroutine = null;
         GameManager.m_instance.stopSwitch = false;
     }
@@ -211,6 +150,12 @@ public class EndingCase2 : MonoBehaviour
         endWindow.gameObject.SetActive(false);
         soundManager.StopBgm(ending2Sound);
         GameManager.m_instance.stopSwitch = false;
+        //if(GameManager.m_instance.ToEvent3.firstchased == true)
+        //    GameManager.m_instance.OnclickRetryButton();
+        GameManager.m_instance.player.transform.position = new Vector2(69, -46);
+        light2D.intensity = 1f;
+        EndingGalleryManager.m_gallery.endingGallerys[1].sprite = end2retry.sprite;
+        EndingGalleryManager.m_gallery.endingFlag[1] = true;
     }
     public void End2SelectYes()
     {
@@ -221,7 +166,6 @@ public class EndingCase2 : MonoBehaviour
         selection.gameObject.SetActive(false);
         Selectwindow.gameObject.SetActive(false);
         answer = true;
-        isOpenSelect = false;
     }
     public void End2SelectNo()
     {
@@ -231,6 +175,6 @@ public class EndingCase2 : MonoBehaviour
         Selectwindow.gameObject.SetActive(false);
         answer = true;
         coroutine = null;
-        isOpenSelect = false;
+        MessageManager.message_instance.isOpenSelect = false;
     }
 }

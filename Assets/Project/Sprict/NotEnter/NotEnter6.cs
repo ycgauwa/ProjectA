@@ -1,5 +1,8 @@
+using System;
+using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,6 +54,7 @@ public class NotEnter6 : MonoBehaviour
     public Image characterImage;
     public Image redScreen;
     public Canvas choicePanel;
+    public Image notEnter6;
 
     public bool getKey;
     public bool toevent5;
@@ -76,51 +80,38 @@ public class NotEnter6 : MonoBehaviour
     public GameObject player;
     public GameObject seiitirou;
     public GameObject enemy;
+    public GameObject firstSelection;
+    private CancellationTokenSource heartSoundCTS;
 
     private void Start()
     {
         redScreen.color = Color.clear;
+        heartSoundCTS = new CancellationTokenSource();
     }
-    private void Update()
+    private async void OnTriggerEnter2D(Collider2D collider)
     {
-
-    }
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if(getKey == false)
-        {
-            if(collider.gameObject.tag.Equals("Player"))
-            {
-                MessageManager.message_instance.MessageWindowActive(messages, names, images);
-            }
-        }
-        if(getKey  == true)
+        if(getKey == false && collider.gameObject.tag.Equals("Player")) MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
+        else if(getKey  == true)
         {
             if (collider.gameObject.tag.Equals("Player"))
             {
-                 GameManager.m_instance.stopSwitch = true;
-            coroutine = ToEvent5();
-            StartCoroutine(coroutine);
-            ToEvent5();
+                GameManager.m_instance.stopSwitch = true;
+                await ToEvent5();
             }
         }
-
         if(collider.gameObject.tag.Equals("Seiitirou"))
         {
             if(underKey.checkPossession == false)
             {
-                MessageManager.message_instance.MessageWindowActive(messages4, names4, images4);
+                MessageManager.message_instance.MessageWindowActive(messages4, names4, images4, ct: destroyCancellationToken).Forget();
                 seiitirouFlag = true;
                 enemy.transform.position = new Vector2(0, 0);
                 enemy.gameObject.SetActive(false);
             }
-            else
-            {
-                seiitirou.transform.position = new Vector3(128, 25, 0);
-            }
+            else seiitirou.transform.position = new Vector3(128, 25, 0);
         }
     }
-    IEnumerator ToEvent5()
+    async UniTask ToEvent5()
     {
         if(!choiced)
         {
@@ -128,44 +119,30 @@ public class NotEnter6 : MonoBehaviour
             Homing.m_instance.speed = 0;
 
             soundManager.PlaySe(scream);
-            yield return new WaitForSeconds(1.3f);
+            await UniTask.Delay(TimeSpan.FromSeconds(1.3f));
             //Time.timeScale = 0.0f;
-            window.gameObject.SetActive(true);
-            yield return OnMessage1();
+            await MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken);
+            //yield return OnMessage1();
 
-            //　選択肢を出したりBGMを付ける。画面を揺らす？とか近づけたりしていろいろいじくる
+            //選択肢を出したりBGMを付ける。画面を揺らす？とか近づけたりしていろいろいじくる
 
-            yield return OnPanel1();
-            StartCoroutine(HeartSounds());
+            //選択肢が選ばれる前に会話が終わらないため下に行かない。
+            await OnPanel1();
+            heartSoundCTS = new CancellationTokenSource();
+            HeartSounds(heartSoundCTS.Token).Forget(e => { Debug.Log("キャンセルされた"); });
             soundManager.PlayBgm(fearBGM);
-            yield return new WaitForSeconds(0.5f);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
             cameraSwitch = true;
-            //yield return Red();
-
-
-            //window.gameObject.SetActive(true);
-            //yield return OnMessage2();
-            PlayerManager.m_instance.m_speed = 0.075f;
-            Homing.m_instance.speed = 2;
-            StopCoroutine(coroutine);
-            coroutine = null;
-        }
-        else
-        {
-            window.gameObject.SetActive(true);
-            yield return OnMessage2();
-            target.text = "";
-            window.gameObject.SetActive(false);
-            PlayerManager.m_instance.m_speed = 0.075f;
             Homing.m_instance.speed = 2;
         }
+        else MessageManager.message_instance.MessageWindowActive(messages3, names3, images3, ct: destroyCancellationToken).Forget();
     }
     IEnumerator ToResqueEvent()
     {
         heartCounts = 1000;
         cameraSwitch = false;
         choicePanel.gameObject.SetActive(false);
-        StopCoroutine(HeartSounds());
+        heartSoundCTS.Cancel();
         soundManager.StopSe(heartSound);
         redScreen.gameObject.SetActive(false);
         GameManager.m_instance.stopSwitch = false;
@@ -192,35 +169,10 @@ public class NotEnter6 : MonoBehaviour
         characterImage.sprite = image;
     }
 
-    IEnumerator OnMessage1()
-    {
-        for(int i = 0; i < messages2.Count; ++i)
-        {
-            // 1フレーム分 処理を待機(下記説明1)
-            yield return null;
-            showMessage(messages2[i], names2[i], images2[i]);
-            yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
-        }
-        yield break;
-    }
-    IEnumerator OnPanel1()
+    async UniTask OnPanel1()
     {
         choicePanel.gameObject.SetActive(true);
-        yield return new WaitUntil(() => choiced == false);
-    }
-    IEnumerator OnMessage2()
-    {
-        for(int i = 0; i < messages3.Count; ++i)
-        {
-            //PlayerManager.m_instance.m_speed = 0;
-            //Homing.m_instance.speed = 0;
-            // 1フレーム分 処理を待機(下記説明1)
-            yield return null;
-            showMessage(messages3[i], names3[i], images3[i]);
-            GameManager.m_instance.stopSwitch = false;
-            yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
-        }
-        yield break;
+        await UniTask.WaitUntil(() => choiced == false);
     }
     IEnumerator OnMessage3()
     {
@@ -242,25 +194,32 @@ public class NotEnter6 : MonoBehaviour
             yield return null;
         }
     }
-    private IEnumerator HeartSounds()
+    private async UniTask HeartSounds(CancellationToken ct)
     {
         while(heartCounts < 1000)
         {
             soundManager.PlaySe(heartSound);
             heartCounts++;
-            yield return new WaitForSeconds(1f);
+            try
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(1f), cancellationToken: ct);
+            }
+            catch(OperationCanceledException)
+            {
+                break;
+            }
         }
     }
     public void OnAdvanceBotton()
     {
         // 進むボタンを押した時のメソッド要素として音をすべて消す、メッセージ、TP、戻れない。
-        MessageManager.message_instance.MessageWindowActive(advancemessages, advancenames, advanceimages);
+        MessageManager.message_instance.MessageWindowActive(advancemessages, advancenames, advanceimages, ct: destroyCancellationToken).Forget();
         //ハートの変数を１０００にしてカメラのズームを元に戻せばよいレスキューも同じ
         //あとは選択肢表示の時のウィンドウの表示が怪しいからちゃんと非表示にしておくそして自由に動けるようになった後選択肢も非表示にする。
         heartCounts = 1000;
         cameraSwitch = false;
         choicePanel.gameObject.SetActive(false);
-        StopCoroutine(HeartSounds());
+        heartSoundCTS.Cancel();
         soundManager.StopSe(heartSound);
         redScreen.gameObject.SetActive(false);
         choiced = true;

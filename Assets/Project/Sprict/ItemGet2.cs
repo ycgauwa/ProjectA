@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,7 +34,6 @@ public class ItemGet2 : MonoBehaviour
     public Item detergent;
     public Item underKey;
     private bool isContacted = false;
-    public static bool messageSwitch = false;
     private bool hummerGeted = false;
 
 
@@ -57,20 +57,16 @@ public class ItemGet2 : MonoBehaviour
         // アイテムを入手する前
         if(hummer.checkPossession == false)
         {
-            if(isContacted && messageSwitch == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
-            {
-                messageSwitch = true;
-                MessageManager.message_instance.MessageWindowActive(messages, names, images);
-            }
+            if(isContacted && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
+                MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
         }
         //　アイテムを入手したあと
         else if(hummer.checkPossession == true)
         {
-            if(isContacted && messageSwitch == false && hummerGeted == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
+            if(isContacted && hummerGeted == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
             {
-                messageSwitch = true;
                 hummerGeted = true;
-                MessageManager.message_instance.MessageWindowActive(messages2, names2, images2);
+                MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken).Forget();
                 inventry.Add(detergent);
             }
         }

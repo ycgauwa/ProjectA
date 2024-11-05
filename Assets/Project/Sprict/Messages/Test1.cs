@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +19,6 @@ public class Test1 : MonoBehaviour
     public Canvas window;
     public Text target;
     public Text nameText;
-    public static bool messageSwitch = false;
     private void OnTriggerEnter2D(Collider2D collider)
     {
         //幸人の時に表示されるメッセージ
@@ -42,10 +42,9 @@ public class Test1 : MonoBehaviour
     private void Update()//入力チェックはUpdateに書く
     {
         //メッセージウィンドウ閉じるときはこのメソッドを
-        if(isContacted && messageSwitch == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
+        if(isContacted && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
-            messageSwitch = true;
-            MessageManager.message_instance.MessageWindowActive(messages, names,image);
+            MessageManager.message_instance.MessageWindowActive(messages, names,image, ct: destroyCancellationToken).Forget();
         }
     }
     /*private void OnTriggerEnter2D(Collider2D collider)

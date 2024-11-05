@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
@@ -24,10 +21,6 @@ public class PlayerManager : MonoBehaviour
     public GameObject enemy;
     public Homing homing;
     public Text StaminaString;
-    public Canvas choiceCanvas;
-    public Image stairChoice;
-    public GameObject firstChoice;
-    public bool canUp = false;
     public string stringtext = "";
     public enum PlayerState
     {
@@ -67,23 +60,23 @@ public class PlayerManager : MonoBehaviour
     private void FixedUpdate()
     {
         Application.targetFrameRate = 60;
-        
+
         var h = Input.GetAxisRaw("Horizontal");
         var v = Input.GetAxisRaw("Vertical");
-        var velocity = new Vector3(h, v)* Speed;
+        var velocity = new Vector3(h, v) * Speed;
         transform.localPosition += velocity;
     }
     // 走っている時にスタミナが減るメソッド。
     public void Dashing(int staminaConsume)
     {
         playerstate = PlayerState.Run;
-        if (homing.enemyCount >0.2f)
+        if(homing.enemyCount > 0.2f)
         {
             stamina -= staminaConsume;
             staminaIntensity += 0.005f;
         }
-        
-        if (0 < stamina) return;
+
+        if(0 < stamina) return;
 
         // スタミナが0になったら少しの間動けなくなりゆっくりスタミナが回復する。
         NoneStamina();
@@ -101,7 +94,7 @@ public class PlayerManager : MonoBehaviour
         //stringtext = stamina.ToString();
         //StaminaString.text = stringtext;
         Speed = m_speed;
-        if (stamina > staminaMax)
+        if(stamina > staminaMax)
         {
             stamina = staminaMax;
         }
@@ -124,12 +117,13 @@ public class PlayerManager : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter2D(Collider2D other)
     {
-        bool isTeleport = other.gameObject.CompareTag("House") || other.gameObject.CompareTag("Warp1") ||
-            other.gameObject.CompareTag("School1") || other.gameObject.CompareTag("School2") ||
-            other.gameObject.CompareTag("School3") || other.gameObject.CompareTag("School4") ||
-            other.gameObject.CompareTag("School5") || other.gameObject.CompareTag("School6") ||
-            other.gameObject.CompareTag("School7") || other.gameObject.CompareTag("School8") ||
-            other.gameObject.CompareTag("School9") || other.gameObject.CompareTag("School10") ||
+        /*bool isTeleport =
+            other.gameObject.CompareTag("House"   ) || other.gameObject.CompareTag("Warp1") ||
+            other.gameObject.CompareTag("School1" ) || other.gameObject.CompareTag("School2") ||
+            other.gameObject.CompareTag("School3" ) || other.gameObject.CompareTag("School4") ||
+            other.gameObject.CompareTag("School5" ) || other.gameObject.CompareTag("School6") ||
+            other.gameObject.CompareTag("School7" ) || other.gameObject.CompareTag("School8") ||
+            other.gameObject.CompareTag("School9" ) || other.gameObject.CompareTag("School10") ||
             other.gameObject.CompareTag("Home1") || other.gameObject.CompareTag("Home2") ||
             other.gameObject.CompareTag("School11") || other.gameObject.CompareTag("School12") ||
             other.gameObject.CompareTag("School13") || other.gameObject.CompareTag("School14") ||
@@ -164,90 +158,89 @@ public class PlayerManager : MonoBehaviour
         if (isTeleport == false) 
         {
             return;
-        }
+        }*/
+
         //TeleportAddress型の変数、であり初期値はnull
         TeleportAddress teleportAddress = null;
 
 
-        if (other.gameObject.CompareTag("House"))
+        if(other.gameObject.CompareTag("House"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("House");
             transform.position = teleportAddress.playerPosition;
         }
-        if (other.gameObject.CompareTag("Warp1"))
+        if(other.gameObject.CompareTag("Warp1"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Warp1");
             transform.position = teleportAddress.playerPosition;
         }
-        if (other.gameObject.CompareTag("School1"))
+        if(other.gameObject.CompareTag("School1"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("School1");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.schoolDoor);
 
         }
-        if (other.gameObject.CompareTag("School2"))
+        if(other.gameObject.CompareTag("School2"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("School2");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.schoolDoor);
 
         }
-        if (other.gameObject.CompareTag("School3"))
+        if(other.gameObject.CompareTag("School3"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("School3");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.schoolDoor);
 
         }
-        if (other.gameObject.CompareTag("School4"))
+        if(other.gameObject.CompareTag("School4"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("School4");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.schoolDoor);
         }
-        if (other.gameObject.CompareTag("School5"))
+        if(other.gameObject.CompareTag("School5"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("School5");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.schoolDoor);
         }
-        if (other.gameObject.CompareTag("School6"))
+        if(other.gameObject.CompareTag("School6"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("School6");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.schoolDoor);
         }
-        if (other.gameObject.CompareTag("School7"))
+        if(other.gameObject.CompareTag("School7"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("School7");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.schoolDoor);
         }
-        if (other.gameObject.CompareTag("School8"))
+        if(other.gameObject.CompareTag("School8"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("School8");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.schoolDoor);
         }
-        if (other.gameObject.CompareTag("Home1"))
+        if(other.gameObject.CompareTag("Home1"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Home1");
             transform.position = teleportAddress.playerPosition;
         }
-        if (other.gameObject.CompareTag("Home2"))
+        if(other.gameObject.CompareTag("Home2"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Home2");
             transform.position = teleportAddress.playerPosition;
         }
-        if (other.gameObject.CompareTag("School9"))
+        if(other.gameObject.CompareTag("School9"))
         {
-            GameManager.m_instance.stopSwitch = true;
-            choiceCanvas.gameObject.SetActive(true);
-            stairChoice.gameObject.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(firstChoice);
+            teleportAddress = teleportManager.FindTeleportAddress("School9");
+            transform.position = teleportAddress.playerPosition;
         }
-        if (other.gameObject.CompareTag("School10"))
+        if(other.gameObject.CompareTag("School10"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("School10");
             transform.position = teleportAddress.playerPosition;
@@ -346,7 +339,7 @@ public class PlayerManager : MonoBehaviour
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-7");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
-            if (!enemy.activeSelf)
+            if(!enemy.activeSelf)
             {
                 enemy.transform.position = new Vector2(0, 0);
                 Homing.m_instance.enemyEmerge = false;
@@ -361,8 +354,9 @@ public class PlayerManager : MonoBehaviour
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-8");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
-            if (Homing.m_instance.enemyEmerge == false)
+            if(Homing.m_instance.enemyEmerge == false)
             {
+                if(!teleportManager.toevent3.event3flag) return;
                 Homing.m_instance.enemyEmerge = true;
             }
         }
@@ -437,7 +431,7 @@ public class PlayerManager : MonoBehaviour
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-20");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
-            if (!enemy.activeSelf)
+            if(!enemy.activeSelf)
             {
                 enemy.transform.position = new Vector2(0, 0);
                 Homing.m_instance.enemyEmerge = false;
@@ -590,16 +584,17 @@ public class PlayerManager : MonoBehaviour
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-23");
             transform.position = teleportAddress.playerPosition;
         }
-        if (other.gameObject.name == "Ladder1-1")
+        if(other.gameObject.name == "Ladder1-1")
         {
             teleportAddress = teleportManager.FindTeleportAddress("Ladder1-1");
             transform.position = teleportAddress.playerPosition;
         }
-        if (other.gameObject.name == ("Ladder1-2"))
+        if(other.gameObject.name == ("Ladder1-2"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Ladder1-2");
             transform.position = teleportAddress.playerPosition;
         }
+        if(teleportAddress == null) return;
         //別クラスのメソッドの行使引数はteleportAddress
         teleportManager.OnPlayerTeleport(teleportAddress);
     }
@@ -612,20 +607,4 @@ public class PlayerManager : MonoBehaviour
         //Rigidbody2D rb = GetComponent<Rigidbody2D>();
         //GameTeleportManager gametp = GetComponent<GameTeleportManager>();
     }
-    public void YesUp()
-    {
-        canUp = true;
-        gameObject.transform.position = new Vector2(-7, -71);
-        stairChoice.gameObject.SetActive(false);
-        choiceCanvas.gameObject.SetActive(false);
-        GameManager.m_instance.stopSwitch = false;
-    }
-    public void NoUp()
-    {
-        canUp = false;
-        stairChoice.gameObject.SetActive(false);
-        choiceCanvas.gameObject.SetActive(false);
-        GameManager.m_instance.stopSwitch = false;
-    }
-
 }

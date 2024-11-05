@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+
 //using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
@@ -82,7 +84,8 @@ public class DiaryMessage : MonoBehaviour
     }
     IEnumerator WindowAction()
     {
-        //話しかけるとまずテキストで表示。
+        MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken).Forget();
+        /*話しかけるとまずテキストで表示。
         window.gameObject.SetActive(true);
         for(int i = 0; i < messages.Count; ++i)
         {
@@ -94,8 +97,8 @@ public class DiaryMessage : MonoBehaviour
         }
         target.text = "";
         GameManager.m_instance.ImageErase(characterImage);
-        window.gameObject.SetActive(false);
-        
+        window.gameObject.SetActive(false);*/
+        yield return new WaitUntil(() => !MessageManager.message_instance.talking);
         //何回か押すとテキストが消えて、日記の表示がされる。
         diaryWindow.gameObject.SetActive(true);
         

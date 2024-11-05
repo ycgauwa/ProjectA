@@ -17,6 +17,7 @@ public class Character : ScriptableObject
     public List<Sprite> itemGiveImage1;
     public List<Sprite> itemGiveImage2;
     public List<Sprite> itemGivedImage;
+    public List<Sprite> freeImage1;
     public List<string> messageTexts1;
     public List<string> messageTexts2;
     public List<string> messageTexts3;
@@ -24,5 +25,5 @@ public class Character : ScriptableObject
     public List<string> itemGiveMessage1;
     public List<string> itemGiveMessage2;
     public List<string> itemGivedMessage;
-
+    public List<string> freeText1;
 }

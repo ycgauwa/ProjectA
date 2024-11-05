@@ -55,6 +55,7 @@ public class MessageCharactor : MonoBehaviour
     {
         isContacted = false;
         characterItem.thisGameObject = gameObject;
+        
     }
 
     //プレイヤーが接触する。その時にキャラクターによって呼ぶメソッドを変えたい→メソッドは同じでゲームオブジェクトを
@@ -72,9 +73,7 @@ public class MessageCharactor : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collider)
     {
         if(collider.gameObject.tag.Equals("Player"))
-        {
             isContacted = false;
-        }
     }
     public IEnumerator CreateCoroutine()
     {
@@ -88,10 +87,8 @@ public class MessageCharactor : MonoBehaviour
             GameManager.m_instance.ImageErase(Chara);
             window.gameObject.SetActive(false);
         }
-
         StopCoroutine(coroutine);
         coroutine = null;
-
     }
 
     protected void showMessage(string message, string name, Sprite image)
@@ -225,7 +222,7 @@ public class MessageCharactor : MonoBehaviour
             i++;
         }
         character.messageTexts2[0] = "「もう準備が遅いよ……都市伝説の儀式を試すんでしょ？」";
-        character.messageTexts2[1] = "「早く行こうよ！もう待ちきれないよー！はやく！はやく！はやク！ハヤク！」";
+        character.messageTexts2[1] = "「早く行こうよ！もう待ちきれないよ！はやく！はやく！はやク！ハヤク！」";
         selectionText.gameObject.SetActive(true);
         GameManager.m_instance.stopSwitch = true;
         yield return new WaitForSeconds(1f);
@@ -240,6 +237,21 @@ public class MessageCharactor : MonoBehaviour
         yield return new WaitForSeconds(4f);
         soundManager.StopBgm(crisis);
         GameManager.m_instance.stopSwitch = false;
+        images = character.freeImage1;
+        messages = character.freeText1;
+        charactername = "幸人";
+        window.gameObject.SetActive(true);
+        i = 0;
+        foreach(string str in messages)
+        {
+            yield return null;
+            showMessage(str, charactername, images[i]);
+            i++;
+            yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
+        }
+        target.text = "";
+        GameManager.m_instance.ImageErase(Chara);
+        window.gameObject.SetActive(false);
     }
     public IEnumerator MitsukiNotGivedMessage()
     {

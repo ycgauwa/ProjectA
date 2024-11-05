@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Rendering.Universal;
+using UnityEditor.Rendering;
+using Cysharp.Threading.Tasks;
+using System;
 
 
 public class ToEvent1 : MonoBehaviour
@@ -19,7 +23,8 @@ public class ToEvent1 : MonoBehaviour
     public Image Chara;
     public static bool one;
     public GameObject player;
-    private IEnumerator coroutine;
+    public GameObject anotherDoor;
+    public Light2D light2D;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,77 +33,41 @@ public class ToEvent1 : MonoBehaviour
 
     // Update is called once per frame
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private async void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log($"colloder: {other.gameObject.name} ");
-
         //一回しか作動しないための仕組み
-        if (!one)
-        {
-            StartCoroutine(Event1());
-            one = true;
-        }
-       
+        if (!one) await Event1();
     }
     //イベント１のためのコルーチン。大枠の役割を果たしてくれる。
-    IEnumerator Event1()
+    private async UniTask Event1()
     {
-        
-        yield return new WaitForSeconds(1);
+        PlayerManager.m_instance.soundManager.PlaySe(PlayerManager.m_instance.teleportManager.schoolDoor);
+        GameManager.m_instance.stopSwitch = true;
+        one = true;
+        await Blackout();
+        await UniTask.Delay(TimeSpan.FromSeconds(1f));
+        light2D.intensity = 1;
         player.transform.position = new Vector3(-33, -34, 0);
-        //プレイヤーの固定（実力不足のため別のクラスのメソッドを呼び出している）
-        //PlayerManager.m_instance.Event1();
-        PlayerManager.m_instance.m_speed = 0;
-        coroutine = CreateCoroutine();
-        // コルーチンの起動(下記説明2)
-        StartCoroutine(coroutine);
-        
-    }
-
-    public IEnumerator CreateCoroutine()
-    {
-        // window起動
-        window.gameObject.SetActive(true);
-
-        // 抽象メソッド呼び出し 詳細は子クラスで実装
-        yield return OnAction();
-
-        // window終了
-        this.target.text = "";
-        this.window.gameObject.SetActive(false);
-
-        StopCoroutine(coroutine);
-        coroutine = null;
-        Debug.Log("hhh");
-        PlayerManager.m_instance.m_speed = 0.075f;
-
-
-    }
-    protected void showMessage(string message,string name, Sprite image)
-    {
-        this.target.text = message;
-        this.nameText.text = name;
-        Chara.sprite = image;
-    }
-
-    IEnumerator OnAction()
-    {
-
-        for(int i = 0; i < messages.Count; ++i)
+        GameManager.m_instance.stopSwitch = false;
+        MessageManager.message_instance.MessageWindowOnceActive(messages, names, images, ct: destroyCancellationToken).Forget();
+        if(gameObject.name == "SchoolWarp4")
         {
-            // 1フレーム分 処理を待機(下記説明1)
-            yield return null;
-
-            // 会話をwindowのtextフィールドに表示
-            showMessage(messages[i], names[i], images[i]);
-
-
-            // キー入力を待機 (下記説明1)
-            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
+            gameObject.gameObject.tag = "School8";
+            anotherDoor.gameObject.tag = "School7";
         }
-
-        yield break;
-
+        else
+        {
+            gameObject.gameObject.tag = "School7";
+            anotherDoor.gameObject.tag = "School8";
+        }
     }
-    
+
+    private IEnumerator Blackout()
+    {
+        while(light2D.intensity > 0.01f)
+        {
+            light2D.intensity -= 0.012f;
+            yield return null; //ここで１フレーム待ってくれてる
+        }
+    }
 }

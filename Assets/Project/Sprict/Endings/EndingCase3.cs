@@ -6,6 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 using UnityEngine.EventSystems;
 using UnityEngine.AI;
 using UnityEngine.Rendering.Universal;
+using Cysharp.Threading.Tasks;
 
 public class EndingCase3 : MonoBehaviour
 {
@@ -68,6 +69,7 @@ public class EndingCase3 : MonoBehaviour
     public Image enemyImage;
     public Image end3Image;
     public Image end4Image;
+    public Image end4Image2;
     public Color color;
     public bool isOpenSelect = false;
     private int questionCount = 0;
@@ -90,20 +92,16 @@ public class EndingCase3 : MonoBehaviour
     public AudioClip eatSound;
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.tag.Equals("Player"))
-        {
+        if(collider.gameObject.tag.Equals("Player")) 
             isContacted = true;
-        }
     }
     // この状態だと文字や画像は出る。でも画像が閉じれなくなってしまう。後動けない
     //　画像が一周してからもう一度画像を出すために
     private void OnTriggerExit2D(Collider2D collider)
     {
         messageSwitch = false;
-        if(collider.gameObject.tag.Equals("Player"))
-        {
+        if(collider.gameObject.tag.Equals("Player")) 
             isContacted = false;
-        }
     }
 
     protected void showMessage(string message, string name, Sprite image)
@@ -153,7 +151,7 @@ public class EndingCase3 : MonoBehaviour
             else
             {
                 messageSwitch = true;
-                MessageManager.message_instance.MessageWindowActive(messages2, names2, image2);
+                MessageManager.message_instance.MessageWindowActive(messages2, names2, image2, ct: destroyCancellationToken).Forget();
             }
         }
     }
@@ -408,7 +406,6 @@ public class EndingCase3 : MonoBehaviour
     {
         //debuffカウント１でダッシュが出来ない、2で歩く速度減少3で死ぬ
         ++debuffcount;
-        Debug.Log("debuff");
         if (debuffcount == 1)
         {
             playerManager.playercondition = PlayerManager.PlayerCondition.Suffocation;
@@ -486,6 +483,7 @@ public class EndingCase3 : MonoBehaviour
         soundManager.StopBgm(ending3Sound);
         GameManager.m_instance.OnclickRetryButton();
         EndingGalleryManager.m_gallery.endingGallerys[2].sprite = end3Image.sprite;
+        EndingGalleryManager.m_gallery.endingFlag[2] = true;
         this.gameObject.SetActive(false);
     }
     public void OnclickEnd4Retry()
@@ -495,7 +493,8 @@ public class EndingCase3 : MonoBehaviour
         light2D.intensity = 1.0f;
         soundManager.StopSe(eatSound);
         GameManager.m_instance.OnclickRetryButton();
-        EndingGalleryManager.m_gallery.endingGallerys[3].sprite = end4Image.sprite;
+        EndingGalleryManager.m_gallery.endingGallerys[3].sprite = end4Image2.sprite;
+        EndingGalleryManager.m_gallery.endingFlag[3] = true;
         this.gameObject.SetActive(false);
     }
     private IEnumerator ExitEvent()

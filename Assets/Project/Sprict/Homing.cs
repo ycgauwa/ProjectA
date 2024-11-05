@@ -57,7 +57,7 @@ public class Homing : MonoBehaviour
                 new Vector2(playerTr.position.x, playerTr.position.y),
                 speed * Time.deltaTime);
         }
-        if(enemyEmerge == true && speed > 0)
+        if(enemyEmerge == true && speed > 0 && PlayerManager.m_instance.playerstate != PlayerManager.PlayerState.Talk && PlayerManager.m_instance.playerstate != PlayerManager.PlayerState.Stop)
         {
             enemyCount += Time.deltaTime;
         }

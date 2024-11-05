@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+
 //using UnityEditor.VersionControl;
 using UnityEngine;
 
@@ -55,7 +57,7 @@ public class ToEvent3 : MonoBehaviour
         {
             if(collider.gameObject.tag.Equals("Player"))
             {
-                MessageManager.message_instance.MessageWindowActive(messages,names,images);
+                MessageManager.message_instance.MessageWindowActive(messages,names,images,ct: destroyCancellationToken).Forget();
                 soundManager.PlaySe(eatSound);
                 event3flag = true; //ƒtƒ‰ƒO‚ª—§‚Â
                 GameTeleportManager.chasedTime = true;

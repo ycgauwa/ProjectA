@@ -7,6 +7,7 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using Cysharp.Threading.Tasks;
 
 public class GameManager : MonoBehaviour
 {
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         EventSystem.current.SetSelectedGameObject(gamemodeFirstSelect);
+        stopSwitch = true;
         m_instance = this;
         postVolume.profile.TryGet(out vignette);
     }
@@ -93,7 +95,7 @@ public class GameManager : MonoBehaviour
                 //中断するかを問う選択肢の出現
                 if(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
                 {
-                    MessageManager.message_instance.MessageWindowActive(cookedmessages, cookednames, cookedimage);
+                    MessageManager.message_instance.MessageWindowOnceActive(cookedmessages, cookednames, cookedimage, ct: destroyCancellationToken).Forget();
                     cooktop.interrupt.gameObject.SetActive(true);
                     soundManager.PlaySe(cancel);
                 }
@@ -211,6 +213,7 @@ public class GameManager : MonoBehaviour
             case PlayerManager.PlayerState.Talk:
                 PlayerManager.m_instance.m_speed = 0;
                 Homing.m_instance.speed = 0;
+                
                 break;
             case PlayerManager.PlayerState.Stop:
                 PlayerManager.m_instance.m_speed = 0;
@@ -219,7 +222,7 @@ public class GameManager : MonoBehaviour
         //デバック用
         if(Input.GetKeyDown(KeyCode.F1))
         {
-            player.transform.position = new Vector3(-80,21,0);
+            player.transform.position = new Vector3(130,24,0);
         }
     }
     public void OnClickBackButton()
@@ -348,7 +351,7 @@ public class GameManager : MonoBehaviour
             menuCanvas.gameObject.SetActive(true);
             EventSystem.current.SetSelectedGameObject(menuFirstSelect);
             soundManager.PlaySe(cancel);
-            if (PlayerMessage.instance.firstActive == false) PlayerMessage.instance.firstActive = true;
+            if (DemoFinish.instance.firstActive == false) DemoFinish.instance.firstActive = true;
         }
         else if (inventryCanvas.gameObject.activeSelf)
         {
@@ -412,7 +415,7 @@ public class GameManager : MonoBehaviour
             menuCanvas.gameObject.SetActive(true);
             EventSystem.current.SetSelectedGameObject(menuFirstSelect);
             soundManager.PlaySe(cancel);
-            if (PlayerMessage.instance.firstActive == false) PlayerMessage.instance.firstActive = true;
+            if(DemoFinish.instance.firstActive == false) DemoFinish.instance.firstActive = true;
         }
         else if (Instruction2.gameObject.activeSelf)
         {

@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 
 public class EndingCase1 : MonoBehaviour
 {
@@ -45,11 +47,10 @@ public class EndingCase1 : MonoBehaviour
     public AudioClip decision;
     public AudioClip tensionBGM;
     public GameObject firstSelect;
-    private IEnumerator coroutine;
 
     //アンサーとして何を答えたか
     public  int answerNum;
-    private bool isOpenSelect = false;
+    public bool answered = false;
     private bool isContacted = false;
     // Start is called before the first frame update
     void Start()
@@ -59,89 +60,29 @@ public class EndingCase1 : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.tag.Equals("Player"))
-        {
-            isContacted = true;
-        }
+        if(collider.gameObject.tag.Equals("Player")) isContacted = true;
     }
     // colliderをもつオブジェクトの領域外にでたとき(下記で説明1)
     private void OnTriggerExit2D(Collider2D collider)
     {
-        if(collider.gameObject.tag.Equals("Player"))
-        {
-            isContacted = false;
-        }
+        if(collider.gameObject.tag.Equals("Player")) isContacted = false;
     }
     private void Update()
     {
         //話しかける(条件は動的なものと今回のboolのように恒常的なもので分けた方がいい)
         if(Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return))
         {
-            if(isContacted == true && coroutine == null)
+            if(isContacted == true && answered == false)
             {
-                if (answerNum == 1)
-                {
-                    coroutine = OnAction2();
-                    PlayerManager.m_instance.m_speed = 0;
-                    StartCoroutine(coroutine);
-                }
+                if (answerNum == 1) MessageManager.message_instance.MessageWindowActive(messages4, names4, image4, ct:destroyCancellationToken).Forget();
                 else if (answerNum == 0)
                 {
-                    coroutine = OnAction();
-                    StartCoroutine(coroutine);
+                    MessageManager.message_instance.MessageSelectWindowActive(messages, names, image,Selectwindow,selection,firstSelect, tensionBGM,ct: destroyCancellationToken).Forget();
+                    answered = true;
                 }
                 else return;
             }
         }
-    }
-    protected void showMessage(string message, string name, Sprite image)
-    {
-        this.target.text = message;
-        this.nameText.text = name;
-        characterImage.sprite = image;
-    }
-    IEnumerator OnAction()
-    {
-        window.gameObject.SetActive(true);
-        for(int i = 0; i < messages.Count; ++i)
-        {
-            yield return null;
-
-            showMessage(messages[i], names[i], image[i]);
-            if(i == messages.Count - 1)
-            {
-                soundManager.PlayBgm(tensionBGM);
-                Selectwindow.gameObject.SetActive(true);
-                selection.gameObject.SetActive(true);
-                EventSystem.current.SetSelectedGameObject(firstSelect);
-                isOpenSelect = true;
-                break;
-            }
-            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
-        }
-        yield return new WaitUntil(() => !isOpenSelect);
-        target.text = "";
-        window.gameObject.SetActive(false);
-        coroutine = null;
-        yield break;
-
-    }
-    IEnumerator OnAction2()
-    {
-        window.gameObject.SetActive(true);
-
-        for(int i = 0; i < messages4.Count; ++i)
-        {
-            yield return null;
-
-            showMessage(messages4[i], names4[i], image4[i]);
-
-            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
-        }
-        window.gameObject.SetActive(false);
-        PlayerManager.m_instance.m_speed = 0.075f;
-        coroutine = null;
-        yield break;
     }
     public void End1SelectYes()
     {
@@ -151,7 +92,7 @@ public class EndingCase1 : MonoBehaviour
         StartCoroutine("Blackout");
         selection.gameObject.SetActive(false);
         Selectwindow.gameObject.SetActive(false);
-        isOpenSelect = false;
+        MessageManager.message_instance.isOpenSelect = false;
         soundManager.StopBgm(tensionBGM);
     }
     public void End1SelectNo()
@@ -161,8 +102,9 @@ public class EndingCase1 : MonoBehaviour
         selection.gameObject.SetActive(false);
         Selectwindow.gameObject.SetActive(false);
         answerNum = 1;
-        isOpenSelect = false;
+        MessageManager.message_instance.isOpenSelect = false;
         soundManager.StopBgm(tensionBGM);
+        answered = false;
     }
     private IEnumerator Blackout()
     {
