@@ -75,6 +75,8 @@ public class ToEvent2 : MonoBehaviour
     private bool playerCamera;
     public PlayableDirector playableDirector;
     public Animator cameraAnimator;
+    public Volume volume;
+    private ColorAdjustments colorAdjustments;
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -115,6 +117,7 @@ public class ToEvent2 : MonoBehaviour
     }
     async UniTask CreateCoroutine()
     {
+        volume.profile.TryGet<ColorAdjustments>(out colorAdjustments);
         inventry.Delete(item);
         await MessageManager.message_instance.MessageWindowOnceActive(beforeMessages, beforeNames, beforeImages, ct: destroyCancellationToken);
 
@@ -189,6 +192,7 @@ public class ToEvent2 : MonoBehaviour
         await Blackout2();
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         cameraAnimator.enabled = false;
+        colorAdjustments.active = true;
         light2D.intensity = 1.0f;
         gameMenuUI.SetActive(true);
 
