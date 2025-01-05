@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class NotEnter4 : MonoBehaviour
@@ -30,16 +31,17 @@ public class NotEnter4 : MonoBehaviour
         {
             if(collider.gameObject.tag.Equals("Player"))
             {
-                MessageManager.message_instance.MessageWindowActive(messages, names, images);
+                MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
             }
         }
         else if(getKey1 == true)
         {
             if(collider.gameObject.tag.Equals("Player"))
             {
-                this.gameObject.tag = "Minnka1-17";
+                gameObject.tag = "Minnka1-17";
                 // 一旦敵が出てこないようにする。←出来てない。
-                itemDateBase.Items4Delete();
+                Inventry.instance.Delete(itemDateBase.GetItemId(251));
+                itemDateBase.GetItemId(251).checkPossession = false;
             }
         }
         
@@ -50,7 +52,7 @@ public class NotEnter4 : MonoBehaviour
             {
                 if(notEnter6.seiitirouFlag == false)
                 {
-                    MessageManager.message_instance.MessageWindowActive(messages2, names2, images2);
+                    MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken).Forget();
                 }
                 else
                 {

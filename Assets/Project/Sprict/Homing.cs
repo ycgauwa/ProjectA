@@ -81,7 +81,7 @@ public class Homing : MonoBehaviour
         if (collider.gameObject.tag.Equals("Player"))
         {
             // 藁人形を人形を持っているときの処理
-            if(itemDateBase.items[8].checkPossession == true)
+            if(itemDateBase.GetItemId(301).checkPossession == true)
             {
                 itemSprictW.ItemEffect();
             }

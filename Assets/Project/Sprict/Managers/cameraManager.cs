@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using DG.Tweening;
 
 public class cameraManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class cameraManager : MonoBehaviour
     public float cameraSize = 0.0f;
     public Camera cam;
     public NotEnter6 notEnter6;
+    public HaruDeathQuestion question;
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +70,7 @@ public class cameraManager : MonoBehaviour
             cameraPos.z = -10;
             Camera.main.gameObject.transform.position = cameraPos;
         }
-        if(notEnter6.cameraSwitch)
+        if(notEnter6.cameraSwitch || question.cameraSwitch)
         {
             if(cameraSize > 0.5)
             {

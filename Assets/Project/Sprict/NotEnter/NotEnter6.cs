@@ -6,6 +6,7 @@ using Cysharp.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 using static UnityEngine.GraphicsBuffer;
 
 public class NotEnter6 : MonoBehaviour
@@ -141,6 +142,7 @@ public class NotEnter6 : MonoBehaviour
     {
         heartCounts = 1000;
         cameraSwitch = false;
+        notEnter6.gameObject.SetActive(false);
         choicePanel.gameObject.SetActive(false);
         heartSoundCTS.Cancel();
         soundManager.StopSe(heartSound);
@@ -152,7 +154,7 @@ public class NotEnter6 : MonoBehaviour
         soundManager.StopBgm(fearBGM);
         target.text = "";
         window.gameObject.SetActive(false);
-        if (itemDateBase.items[8].checkPossession == true)
+        if (itemDateBase.GetItemId(301).checkPossession == true)
         {
             itemSprictW.ItemDelete();
         }
@@ -172,6 +174,7 @@ public class NotEnter6 : MonoBehaviour
     async UniTask OnPanel1()
     {
         choicePanel.gameObject.SetActive(true);
+        notEnter6.gameObject.SetActive(true);
         await UniTask.WaitUntil(() => choiced == false);
     }
     IEnumerator OnMessage3()
@@ -218,6 +221,7 @@ public class NotEnter6 : MonoBehaviour
         //あとは選択肢表示の時のウィンドウの表示が怪しいからちゃんと非表示にしておくそして自由に動けるようになった後選択肢も非表示にする。
         heartCounts = 1000;
         cameraSwitch = false;
+        notEnter6.gameObject.SetActive(false);
         choicePanel.gameObject.SetActive(false);
         heartSoundCTS.Cancel();
         soundManager.StopSe(heartSound);
@@ -230,7 +234,7 @@ public class NotEnter6 : MonoBehaviour
         Homing.m_instance.enemyEmerge = false;
         underKey.checkPossession = false;
         GameManager.m_instance.stopSwitch = false;
-        inventry.Delete(itemDateBase.items[7]);
+        inventry.Delete(itemDateBase.GetItemId(253));
         soundManager.StopBgm(fearBGM);
     }
     public void OnRescueBotton()

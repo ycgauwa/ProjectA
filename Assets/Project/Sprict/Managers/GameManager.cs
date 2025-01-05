@@ -8,6 +8,9 @@ using UnityEngine.Rendering;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using Cysharp.Threading.Tasks;
+using System.Linq;
+using System.IO;
+using Unity.VisualScripting.FullSerializer;
 
 public class GameManager : MonoBehaviour
 {
@@ -65,7 +68,9 @@ public class GameManager : MonoBehaviour
     public SoundManager soundManager;
     public Volume postVolume;
     private Vignette vignette;
-    public bool stopSwitch = false; 
+    public bool stopSwitch = false;
+    private TextAsset csvInteriorsFile; // CSVファイル
+    private List<string[]> csvInteriorsData = new List<string[]>(); // CSVファイルの中身を入れるリスト
 
     private void Start()
     {
@@ -73,6 +78,14 @@ public class GameManager : MonoBehaviour
         stopSwitch = true;
         m_instance = this;
         postVolume.profile.TryGet(out vignette);
+        csvInteriorsFile = Resources.Load("InteriorsText") as TextAsset; // ResourcesにあるCSVファイルを格納
+        StringReader reader = new StringReader(csvInteriorsFile.text); // TextAssetをStringReaderに変換
+
+        while(reader.Peek() != -1)
+        {
+            string line = reader.ReadLine(); // 1行ずつ読み込む
+            csvInteriorsData.Add(line.Split(',')); // csvDataリストに追加する
+        }
     }
     // Update is called once per frame
     void Update()
@@ -222,8 +235,20 @@ public class GameManager : MonoBehaviour
         //デバック用
         if(Input.GetKeyDown(KeyCode.F1))
         {
-            player.transform.position = new Vector3(66,149,0);
+            player.transform.position = new Vector3(106,140,0);
         }
+    }
+    public List<string> GetSpeakerName(string interiorName)
+    {
+        int stt = csvInteriorsData.IndexOf(csvInteriorsData.First(item => item[0] == interiorName));
+        int end = csvInteriorsData.IndexOf(csvInteriorsData.Skip(stt + 1).First(item => item[0] != ""));
+        return csvInteriorsData.Skip(stt).Take(end-1 - stt).Select(item => item[1]).ToList();
+    }
+    public List<string>GetMessages(string interiorName)
+    {
+        int stt = csvInteriorsData.IndexOf(csvInteriorsData.First(item => item[0] == interiorName));
+        int end = csvInteriorsData.IndexOf(csvInteriorsData.Skip(stt + 1).First(item => item[0] != ""));
+        return csvInteriorsData.Skip(stt).Take(end-1 - stt).Select(item => item[2]).ToList();
     }
     public void OnClickBackButton()
     {
@@ -272,8 +297,8 @@ public class GameManager : MonoBehaviour
         if(homing.speed == 0)homing.speed = 2;
         if (deathCount > 4)
         {
-            itemDate.items[7].checkPossession = false;
-            inventry.Delete(itemDate.items[7]);
+            itemDate.GetItemId(253).checkPossession = false;
+            inventry.Delete(itemDate.GetItemId(253));
             yukitoDead.SetActive(true);
             seiitirou.gameObject.tag = "Seiitirou";
 

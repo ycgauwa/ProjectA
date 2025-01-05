@@ -301,7 +301,7 @@ public class MessageCharactor : MonoBehaviour
         characterItem.soundManager.PlaySe(characterItem.decision);
         characterItem.selection.gameObject.SetActive(false);
         characterItem.Selectwindow.gameObject.SetActive(false);
-        characterItem.inventry.Add(characterItem.itemDateBase.items[10]);
+        characterItem.inventry.Add(characterItem.itemDateBase.GetItemId(201));
         characterItem.givedItem.checkPossession = true;
         characterItem.answerNum = 2;
         characterItem.isOpenSelect = false;

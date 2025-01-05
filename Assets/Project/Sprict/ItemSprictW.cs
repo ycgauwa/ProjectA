@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class ItemSprictW : MonoBehaviour
@@ -36,17 +37,19 @@ public class ItemSprictW : MonoBehaviour
     public void ItemEffect()
     {
         //サウンドと演出を流していっかいだけするーする
-        itemDateBase.Items9Delete();
+        Inventry.instance.Delete(itemDateBase.GetItemId(301));
+        itemDateBase.GetItemId(301).checkPossession = false;
         audioSource.PlayOneShot(bellSound);
-        MessageManager.message_instance.MessageWindowActive(messages, names, images);
+        MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
         gameTeleportManager.StopChased();
         Invoke("Stop", 3f);
     }
     public void ItemDelete()
     {
-        itemDateBase.Items9Delete();
+        Inventry.instance.Delete(itemDateBase.GetItemId(301));
+        itemDateBase.GetItemId(301).checkPossession = false;
         audioSource.PlayOneShot(bellSound);
-        MessageManager.message_instance.MessageWindowActive(messages2, names2, images2);
+        MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken).Forget();
     }
     public void Stop()
     {

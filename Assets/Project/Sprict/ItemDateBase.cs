@@ -3,6 +3,7 @@ using System.Collections.Generic;
 //using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 //using static UnityEditor.Progress;
 
 public class ItemDateBase : MonoBehaviour
@@ -20,6 +21,16 @@ public class ItemDateBase : MonoBehaviour
             items[i].checkPossession = false;
         }
     }
+    public Item GetItemId(int itemid)
+    {
+        Item item = new Item();
+        for(int i = 0; i < items.Count; i++)
+        {
+            if(items[i].itemID == itemid)
+                item = items[i];
+        }
+        return item;
+    }
     //　アイテムのセレクト状態解除
     public void SelectDiff()
     {
@@ -32,21 +43,21 @@ public class ItemDateBase : MonoBehaviour
     public void synthesis()
     {
         //　ハンマーと洗剤で普通のハンマーになる
-        if(items[1].selectedItem == true && items[2].selectedItem == true && notEnter4.getKey1 == false)
+        if(GetItemId(3).selectedItem == true && GetItemId(4).selectedItem == true && notEnter4.getKey1 == false)
         {
-            inventry.Add(items[3]);
-            inventry.Delete(items[1]);
-            inventry.Delete(items[2]);
+            inventry.Add(GetItemId(5));
+            inventry.Delete(GetItemId(3));
+            inventry.Delete(GetItemId(4));
             // ここで合成のメッセージを出すようにする。
             itemTextMessage.gameObject.SetActive(true);
             itemTextMessage.text = "合成完了";
         }
         //　普通のハンマーと人形で鍵が出てくる。
-        if(items[0].selectedItem == true && items[3].selectedItem == true && notEnter4.getKey1 == false)
+        if(GetItemId(5).selectedItem == true && GetItemId(2).selectedItem == true && notEnter4.getKey1 == false)
         {
-            inventry.Add(items[5]);
-            inventry.Delete(items[0]);
-            inventry.Delete(items[3]);
+            inventry.Add(GetItemId(252));
+            inventry.Delete(GetItemId(5));
+            inventry.Delete(GetItemId(2));
             itemTextMessage.gameObject.SetActive(true);
             itemTextMessage.text = "合成完了";
             notEnter4.getKey1 = true;
@@ -62,18 +73,5 @@ public class ItemDateBase : MonoBehaviour
                 itemTextMessage.gameObject.SetActive(false);
             }
         }
-    }
-    public void Items4Delete()
-    {
-        inventry.Delete(items[3]);
-    }
-    public void Items5Delete()
-    {
-        inventry.Delete(items[3]);
-    }
-    public void Items9Delete()
-    {
-        inventry.Delete(items[8]);
-        items[8].checkPossession = false;
     }
 }

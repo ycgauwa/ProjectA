@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class NotEnter5 : MonoBehaviour
@@ -30,7 +31,7 @@ public class NotEnter5 : MonoBehaviour
         {
             if(collider.gameObject.tag.Equals("Player"))
             {
-                MessageManager.message_instance.MessageWindowActive(messages, names, images);
+                MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
             }
         }
         else if(rescueEvent.RescueSwitch == true)
@@ -38,7 +39,7 @@ public class NotEnter5 : MonoBehaviour
             if(collider.gameObject.tag.Equals("Player"))
             {
                 gameObject.tag = "Untagged";
-                MessageManager.message_instance.MessageWindowActive(messages2, names2, images2);
+                MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken).Forget();
             }
         }
         else if(getKey2 == true)
@@ -46,7 +47,8 @@ public class NotEnter5 : MonoBehaviour
             if(collider.gameObject.tag.Equals("Player"))
             {
                 this.gameObject.tag = "Minnka1-20";
-                itemDateBase.Items5Delete();
+                Inventry.instance.Delete(itemDateBase.GetItemId(252));
+                itemDateBase.GetItemId(252).checkPossession = false;
                 if (enemy.gameObject.activeSelf)
                 {
                     homing.teleportManager.StopChased();

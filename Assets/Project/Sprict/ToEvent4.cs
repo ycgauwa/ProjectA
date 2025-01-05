@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class ToEvent4 : MonoBehaviour
 {
     // 部屋に入った時にイベントあるから敵が出てこないようにして、これでイベントが終わったら
-    // 次から敵が出てきてもいいようにする。
+    // 次から敵が出てきてもいいようにする。調べた時には音楽を止めて選択肢を出して別の音楽を出す。
 
     public GameObject player;
     public bool event4flag;
@@ -41,7 +45,7 @@ public class ToEvent4 : MonoBehaviour
                 // プレイヤーの速度が停止
                 playerStop = true;
                 // 効果音とメッセージを流す
-                MessageManager.message_instance.MessageWindowActive(messages, names, images);
+                MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
                 event4flag = true; //フラグが立つ
                 toevent3.event3flag = true; //　敵が出てくるようにする。
             }

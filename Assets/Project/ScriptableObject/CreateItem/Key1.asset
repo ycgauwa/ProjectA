@@ -15,5 +15,6 @@ MonoBehaviour:
   name: "\u5C45\u9593\u5BA4\u306E\u9375"
   icon: {fileID: 21300000, guid: 943df3b0fd0fcf547b908bd391725a77, type: 3}
   itemText: "\u3088\u304F\u898B\u308B\u3068\u5C45\u9593\u306E\u9375\u3068\u66F8\u304B\u308C\u3066\u3044\u308B"
+  itemID: 251
   checkPossession: 0
   selectedItem: 0

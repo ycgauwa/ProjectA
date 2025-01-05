@@ -34,37 +34,6 @@ public class CalenderMessage : MonoBehaviour
     public bool messageSwitch = false;
     private bool isContacted = false;
 
-    /*private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if(collider.gameObject.tag.Equals("Player"))
-        {
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                PlayerManager.m_instance.m_speed = 0;
-                coroutine = CreateCoroutine();
-                StartCoroutine(coroutine);
-            }
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collider)
-    {
-        if(collider.gameObject.tag.Equals("Player"))
-        {
-            if(calCanvas.gameObject.activeSelf)
-            {
-                calender.gameObject.SetActive(false);
-                calCanvas.gameObject.SetActive(false);
-            }
-            if(TVScreen == null)
-            {
-                return;
-            }
-            if(TVScreen.gameObject.activeSelf)
-            {
-                TVScreen.gameObject.SetActive(false);
-            }
-        }
-    }*/
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.tag.Equals("Player"))

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
@@ -77,6 +78,7 @@ public class ToEvent2 : MonoBehaviour
     public Animator cameraAnimator;
     public Volume volume;
     private ColorAdjustments colorAdjustments;
+    public float x, y,t;
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -101,18 +103,10 @@ public class ToEvent2 : MonoBehaviour
                 CreateCoroutine().Forget();
             }
         }
-        if(eventcamera.transform.position.y > 6 && cameraManager.playerCamera == false)
-        {
-            eventcamera.transform.Translate(new Vector3(0.0f, -0.05f, 0.0f * Time.deltaTime * speed));
-        }
         if(girl.transform.position.x > -86 && cameraManager.girlCamera == true)
         {
             // girl‚ª“®‚­ƒvƒƒOƒ‰ƒ€
             girl.transform.Translate(new Vector3(-0.05f, 0, 0.0f * Time.deltaTime * speed));
-        }
-        if(eventcamera.transform.position.x < -80 && cameraManager.playerCamera == false && cameraManager.girlCamera == false)
-        {
-            eventcamera.transform.Translate(new Vector3(0.07f, 0.0f, 0.0f * Time.deltaTime * speed));
         }
     }
     async UniTask CreateCoroutine()
@@ -142,6 +136,7 @@ public class ToEvent2 : MonoBehaviour
         soundManager.PlayBgm(suspiciousBgm);
         //camera‚Ìˆ—
         Event2Camera();
+        eventcamera.transform.DOMove(new Vector3(-80,6,-10),6);
 
         await UniTask.Delay(TimeSpan.FromSeconds(6.0f));
 
@@ -158,9 +153,10 @@ public class ToEvent2 : MonoBehaviour
         
         guards.transform.position = new Vector3(-76, 5, 0);
         cameraManager.girlCamera = false;
+        eventcamera.transform.DOMove(new Vector3(x, y, -10), t);
 
         await UniTask.Delay(TimeSpan.FromSeconds(3.0f));
-        
+
         window.gameObject.SetActive(true);
         await MessageManager.message_instance.MessageWindowOnceActive(messages3, names3, images3, ct: destroyCancellationToken);
 

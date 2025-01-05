@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Device;
 //using static UnityEditor.Progress;
@@ -58,13 +59,13 @@ public class ItemGet3 : MonoBehaviour
             {
                 messageSwitch = true;
                 PlayerManager.m_instance.m_speed = 0;
-                MessageManager.message_instance.MessageWindowActive(messages, names, images);
+                MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
             }
             else if(toevent4.event4flag == true && getedItem == false)
             {
                 messageSwitch = true;
                 PlayerManager.m_instance.m_speed = 0;
-                MessageManager.message_instance.MessageWindowActive(messages2, names2, image2);
+                MessageManager.message_instance.MessageWindowActive(messages2, names2, image2, ct: destroyCancellationToken).Forget();
                 notEnter6.getKey = true;
                 getedItem = true;
                 inventry.Add(item);
@@ -74,7 +75,7 @@ public class ItemGet3 : MonoBehaviour
             {
                 messageSwitch = true;
                 PlayerManager.m_instance.m_speed = 0;
-                MessageManager.message_instance.MessageWindowActive(messages3, names3, image3);
+                MessageManager.message_instance.MessageWindowActive(messages3, names3, image3, ct: destroyCancellationToken).Forget();
             }
         }
     }

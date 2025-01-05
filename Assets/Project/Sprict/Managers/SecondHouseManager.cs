@@ -48,6 +48,7 @@ public class SecondHouseManager : MonoBehaviour
     private List<string> keyOpenNames;
     [SerializeField]
     private List<Sprite> keyOpenImage;
+    public Test1[] interiors = new Test1[4];
     private IEnumerator coroutine;
     public Canvas window;
     public Text target;
@@ -56,7 +57,8 @@ public class SecondHouseManager : MonoBehaviour
     private bool bearKey = false;
     private bool chickenKey = false;
     private bool mushroomKey = false;
-    public bool secondkey = false;
+    public bool firstkey = false;
+    public GameObject meat;
     public Inventry inventry;
     public ItemDateBase itemDate;
     public DishMessage chickenDish;
@@ -66,19 +68,20 @@ public class SecondHouseManager : MonoBehaviour
     public AnimalsMessages chicken;
     public AnimalsMessages mushroom;
     public Cooktop cooktop;
+    public Homing2 ajure;
     public SoundManager soundManager;
     public AudioClip keyOpen;
     //2軒目の選択肢を統括するスクリプト
 
     private void Update()
     {
-        if(chickenKey == true && mushroomKey == true && bearKey == true && secondkey == false)
+        if(chickenKey == true && mushroomKey == true && bearKey == true && firstkey == false)
         {
             //鍵が開いた音
             coroutine = OpenKey();
             StartCoroutine(coroutine);
             //鍵が空いてからメッセージを出す
-            secondkey = true;
+            firstkey = true;
         }
     }
 
@@ -179,19 +182,19 @@ public class SecondHouseManager : MonoBehaviour
         {
             bear.selection.gameObject.SetActive(false);
             bear.Selectwindow.gameObject.SetActive(false);
-            if(itemDate.items[25].checkPossession == true)
+            if(itemDate.GetItemId(23).checkPossession == true)
             {//本物持ってた時ドアが空くキーが一個解放する（３つでドアが開く）
-                inventry.Delete(itemDate.items[25]);
-                itemDate.items[25].checkPossession = false;
+                inventry.Delete(itemDate.GetItemId(23));
+                itemDate.GetItemId(23).checkPossession = false;
                 bear.isOpenSelect = false;
                 bearKey = true;
                 coroutine = OnAction2();
                 StartCoroutine(coroutine);
             }
-            else if(itemDate.items[28].checkPossession == true)
+            else if(itemDate.GetItemId(20).checkPossession == true)
             {//メッセージが出た後に死ぬ
-                inventry.Delete(itemDate.items[28]);
-                itemDate.items[28].checkPossession = false;
+                inventry.Delete(itemDate.GetItemId(20));
+                itemDate.GetItemId(20).checkPossession = false;
                 bear.isOpenSelect = false;
                 coroutine = OnFailAction();
                 StartCoroutine(coroutine);
@@ -201,16 +204,16 @@ public class SecondHouseManager : MonoBehaviour
         {
             chicken.selection.gameObject.SetActive(false);
             chicken.Selectwindow.gameObject.SetActive(false);
-            if(itemDate.items[24].checkPossession == true)
+            if(itemDate.GetItemId(22).checkPossession == true)
             {
-                inventry.Delete(itemDate.items[24]);
-                itemDate.items[24].checkPossession = false;
+                inventry.Delete(itemDate.GetItemId(22));
+                itemDate.GetItemId(22).checkPossession = false;
                 chicken.isOpenSelect = false;
                 chickenKey = true;
                 coroutine = OnAction2();
                 StartCoroutine(coroutine);
             }
-            else if(itemDate.items[27].checkPossession == true)
+            else if(itemDate.GetItemId(19).checkPossession == true)
             {//メッセージが出た後に死ぬ
 
             }
@@ -219,16 +222,16 @@ public class SecondHouseManager : MonoBehaviour
         {
             mushroom.selection.gameObject.SetActive(false);
             mushroom.Selectwindow.gameObject.SetActive(false);
-            if(itemDate.items[23].checkPossession == true)
+            if(itemDate.GetItemId(21).checkPossession == true)
             {
-                inventry.Delete(itemDate.items[23]);
-                itemDate.items[23].checkPossession = false;
+                inventry.Delete(itemDate.GetItemId(21));
+                itemDate.GetItemId(21).checkPossession = false;
                 mushroom.isOpenSelect = false;
                 mushroomKey = true;
                 coroutine = OnAction2();
                 StartCoroutine(coroutine);
             }
-            else if(itemDate.items[26].checkPossession == true)
+            else if(itemDate.GetItemId(18).checkPossession == true)
             {//メッセージが出た後に死ぬ
 
             }

@@ -118,8 +118,8 @@ public class RescueEvent : MonoBehaviour
             {
                 yukitoProfile.gameObject.SetActive(false);
                 seiitirouProfile.gameObject.SetActive(true);
-                notEnter6.inventry.Delete(notEnter6.itemDateBase.items[5]);
-                notEnter6.inventry.Delete(notEnter6.itemDateBase.items[6]);
+                notEnter6.inventry.Delete(notEnter6.itemDateBase.GetItemId(251));
+                notEnter6.inventry.Delete(notEnter6.itemDateBase.GetItemId(251));
                 soundManager.StopBgm(toEvent3.chasedBGM);
                 if(SeiitirouAnimation.GetComponent<AnimationStateController>().enabled == false)
                 {

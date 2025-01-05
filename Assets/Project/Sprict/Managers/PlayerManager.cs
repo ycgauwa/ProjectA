@@ -594,6 +594,18 @@ public class PlayerManager : MonoBehaviour
             teleportAddress = teleportManager.FindTeleportAddress("Ladder1-2");
             transform.position = teleportAddress.playerPosition;
         }
+        if(other.gameObject.name == "Warp2-23")
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Warp2-23");
+            transform.position = teleportAddress.playerPosition;
+            teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
+        }
+        if(other.gameObject.name == ("Warp2-24"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Warp2-24");
+            transform.position = teleportAddress.playerPosition;
+            teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
+        }
         if(teleportAddress == null) return;
         //別クラスのメソッドの行使引数はteleportAddress
         teleportManager.OnPlayerTeleport(teleportAddress);

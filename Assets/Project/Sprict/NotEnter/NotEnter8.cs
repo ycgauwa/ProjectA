@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class NotEnter8 : MonoBehaviour
@@ -25,29 +26,19 @@ public class NotEnter8 : MonoBehaviour
     private List<Sprite> images2;
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (secondHouseManager.secondkey == false)
+        if (secondHouseManager.firstkey == false)
         {
             if (collider.gameObject.tag.Equals("Player"))
             {
-                MessageManager.message_instance.MessageWindowActive(messages, names, images);
+                MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
             }
         }
-        else if (secondHouseManager.secondkey == true)
+        else if (secondHouseManager.firstkey == true)
         {
             if (collider.gameObject.tag.Equals("Player"))
             {
                 gameObject.tag = "Minnka2-5";
             }
         }
-    }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

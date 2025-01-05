@@ -3,6 +3,7 @@ using UnityEngine;
 public class GameTeleportManager : MonoBehaviour
 {
     [SerializeField] private Homing Enemy = null;
+    [SerializeField] private Homing2 Enemy2 = null;
 
     //TeleportAddress型の変数、であり初期値はnull
     //これが本当にTeleportAddress型なのか確認するそしてなぜそっちじゃなくてこっちのスプリクトでかくのか？
@@ -13,6 +14,7 @@ public class GameTeleportManager : MonoBehaviour
     public float enemyTeleportTime;
     private bool enemyTeleportSwitch = false;
     public GameObject enemy;
+    public GameObject enemy2;
     public GameObject Yukito;
     public static bool chasedTime;
     private bool enemyStartTPTime;
@@ -22,14 +24,16 @@ public class GameTeleportManager : MonoBehaviour
     public AudioClip climbStairs;
     public DifficultyLevelManager difficultyLevelManager;
     public SoundManager soundManager;
+    public ToEvent3 toevent3;
 
     private void Update()
     {
         if(PlayerManager.m_instance.playerstate != PlayerManager.PlayerState.Talk && PlayerManager.m_instance.playerstate != PlayerManager.PlayerState.Stop && chasedTime == true)
         {
             enemyTeleportTime += Time.deltaTime;
-            if(enemyStartTPTime == true && enemyTeleportTime > 2.0f)
+            if(enemyStartTPTime == true && enemyTeleportTime > 2.0f)//欲を言えば2体目は1fにしたい。
             {
+                Debug.Log(Enemy);
                 Invoke("OnEnemyTeleport", 0f);
                 enemyStartTPTime = false;
             }
@@ -113,8 +117,9 @@ public class GameTeleportManager : MonoBehaviour
         new TeleportAddress(){tag="Minnka2-22",playerPosition = new Vector2(64, 150)},
         new TeleportAddress(){name="Ladder1-1",playerPosition = new Vector2(103, 8)},
         new TeleportAddress(){name="Ladder1-2",playerPosition = new Vector2(95, -19)},
+        new TeleportAddress(){name="Warp2-23",playerPosition = new Vector2(40, 120)},
+        new TeleportAddress(){name="Warp2-24",playerPosition = new Vector2(64, 144)},
     };
-    public ToEvent3 toevent3;
 
     /*ここでテレポートアドレスから引っ張ってきたPTAの変数が引数となって
      プレイヤーがテレポートしたという情報を持っている。invokeもプレイヤーが
@@ -150,8 +155,8 @@ public class GameTeleportManager : MonoBehaviour
             Debug.LogError("エネミーの参照がありません");
             return;
         }
-        // EnemyがTPするメソッド(ここに確率を加えたい)
-        if(toevent3.event3flag && Homing.m_instance.enemyEmerge)
+        // EnemyがTPするメソッド(ここに確率を加えたい)でも２匹目は基本イベントのみなのでstopchasedは必要ない。
+        if((toevent3.event3flag && Homing.m_instance.enemyEmerge) || Homing2.m_instance.enemyEmerge)
         {
             switch(difficultyLevelManager.difficultyLevel)
             {
@@ -215,6 +220,15 @@ public class GameTeleportManager : MonoBehaviour
                     }
                     break;
             }
+            
+            //2匹目のスクリプト
+            if(enemy2.gameObject.activeSelf)
+            {
+                enemy2.gameObject.SetActive(false);
+                if(enemyTeleportSwitch) CancelInvoke("EnemyEmerge");
+                Invoke("EnemyEmerge2", 0f);
+                enemyTeleportSwitch = true;
+            }
         }
     }
     public void StopChased()
@@ -235,8 +249,20 @@ public class GameTeleportManager : MonoBehaviour
             enemyTeleportTime = 0;
         }
     }
+    private void EnemyEmerge2()
+    {
+        if(!enemy2.activeSelf)
+        {
+            enemy2.gameObject.SetActive(true);
+            enemyTeleportSwitch = false;
+            Enemy2.transform.position = enemyTeleportAddress.playerPosition;
+            Enemy2.speed -= 1.5f;
+            enemyTeleportTime = 0;
+        }
+    }
     public void EnemyStartChase()
     {
+        //2匹目はイベントのみなので確定出現だからここもいらない。
         switch(difficultyLevelManager.difficultyLevel)
         {
             case DifficultyLevelManager.DifficultyLevel.Easy:

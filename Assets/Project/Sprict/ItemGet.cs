@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 //using static UnityEditor.Progress;
@@ -52,7 +53,7 @@ public class ItemGet : MonoBehaviour
             messageSwitch = true;
             itemGeted = true;
             item.checkPossession = true;
-            MessageManager.message_instance.MessageWindowActive(messages, names,images);
+            MessageManager.message_instance.MessageWindowActive(messages, names,images, ct: destroyCancellationToken).Forget();
             inventry.Add(item);
         }
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -104,7 +105,7 @@ public class AnimalsMessages : MonoBehaviour
             else
             {
                 messageSwitch = true;
-                MessageManager.message_instance.MessageWindowActive(messages, names, image);
+                MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken).Forget();
             }
         }
     }

@@ -99,7 +99,38 @@ public class SoundManager : MonoBehaviour
         Debug.Log("‚¯‚·‚æ‚P");
         bgmAudioSource.Stop();
         bgmAudioSource.clip = null;
-        
+    }
+    public void PauseBgm(AudioClip clip)
+    {
+        if(bgmAudioSource.clip != clip)
+        {
+            Debug.Log("‚¿‚ª‚¤‚æ‚P");
+            if(bgmAudioSource2.clip == clip)
+            {
+                Debug.Log("‚Æ‚ß‚é‚æ2");
+                bgmAudioSource2.Pause();
+            }
+            Debug.Log("‚¿‚ª‚¤‚æ2");
+            return;
+        }
+        Debug.Log("‚Æ‚ß‚é‚æ‚P");
+        bgmAudioSource.Pause();
+    }
+    public void UnPauseBgm(AudioClip clip)
+    {
+        if(bgmAudioSource.clip != clip)
+        {
+            Debug.Log("‚¿‚ª‚¤‚æ‚P");
+            if(bgmAudioSource2.clip == clip)
+            {
+                Debug.Log("‚Æ‚ß‚é‚æ2");
+                bgmAudioSource2.UnPause();
+            }
+            Debug.Log("‚¿‚ª‚¤‚æ2");
+            return;
+        }
+        Debug.Log("‚Æ‚ß‚é‚æ‚P");
+        bgmAudioSource.UnPause();
     }
 
     public void PlaySe(AudioClip clip)
@@ -108,18 +139,15 @@ public class SoundManager : MonoBehaviour
         {
             return;
         }
-
         seAudioSource.PlayOneShot(clip);
     }
     public void StopSe(AudioClip clip)
     {
         seAudioSource.clip = clip;
-
         if (clip == null)
         {
             return;
         }
-
         seAudioSource.Stop();
         seAudioSource.clip = null;
     }

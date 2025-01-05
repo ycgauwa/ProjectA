@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Test1 : MonoBehaviour
 {
@@ -19,32 +21,28 @@ public class Test1 : MonoBehaviour
     public Canvas window;
     public Text target;
     public Text nameText;
+    public bool talked;
+    private bool isContacted = false;
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         //幸人の時に表示されるメッセージ
         if(collider.gameObject.tag.Equals("Player"))
-        {
             isContacted = true;
-        }
-
     }
     private void OnTriggerExit2D(Collider2D collider)
     {
         if(collider.gameObject.tag.Equals("Player"))
-        {
             isContacted = false;
-        }
     }
-    
-    private bool isContacted = false;
-    //物理的な挙動の時はFixedUpdateでかけ！
-
     private void Update()//入力チェックはUpdateに書く
     {
+        
         //メッセージウィンドウ閉じるときはこのメソッドを
         if(isContacted && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
-            MessageManager.message_instance.MessageWindowActive(messages, names,image, ct: destroyCancellationToken).Forget();
+            MessageManager.message_instance.MessageWindowActive(GameManager.m_instance.GetMessages(name),GameManager.m_instance.GetSpeakerName(name), image, ct: destroyCancellationToken).Forget();
+            if(!talked) talked = true;
         }
     }
     /*private void OnTriggerEnter2D(Collider2D collider)
@@ -54,8 +52,10 @@ public class Test1 : MonoBehaviour
             Debug.Log($"colloder: {collider.gameObject.name} ");
             /*（）の中に引数を入れてあげると実行元のメソッドが渡した変数で処理を行ってくれる。
             ただし、データを渡す側は変数だけでよい*/
-           /* MessageManager.message_instance.MessageWindowActive(messages, names);
-        }
-       
-    }*/
+    /* MessageManager.message_instance.MessageWindowActive(messages, names);
+ }
+
+}*/
+    private TextAsset csvFile; // CSVファイル
+    private List<string[]> csvData = new List<string[]>(); // CSVファイルの中身を入れるリスト
 }
