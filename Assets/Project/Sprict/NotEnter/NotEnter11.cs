@@ -27,7 +27,7 @@ public class NotEnter11 : MonoBehaviour
         {
             if(collider.gameObject.tag.Equals("Player"))
             {
-                gameObject.tag = "Minnka2-17";
+                name = "Warp2-23";
             }
         }
     }

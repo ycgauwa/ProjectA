@@ -22,10 +22,13 @@ public class Meat : MonoBehaviour
     private List<Sprite> images2;
     public GameObject player;
     public GameObject enemy;
+    public GameObject lightAnimation;
+    public GameObject haruSelectionObject;
     public Light2D light2D;
     public Homing2 ajure;
     public NotEnter10 notEnter10;
     public SoundManager soundManager;
+    public AudioClip meatSound;
     private bool isContacted = false;
     //犬に追われている最中に出てくる。これに話しかけるとイベントが開始。画面が暗転して
     //プレイヤーと犬の位置が移動してメッセージが出る
@@ -47,7 +50,7 @@ public class Meat : MonoBehaviour
         //メッセージウィンドウ閉じるときはこのメソッドを
         if(isContacted && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
-            MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken).Forget();
+            isContacted = false;
             GameManager.m_instance.stopSwitch = true;
             ajure.acceleration = 0;
             ajure.speed = 0;
@@ -57,12 +60,17 @@ public class Meat : MonoBehaviour
     }
     private async UniTask MeatEated()
     {
+        await MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken);
         await Blackout();
+        soundManager.PlaySe(meatSound);
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         notEnter10.soundManager.StopBgm(notEnter10.fearMusic);
         light2D.intensity = 1.0f;
         await MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken);
         GameManager.m_instance.stopSwitch = false;
+        soundManager.StopSe(meatSound);
+        lightAnimation.gameObject.SetActive(true);
+        haruSelectionObject.tag = "Minnka2-4";
     }
     private async UniTask Blackout()
     {

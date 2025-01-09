@@ -235,7 +235,7 @@ public class GameManager : MonoBehaviour
         //デバック用
         if(Input.GetKeyDown(KeyCode.F1))
         {
-            player.transform.position = new Vector3(106,140,0);
+            player.transform.position = new Vector3(76,170,0);
         }
     }
     public List<string> GetSpeakerName(string interiorName)

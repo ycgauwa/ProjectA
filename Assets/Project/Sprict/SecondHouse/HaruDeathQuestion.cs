@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using static UnityEngine.Rendering.DebugUI;
 using System.Threading;
@@ -23,6 +24,8 @@ public class HaruDeathQuestion : MonoBehaviour
     private List<Sprite> images3;
     [SerializeField]
     private List<Sprite> images4;
+    [SerializeField]
+    private List<Sprite> images5;
     public GameObject player;
     public GameObject enemy;
     public GameObject haruDead;
@@ -30,6 +33,8 @@ public class HaruDeathQuestion : MonoBehaviour
     public GameObject firstSelection;
     public Light2D light2D;
     public Canvas choiceCanvas;
+    public Canvas end5Canvas;
+    public Image end5Image;
 
     private int heartCounts;
     private bool choiced = false;
@@ -41,6 +46,8 @@ public class HaruDeathQuestion : MonoBehaviour
     public SoundManager soundManager;
     public AudioClip fearBGM;
     public AudioClip heartSound;
+    public AudioClip doorSound;
+    public AudioClip ending5Sound;
     public NotEnter10 notEnter10;
     // このスクリプトでは犬に追われている時に入ろうとすると晴を見捨てるかを選ぶことができる
 
@@ -124,6 +131,7 @@ public class HaruDeathQuestion : MonoBehaviour
         panel.gameObject.SetActive(false);
         choiceCanvas.gameObject.SetActive(false);
         await Blackout();
+        soundManager.PlaySe(doorSound);
         player.transform.position = new Vector3(83, 73, 0);
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         light2D.intensity = 1.0f;
@@ -132,11 +140,11 @@ public class HaruDeathQuestion : MonoBehaviour
 
         //「晴ごめん……許して」的なセリフとその反応を加える。
         await MessageManager.message_instance.MessageWindowActive(messages, names, images2, ct: destroyCancellationToken);
-        player.transform.DOLocalMove(new Vector3(80, 65, 0), 6f);
-        await UniTask.Delay(TimeSpan.FromSeconds(6f));
-        player.transform.position = new Vector3(131, -12, 0);
+        player.transform.DOLocalMove(new Vector3(80, 65, 0), 4f);
+        await UniTask.Delay(TimeSpan.FromSeconds(4f));
         await Blackout();
-        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+        player.transform.position = new Vector3(131, -12, 0);
+        await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         // 晴の叫び声と幸人の後悔の描写
         await MessageManager.message_instance.MessageWindowActive(messages, names, images3, ct: destroyCancellationToken);
 
@@ -145,13 +153,24 @@ public class HaruDeathQuestion : MonoBehaviour
         await UniTask.Delay(TimeSpan.FromSeconds(3f));
         // 幸人が決心して戻る。
         await MessageManager.message_instance.MessageWindowActive(messages, names, images4, ct: destroyCancellationToken);
+        
         player.transform.DOLocalMove(new Vector3(131, -12, 0), 2.5f);
         await UniTask.Delay(TimeSpan.FromSeconds(2.5f));
         await Blackout();
-        player.transform.position = new Vector3(80, 65, 0);
         await UniTask.Delay(TimeSpan.FromSeconds(1f));
+        player.transform.position = new Vector3(80, 65, 0);
         light2D.intensity = 1.0f;
         player.transform.DOLocalMove(new Vector3(80, 73, 0), 8f);
+        await UniTask.Delay(TimeSpan.FromSeconds(2.5f));
+        soundManager.PlayBgm(ending5Sound);
+        await UniTask.Delay(TimeSpan.FromSeconds(5.5f));
+        //　晴の死体を見てしまう→うわ～ってなってEnding
+        await MessageManager.message_instance.MessageWindowActive(messages, names, images4, ct: destroyCancellationToken);
+        
+        await BlackoutSlow();
+        await UniTask.Delay(TimeSpan.FromSeconds(4f));
+        light2D.intensity = 1.0f;
+        end5Canvas.gameObject.SetActive(true);
     }
     private async UniTask Blackout()
     {
@@ -162,5 +181,24 @@ public class HaruDeathQuestion : MonoBehaviour
             light2D.intensity -= 0.012f;
             await UniTask.Delay(1);
         }
+    }
+    private async UniTask BlackoutSlow()
+    {
+        light2D.intensity = 1.0f;
+        GameManager.m_instance.stopSwitch = true;
+        while(light2D.intensity > 0.01f)
+        {
+            light2D.intensity -= 0.003f;
+            await UniTask.Delay(1);
+        }
+    }
+    public void OnclickEnd5Retry()
+    {
+        end5Canvas.gameObject.SetActive(false);
+        light2D.intensity = 1.0f;
+        soundManager.StopBgm(ending5Sound);
+        GameManager.m_instance.OnclickRetryButton();
+        EndingGalleryManager.m_gallery.endingGallerys[4].sprite = end5Image.sprite;
+        EndingGalleryManager.m_gallery.endingFlag[4] = true;
     }
 }

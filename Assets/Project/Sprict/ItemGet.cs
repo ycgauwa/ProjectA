@@ -33,17 +33,12 @@ public class ItemGet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.tag.Equals("Player") || collider.gameObject.tag.Equals("Seiitirou"))
-        {
             isContacted = true;
-        }
-
     }
     private void OnTriggerExit2D(Collider2D collider)
     {
         if(collider.gameObject.tag.Equals("Player") || collider.gameObject.tag.Equals("Seiitirou"))
-        {
             isContacted = false;
-        }
     }
 
     private void Update()
@@ -55,7 +50,8 @@ public class ItemGet : MonoBehaviour
             item.checkPossession = true;
             MessageManager.message_instance.MessageWindowActive(messages, names,images, ct: destroyCancellationToken).Forget();
             inventry.Add(item);
+            if(name == "LightAnimation")
+                gameObject.SetActive(false);
         }
     }
-
 }
