@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charaName: "\u672C\u591A \u6FAA"
   description: 
+  FavorabilityCount: 100
   characterImages1:
   - {fileID: 21300000, guid: 9c77ecd6de829ab4aa58abbf4d690270, type: 3}
   - {fileID: 21300000, guid: 024e9dba047e8984c87f903f641c4301, type: 3}
@@ -23,8 +24,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 024e9dba047e8984c87f903f641c4301, type: 3}
   characterImages3: []
   characterImages4: []
+  maxAffinityImages: []
+  highAffinityImages: []
+  moderateAffinityImages: []
+  lowAffinityImages: []
+  minAffinityImages: []
+  negativeAffinityImages: []
   itemGiveImage1: []
   itemGiveImage2: []
+  itemGivedImage: []
+  freeImage1: []
   messageTexts1:
   - "\u300C\u3069\u3046\u3057\u305F\u306E\uFF1F\u5145\u5E0C\u306A\u3089\u96A3\u306E\u6559\u5BA4\u306B\u3044\u308B\u3068\u601D\u3046\u3051\u3069\u3002\u300D"
   - "\u300C\u3042\u3041\u3001\u4F8B\u306E\u592A\u9F13\u306E\u4E8B\u306D\u3002\u5E78\u4EBA\u3082\u77E5\u3063\u3066\u308B\u3068\u601D\u3046\u3051\u3069\u4E00\u5FDC\u8AAC\u660E\u3059\u308B\u308F\u306D\u300D"
@@ -34,5 +43,21 @@ MonoBehaviour:
   - "\u300C\u7406\u79D1\u5BA4\u306B\u884C\u3063\u305F\u306E\u306A\u3089\u6B21\u306F\u97F3\u697D\u5BA4\u306D\u300D"
   messageTexts3: []
   messageTexts4: []
+  maxAffinityMessages: []
+  highAffinityMessages:
+  - "\u300C\u30C6\u30B9\u30C8\u300D"
+  - "\u597D\u611F\u5EA6\u306F\uFF28\uFF29\uFF27\uFF28\u3067\u3059"
+  - 
+  - 
+  moderateAffinityMessages:
+  - "\u30C6\u30B9\u30C8"
+  - "\u597D\u611F\u5EA6\u306FModerate\u3067\u3059"
+  - 
+  - 
+  lowAffinityMessages: []
+  minAffinityMessages: []
+  negativeAffinityMessages: []
   itemGiveMessage1: []
   itemGiveMessage2: []
+  itemGivedMessage: []
+  freeText1: []

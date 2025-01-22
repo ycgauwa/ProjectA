@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47c5cf7a1069f43acc6cfe09d5d118, type: 3}
   m_Name: Tinurareta Bati
   m_EditorClassIdentifier: 
-  name: 
   icon: {fileID: 21300000, guid: 58f0ea67933405c43bbc91b3ca0c4914, type: 3}
   itemText: "\u8840\u306B\u67D3\u307E\u3063\u305F\u771F\u3063\u8D64\u306A\u30D0\u30C1\u306E\u3088\u3046\u3060"
   itemID: 1

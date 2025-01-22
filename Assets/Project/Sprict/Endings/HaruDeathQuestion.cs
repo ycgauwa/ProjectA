@@ -47,6 +47,7 @@ public class HaruDeathQuestion : MonoBehaviour
     public GameObject haruDead;
     public GameObject panel;
     public GameObject firstSelection;
+    public Character haru;
     public Light2D light2D;
     public Canvas choiceCanvas;
     public Canvas end5Canvas;
@@ -217,5 +218,6 @@ public class HaruDeathQuestion : MonoBehaviour
         //GameManager.m_instance.OnclickRetryButton();
         EndingGalleryManager.m_gallery.endingGallerys[4].sprite = end5Image.sprite;
         EndingGalleryManager.m_gallery.endingFlag[4] = true;
+        haru.FavorabilityCount -= 40;
     }
 }

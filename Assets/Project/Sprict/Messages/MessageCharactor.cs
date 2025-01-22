@@ -63,11 +63,9 @@ public class MessageCharactor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log($"colloder: {gameObject.name}");
         if(collider.gameObject.tag.Equals("Player"))
         {
-            coroutine = CreateCoroutine();
-            StartCoroutine(coroutine);
+            isContacted = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collider)
@@ -75,11 +73,18 @@ public class MessageCharactor : MonoBehaviour
         if(collider.gameObject.tag.Equals("Player"))
             isContacted = false;
     }
+    private void Update()
+    {
+        if (isContacted && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
+        {
+            isContacted = false;
+            coroutine = CreateCoroutine();
+            StartCoroutine(coroutine);
+        }
+    }
     public IEnumerator CreateCoroutine()
     {
-        // window起動
         window.gameObject.SetActive(true);
-        // 抽象メソッド呼び出し 詳細は子クラスで実装
         yield return CharaShowMessage();
         if (!characterItem.selection.gameObject.activeSelf && characterItem.answerNum != 0)
         {
@@ -104,7 +109,11 @@ public class MessageCharactor : MonoBehaviour
     会話内容ごとにリストを作ってあげたらいいのでは？
     特定の条件の時にはList1、別の条件ではList2を呼び出すことによってListを呼び出しながらも会話内容を変えることができる
     今悩んでいるのは、foreachを使った場合stringのListは回してくれるけどImageのListはどうなるの？ってはなし
-    でもメッセージと画像は一対一対応してるから別にforeachじゃなくてもよくね？*/
+    でもメッセージと画像は一対一対応してるから別にforeachじゃなくてもよくね？
+    1月22日追記
+    上の階層でイベントごとのフラグで進行度によるメッセージ管理。←基本的に先の内容ほど上しとく。
+    下のスイッチ文で好感度による変化したメッセージ文の管理。
+     */
     IEnumerator CharaShowMessage()
     {
         if(notEnter4.getKey1 == true)//居間に行けるようになってからの内容
@@ -112,18 +121,7 @@ public class MessageCharactor : MonoBehaviour
             charactername = character.charaName;
             images = character.characterImages3;
             messages = character.messageTexts3;
-            int i = 0;
-            // 要素の数だけループが行われる。
-            foreach(string str in messages)
-            {
-                yield return null;
-                showMessage(str, charactername, images[i]);
-                i++;
-                yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
-            }
-            target.text = "";
-            GameManager.m_instance.ImageErase(Chara);
-            window.gameObject.SetActive(false);
+            yield return CharacterMessageActive(messages, charactername, images);
             yield break;
         }
         if(bati.checkPossession == true)//バチをとってからの内容
@@ -137,6 +135,7 @@ public class MessageCharactor : MonoBehaviour
                 character.messageTexts2[1] = "「やっぱり僕怖くなってきたかも知れない……。ね、ねぇちょっと今回はやめにしない？」";
             }
             messages = character.messageTexts2;
+            
             int i = 0;
             // 要素の数だけループが行われる。
             foreach(string str in messages)
@@ -172,31 +171,61 @@ public class MessageCharactor : MonoBehaviour
         else if(bati.checkPossession == false)
         {
             charactername = character.charaName;
-            images = character.characterImages1;
-            messages = character.messageTexts1;
-            int i = 0;
-            // 要素の数だけループが行われる。
-            foreach (string str in messages)
+            switch (character.FavorabilityCount)
             {
-                yield return null;
-                showMessage(str, charactername, images[i]);
-                i++;
-                yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
+                case >80:
+                    Debug.Log("81以上");
+                    images = character.characterImages1;
+                    messages = character.messageTexts1;
+                    yield return CharacterMessageActive(messages, charactername, images);
+                    yield break;
+                case >60:
+                    Debug.Log("61");
+                    images = character.characterImages1;
+                    messages = character.highAffinityMessages;
+                    yield return CharacterMessageActive(messages, charactername, images);
+                    yield break;
+                case >40:
+                    Debug.Log("41");
+                    images = character.characterImages1;
+                    messages = character.moderateAffinityMessages;
+                    yield return CharacterMessageActive(messages, charactername, images);
+                    yield break;
+                case >20:
+                    Debug.Log("21");
+                    break;
+                case >0:
+                    Debug.Log("1");
+                    break;
+                case 0:
+                    Debug.Log("0");
+                    break;
+
+
+                default:
+                    break;
             }
-            if(gameObject.name == "Hosokawa Mitsuki" && characterItem.answerNum == 0)
-            {
-                //こいつの中に初回限定のメッセージ文を（⑤）を入れてあげればいける。
-                characterItem.CharagivedItem();
-            }
-            else
-            {
-                target.text = "";
-                GameManager.m_instance.ImageErase(Chara);
-                window.gameObject.SetActive(false);
-            }
-            yield break;
         }
     }
+    // キャラクターのメッセージ文のメソッド。
+    public IEnumerator CharacterMessageActive(List<string> message,string name,List<Sprite> charaimage)
+    {
+        int i = 0;
+        foreach (string str in message)
+        {
+            Debug.Log(name);
+            yield return null;
+            showMessage(str, name, charaimage[i]);
+            i++;
+            yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
+        }
+        target.text = "";
+        GameManager.m_instance.ImageErase(Chara);
+        window.gameObject.SetActive(false);
+        yield break;
+    }
+
+    // 以下はキャラクターのイベント毎の特殊なメソッド
     public IEnumerator HaruSelectionCoroutine()
     {
         answerNum = 2;

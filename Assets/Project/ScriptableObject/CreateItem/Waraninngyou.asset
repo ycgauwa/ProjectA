@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47c5cf7a1069f43acc6cfe09d5d118, type: 3}
   m_Name: Waraninngyou
   m_EditorClassIdentifier: 
-  name: "\u53E4\u307C\u3051\u305F\u85C1\u4EBA\u5F62"
   icon: {fileID: 21300000, guid: dd135f21987072c47a9df179e514f2d9, type: 3}
   itemText: "\u6301\u3063\u3066\u3044\u308B\u3068\u6696\u304B\u3044\u611F\u899A\u306B\u306A\u308B"
   itemID: 301
-  checkPossession: 0
+  checkPossession: 1
   selectedItem: 0
