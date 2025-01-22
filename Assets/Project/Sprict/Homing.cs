@@ -29,6 +29,7 @@ public class Homing : MonoBehaviour
     NPCAnimationController cr;
     public Vector2 enemyPosition;
     private Vector2 enemyMovement;
+    public AudioClip meatEat;
 
     private void Start()
     {
@@ -88,6 +89,7 @@ public class Homing : MonoBehaviour
             else
             {
                 // 食べられた時のサウンドを流す
+                SoundManager.sound_Instance.PlaySe(meatEat);
                 // ゲームオーバー画面を出すためのキャンバスとその数秒後にボタンを出す
                 gameoverWindow.gameObject.SetActive(true);
                 GameManager.m_instance.stopSwitch = true;

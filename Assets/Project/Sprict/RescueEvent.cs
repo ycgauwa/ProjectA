@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using System;
 
 public class RescueEvent : MonoBehaviour
 {
@@ -53,36 +55,20 @@ public class RescueEvent : MonoBehaviour
     public static bool messageSwitch = false;
     private bool SeiitirouMove;
     public bool RescueSwitch;
-    private IEnumerator coroutine;
     public Light2D light2D;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if (Seiitirou.transform.position.y > 70 && SeiitirouMove == true)
-        {
-            Seiitirou.transform.Translate(new Vector3(0f, -0.05f, 0.0f * Time.deltaTime));
-        }
         // このイベント中は敵は消えない＆敵が出ている間はBGMを流し続ける。
         if (RescueSwitch == true)
         {
             gameTeleportManager.enemyRndNum = 99;
             if(Player.activeSelf)soundManager.PlayBgm(ChasedBGM);
         }
+
         if (SeiitirouMove == true && RescueSwitch == false)
-        {
             Player.gameObject.tag = "Untagged";
-        }
-        else
-        {
-            Player.gameObject.tag = "Player";
-        }
+        else Player.gameObject.tag = "Player";
         // ゲームオーバーを5回したら画面が真っ暗になるイベントを作成する（ドアの文が変化したり何かしらの変化はつけてあげたい）
         // 一回死ぬごとに画面が暗くなる。BGMはついたままで敵とPlayerの位置はイベントが始まった初期の位置に移動している。
         // リトライボタンを押すと自動的に例の場所に戻される。
@@ -119,12 +105,12 @@ public class RescueEvent : MonoBehaviour
                 yukitoProfile.gameObject.SetActive(false);
                 seiitirouProfile.gameObject.SetActive(true);
                 notEnter6.inventry.Delete(notEnter6.itemDateBase.GetItemId(251));
-                notEnter6.inventry.Delete(notEnter6.itemDateBase.GetItemId(251));
+                notEnter6.inventry.Delete(notEnter6.itemDateBase.GetItemId(252));
                 soundManager.StopBgm(toEvent3.chasedBGM);
                 if(SeiitirouAnimation.GetComponent<AnimationStateController>().enabled == false)
-                {
                     SeiitirouAnimation.GetComponent<AnimationStateController>().enabled = true;
-                }
+                GameManager.m_instance.deathCount = 0;
+                gameObject.SetActive(false);
             }
         }
     }
@@ -133,122 +119,50 @@ public class RescueEvent : MonoBehaviour
         if (collider.gameObject.tag.Equals("Player"))
         {
             if (notEnter6.rescued == false)
-            {
                 return;
-            }
-            if (notEnter6.rescued == true && RescueSwitch == false)
+            else if (notEnter6.rescued == true && RescueSwitch == false)
             {
                 CapsuleCollider2D capsuleCollider = Seiitirou.GetComponent<CapsuleCollider2D>();
                 GameManager.m_instance.stopSwitch = true;
                 capsuleCollider.enabled = false;
-                coroutine = RescueSeiitirouEvent();
-                StartCoroutine(coroutine);
+                RescueSeiitirouEvent().Forget();
                 Homing.m_instance.enemyEmerge = true;
                 toEvent3.event3flag = true;
             }
         }
     }
-    IEnumerator RescueSeiitirouEvent()
+    private async UniTask RescueSeiitirouEvent()
     {
-        // 独り言
-
-        window.gameObject.SetActive(true);
-        yield return OnMessage1();
-        target.text = "";
-        window.gameObject.SetActive(false);
-
-        yield return new WaitForSeconds(2.0f);
+        Debug.Log("EventStart");
+        await MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken);
         //征一郎が出てきて会話する
+        await UniTask.Delay(TimeSpan.FromSeconds(1f));
         soundManager.PlaySe(doorSound);
-        Seiitirou.transform.position = new Vector2(35,71);
-        yield return new WaitForSeconds(0.5f);
-        SeiitirouMove = true;
+        Seiitirou.transform.position = new Vector2(35, 71);
+        Seiitirou.transform.DOLocalMove(new Vector3(35, 70, 0), 1f);
+        await UniTask.Delay(TimeSpan.FromSeconds(1f));
 
-        window.gameObject.SetActive(true);
-        yield return OnMessage2();
-        target.text = "";
-        window.gameObject.SetActive(false);
+        await MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken);
         //征一郎が去っていく。ドアの音とともに化け物が扉から出てくる
-        yield return SeiitirouLeave();
+        Seiitirou.transform.DOLocalMove(new Vector3(35, 69, 0), 0.5f);
+        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+        Seiitirou.transform.DOLocalMove(new Vector3(31, 69, 0), 1.5f);
+        await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
+        Seiitirou.transform.DOLocalMove(new Vector3(31, 60, 0), 4.0f);
+        await UniTask.Delay(TimeSpan.FromSeconds(3.5f));
         soundManager.PlaySe(doorSound);
+        await UniTask.Delay(TimeSpan.FromSeconds(2.0f));
         Seiitirou.transform.position = new Vector2(24, 0);
-        yield return new WaitForSeconds(2.0f);
-        
+
         Enemy.gameObject.SetActive(true);
         RescueSwitch = true;
         Homing.m_instance.speed = 0;
         Enemy.transform.position = new Vector2(35, 71);
-
-        window.gameObject.SetActive(true);
-        yield return OnMessage3();
-        target.text = "";
-        window.gameObject.SetActive(false);
-
+        await MessageManager.message_instance.MessageWindowActive(messages3, names3, images3, ct: destroyCancellationToken);
         GameManager.m_instance.stopSwitch = false;
-        PlayerManager.m_instance.m_speed = 0.075f;
         Homing.m_instance.speed = 2;
         soundManager.PlayBgm(ChasedBGM);
-
-        StopCoroutine(coroutine);
-    }
-    protected void showMessage(string message, string name, Sprite image)
-    {
-        target.text = message;
-        nameText.text = name;
-        characterImage.sprite = image;
-    }
-    IEnumerator OnMessage1()
-    {
-        for (int i = 0; i < messages.Count; ++i)
-        {
-            // 1フレーム分 処理を待機(下記説明1)
-            yield return null;
-            showMessage(messages[i], names[i], images[i]);
-            yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
-        }
-        yield break;
-    }
-    IEnumerator OnMessage2()
-    {
-        for (int i = 0; i < messages2.Count; ++i)
-        {
-            // 1フレーム分 処理を待機(下記説明1)
-            yield return null;
-            showMessage(messages2[i], names2[i], images2[i]);
-            yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
-        }
-        yield break;
-    }
-    IEnumerator OnMessage3()
-    {
-        for (int i = 0; i < messages3.Count; ++i)
-        {
-            // 1フレーム分 処理を待機(下記説明1)
-            yield return null;
-            showMessage(messages3[i], names3[i], images3[i]);
-            yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
-        }
-        yield break;
-    }
-    IEnumerator SeiitirouLeave()
-    {
-        while (Seiitirou.transform.position.y > 69.4)
-        {
-            yield return null;
-            Seiitirou.transform.Translate(new Vector3(0f, -0.05f, 0.0f * Time.deltaTime));
-        }
-        yield return new WaitForSeconds(0.3f);
-        while(Seiitirou.transform.position.x > 31)
-        {
-            yield return null;
-            Seiitirou.transform.Translate(new Vector3(-0.05f, 0f, 0.0f * Time.deltaTime));
-        }
-        yield return new WaitForSeconds(0.2f);
-        while(Seiitirou.transform.position.y > 60)
-        {
-            yield return null;
-            Seiitirou.transform.Translate(new Vector3(0f, -0.05f, 0.0f * Time.deltaTime));
-        }
-        yield break;
+        BoxCollider2D boxCollider = gameObject.GetComponent<BoxCollider2D>();
+        boxCollider.enabled = false;
     }
 }

@@ -36,7 +36,6 @@ public class PassWord : MonoBehaviour
                 // 押せば押すほどアイテムが入手できてしまうから一度取得したら入手できない仕様にしてあげる。
                 // Inventryの追加（アイテムの取得）
                 inventry.Add(doll);
-                doll.checkPossession = true;
                 MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
             }
         }
@@ -49,7 +48,6 @@ public class PassWord : MonoBehaviour
             if(passcode2.text == "2007")
             {
                 inventry.Add(secondHouseKey);
-                secondHouseKey.checkPossession = true;
                 MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
             }
         }

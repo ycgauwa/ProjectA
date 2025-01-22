@@ -53,6 +53,7 @@ public class ToEvent2 : MonoBehaviour
     [SerializeField]
     private List<Sprite> beforeImages;
     public Canvas window;
+    public Canvas timelineCanvas;
     public Text target;
     public Text nameText;
     public Image characterImage;
@@ -183,11 +184,13 @@ public class ToEvent2 : MonoBehaviour
         cameraAnimator.enabled = true;
         light2D.intensity = 1.0f;
         gameMenuUI.SetActive(false);
+        timelineCanvas.gameObject.SetActive(true);
         playableDirector.Play();
         await UniTask.Delay(TimeSpan.FromSeconds(68f));
         await Blackout2();
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         cameraAnimator.enabled = false;
+        timelineCanvas.gameObject.SetActive(false);
         colorAdjustments.active = true;
         light2D.intensity = 1.0f;
         gameMenuUI.SetActive(true);

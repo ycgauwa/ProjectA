@@ -38,7 +38,6 @@ public class ItemSprictW : MonoBehaviour
     {
         //サウンドと演出を流していっかいだけするーする
         Inventry.instance.Delete(itemDateBase.GetItemId(301));
-        itemDateBase.GetItemId(301).checkPossession = false;
         audioSource.PlayOneShot(bellSound);
         MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
         gameTeleportManager.StopChased();
@@ -47,7 +46,6 @@ public class ItemSprictW : MonoBehaviour
     public void ItemDelete()
     {
         Inventry.instance.Delete(itemDateBase.GetItemId(301));
-        itemDateBase.GetItemId(301).checkPossession = false;
         audioSource.PlayOneShot(bellSound);
         MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken).Forget();
     }

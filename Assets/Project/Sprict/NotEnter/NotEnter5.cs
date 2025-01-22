@@ -31,7 +31,7 @@ public class NotEnter5 : MonoBehaviour
         {
             if(collider.gameObject.tag.Equals("Player"))
             {
-                MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
+                MessageManager.message_instance.MessageWindowActive(GameManager.m_instance.GetMessages(name, "NotEnter"), GameManager.m_instance.GetSpeakerName(name, "NotEnter"), images, ct: destroyCancellationToken).Forget();
             }
         }
         else if(rescueEvent.RescueSwitch == true)
@@ -39,7 +39,7 @@ public class NotEnter5 : MonoBehaviour
             if(collider.gameObject.tag.Equals("Player"))
             {
                 gameObject.tag = "Untagged";
-                MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken).Forget();
+                MessageManager.message_instance.MessageWindowActive(GameManager.m_instance.GetMessages(name + "A", "NotEnter"), GameManager.m_instance.GetSpeakerName(name + "A", "NotEnter"), images2, ct: destroyCancellationToken).Forget();
             }
         }
         else if(getKey2 == true)
@@ -48,7 +48,6 @@ public class NotEnter5 : MonoBehaviour
             {
                 this.gameObject.tag = "Minnka1-20";
                 Inventry.instance.Delete(itemDateBase.GetItemId(252));
-                itemDateBase.GetItemId(252).checkPossession = false;
                 if (enemy.gameObject.activeSelf)
                 {
                     homing.teleportManager.StopChased();

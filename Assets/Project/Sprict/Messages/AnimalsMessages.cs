@@ -97,7 +97,6 @@ public class AnimalsMessages : MonoBehaviour
         {
             if(cooktop.isCooked == true)
             {
-                Debug.Log("miss");
                 messageSwitch = true;
                 coroutine = OnAction();
                 StartCoroutine(coroutine);

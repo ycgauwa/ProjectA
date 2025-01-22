@@ -345,11 +345,8 @@ public class Cooktop : MonoBehaviour
             MessageManager.message_instance.MessageWindowActive(dish1Messages, dish1Names, dish1Image, messageSwitch, ct: destroyCancellationToken).Forget();
             ingredients.gameObject.SetActive(false);
             inventry.Delete(itemDateBase.GetItemId(6));
-            itemDateBase.GetItemId(6).checkPossession = false;
-            itemDateBase.GetItemId(15).checkPossession = false;
             inventry.Delete(itemDateBase.GetItemId(1));
             inventry.Add(itemDateBase.GetItemId(21));
-            itemDateBase.GetItemId(21).checkPossession = true;
             selectedDish1 = false;
             ingredients1Text.text = "使用済み";
         }
@@ -362,22 +359,17 @@ public class Cooktop : MonoBehaviour
             MessageManager.message_instance.MessageWindowActive(dishFailMessages, dishFailNames, dishFailImage, messageSwitch, ct: destroyCancellationToken).Forget();
             ingredients.gameObject.SetActive(false);
             inventry.Delete(itemDateBase.GetItemId(15));
-            itemDateBase.GetItemId(15).checkPossession = false;
             if(itemDateBase.GetItemId(7).checkPossession == true)
             {
-                itemDateBase.GetItemId(7).checkPossession = false;
                 inventry.Delete(itemDateBase.GetItemId(7));
                 inventry.Add(itemDateBase.GetItemId(18));
-                itemDateBase.GetItemId(18).checkPossession = true;
                 selectedDish1 = false;
                 ingredients1Text.text = "使用済み";
             }
             else if(itemDateBase.GetItemId(8).checkPossession == true)
             {
-                itemDateBase.GetItemId(8).checkPossession = false;
                 inventry.Delete(itemDateBase.GetItemId(8));
                 inventry.Add(itemDateBase.GetItemId(18));
-                itemDateBase.GetItemId(18).checkPossession = true;
                 selectedDish1 = false;
                 ingredients1Text.text = "使用済み";
             }
@@ -390,11 +382,8 @@ public class Cooktop : MonoBehaviour
             MessageManager.message_instance.MessageWindowActive(dish2Messages, dish2Names, dish2Image, messageSwitch, ct: destroyCancellationToken).Forget();
             ingredients.gameObject.SetActive(false);
             inventry.Delete(itemDateBase.GetItemId(16));
-            itemDateBase.GetItemId(16).checkPossession = false;
-            itemDateBase.GetItemId(9).checkPossession = false;
             inventry.Delete(itemDateBase.GetItemId(9));
             inventry.Add(itemDateBase.GetItemId(22));
-            itemDateBase.GetItemId(22).checkPossession = true;
             selectedDish2 = false;
             ingredients2Text.text = "使用済み";
         }
@@ -407,22 +396,17 @@ public class Cooktop : MonoBehaviour
             MessageManager.message_instance.MessageWindowActive(dishFailMessages, dishFailNames, dishFailImage, messageSwitch, ct: destroyCancellationToken).Forget();
             ingredients.gameObject.SetActive(false);
             inventry.Delete(itemDateBase.GetItemId(16));
-            itemDateBase.GetItemId(16).checkPossession = false;
             if(itemDateBase.GetItemId(10).checkPossession == true)
             {
-                itemDateBase.GetItemId(10).checkPossession = false;
                 inventry.Delete(itemDateBase.GetItemId(10));
                 inventry.Add(itemDateBase.GetItemId(19));
-                itemDateBase.GetItemId(19).checkPossession = true;
                 selectedDish2 = false;
                 ingredients2Text.text = "使用済み";
             }
             else if(itemDateBase.GetItemId(11).checkPossession == true)
             {
-                itemDateBase.GetItemId(11).checkPossession = false;
                 inventry.Delete(itemDateBase.GetItemId(11));
                 inventry.Add(itemDateBase.GetItemId(19));
-                itemDateBase.GetItemId(19).checkPossession = true;
                 selectedDish2 = false;
                 ingredients2Text.text = "使用済み";
             }
@@ -435,11 +419,8 @@ public class Cooktop : MonoBehaviour
             MessageManager.message_instance.MessageWindowActive(dish3Messages, dish3Names, dish3Image, messageSwitch, ct: destroyCancellationToken).Forget();
             ingredients.gameObject.SetActive(false);
             inventry.Delete(itemDateBase.GetItemId(17));
-            itemDateBase.GetItemId(17).checkPossession = false;
-            itemDateBase.GetItemId(12).checkPossession = false;
             inventry.Delete(itemDateBase.GetItemId(12));
             inventry.Add(itemDateBase.GetItemId(23));
-            itemDateBase.GetItemId(23).checkPossession = true;
             selectedDish3 = false;
             ingredients3Text.text = "使用済み";
         }
@@ -452,22 +433,17 @@ public class Cooktop : MonoBehaviour
             MessageManager.message_instance.MessageWindowActive(dishFailMessages, dishFailNames, dishFailImage, messageSwitch, ct: destroyCancellationToken).Forget();
             ingredients.gameObject.SetActive(false);
             inventry.Delete(itemDateBase.GetItemId(17));
-            itemDateBase.GetItemId(17).checkPossession = false;
             if(itemDateBase.GetItemId(13).checkPossession == true)
             {
-                itemDateBase.GetItemId(13).checkPossession = false;
                 inventry.Delete(itemDateBase.GetItemId(13));
                 inventry.Add(itemDateBase.GetItemId(20));
-                itemDateBase.GetItemId(20).checkPossession = true;
                 selectedDish3 = false;
                 ingredients3Text.text = "使用済み";
             }
             else if(itemDateBase.GetItemId(14).checkPossession == true)
             {
-                itemDateBase.GetItemId(14).checkPossession = false;
                 inventry.Delete(itemDateBase.GetItemId(14));
                 inventry.Add(itemDateBase.GetItemId(20));
-                itemDateBase.GetItemId(20).checkPossession = true;
                 selectedDish3 = false;
                 ingredients3Text.text = "使用済み";
             }

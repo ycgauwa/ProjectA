@@ -10,6 +10,8 @@ public class SoundManager : MonoBehaviour
     AudioSource bgmAudioSource2;
     [SerializeField]
     AudioSource seAudioSource;
+    public static SoundManager sound_Instance;
+
 
     public float BgmVolume
     {
@@ -51,6 +53,7 @@ public class SoundManager : MonoBehaviour
     {
         GameObject soundManager = CheckOtherSoundManager();
         bool checkResult = soundManager != null && soundManager != gameObject;
+        sound_Instance = this;
     }
 
     GameObject CheckOtherSoundManager()

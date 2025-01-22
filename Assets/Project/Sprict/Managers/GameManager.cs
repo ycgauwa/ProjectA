@@ -20,6 +20,12 @@ public class GameManager : MonoBehaviour
     private List<string> cookednames;
     [SerializeField]
     private List<Sprite> cookedimage;
+    [SerializeField]
+    private List<string>Firmessages3;
+    [SerializeField]
+    private List<string> Firnames3;
+    [SerializeField]
+    private List<Sprite> Firimages3;
     public static GameManager m_instance;
     public GameObject player;
     public GameObject seiitirou;
@@ -54,6 +60,9 @@ public class GameManager : MonoBehaviour
     public Image Instruction3;
     public Image Instruction4;
     public Image Instruction5;
+    public Image gallery1;
+    public Image gallery2;
+    public Image lookPuzzle;
     public Sprite noneImage;
     public ItemDateBase itemDate;
     public Inventry inventry;
@@ -61,6 +70,7 @@ public class GameManager : MonoBehaviour
     public AudioClip decision;
     public AudioClip ikigire;
     public ToEvent3 ToEvent3;
+    public FirEnemyMess firEnemyMess;
     public DishMessage chickenDish;
     public DishMessage fishDish;
     public DishMessage shrimpDish;
@@ -71,6 +81,10 @@ public class GameManager : MonoBehaviour
     public bool stopSwitch = false;
     private TextAsset csvInteriorsFile; // CSVファイル
     private List<string[]> csvInteriorsData = new List<string[]>(); // CSVファイルの中身を入れるリスト
+    private TextAsset csvNotEntersFile; // CSVファイル
+    private List<string[]> csvNotEntersData = new List<string[]>(); // CSVファイルの中身を入れるリスト
+    private TextAsset csvEndingsFile; // CSVファイル
+    private List<string[]> csvEndingsData = new List<string[]>(); // CSVファイルの中身を入れるリスト
 
     private void Start()
     {
@@ -80,11 +94,25 @@ public class GameManager : MonoBehaviour
         postVolume.profile.TryGet(out vignette);
         csvInteriorsFile = Resources.Load("InteriorsText") as TextAsset; // ResourcesにあるCSVファイルを格納
         StringReader reader = new StringReader(csvInteriorsFile.text); // TextAssetをStringReaderに変換
+        csvNotEntersFile = Resources.Load("NotEntersText") as TextAsset;
+        StringReader notEnterReader = new StringReader(csvNotEntersFile.text);
+        csvEndingsFile = Resources.Load("EndingsText") as TextAsset;
+        StringReader endingReader = new StringReader(csvEndingsFile.text);
 
         while(reader.Peek() != -1)
         {
             string line = reader.ReadLine(); // 1行ずつ読み込む
             csvInteriorsData.Add(line.Split(',')); // csvDataリストに追加する
+        }
+        while(notEnterReader.Peek() != -1)
+        {
+            string line = notEnterReader.ReadLine(); // 1行ずつ読み込む
+            csvNotEntersData.Add(line.Split(',')); // csvDataリストに追加する
+        }
+        while(endingReader.Peek() != -1)
+        {
+            string line = endingReader.ReadLine(); // 1行ずつ読み込む
+            csvEndingsData.Add(line.Split(',')); // csvDataリストに追加する
         }
     }
     // Update is called once per frame
@@ -124,6 +152,15 @@ public class GameManager : MonoBehaviour
                     else if(cooktop.selectedDish3)cooktop.selectedDish3 = false;
                     EventSystem.current.SetSelectedGameObject(cooktop.firstSelect);
                     soundManager.PlaySe(cancel);
+                }
+            }
+            else if(lookPuzzle.gameObject.activeSelf)
+            {
+                if(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
+                {
+                    lookPuzzle.gameObject.SetActive(false);
+                    soundManager.PlaySe(cancel);
+                    stopSwitch = false;
                 }
             }
             else
@@ -237,18 +274,55 @@ public class GameManager : MonoBehaviour
         {
             player.transform.position = new Vector3(76,170,0);
         }
+        else if(Input.GetKeyDown(KeyCode.F2))
+        {
+            player.transform.position = new Vector3(106, 140, 0);
+        }
+        else if(Input.GetKeyDown(KeyCode.F3))
+        {
+            player.transform.position = new Vector3(150, -12, 0);
+        }
     }
-    public List<string> GetSpeakerName(string interiorName)
+    public List<string> GetSpeakerName(string interiorName, string type)
     {
-        int stt = csvInteriorsData.IndexOf(csvInteriorsData.First(item => item[0] == interiorName));
-        int end = csvInteriorsData.IndexOf(csvInteriorsData.Skip(stt + 1).First(item => item[0] != ""));
-        return csvInteriorsData.Skip(stt).Take(end-1 - stt).Select(item => item[1]).ToList();
+        switch(type)
+            {
+            case "Interior":
+                int stt = csvInteriorsData.IndexOf(csvInteriorsData.First(item => item[0] == interiorName));
+                int end = csvInteriorsData.IndexOf(csvInteriorsData.Skip(stt + 1).First(item => item[0] != ""));
+                return csvInteriorsData.Skip(stt).Take(end - 1 - stt).Select(item => item[1]).ToList();
+            case "NotEnter":
+                stt = csvNotEntersData.IndexOf(csvNotEntersData.First(item => item[0] == interiorName));
+                end = csvNotEntersData.IndexOf(csvNotEntersData.Skip(stt + 1).First(item => item[0] != ""));
+                return csvNotEntersData.Skip(stt).Take(end - 1 - stt).Select(item => item[1]).ToList();
+
+            default:
+                return new List<string>();
+        }
+
     }
-    public List<string>GetMessages(string interiorName)
+    public List<string>GetMessages(string interiorName, string type)
     {
-        int stt = csvInteriorsData.IndexOf(csvInteriorsData.First(item => item[0] == interiorName));
-        int end = csvInteriorsData.IndexOf(csvInteriorsData.Skip(stt + 1).First(item => item[0] != ""));
-        return csvInteriorsData.Skip(stt).Take(end-1 - stt).Select(item => item[2]).ToList();
+        switch(type)
+        {
+            case "Interior":
+                int stt = csvInteriorsData.IndexOf(csvInteriorsData.First(item => item[0] == interiorName));
+                int end = csvInteriorsData.IndexOf(csvInteriorsData.Skip(stt + 1).First(item => item[0] != ""));
+                return csvInteriorsData.Skip(stt).Take(end - 1 - stt).Select(item => item[2]).ToList();
+
+            case "NotEnter":
+                 stt = csvNotEntersData.IndexOf(csvNotEntersData.First(item => item[0] == interiorName));
+                 end = csvNotEntersData.IndexOf(csvNotEntersData.Skip(stt + 1).First(item => item[0] != ""));
+                return csvNotEntersData.Skip(stt).Take(end - 1 - stt).Select(item => item[2]).ToList();
+            
+            case "Ending":
+                stt = csvEndingsData.IndexOf(csvEndingsData.First(item => item[0] == interiorName));
+                end = csvEndingsData.IndexOf(csvEndingsData.Skip(stt + 1).First(item => item[0] != ""));
+                return csvEndingsData.Skip(stt).Take(end - 1 - stt).Select(item => item[2]).ToList();
+
+            default:
+                return new List<string>();
+        }
     }
     public void OnClickBackButton()
     {
@@ -290,14 +364,20 @@ public class GameManager : MonoBehaviour
         soundManager.PlaySe(decision);
         menuCanvas.gameObject.SetActive(false);
         galleryCanvas.gameObject.SetActive(true);
+        gallery1.gameObject.SetActive(true);
     }
-    public void OnclickRetryButton()
+    public void OnclickRetryButton(AudioClip meatSound = null)
     {
-        GameManager.m_instance.stopSwitch = false;
+        player.transform.position = new Vector2(0,0);
+        stopSwitch = false;
         if(homing.speed == 0)homing.speed = 2;
+        soundManager.StopSe(meatSound);
+        if(MessageManager.message_instance.window.gameObject.activeSelf)
+        {
+            MessageManager.message_instance.window.gameObject.SetActive(false);
+        }
         if (deathCount > 4)
         {
-            itemDate.GetItemId(253).checkPossession = false;
             inventry.Delete(itemDate.GetItemId(253));
             yukitoDead.SetActive(true);
             seiitirou.gameObject.tag = "Seiitirou";
@@ -312,25 +392,25 @@ public class GameManager : MonoBehaviour
             playerManager = seiitirou.GetComponent<PlayerManager>();
             playerManager.staminaMax = 300;
             playerManager.teleportManager = teleportManager;
+            playerManager.homing = homing;
             Rigidbody2D rb = seiitirou.GetComponent<Rigidbody2D>();
             rb.constraints = RigidbodyConstraints2D.None;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            homing.enemyEmerge = false;
+            homing.enemyCount = 0;
             playerManager.SeiitirouRes();
         }
         if (rescueEvent.RescueSwitch)
         {
-            Debug.Log(deathCount);
             player.transform.position = new Vector2(35, 68);
             enemy.transform.position = new Vector2(35, 71);
             buttonPanel.gameObject.SetActive(false);
             gameoverWindow.gameObject.SetActive(false);
-            PlayerManager.m_instance.m_speed = 0.075f;
             Homing.m_instance.speed = 2;
             deathCount++;
         }
         else
         {
-            PlayerManager.m_instance.m_speed = 0.075f;
             Homing.m_instance.speed = 2;
             soundManager.PlaySe(decision);
             buttonPanel.gameObject.SetActive(false);
@@ -342,14 +422,14 @@ public class GameManager : MonoBehaviour
             //　最初は民家１の玄関前に復活できるようにする。
             //　2軒目に行く時点でチェックポイントを変える。
             //　その際は敵を消しておく。
-            if(ToEvent3.firstchased == true)
+            player.transform.position = new Vector2(69, -46);
+            
+            if(firEnemyMess.gameObject.activeSelf)
+                firEnemyMess.firstDeath = true;
+            if(enemy.activeSelf)
             {
-                player.transform.position = new Vector2(69, -46);
-                if(enemy.activeSelf)
-                {
-                    enemy.gameObject.SetActive(false);
-                    teleportManager.StopChased();
-                }
+                enemy.gameObject.SetActive(false);
+                teleportManager.StopChased();
             }
         }
     }

@@ -35,7 +35,9 @@ public class NotEnter1 : MonoBehaviour
             //falseの時メッセージウィンドウの表示
             //代入大事。同じ名前であっても下記のようなやり方で代入可能
             this.one = ToEvent1.one;
-            if (one == false) MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken).Forget();
+            if (one == false)
+                MessageManager.message_instance.MessageWindowActive(GameManager.m_instance.GetMessages(name, "NotEnter"), GameManager.m_instance.GetSpeakerName(name, "NotEnter"), image, ct: destroyCancellationToken).Forget();
+            //MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken).Forget();
             else if (one == true) player.transform.position = new Vector2(-10, -105);
         }
     }

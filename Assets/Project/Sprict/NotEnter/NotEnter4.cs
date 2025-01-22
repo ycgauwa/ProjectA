@@ -31,7 +31,7 @@ public class NotEnter4 : MonoBehaviour
         {
             if(collider.gameObject.tag.Equals("Player"))
             {
-                MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
+                MessageManager.message_instance.MessageWindowActive(GameManager.m_instance.GetMessages(name, "NotEnter"), GameManager.m_instance.GetSpeakerName(name, "NotEnter"), images, ct: destroyCancellationToken).Forget();
             }
         }
         else if(getKey1 == true)
@@ -41,7 +41,6 @@ public class NotEnter4 : MonoBehaviour
                 gameObject.tag = "Minnka1-17";
                 // 一旦敵が出てこないようにする。←出来てない。
                 Inventry.instance.Delete(itemDateBase.GetItemId(251));
-                itemDateBase.GetItemId(251).checkPossession = false;
             }
         }
         
@@ -52,7 +51,7 @@ public class NotEnter4 : MonoBehaviour
             {
                 if(notEnter6.seiitirouFlag == false)
                 {
-                    MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken).Forget();
+                    MessageManager.message_instance.MessageWindowActive(GameManager.m_instance.GetMessages(name+"A", "NotEnter"), GameManager.m_instance.GetSpeakerName(name+"A", "NotEnter"), images2, ct: destroyCancellationToken).Forget();
                 }
                 else
                 {

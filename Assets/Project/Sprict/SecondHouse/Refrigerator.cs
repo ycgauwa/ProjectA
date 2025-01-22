@@ -98,7 +98,7 @@ public class Refrigerator : MonoBehaviour
     {
         if(isContacted && messageSwitch == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
-            if(itemDateBase.items[11].checkPossession && itemDateBase.items[12].checkPossession && itemDateBase.items[13].checkPossession == true && isTaken == false)
+            if(itemDateBase.GetItemId(15).checkPossession && itemDateBase.GetItemId(16).checkPossession && itemDateBase.GetItemId(17).checkPossession == true && isTaken == false)
             {
                 messageSwitch = true;
                 coroutine = OnAction();
@@ -121,8 +121,7 @@ public class Refrigerator : MonoBehaviour
     {
         if(target.text == "「エビチリ似合いそうな良い素材はないかな？」")
         {
-            inventry.Add(itemDateBase.items[14]);
-            itemDateBase.items[14].checkPossession = true;
+            inventry.Add(itemDateBase.GetItemId(6));
             target.text = "鳥の丸焼き用の素材は？";
             select1.text = "レモン";
             select2.text = "オレンジ";
@@ -130,8 +129,7 @@ public class Refrigerator : MonoBehaviour
         }
         else if(target.text == "鳥の丸焼き用の素材は？")
         {
-            inventry.Add(itemDateBase.items[17]);
-            itemDateBase.items[17].checkPossession = true;
+            inventry.Add(itemDateBase.GetItemId(9));
             target.text = "魚のソテー用の素材は？";
             select1.text = "赤いソース";
             select2.text = "青いソース";
@@ -139,8 +137,7 @@ public class Refrigerator : MonoBehaviour
         }
         else if(target.text == "魚のソテー用の素材は？")
         {
-            inventry.Add(itemDateBase.items[20]);
-            itemDateBase.items[20].checkPossession = true;
+            inventry.Add(itemDateBase.GetItemId(12));
             selection.gameObject.SetActive(false);
             Selectwindow.gameObject.SetActive(false);
             target.text = "これで食材の用意ができた。調理に向かおう";
@@ -152,8 +149,7 @@ public class Refrigerator : MonoBehaviour
     {
         if(target.text == "「エビチリ似合いそうな良い素材はないかな？」")
         {
-            inventry.Add(itemDateBase.items[15]);
-            itemDateBase.items[15].checkPossession = true;
+            inventry.Add(itemDateBase.GetItemId(7));
             target.text = "鳥の丸焼き用の素材は？";
             select1.text = "レモン";
             select2.text = "オレンジ";
@@ -161,8 +157,7 @@ public class Refrigerator : MonoBehaviour
         }
         else if(target.text == "鳥の丸焼き用の素材は？")
         {
-            inventry.Add(itemDateBase.items[18]);
-            itemDateBase.items[18].checkPossession = true;
+            inventry.Add(itemDateBase.GetItemId(10));
             target.text = "魚のソテー用の素材は？";
             select1.text = "赤いソース";
             select2.text = "青いソース";
@@ -170,8 +165,7 @@ public class Refrigerator : MonoBehaviour
         }
         else if(target.text == "魚のソテー用の素材は？")
         {
-            inventry.Add(itemDateBase.items[21]);
-            itemDateBase.items[21].checkPossession = true;
+            inventry.Add(itemDateBase.GetItemId(13));
             selection.gameObject.SetActive(false);
             Selectwindow.gameObject.SetActive(false);
             target.text = "これで食材の用意ができた。調理に向かおう";
@@ -183,8 +177,7 @@ public class Refrigerator : MonoBehaviour
     {
         if(target.text == "「エビチリ似合いそうな良い素材はないかな？」")
         {
-            inventry.Add(itemDateBase.items[16]);
-            itemDateBase.items[16].checkPossession = true;
+            inventry.Add(itemDateBase.GetItemId(8));
             target.text = "鳥の丸焼き用の素材は？";
             select1.text = "レモン";
             select2.text = "オレンジ";
@@ -192,8 +185,7 @@ public class Refrigerator : MonoBehaviour
         }
         else if(target.text == "鳥の丸焼き用の素材は？")
         {
-            inventry.Add(itemDateBase.items[19]);
-            itemDateBase.items[19].checkPossession = true;
+            inventry.Add(itemDateBase.GetItemId(11));
             target.text = "魚のソテー用の素材は？";
             select1.text = "赤いソース";
             select2.text = "青いソース";
@@ -201,8 +193,7 @@ public class Refrigerator : MonoBehaviour
         }
         else if(target.text == "魚のソテー用の素材は？")
         {
-            inventry.Add(itemDateBase.items[22]);
-            itemDateBase.items[22].checkPossession = true;
+            inventry.Add(itemDateBase.GetItemId(14));
             selection.gameObject.SetActive(false);
             Selectwindow.gameObject.SetActive(false);
             target.text = "これで食材の用意ができた。調理に向かおう";

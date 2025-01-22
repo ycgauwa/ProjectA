@@ -20,4 +20,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Project/Scenes/MiniGame1.unity
     guid: 99e18c4f829e8824a866236f87e77e65
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: dbc84950f97dcfc4f8fb18356d91147d,
+      type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: dcf5ae3179be3eb4b8ce0d3233d222c8,
+      type: 2}

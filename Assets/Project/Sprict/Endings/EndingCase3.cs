@@ -495,7 +495,7 @@ public class EndingCase3 : MonoBehaviour
         GameManager.m_instance.OnclickRetryButton();
         EndingGalleryManager.m_gallery.endingGallerys[3].sprite = end4Image2.sprite;
         EndingGalleryManager.m_gallery.endingFlag[3] = true;
-        this.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
     private IEnumerator ExitEvent()
     {

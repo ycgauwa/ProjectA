@@ -61,6 +61,8 @@ public class EndingCase2 : MonoBehaviour
     public bool answer;
     public GameObject firstSelect;
     public GameObject firstSelect2;
+    public GameObject entrance;
+    public GameObject wall;
 
     //流れとしては外に出ようとして、つかむ画像の出現そのあとに凍るそのあとに白骨化からの餓死エンド。
     //変化が起こる前に、フェードアウトをはさむ予定ではある。選択肢→つかむ画像→一瞬光って画像差し替え→メッセージ送り
@@ -142,7 +144,10 @@ public class EndingCase2 : MonoBehaviour
         end2retry.gameObject.SetActive(true);
         end2Image3.gameObject.SetActive(false);
         coroutine = null;
-        GameManager.m_instance.stopSwitch = false;
+        entrance.gameObject.SetActive(false);
+        wall.gameObject.SetActive(true);
+        gameObject.SetActive(false);
+
     }
     public void OnclickEnd2Retry()
     {

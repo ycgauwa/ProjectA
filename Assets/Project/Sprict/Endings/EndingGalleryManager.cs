@@ -39,11 +39,33 @@ public class EndingGalleryManager : MonoBehaviour
             explainText = "End3 ˜M‚Î‚ê‚½¬“®•¨\nyæ“¾ğŒz\nƒNƒ[ƒ[ƒbƒg‚É‰B‚ê‚½Œã‚É_Œ‡‡V‚Æ‚È‚Á‚Ä€–S‚·‚é";
         else if(i == 3)
             explainText = "End4 ‹÷‚É’Ç‚¢‚â‚ç‚ê‚½‘l\nyæ“¾ğŒz\nƒNƒ[ƒ[ƒbƒg‚É‰B‚ê‚Ä‚©‚çˆÀ‘S‚ğŠm”F‚¹‚¸ŠO‚Éo‚æ‚¤‚Æ‚·‚é";
+        else if(i == 4)
+            explainText = "End5 ô‚í‚ê‚½¶–½‚Ì‹~Ï\nyæ“¾ğŒz\n“ä‚Ì’j‚ğŒ©E‚µ‚É‚µ‚Ä©•ª‚Ì‚½‚ß‚É—Fl‚Ì°‚à¶æÑ‚É‚·‚é";
+        else if(i == 5)
+            explainText = "End6 ŒŒ‚É‚Ü‚İ‚ê‚½”Ó`‰ï\nyæ“¾ğŒz\neØ‚È‚Ê‚¢‚®‚é‚İ‚½‚¿‚Éì‚Á‚½—¿—‚ğ“n‚³‚È‚¢";
         endingDetailText.text = explainText;
     }
     public void CloseEndingDetail()
     {
         endingDetail.gameObject.SetActive(false);
         explainText = "";
+    }
+    public void NextGalleryPage()
+    {
+        if(GameManager.m_instance.gallery1.gameObject.activeSelf)
+        {
+            SoundManager.sound_Instance.PlaySe(GameManager.m_instance.decision);
+            GameManager.m_instance.gallery1.gameObject.SetActive(false);
+            GameManager.m_instance.gallery2.gameObject.SetActive(true);
+        }
+    }
+    public void BackGalleryButton()
+    {
+        if(GameManager.m_instance.gallery2.gameObject.activeSelf)
+        {
+            SoundManager.sound_Instance.PlaySe(GameManager.m_instance.decision);
+            GameManager.m_instance.gallery2.gameObject.SetActive(false);
+            GameManager.m_instance.gallery1.gameObject.SetActive(true);
+        }
     }
 }

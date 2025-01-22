@@ -16,12 +16,6 @@ public class CalenderMessage : MonoBehaviour
     private List<string> names;
     [SerializeField]
     private List<Sprite> image;
-    [SerializeField]
-    private List<string> messages2;
-    [SerializeField]
-    private List<string> names2;
-    [SerializeField]
-    private List<Sprite> image2;
     public Canvas window;
     public Text target;
     public Text nameText;

@@ -19,11 +19,27 @@ public class HaruDeathQuestion : MonoBehaviour
     [SerializeField]
     private List<Sprite> images;
     [SerializeField]
+    private List<string> messages2;
+    [SerializeField]
+    private List<string> names2;
+    [SerializeField]
     private List<Sprite> images2;
+    [SerializeField]
+    private List<string> messages3;
+    [SerializeField]
+    private List<string> names3;
     [SerializeField]
     private List<Sprite> images3;
     [SerializeField]
+    private List<string> messages4;
+    [SerializeField]
+    private List<string> names4;
+    [SerializeField]
     private List<Sprite> images4;
+    [SerializeField]
+    private List<string> messages5;
+    [SerializeField]
+    private List<string> names5;
     [SerializeField]
     private List<Sprite> images5;
     public GameObject player;
@@ -139,33 +155,34 @@ public class HaruDeathQuestion : MonoBehaviour
         await UniTask.Delay(TimeSpan.FromSeconds(2f));
 
         //「晴ごめん……許して」的なセリフとその反応を加える。
-        await MessageManager.message_instance.MessageWindowActive(messages, names, images2, ct: destroyCancellationToken);
+        await MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken);
         player.transform.DOLocalMove(new Vector3(80, 65, 0), 4f);
         await UniTask.Delay(TimeSpan.FromSeconds(4f));
         await Blackout();
         player.transform.position = new Vector3(131, -12, 0);
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         // 晴の叫び声と幸人の後悔の描写
-        await MessageManager.message_instance.MessageWindowActive(messages, names, images3, ct: destroyCancellationToken);
+        await MessageManager.message_instance.MessageWindowActive(messages3, names3, images3, ct: destroyCancellationToken);
 
         light2D.intensity = 1.0f;
         player.transform.DOLocalMove(new Vector3(131, -16, 0), 5f);
         await UniTask.Delay(TimeSpan.FromSeconds(3f));
         // 幸人が決心して戻る。
-        await MessageManager.message_instance.MessageWindowActive(messages, names, images4, ct: destroyCancellationToken);
+        await MessageManager.message_instance.MessageWindowActive(messages4, names4, images4, ct: destroyCancellationToken);
         
         player.transform.DOLocalMove(new Vector3(131, -12, 0), 2.5f);
         await UniTask.Delay(TimeSpan.FromSeconds(2.5f));
         await Blackout();
         await UniTask.Delay(TimeSpan.FromSeconds(1f));
         player.transform.position = new Vector3(80, 65, 0);
+        haruDead.gameObject.SetActive(true);
         light2D.intensity = 1.0f;
         player.transform.DOLocalMove(new Vector3(80, 73, 0), 8f);
         await UniTask.Delay(TimeSpan.FromSeconds(2.5f));
         soundManager.PlayBgm(ending5Sound);
         await UniTask.Delay(TimeSpan.FromSeconds(5.5f));
         //　晴の死体を見てしまう→うわ～ってなってEnding
-        await MessageManager.message_instance.MessageWindowActive(messages, names, images4, ct: destroyCancellationToken);
+        await MessageManager.message_instance.MessageWindowActive(messages5, names5, images5, ct: destroyCancellationToken);
         
         await BlackoutSlow();
         await UniTask.Delay(TimeSpan.FromSeconds(4f));
@@ -197,7 +214,7 @@ public class HaruDeathQuestion : MonoBehaviour
         end5Canvas.gameObject.SetActive(false);
         light2D.intensity = 1.0f;
         soundManager.StopBgm(ending5Sound);
-        GameManager.m_instance.OnclickRetryButton();
+        //GameManager.m_instance.OnclickRetryButton();
         EndingGalleryManager.m_gallery.endingGallerys[4].sprite = end5Image.sprite;
         EndingGalleryManager.m_gallery.endingFlag[4] = true;
     }

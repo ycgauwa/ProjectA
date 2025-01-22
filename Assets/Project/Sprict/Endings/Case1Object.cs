@@ -89,11 +89,13 @@ public class Case1Object : MonoBehaviour
     {
         end1Image.gameObject.SetActive(true);
         endWindow.gameObject.SetActive(false);
-        endingCase1.player.transform.position = new Vector3(30, -35, 0);
+        endingCase1.player.transform.position = new Vector3(-35, 31, 0);
         soundManager.StopBgm(ending1Sound);
         GameManager.m_instance.stopSwitch = false;
         EndingGalleryManager.m_gallery.endingGallerys[0].sprite = end1retry.sprite;
         EndingGalleryManager.m_gallery.endingFlag[0] = true;
-        endingCase1.answerNum = 0;
+        endingCase1.gameObject.transform.position = new Vector3(-35,29,0);
+        endingCase1.answerNum = 3;
+        Destroy(endingCase1.faliedSelect.gameObject);
     }
 }

@@ -23,7 +23,7 @@ public class NotEnter3 : MonoBehaviour
         {
             if(collider.gameObject.tag.Equals("Player"))
             {
-                MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
+                MessageManager.message_instance.MessageWindowActive(GameManager.m_instance.GetMessages(name, "NotEnter"), GameManager.m_instance.GetSpeakerName(name, "NotEnter"), images,ct: destroyCancellationToken).Forget();
             }
         }
         // イベントが終わった後にTPできるようにしたい

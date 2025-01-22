@@ -21,6 +21,7 @@ public class BombDefuse : MonoBehaviour
     public Light2D light2D;
     public Item defusedBomb;
     public Inventry inventry;
+    public EnemyEncounter enemyEncounter;
 
     public Canvas secondHouseCanvas;
     public Image bombImage;
@@ -28,7 +29,7 @@ public class BombDefuse : MonoBehaviour
     public Text secondTimerText;
     public Text bombAnswerText;
     float limitTime = 60;
-    private bool timerStartSwitch;
+    public  bool timerStartSwitch;
     private bool isContacted = false;
 
     public SoundManager soundManager;
@@ -51,21 +52,19 @@ public class BombDefuse : MonoBehaviour
     }
     void Update()
     {
-        if(isContacted && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
+        if(timerStartSwitch == false && isContacted && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
             isContacted = false;
             BombDifuse().Forget();
         }
         if(timerStartSwitch)
             limitTime -= Time.deltaTime;
-
         if(limitTime < 0)
         {
             limitTime = 0;
             timerStartSwitch = false;
             ExplodeBomb().Forget();
         }
-
         secondTimerText.text = "0:" + limitTime.ToString("F0"); // 残り時間を整数で表示
     }
     private async UniTask BombDifuse()
@@ -76,13 +75,15 @@ public class BombDefuse : MonoBehaviour
         bombImage.gameObject.SetActive(true);
         timerStartSwitch = true;
         soundManager.PlayBgm(clockSound);
+        enemyEncounter.afterDifuse = true;
     }
     private async UniTask AfterDifuse()
     {
         soundManager.StopBgm(clockSound);
+        //　ここで「爆弾解除できた！坑道に向かおう。」
         await MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken);
         inventry.Add(defusedBomb);
-        defusedBomb.checkPossession = true;
+        SecondHouseManager.secondHouse_instance.enemyEncounter.gameObject.SetActive(true);
         GameManager.m_instance.stopSwitch = false;
     }
     private async UniTask ExplodeBomb()

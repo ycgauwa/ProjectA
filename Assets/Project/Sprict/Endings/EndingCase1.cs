@@ -47,6 +47,7 @@ public class EndingCase1 : MonoBehaviour
     public AudioClip decision;
     public AudioClip tensionBGM;
     public GameObject firstSelect;
+    public GameObject faliedSelect;
 
     //アンサーとして何を答えたか
     public  int answerNum;
@@ -56,7 +57,7 @@ public class EndingCase1 : MonoBehaviour
     void Start()
     {
         answerNum = 0;
-        //0が初期値1が否定した後2肯定した後
+        //0が初期値1が否定した後2肯定した後3がリトライを押した後。
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -75,7 +76,7 @@ public class EndingCase1 : MonoBehaviour
             if(isContacted == true && answered == false)
             {
                 if (answerNum == 1) MessageManager.message_instance.MessageWindowActive(messages4, names4, image4, ct:destroyCancellationToken).Forget();
-                else if (answerNum == 0)
+                else if (answerNum == 0 || answerNum == 3)
                 {
                     MessageManager.message_instance.MessageSelectWindowActive(messages, names, image,Selectwindow,selection,firstSelect, tensionBGM,ct: destroyCancellationToken).Forget();
                     answered = true;
@@ -101,9 +102,12 @@ public class EndingCase1 : MonoBehaviour
         soundManager.PlaySe(decision);
         selection.gameObject.SetActive(false);
         Selectwindow.gameObject.SetActive(false);
-        answerNum = 1;
         MessageManager.message_instance.isOpenSelect = false;
         soundManager.StopBgm(tensionBGM);
+        if(answerNum == 3)
+        {
+        }
+        else answerNum = 1;
         answered = false;
     }
     private IEnumerator Blackout()

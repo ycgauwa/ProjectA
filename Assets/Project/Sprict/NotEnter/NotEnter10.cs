@@ -30,6 +30,7 @@ public class NotEnter10 : MonoBehaviour
     public float savedSpeed = 0;
     public float savedAcceleration = 0;
     public GameObject cameraObject;
+    public GameObject sleptAjure;
     public Homing2 ajure;
     public SoundManager soundManager;
     public AudioClip clip;
@@ -66,6 +67,8 @@ public class NotEnter10 : MonoBehaviour
             {
                 cameraManager.playerCamera = false;
                 GameManager.m_instance.stopSwitch = true;
+                sleptAjure.SetActive(false);
+                ajure.gameObject.SetActive(true);
                 cameraObject.transform.DOLocalMove(new Vector3(78, 149, -10), 2f);
                 Invoke("MessageActive", 2f);
             }
@@ -81,6 +84,7 @@ public class NotEnter10 : MonoBehaviour
         GameManager.m_instance.stopSwitch = false;
         ajure.enemyEmerge = true;
         cameraManager.playerCamera = true;
+        SecondHouseManager.secondHouse_instance.meat.gameObject.SetActive(true);
         gameObject.SetActive(false);
     }
     public void StopEnemy() 

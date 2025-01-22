@@ -17,74 +17,13 @@ public class NotEnter2 : MonoBehaviour
     private List<string> names;
     [SerializeField]
     private List<Sprite> images;
-    public Canvas window;
-    public Text target;
-    public Text nameText;
-    public Image characterImage;
-    private IEnumerator coroutine;
     public GameObject player;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    private void OnTriggerEnter2D(Collider2D collider)
+    private async void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.tag.Equals("Player"))
         {
             PlayerManager.m_instance.m_speed = 0;
-            coroutine = CreateCoroutine();
-            StartCoroutine(coroutine);
+            await MessageManager.message_instance.MessageWindowActive(GameManager.m_instance.GetMessages(name, "NotEnter"), GameManager.m_instance.GetSpeakerName(name, "NotEnter"), images, ct: destroyCancellationToken);        
         }
-    }
-    public IEnumerator CreateCoroutine()
-    {
-        // window起動
-        window.gameObject.SetActive(true);
-
-        // 抽象メソッド呼び出し 詳細は子クラスで実装
-        yield return OnAction();
-
-        // window終了
-        this.target.text = "";
-        this.window.gameObject.SetActive(false);
-
-        StopCoroutine(coroutine);
-        coroutine = null;
-        PlayerManager.m_instance.m_speed = 0.075f;
-
-
-    }
-    protected void showMessage(string message, string name, Sprite image)
-    {
-        this.target.text = message;
-        this.nameText.text = name;
-        characterImage.sprite = image;
-    }
-
-    IEnumerator OnAction()
-    {
-
-        for(int i = 0; i < messages.Count; ++i)
-        {
-            // 1フレーム分 処理を待機(下記説明1)
-            yield return null;
-
-            // 会話をwindowのtextフィールドに表示
-            showMessage(messages[i], names[i], images[i]);
-
-
-            // キー入力を待機 (下記説明1)
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
-        }
-
-        yield break;
-
     }
 }

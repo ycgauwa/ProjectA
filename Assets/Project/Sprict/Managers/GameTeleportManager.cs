@@ -119,6 +119,8 @@ public class GameTeleportManager : MonoBehaviour
         new TeleportAddress(){name="Ladder1-2",playerPosition = new Vector2(95, -19)},
         new TeleportAddress(){name="Warp2-23",playerPosition = new Vector2(40, 120)},
         new TeleportAddress(){name="Warp2-24",playerPosition = new Vector2(64, 144)},
+        new TeleportAddress(){name="Warp2-25",playerPosition = new Vector2(116, 169)},
+        new TeleportAddress(){name="Warp2-26",playerPosition = new Vector2(106, 151)},
     };
 
     /*ここでテレポートアドレスから引っ張ってきたPTAの変数が引数となって

@@ -55,7 +55,7 @@ public class ItemDateBase : MonoBehaviour
         //　普通のハンマーと人形で鍵が出てくる。
         if(GetItemId(5).selectedItem == true && GetItemId(2).selectedItem == true && notEnter4.getKey1 == false)
         {
-            inventry.Add(GetItemId(252));
+            inventry.Add(GetItemId(251));
             inventry.Delete(GetItemId(5));
             inventry.Delete(GetItemId(2));
             itemTextMessage.gameObject.SetActive(true);

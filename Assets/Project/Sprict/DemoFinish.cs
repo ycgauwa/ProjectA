@@ -121,9 +121,12 @@ public class DemoFinish : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        PlayerManager.m_instance.m_speed = 0;
-        Time.timeScale = 0.0f;
-        DemoFinishCanvas.gameObject.SetActive(true);
+        if(collider.gameObject.tag.Equals("Player") || collider.gameObject.name == "Matiba Haru")
+        {
+            PlayerManager.m_instance.m_speed = 0;
+            Time.timeScale = 0.0f;
+            DemoFinishCanvas.gameObject.SetActive(true);
+        }
     }
     // Start is called before the first frame update
     void Awake()

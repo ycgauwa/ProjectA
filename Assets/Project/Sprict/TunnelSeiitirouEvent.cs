@@ -1,0 +1,72 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using UnityEngine;
+using UnityEngine.Rendering.Universal;
+
+public class TunnelSeiitirouEvent : MonoBehaviour
+{
+    //征一郎が坑道にて一人語りをするイベント
+    //セリフを出して、カメラを大岩に移してから
+    //カメラを戻してセリフを出して暗転して進める。
+    [SerializeField]
+    private List<string> messages;
+    [SerializeField]
+    private List<string> names;
+    [SerializeField]
+    private List<Sprite> images;
+    [SerializeField]
+    private List<string> messages2;
+    [SerializeField]
+    private List<string> names2;
+    [SerializeField]
+    private List<Sprite> images2;
+
+    public GameObject cameraObject;
+    public Light2D light2D;
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if(collider.gameObject.tag.Equals("Seiitirou"))
+        {
+            TunnelEvent().Forget();
+        }
+        else if(collider.gameObject.tag.Equals("Player")) gameObject.SetActive(false);
+    }
+    private async UniTask TunnelEvent()
+    {
+        GameManager.m_instance.stopSwitch = true;
+        //セリフ内容（この坑道をもう一度通るだなんて想像もしていなかった。
+        //元々居た家はやばい奴が居たのに逃げ出した先でもあんな化け物がいるだなんて……。
+        //安全を求めて移動を続けているが、やはり別の出口にある大岩を壊すしかなさそうだな。）
+        await MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken);
+        cameraManager.seiitirouCamera = false;
+        cameraObject.transform.DOLocalMove(new Vector3(190, 11, -10), 4f);
+        await UniTask.Delay(TimeSpan.FromSeconds(4f));
+        await MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken);
+        await Blackout();
+        await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
+        cameraManager.seiitirouCamera = true;
+        Debug.Log("test2");
+        //オブジェクトの総入れ替え
+        SecondHouseManager.secondHouse_instance.bear.gameObject.SetActive(false);
+        SecondHouseManager.secondHouse_instance.chicken.gameObject.SetActive(false);
+        SecondHouseManager.secondHouse_instance.mushroom.gameObject.SetActive(false);
+        SecondHouseManager.secondHouse_instance.toEvent5.gameObject.SetActive(false);
+        GameManager.m_instance.stopSwitch = false;
+        light2D.intensity = 1.0f;
+        gameObject.SetActive(false);
+        Debug.Log("test3");
+    }
+    private async UniTask Blackout()
+    {
+        light2D.intensity = 1.0f;
+        while(light2D.intensity > 0.01f)
+        {
+            light2D.intensity -= 0.012f;
+            await UniTask.Delay(1);
+        }
+    }
+}

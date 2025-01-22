@@ -23,12 +23,14 @@ public class Inventry : MonoBehaviour
     }
     public void Add(Item item)
     {
+        item.checkPossession = true;
         items.Add(item);
         inventryUI.UpdateUI();
     }
     public void Delete(Item item)
     {
         item.selectedItem = false;
+        item.checkPossession = false;
         items.Remove(item);
         inventryUI.UpdateUI();
     }

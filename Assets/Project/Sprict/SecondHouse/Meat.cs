@@ -46,7 +46,6 @@ public class Meat : MonoBehaviour
     }
     private void Update()//入力チェックはUpdateに書く
     {
-
         //メッセージウィンドウ閉じるときはこのメソッドを
         if(isContacted && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
@@ -71,6 +70,8 @@ public class Meat : MonoBehaviour
         soundManager.StopSe(meatSound);
         lightAnimation.gameObject.SetActive(true);
         haruSelectionObject.tag = "Minnka2-4";
+        Meat meat = GetComponent<Meat>();
+        meat.enabled = false;
     }
     private async UniTask Blackout()
     {

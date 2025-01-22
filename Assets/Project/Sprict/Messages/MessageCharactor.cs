@@ -107,8 +107,69 @@ public class MessageCharactor : MonoBehaviour
     でもメッセージと画像は一対一対応してるから別にforeachじゃなくてもよくね？*/
     IEnumerator CharaShowMessage()
     {
-        // バチを持ってないとき1軒目以降は分岐できず
-        if(bati.checkPossession == false)
+        if(notEnter4.getKey1 == true)//居間に行けるようになってからの内容
+        {
+            charactername = character.charaName;
+            images = character.characterImages3;
+            messages = character.messageTexts3;
+            int i = 0;
+            // 要素の数だけループが行われる。
+            foreach(string str in messages)
+            {
+                yield return null;
+                showMessage(str, charactername, images[i]);
+                i++;
+                yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
+            }
+            target.text = "";
+            GameManager.m_instance.ImageErase(Chara);
+            window.gameObject.SetActive(false);
+            yield break;
+        }
+        if(bati.checkPossession == true)//バチをとってからの内容
+        {
+            charactername = character.charaName;
+            images = character.characterImages2;
+            if(gameObject.name == "Matiba Haru" && answerNum == 2) images = character.characterImages1;
+            if(gameObject.name == "Matiba Haru" && answerNum != 2)
+            {
+                character.messageTexts2[0] = "「バチ本当に見つかったの！？都市伝説は実在するのかな。」";
+                character.messageTexts2[1] = "「やっぱり僕怖くなってきたかも知れない……。ね、ねぇちょっと今回はやめにしない？」";
+            }
+            messages = character.messageTexts2;
+            int i = 0;
+            // 要素の数だけループが行われる。
+            foreach(string str in messages)
+            {
+                yield return null;
+                showMessage(str, charactername, images[i]);
+                i++;
+                if(i == messages.Count && gameObject.name == "Matiba Haru" && answerNum == 0)
+                {
+                    Selectwindow.gameObject.SetActive(true);
+                    selectionPanel.gameObject.SetActive(true);
+                    EventSystem.current.SetSelectedGameObject(firstSelect);
+                    isOpenSelect = true;
+                    break;
+                }
+                yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
+            }
+            if(gameObject.name == "Hosokawa Mitsuki" && characterItem.answerNum == 0)
+            {
+                //こいつの中に初回限定のメッセージ文を（⑤）を入れてあげればいける。
+                characterItem.CharagivedItem();
+            }
+            else
+            {
+                yield return new WaitUntil(() => !isOpenSelect);
+                Chara.sprite = null;
+                target.text = "";
+                GameManager.m_instance.ImageErase(Chara);
+                window.gameObject.SetActive(false);
+            }
+            yield break;
+        }
+        else if(bati.checkPossession == false)
         {
             charactername = character.charaName;
             images = character.characterImages1;
@@ -129,68 +190,6 @@ public class MessageCharactor : MonoBehaviour
             }
             else
             {
-                target.text = "";
-                GameManager.m_instance.ImageErase(Chara);
-                window.gameObject.SetActive(false);
-            }
-            yield break;
-        }
-        else if(notEnter4.getKey1 == true)//居間に行けるようになってからの内容
-        {
-            charactername = character.charaName;
-            images = character.characterImages3;
-            messages = character.messageTexts3;
-            int i = 0;
-            // 要素の数だけループが行われる。
-            foreach(string str in messages)
-            {
-                yield return null;
-                showMessage(str, charactername, images[i]);
-                i++;
-                yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
-            }
-            target.text = "";
-            GameManager.m_instance.ImageErase(Chara);
-            window.gameObject.SetActive(false);
-            yield break;
-        }
-        else if(bati.checkPossession == true)//バチをとってからの内容
-        {
-            charactername = character.charaName;
-            images = character.characterImages2;
-            if(gameObject.name == "Matiba Haru" && answerNum == 2) images = character.characterImages1;
-            if (gameObject.name == "Matiba Haru" && answerNum != 2)
-            {
-                character.messageTexts2[0] = "「バチ本当に見つかったの！？都市伝説は実在するのかな。」";
-                character.messageTexts2[1] = "「やっぱり僕怖くなってきたかも知れない……。ね、ねぇちょっと今回はやめにしない？」";
-            }
-            messages = character.messageTexts2;
-            int i = 0;
-            // 要素の数だけループが行われる。
-            foreach(string str in messages)
-            {
-                yield return null;
-                showMessage(str, charactername, images[i]);
-                i++;
-                if (i == messages.Count && gameObject.name == "Matiba Haru" && answerNum == 0)
-                {
-                    Selectwindow.gameObject.SetActive(true);
-                    selectionPanel.gameObject.SetActive(true);
-                    EventSystem.current.SetSelectedGameObject(firstSelect);
-                    isOpenSelect = true;
-                    break;
-                }
-                yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
-            }
-            if(gameObject.name == "Hosokawa Mitsuki" && characterItem.answerNum == 0)
-            {
-                //こいつの中に初回限定のメッセージ文を（⑤）を入れてあげればいける。
-                characterItem.CharagivedItem();
-            }
-            else
-            {
-                yield return new WaitUntil(() => !isOpenSelect);
-                Chara.sprite = null;
                 target.text = "";
                 GameManager.m_instance.ImageErase(Chara);
                 window.gameObject.SetActive(false);
@@ -302,7 +301,6 @@ public class MessageCharactor : MonoBehaviour
         characterItem.selection.gameObject.SetActive(false);
         characterItem.Selectwindow.gameObject.SetActive(false);
         characterItem.inventry.Add(characterItem.itemDateBase.GetItemId(201));
-        characterItem.givedItem.checkPossession = true;
         characterItem.answerNum = 2;
         characterItem.isOpenSelect = false;
     }

@@ -34,6 +34,7 @@ public class ItemGet : MonoBehaviour
     {
         if(collider.gameObject.tag.Equals("Player") || collider.gameObject.tag.Equals("Seiitirou"))
             isContacted = true;
+        
     }
     private void OnTriggerExit2D(Collider2D collider)
     {
@@ -47,9 +48,10 @@ public class ItemGet : MonoBehaviour
         {
             messageSwitch = true;
             itemGeted = true;
-            item.checkPossession = true;
             MessageManager.message_instance.MessageWindowActive(messages, names,images, ct: destroyCancellationToken).Forget();
             inventry.Add(item);
+            ItemGet getItem = GetComponent<ItemGet>();
+            getItem.enabled = false;
             if(name == "LightAnimation")
                 gameObject.SetActive(false);
         }

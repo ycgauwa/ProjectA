@@ -87,7 +87,7 @@ public class PlayerManager : MonoBehaviour
         stamina += 1;
         staminaIntensity -= 0.01f;
         //息切れを加えてスピードを遅くする。
-        soundManager.PlaySe(shortnessSound);
+        SoundManager.sound_Instance.PlaySe(GameManager.m_instance.ikigire);
     }
     private void Update()
     {
@@ -588,11 +588,13 @@ public class PlayerManager : MonoBehaviour
         {
             teleportAddress = teleportManager.FindTeleportAddress("Ladder1-1");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.soundManager.PlaySe(teleportManager.climbStairs);
         }
         if(other.gameObject.name == ("Ladder1-2"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Ladder1-2");
             transform.position = teleportAddress.playerPosition;
+            teleportManager.soundManager.PlaySe(teleportManager.climbStairs);
         }
         if(other.gameObject.name == "Warp2-23")
         {
@@ -603,6 +605,18 @@ public class PlayerManager : MonoBehaviour
         if(other.gameObject.name == ("Warp2-24"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Warp2-24");
+            transform.position = teleportAddress.playerPosition;
+            teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
+        }
+        if(other.gameObject.name == ("Warp2-25"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Warp2-25");
+            transform.position = teleportAddress.playerPosition;
+            teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
+        }
+        if(other.gameObject.name == ("Warp2-26"))
+        {
+            teleportAddress = teleportManager.FindTeleportAddress("Warp2-26");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
         }

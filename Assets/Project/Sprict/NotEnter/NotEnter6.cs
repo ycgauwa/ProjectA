@@ -74,6 +74,7 @@ public class NotEnter6 : MonoBehaviour
     public AudioClip scream;
     public AudioClip heartSound;
     public SoundManager soundManager;
+    public RescueEvent rescueEvent;
 
     private int heartCounts;
     private float redNum = 0.0f;
@@ -96,7 +97,6 @@ public class NotEnter6 : MonoBehaviour
         {
             if (collider.gameObject.tag.Equals("Player"))
             {
-                GameManager.m_instance.stopSwitch = true;
                 await ToEvent5();
             }
         }
@@ -116,14 +116,12 @@ public class NotEnter6 : MonoBehaviour
     {
         if(!choiced)
         {
-            PlayerManager.m_instance.m_speed = 0;
+            GameManager.m_instance.stopSwitch = true;
             Homing.m_instance.speed = 0;
 
             soundManager.PlaySe(scream);
             await UniTask.Delay(TimeSpan.FromSeconds(1.3f));
-            //Time.timeScale = 0.0f;
             await MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken);
-            //yield return OnMessage1();
 
             //選択肢を出したりBGMを付ける。画面を揺らす？とか近づけたりしていろいろいじくる
 
@@ -140,6 +138,8 @@ public class NotEnter6 : MonoBehaviour
     }
     IEnumerator ToResqueEvent()
     {
+        rescueEvent.gameObject.SetActive(true);
+        soundManager.StopBgm(fearBGM);
         heartCounts = 1000;
         cameraSwitch = false;
         notEnter6.gameObject.SetActive(false);
@@ -150,8 +150,8 @@ public class NotEnter6 : MonoBehaviour
         GameManager.m_instance.stopSwitch = false;
         choiced = true;
         rescued = true;
+        window.gameObject.SetActive(true);
         yield return OnMessage3();
-        soundManager.StopBgm(fearBGM);
         target.text = "";
         window.gameObject.SetActive(false);
         if (itemDateBase.GetItemId(301).checkPossession == true)
@@ -232,7 +232,6 @@ public class NotEnter6 : MonoBehaviour
         enemy.gameObject.SetActive(false);
         gameTeleportManager.soundManager.StopBgm(gameTeleportManager.toevent3.chasedBGM);
         Homing.m_instance.enemyEmerge = false;
-        underKey.checkPossession = false;
         GameManager.m_instance.stopSwitch = false;
         inventry.Delete(itemDateBase.GetItemId(253));
         soundManager.StopBgm(fearBGM);

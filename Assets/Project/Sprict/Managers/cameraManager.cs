@@ -9,10 +9,12 @@ public class cameraManager : MonoBehaviour
     public GameObject player; // ’Ç]‚·‚é‘ÎÛ‚ğŒˆ‚ß‚é•Ï”
     public GameObject seiitirou;
     public GameObject girl;
+    public GameObject haru;
     Vector3 pos;              // ƒJƒƒ‰‚Ì‰ŠúˆÊ’u‚ğ‹L‰¯‚·‚é‚½‚ß‚Ì•Ï”
     public static bool playerCamera = true;
     public static bool girlCamera = false;
     public static bool seiitirouCamera = false;
+    public static bool haruCamera = false;
     public static bool event5Camera = false;
     public float cameraSize = 0.0f;
     public Camera cam;
@@ -65,6 +67,18 @@ public class cameraManager : MonoBehaviour
 
             cameraPos.x = seiitirou.transform.position.x;
             cameraPos.y = seiitirou.transform.position.y;
+
+
+            cameraPos.z = -10;
+            Camera.main.gameObject.transform.position = cameraPos;
+        }
+        if(haruCamera == true)
+        {
+            Vector3 cameraPos = haru.transform.position;
+
+
+            cameraPos.x = haru.transform.position.x;
+            cameraPos.y = haru.transform.position.y;
 
 
             cameraPos.z = -10;
