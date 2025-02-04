@@ -24,6 +24,7 @@ public class Inventry : MonoBehaviour
     public void Add(Item item)
     {
         item.checkPossession = true;
+        item.geted = true;
         items.Add(item);
         inventryUI.UpdateUI();
     }

@@ -117,6 +117,7 @@ public class SecondHouseManager : MonoBehaviour
     [SerializeField]
     private List<Sprite> keyOpenImage;
     public Test1[] interiors = new Test1[4];
+    public CalenderMessage CalenderInteriors;
     private IEnumerator coroutine;
     public Canvas window;
     public Canvas end6Canvas;
@@ -128,8 +129,15 @@ public class SecondHouseManager : MonoBehaviour
     private bool chickenKey = false;
     private bool mushroomKey = false;
     public bool firstkey = false;
+    public bool haruTakedKey = false;
     public GameObject meat;
+    public GameObject haru;
     public GameObject metalBlade;
+    public GameObject weightObject;
+    public GameObject weightSwitch;
+    public GameObject sleepAjure;
+    public NotEnter9 notEnter9;
+    public EndingCase9 endingCase9;
     public Inventry inventry;
     public ItemDateBase itemDate;
     public DishMessage chickenDish;
@@ -143,17 +151,25 @@ public class SecondHouseManager : MonoBehaviour
     public EnemyEncounter enemyEncounter;
     public HaruImportantEvent haruImportant;
     public NotEnter13 notEnter13;
+    public TalkingWithHaru talkingWithHaru;
     public TunnelSeiitirouEvent tunnelSeiitirou;
     public Cooktop cooktop;
     public Homing2 ajure;
     public static SecondHouseManager secondHouse_instance;
     public SoundManager soundManager;
+    public Item clinicKey;
+    public AudioClip heartSound;
+    public AudioClip dogSound;
+    public AudioClip doorSound;
     public AudioClip keyOpen;
     public AudioClip meatEat;
     public AudioClip muvingAnimals;
     public AudioClip ending6Music;
+    public AudioClip noiseSound;
     public AudioClip laughing;
     public AudioClip bigSoundSE;
+    public AudioClip runSound;
+    public AudioClip fearMusic;
     //2軒目の選択肢を統括するスクリプト
 
     private void Start()

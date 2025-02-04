@@ -58,7 +58,7 @@ public class EscapeFormAjure : MonoBehaviour
             ajure.acceleration = 0;
             ajure.speed = 0;
             ajure.enemyEmerge = false;
-            soundManager.PauseBgm(enemyEncounter.fearMusic);
+            soundManager.PauseBgm(SecondHouseManager.secondHouse_instance.fearMusic);
             EscapeAjure().Forget();
             GameManager.m_instance.stopSwitch = true;
         }
@@ -99,7 +99,7 @@ public class EscapeFormAjure : MonoBehaviour
         ajure.gameObject.transform.position = new Vector3(9999,9999,0);
         GameManager.m_instance.stopSwitch = false;
         ajure.enemyEmerge = true;
-        soundManager.UnPauseBgm(enemyEncounter.fearMusic);
+        soundManager.UnPauseBgm(SecondHouseManager.secondHouse_instance.fearMusic);
         SecondHouseManager.secondHouse_instance.haruImportant.gameObject.SetActive(true);
     }
     private async UniTask Blackout()

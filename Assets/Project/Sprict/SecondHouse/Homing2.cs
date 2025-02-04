@@ -18,21 +18,40 @@ public class Homing2 : MonoBehaviour
     public Image buttonPanel;
     public bool enemyEmerge;
     public bool isMove;
+    public float savedSpeed = 0;
+    public float savedAcceleration = 0;
     Rigidbody2D rbody;
     //NPCAnimationController cr;
     public Vector2 enemyPosition;
     private Vector2 enemyMovement;
+
+    private Rigidbody2D rb;
+    private  Animator animator;
+    private SpriteRenderer spriteRenderer;
+    private bool facingRight = true;
+    private Vector3 previousPosition;
+    private Vector3 currentPosition;
     //2軒目の犬の動作スクリプト。流れとしては溜めて一気に動く感じ。
     private void Start()
     {
         m_instance = this;
         // プレイヤーのTransformを取得（プレイヤーのタグPlayerに設定必要）
-        playerTr = GameObject.FindGameObjectWithTag("Player").transform;
-        //cr = GetComponentInChildren<NPCAnimationController>();
+        if(GameObject.FindGameObjectWithTag("Player") == null)
+        {
+            playerTr = GameObject.FindGameObjectWithTag("Seiitirou").transform;
+        }
+        else
+        {
+            playerTr = GameObject.FindGameObjectWithTag("Player").transform;
+        }
         isMove = true;
         rbody = GetComponent<Rigidbody2D>();
         enemyCount = 0;
         GameTeleportManager.chasedTime = true;
+        animator = GetComponent<Animator>();
+        currentPosition = transform.position;
+        previousPosition = currentPosition;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     private void Update()
     {
@@ -62,6 +81,26 @@ public class Homing2 : MonoBehaviour
         if(enemyEmerge == true && speed > 0 && PlayerManager.m_instance.playerstate != PlayerManager.PlayerState.Talk && PlayerManager.m_instance.playerstate != PlayerManager.PlayerState.Stop)
         {
             enemyCount += Time.deltaTime;
+        }
+
+        previousPosition = currentPosition;
+        // 現在の位置を更新
+        currentPosition = transform.position;
+
+        // 移動距離を計算
+        Vector3 movement = currentPosition - previousPosition;
+        // アニメーターに速度を設定
+        animator.SetFloat("Speed", speed);
+
+        if(movement.x > 0 && facingRight)
+        {
+            Debug.Log("Right");
+            Flip(-1.5f);
+        }
+        else if(movement.x < 0 && !facingRight)
+        {
+            Debug.Log("Left");
+            Flip(1.5f);
         }
     }
     void FixedUpdate()
@@ -118,6 +157,35 @@ public class Homing2 : MonoBehaviour
         }
     }
     //プレイヤーがTPことを認知させる
+    public void StopEnemy()
+    {
+        if(!gameObject.activeSelf)
+            gameObject.SetActive(true);
+        SoundManager.sound_Instance.PauseBgm(SecondHouseManager.secondHouse_instance.fearMusic);
 
-
+        if(acceleration != 0)
+            savedAcceleration = acceleration;
+        acceleration = 0;
+        if(speed != 0)
+            savedSpeed = speed;
+        speed = 0;
+        enemyEmerge = false;
+    }
+    public void MoveEnemy()
+    {
+        acceleration = savedAcceleration;
+        speed = savedSpeed;
+        SoundManager.sound_Instance.UnPauseBgm(SecondHouseManager.secondHouse_instance.fearMusic);
+        if(gameObject.activeSelf)
+            gameObject.SetActive(false);
+        enemyEmerge = true;
+    }
+    void Flip(float scaleX)
+    {
+        // 向きを反転
+        facingRight = !facingRight;
+        Vector3 scaler = transform.localScale;
+        scaler.x = scaleX;
+        transform.localScale = scaler;
+    }
 }

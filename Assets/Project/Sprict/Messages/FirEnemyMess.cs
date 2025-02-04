@@ -11,40 +11,19 @@ public class FirEnemyMess : MonoBehaviour
     private List<string> names2;
     [SerializeField]
     private List<Sprite> images2;
-    [SerializeField]
-    private List<string> messages3;
-    [SerializeField]
-    private List<string> names3;
-    [SerializeField]
-    private List<Sprite> images3;
     public GameObject enemy;
     public bool firstDeath;
-    FirEnemyMess firEnemy;
-    // Start is called before the first frame update
-    void Start()
-    {
-        firEnemy = GetComponent<FirEnemyMess>();
-    }
-    // Update is called once per frame
     void Update()
     {
-
-        if(!enemy.activeSelf)
+        if(!GameManager.m_instance.homing.enemyEmerge)
         {
-            if(firstDeath)
+            if(GameManager.m_instance.homing.enemyEmerge)
             {
-                Debug.Log(firstDeath);
-                MessageManager.message_instance.MessageWindowActive(messages3, names3, images3, ct: destroyCancellationToken).Forget();
-                firEnemy.enabled = false;
-                firstDeath = false;
+                MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken).Forget();
+                enabled = false;
                 gameObject.SetActive(false);
             }
-                
-            MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken).Forget();
-            firEnemy.enabled = false;
-            gameObject.SetActive(false);
         }
-
     }
     public void Message()
     {

@@ -10,6 +10,7 @@ public class PassWord : MonoBehaviour
     [SerializeField] GameObject fleldObj;
     public InputField passcode1;
     public InputField passcode2;
+    public InputField seiPasscode1;
     public Item doll;
     public Item secondHouseKey;
     public Inventry inventry;
@@ -19,6 +20,12 @@ public class PassWord : MonoBehaviour
     private List<string> names;
     [SerializeField]
     private List<Sprite> images;
+    [SerializeField]
+    private List<string> seiitirouMessages;
+    [SerializeField]
+    private List<string> seiitirouNames;
+    [SerializeField]
+    private List<Sprite> seiitirouImages;
     void Start()
     {
         //これはお手本が画像を触って起こることだからImageを取得してるけど俺のゲームの場合は、、？
@@ -49,6 +56,18 @@ public class PassWord : MonoBehaviour
             {
                 inventry.Add(secondHouseKey);
                 MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
+            }
+        }
+    }
+    public void SeiitirouToGetKey()
+    {
+        fleldObj = GameObject.Find("SeiitirouPasscode");
+        if(secondHouseKey.checkPossession == false)
+        {
+            if(seiPasscode1.text == "511")
+            {
+                inventry.Add(secondHouseKey);
+                MessageManager.message_instance.MessageWindowActive(seiitirouMessages, seiitirouNames, seiitirouImages, ct: destroyCancellationToken).Forget();
             }
         }
     }

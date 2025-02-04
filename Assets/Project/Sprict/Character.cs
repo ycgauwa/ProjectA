@@ -40,4 +40,19 @@ public class Character : ScriptableObject
     public List<string> itemGiveMessage2;
     public List<string> itemGivedMessage;
     public List<string> freeText1;
+    public List<string> messageNames1;
+    public List<string> messageNames2;
+    public List<string> messageNames3;
+    public List<string> messageNames4;
+    public List<string> maxAffinityNames;
+    public List<string> highAffinityNames;
+    public List<string> moderateAffinityNames;
+    public List<string> lowAffinityNames;
+    public List<string> minAffinityNames;
+    public List<string> negativeAffinityNames;
+
+    public List<string> itemGiveNames1;
+    public List<string> itemGiveNames2;
+    public List<string> itemGivedNames;
+    public List<string> freeNames1;
 }

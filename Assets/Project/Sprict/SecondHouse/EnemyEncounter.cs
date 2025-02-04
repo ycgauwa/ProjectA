@@ -29,7 +29,6 @@ public class EnemyEncounter : MonoBehaviour
     public SoundManager soundManager;
     public AudioClip heartSound;
     public AudioClip stepSound;
-    public AudioClip fearMusic;
     public AudioClip clip;
     //爆弾を解除してアイテムとして入手した後特定のエリアを踏むと晴と合流する
     //そのままアニメーションで一緒に進む(一回目晴、２回目晴右、３回目幸人、４回途中から晴)TPしたときにカメラが流れて敵が襲って来る
@@ -98,7 +97,7 @@ public class EnemyEncounter : MonoBehaviour
         Blackout().Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         haru.gameObject.transform.position = new Vector2(0,0);
-        soundManager.PlayBgm(fearMusic);
+        soundManager.PlayBgm(SecondHouseManager.secondHouse_instance.fearMusic);
         GameManager.m_instance.stopSwitch = false;
         player.transform.position = new Vector3(107, 70, 0);
         ajure.speed = 3f;

@@ -16,11 +16,22 @@ public class DiaryMessage : MonoBehaviour
     [SerializeField]
     private List<string> names;
     [SerializeField]
+    private List<Sprite> image;
+    [SerializeField]
+    private List<string> seimessages;
+    [SerializeField]
+    private List<string> seinames;
+    [SerializeField]
+    private List<Sprite> seiimages;
+    [SerializeField]
     private List<string> sentences;
     [SerializeField]
     private List<string> dates;
     [SerializeField]
-    private List<Sprite> image;
+    private List<string> seisentences;
+    [SerializeField]
+    private List<string> seidates;
+
     public Canvas diaryWindow;
     public Canvas window;
     public Text target;
@@ -32,85 +43,63 @@ public class DiaryMessage : MonoBehaviour
     public Image panel;
     private IEnumerator coroutine;
     private bool isContacted = false;
-    public Homing homing;
+    private bool seiContacted = false;
     public SoundManager soundManager;
-    public PlayerManager playerManager;
     public AudioClip pageSound;
     public AudioClip pageTojiSound;
-    private void Start()
-    {
-
-    }
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.tag.Equals("Player"))
-        {
             isContacted = true;
-        }
+        else if(collider.gameObject.tag.Equals("Seiitirou"))
+            seiContacted = true;
     }
 
     // colliderをもつオブジェクトの領域外にでたとき(下記で説明1)
     private void OnTriggerExit2D(Collider2D collider)
     {
         if(collider.gameObject.tag.Equals("Player"))
-        {
             isContacted = false;
-        }
+        else if(collider.gameObject.tag.Equals("Seiitirou"))
+            seiContacted = false;
     }
     private void Update()
     {
-        if(isContacted == true && coroutine == null && diaryWindow.gameObject.activeInHierarchy == false)
+        if(isContacted && diaryWindow.gameObject.activeInHierarchy == false)
         {
-            //話しかける(条件は動的なものと今回のboolのように恒常的なもので分けた方がいい)
-            if(Input.GetKeyDown(KeyCode.Return))
+            if(Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return))
             {
-                coroutine = WindowAction();
-                PlayerManager.m_instance.m_speed = 0;
-                // コルーチンの起動(下記説明2)
-                StartCoroutine(coroutine);
+                WindowAction().Forget();
+                isContacted = false;
             }
         }
-    }
-    protected void showMessage(string message, string name, Sprite image)
-    {
-        target.text = message;
-        nameText.text = name;
-        characterImage.sprite = image;
+        else if(seiContacted && seiimages.Count > 0 && diaryWindow.gameObject.activeInHierarchy == false)
+        {
+            if(Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return))
+            {
+                SeiitirouWindowAction().Forget();
+                seiContacted = false;
+            }
+        }
     }
     protected void showDiaryMessage(string message, string name)
     {
         sentence.text = message;
         date.text = name;
     }
-    IEnumerator WindowAction()
+    private async UniTask WindowAction()
     {
-        MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken).Forget();
-        /*話しかけるとまずテキストで表示。
-        window.gameObject.SetActive(true);
-        for(int i = 0; i < messages.Count; ++i)
-        {
-            // 1フレーム分 処理を待機(下記説明1)
-            yield return null;
-            // 会話をwindowのtextフィールドに表示
-            showMessage(messages[i], names[i], image[i]);
-            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
-        }
-        target.text = "";
-        GameManager.m_instance.ImageErase(characterImage);
-        window.gameObject.SetActive(false);*/
-        yield return new WaitUntil(() => !MessageManager.message_instance.talking);
+        await MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken);
+        await UniTask.WaitUntil(() => !MessageManager.message_instance.talking);
         //何回か押すとテキストが消えて、日記の表示がされる。
         diaryWindow.gameObject.SetActive(true);
         
         for(int i = 0; i < sentences.Count; ++i)
         {
-            playerManager.playerstate = PlayerManager.PlayerState.Talk;
-            // 1フレーム分 処理を待機(下記説明1)
-            yield return null;
-            // 会話をwindowのtextフィールドに表示
+            await UniTask.Delay(1);
             showDiaryMessage(sentences[i], dates[i]);
             soundManager.PlaySe(pageSound);
-            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
+            await UniTask.WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
             if (i == sentences.Count - 1)
             {
                 soundManager.PlaySe(pageTojiSound);
@@ -120,9 +109,28 @@ public class DiaryMessage : MonoBehaviour
         sentence.text = "";
         date.text = "";
         diaryWindow.gameObject.SetActive(false);
-        playerManager.playerstate = PlayerManager.PlayerState.Idol;
-        coroutine = null;
-        homing.speed = 2;
-        yield break;
+    }
+    private async UniTask SeiitirouWindowAction()
+    {
+        await MessageManager.message_instance.MessageWindowActive(seimessages, seinames, seiimages, ct: destroyCancellationToken);
+        await UniTask.WaitUntil(() => !MessageManager.message_instance.talking);
+        //何回か押すとテキストが消えて、日記の表示がされる。
+        diaryWindow.gameObject.SetActive(true);
+
+        for(int i = 0; i < sentences.Count; ++i)
+        {
+            await UniTask.Delay(1);
+            showDiaryMessage(seisentences[i], seidates[i]);
+            soundManager.PlaySe(pageSound);
+            await UniTask.WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
+            if(i == sentences.Count - 1)
+            {
+                soundManager.PlaySe(pageTojiSound);
+            }
+
+        }
+        sentence.text = "";
+        date.text = "";
+        diaryWindow.gameObject.SetActive(false);
     }
 }

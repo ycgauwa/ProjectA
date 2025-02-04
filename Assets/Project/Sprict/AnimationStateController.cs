@@ -19,10 +19,9 @@ public class AnimationStateController : MonoBehaviour
      */
     void Update()
     {
-
         if(Input.anyKeyDown)
         {
-            Vector2? action = this.actionKeyDown();
+            Vector2? action = actionKeyDown();
             if(action.HasValue)
             {
                 // キー入力があればAnimatorにstateをセットする
@@ -49,12 +48,12 @@ public class AnimationStateController : MonoBehaviour
     {
         if(!vector.HasValue)
         {
-            this.animator.speed = 0.0f;
+            animator.speed = 0.0f;
             return;
         }
-        this.animator.speed = 1.0f;
-        this.animator.SetFloat("x", vector.Value.x);
-        this.animator.SetFloat("y", vector.Value.y);
+        animator.speed = 1.0f;
+        animator.SetFloat("x", vector.Value.x);
+        animator.SetFloat("y", vector.Value.y);
 
     }
 

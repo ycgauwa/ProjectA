@@ -138,6 +138,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySe(AudioClip clip)
     {
+        Debug.Log(clip);
         if(clip == null)
         {
             return;

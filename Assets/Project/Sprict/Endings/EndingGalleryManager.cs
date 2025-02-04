@@ -10,6 +10,8 @@ public class EndingGalleryManager : MonoBehaviour
 {
     public Image[] endingGallerys  = new Image[100];
     public bool[] endingFlag = new bool[100];
+    public Image[] endingGalleryPages = new Image[16];
+    private int activePageNum = 0;
     public Sprite testSprite;
     public EndingCase1 endingCase1;
     public Case1Object case1Object;
@@ -18,6 +20,9 @@ public class EndingGalleryManager : MonoBehaviour
     public GameObject endingDetail;
     public Image endingDetailImage;
     public Text endingDetailText;
+    public AudioClip ending5Bgm;
+    public AudioClip freezeSound;
+    public AudioClip blizzardSound;
     public string explainText;
     public static EndingGalleryManager m_gallery;
 
@@ -43,6 +48,14 @@ public class EndingGalleryManager : MonoBehaviour
             explainText = "End5 ô‚í‚ê‚½¶–½‚Ì‹~Ï\nyæ“¾ğŒz\n“ä‚Ì’j‚ğŒ©E‚µ‚É‚µ‚Ä©•ª‚Ì‚½‚ß‚É—Fl‚Ì°‚à¶æÑ‚É‚·‚é";
         else if(i == 5)
             explainText = "End6 ŒŒ‚É‚Ü‚İ‚ê‚½”Ó`‰ï\nyæ“¾ğŒz\neØ‚È‚Ê‚¢‚®‚é‚İ‚½‚¿‚Éì‚Á‚½—¿—‚ğ“n‚³‚È‚¢";
+        else if(i == 6)
+            explainText = "End7 •ß‚ç‚í‚ê‚½Šl•¨‚ÌœÔšL\nyæ“¾ğŒz\nˆÙŠE‚Ì‚QŒ¬–Ú‚Ì–¯‰Æ‚É‚ÄŒºŠÖ‚©‚ço‚æ‚¤‚Æ‚·‚é";//–¼‘O•ÏXƒAƒŠ
+        else if(i == 7)
+            explainText = "End8 “€‚Ä‚Â‚­¢ŠE‚Ì’†‚Å\nyæ“¾ğŒz\n¶g‚Ìó‘Ô‚ÅŒºŠÖ‚ÌƒhƒA‚ğŠJ‚¯‚éB";
+        else if(i == 8)
+            explainText = "End9 –S—ì‚Æ‘ˆ«‚Ì–ÚŠo‚ß\nyæ“¾ğŒz\nªˆê˜Y‚ªKl‚ğ¶æÑ‚É‚µ‚½ŒãA°‚ğŒ©E‚µ‚É‚·‚éB";
+        else if(i == 9)
+            explainText = "End6 ŒŒ‚É‚Ü‚İ‚ê‚½”Ó`‰ï\nyæ“¾ğŒz\neØ‚È‚Ê‚¢‚®‚é‚İ‚½‚¿‚Éì‚Á‚½—¿—‚ğ“n‚³‚È‚¢";
         endingDetailText.text = explainText;
     }
     public void CloseEndingDetail()
@@ -52,20 +65,22 @@ public class EndingGalleryManager : MonoBehaviour
     }
     public void NextGalleryPage()
     {
-        if(GameManager.m_instance.gallery1.gameObject.activeSelf)
+        if(endingGalleryPages[activePageNum].gameObject.activeSelf)
         {
             SoundManager.sound_Instance.PlaySe(GameManager.m_instance.decision);
-            GameManager.m_instance.gallery1.gameObject.SetActive(false);
-            GameManager.m_instance.gallery2.gameObject.SetActive(true);
+            endingGalleryPages[activePageNum].gameObject.SetActive(false);
+            endingGalleryPages[activePageNum + 1].gameObject.SetActive(true);
+            activePageNum++;
         }
     }
     public void BackGalleryButton()
     {
-        if(GameManager.m_instance.gallery2.gameObject.activeSelf)
+        if(endingGalleryPages[activePageNum].gameObject.activeSelf)
         {
             SoundManager.sound_Instance.PlaySe(GameManager.m_instance.decision);
-            GameManager.m_instance.gallery2.gameObject.SetActive(false);
-            GameManager.m_instance.gallery1.gameObject.SetActive(true);
+            endingGalleryPages[activePageNum].gameObject.SetActive(false);
+            endingGalleryPages[activePageNum - 1].gameObject.SetActive(true);
+            activePageNum--;
         }
     }
 }

@@ -37,6 +37,7 @@ public class MessageCharactor : MonoBehaviour
     public NotEnter1 notEnter1;
     public NotEnter4 notEnter4;
     private bool isContacted = false;
+    private bool seiIsContacted = false;
     public static bool messageSwitch = false;
     public CharacterItem characterItem;
     public SoundManager soundManager;
@@ -64,14 +65,16 @@ public class MessageCharactor : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.tag.Equals("Player"))
-        {
             isContacted = true;
-        }
+        else if(collider.gameObject.tag.Equals("Seiitirou"))
+            seiIsContacted = true;
     }
     private void OnTriggerExit2D(Collider2D collider)
     {
         if(collider.gameObject.tag.Equals("Player"))
             isContacted = false;
+        else if(collider.gameObject.tag.Equals("Seiitirou"))
+            seiIsContacted = false;
     }
     private void Update()
     {

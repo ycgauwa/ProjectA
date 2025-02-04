@@ -63,7 +63,7 @@ public class Meat : MonoBehaviour
         await Blackout();
         soundManager.PlaySe(meatSound);
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
-        notEnter10.soundManager.StopBgm(notEnter10.fearMusic);
+        notEnter10.soundManager.StopBgm(SecondHouseManager.secondHouse_instance.fearMusic);
         light2D.intensity = 1.0f;
         await MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken);
         GameManager.m_instance.stopSwitch = false;

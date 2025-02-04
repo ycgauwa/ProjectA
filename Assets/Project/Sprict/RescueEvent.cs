@@ -133,7 +133,6 @@ public class RescueEvent : MonoBehaviour
     }
     private async UniTask RescueSeiitirouEvent()
     {
-        Debug.Log("EventStart");
         await MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken);
         //ªˆê˜Y‚ªo‚Ä‚«‚Ä‰ï˜b‚·‚é
         await UniTask.Delay(TimeSpan.FromSeconds(1f));

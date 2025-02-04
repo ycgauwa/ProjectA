@@ -118,6 +118,14 @@ public class ToEvent2 : MonoBehaviour
 
         await Blackout();
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
+        soundManager.PlaySe(doorSound);
+        await UniTask.Delay(TimeSpan.FromSeconds(1f));
+        soundManager.PlaySe(SecondHouseManager.secondHouse_instance.runSound);
+        await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
+        soundManager.PlaySe(SecondHouseManager.secondHouse_instance.runSound);
+        await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
+        soundManager.PlaySe(SecondHouseManager.secondHouse_instance.runSound);
+        await UniTask.Delay(TimeSpan.FromSeconds(0.7f));
         light2D.intensity = 1.0f;
         window.gameObject.SetActive(true);
 

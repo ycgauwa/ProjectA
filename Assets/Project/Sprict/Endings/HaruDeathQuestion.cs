@@ -11,7 +11,6 @@ using System;
 
 public class HaruDeathQuestion : MonoBehaviour
 {
-    public SecondHouseManager secondHouseManager;
     [SerializeField]
     private List<string> messages;
     [SerializeField]
@@ -56,7 +55,6 @@ public class HaruDeathQuestion : MonoBehaviour
     private int heartCounts;
     private bool choiced = false;
     private bool isContacted = false;
-    public bool cameraSwitch = false;
 
     private CancellationTokenSource heartSoundCTS;
     public Homing2 ajure;
@@ -64,7 +62,6 @@ public class HaruDeathQuestion : MonoBehaviour
     public AudioClip fearBGM;
     public AudioClip heartSound;
     public AudioClip doorSound;
-    public AudioClip ending5Sound;
     public NotEnter10 notEnter10;
     // このスクリプトでは犬に追われている時に入ろうとすると晴を見捨てるかを選ぶことができる
 
@@ -91,14 +88,18 @@ public class HaruDeathQuestion : MonoBehaviour
 
     async UniTask HaruDeathSelection()
     {
-        notEnter10.StopEnemy();
+        ajure.StopEnemy();
         await MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken);
         await OnPanel1();
         heartSoundCTS = new CancellationTokenSource();
         HeartSounds(heartSoundCTS.Token).Forget(e => { Debug.Log("キャンセルされた"); });
         soundManager.PlayBgm(fearBGM);
         await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
-        cameraSwitch = true;
+        while(cameraManager.cameraInstance.cameraSize > 0.5)
+        {
+            cameraManager.cameraInstance.cameraSize -= 0.01f;
+            await UniTask.Delay(1);
+        }
     }
     async UniTask OnPanel1()
     {
@@ -126,11 +127,11 @@ public class HaruDeathQuestion : MonoBehaviour
     {
         //無視するボタン。音楽を再開して敵を再び動かす。
         heartCounts = 1000;
-        cameraSwitch = false;
+        cameraManager.cameraInstance.cameraSize = 5f;
         heartSoundCTS.Cancel();
         soundManager.StopSe(heartSound);
         soundManager.StopBgm(fearBGM);
-        notEnter10.MoveEnemy();
+        ajure.MoveEnemy();
         choiced = true;
         panel.gameObject.SetActive(false);
         choiceCanvas.gameObject.SetActive(false);
@@ -140,7 +141,7 @@ public class HaruDeathQuestion : MonoBehaviour
     {
         // 進むボタン
         heartCounts = 1000;
-        cameraSwitch = false;
+        cameraManager.cameraInstance.cameraSize = 5f;
         heartSoundCTS.Cancel();
         soundManager.StopSe(heartSound);
         soundManager.StopBgm(fearBGM);
@@ -180,7 +181,7 @@ public class HaruDeathQuestion : MonoBehaviour
         light2D.intensity = 1.0f;
         player.transform.DOLocalMove(new Vector3(80, 73, 0), 8f);
         await UniTask.Delay(TimeSpan.FromSeconds(2.5f));
-        soundManager.PlayBgm(ending5Sound);
+        soundManager.PlayBgm(EndingGalleryManager.m_gallery.ending5Bgm);
         await UniTask.Delay(TimeSpan.FromSeconds(5.5f));
         //　晴の死体を見てしまう→うわ～ってなってEnding
         await MessageManager.message_instance.MessageWindowActive(messages5, names5, images5, ct: destroyCancellationToken);
@@ -214,7 +215,7 @@ public class HaruDeathQuestion : MonoBehaviour
     {
         end5Canvas.gameObject.SetActive(false);
         light2D.intensity = 1.0f;
-        soundManager.StopBgm(ending5Sound);
+        soundManager.StopBgm(EndingGalleryManager.m_gallery.ending5Bgm);
         //GameManager.m_instance.OnclickRetryButton();
         EndingGalleryManager.m_gallery.endingGallerys[4].sprite = end5Image.sprite;
         EndingGalleryManager.m_gallery.endingFlag[4] = true;

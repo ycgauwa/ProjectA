@@ -59,17 +59,4 @@ public class Test1 : MonoBehaviour
             if(!talked) talked = true;
         }
     }
-    /*private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.gameObject.CompareTag("Player") &&Input.GetKeyDown(KeyCode.Return))
-        {
-            Debug.Log($"colloder: {collider.gameObject.name} ");
-            /*（）の中に引数を入れてあげると実行元のメソッドが渡した変数で処理を行ってくれる。
-            ただし、データを渡す側は変数だけでよい*/
-    /* MessageManager.message_instance.MessageWindowActive(messages, names);
- }
-
-}*/
-    private TextAsset csvFile; // CSVファイル
-    private List<string[]> csvData = new List<string[]>(); // CSVファイルの中身を入れるリスト
 }

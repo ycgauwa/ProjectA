@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47c5cf7a1069f43acc6cfe09d5d118, type: 3}
   m_Name: Key4
   m_EditorClassIdentifier: 
-  name: "\u8A3A\u7642\u5BA4\u306E\u9375"
   icon: {fileID: 21300000, guid: 943df3b0fd0fcf547b908bd391725a77, type: 3}
   itemText: "\uFF12\u968E\u306E\u8A3A\u7642\u5BA4\u306E\u9375\u3068\u66F8\u304B\u308C\u3066\u3044\u308B\u3002"
   itemID: 254

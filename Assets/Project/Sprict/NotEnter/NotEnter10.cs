@@ -27,23 +27,19 @@ public class NotEnter10 : MonoBehaviour
     [SerializeField]
     private List<Sprite> images3;
     private int i = 0;
-    public float savedSpeed = 0;
-    public float savedAcceleration = 0;
     public GameObject cameraObject;
     public GameObject sleptAjure;
     public Homing2 ajure;
     public SoundManager soundManager;
     public AudioClip clip;
-    public AudioClip fearMusic;
     //特定のオブジェクトに話しかけ終わったら進めるようになる仕組み
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.tag.Equals("Player"))
         {
-            if(secondHouseManager.interiors[4].talked == true)
+            if(secondHouseManager.CalenderInteriors.talked == true)
             {
                 gameObject.SetActive(true);
-                Debug.Log("test");
             }
             for(i = 0; i < 4; i++)
             {
@@ -63,7 +59,7 @@ public class NotEnter10 : MonoBehaviour
                 MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
 
 
-            if(secondHouseManager.interiors[4].talked == true)
+            if(secondHouseManager.CalenderInteriors.talked == true)
             {
                 cameraManager.playerCamera = false;
                 GameManager.m_instance.stopSwitch = true;
@@ -80,34 +76,11 @@ public class NotEnter10 : MonoBehaviour
         soundManager.PlaySe(clip);
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         await MessageManager.message_instance.MessageWindowActive(messages3, names3, images3, ct: destroyCancellationToken);
-        soundManager.PlayBgm(fearMusic);
+        soundManager.PlayBgm(SecondHouseManager.secondHouse_instance.fearMusic);
         GameManager.m_instance.stopSwitch = false;
         ajure.enemyEmerge = true;
         cameraManager.playerCamera = true;
         SecondHouseManager.secondHouse_instance.meat.gameObject.SetActive(true);
         gameObject.SetActive(false);
-    }
-    public void StopEnemy() 
-    {
-        if(!gameObject.activeSelf)
-            gameObject.SetActive(true);
-        soundManager.PauseBgm(fearMusic);
-
-        if(ajure.acceleration != 0)
-            savedAcceleration = ajure.acceleration;
-        ajure.acceleration = 0;
-        if(ajure.speed != 0)
-            savedSpeed = ajure.speed;
-        ajure.speed = 0;
-        ajure.enemyEmerge = false;
-    }
-    public void MoveEnemy()
-    {
-        ajure.acceleration = savedAcceleration;
-        ajure.speed = savedSpeed;
-        soundManager.UnPauseBgm(fearMusic);
-        if(gameObject.activeSelf)
-            gameObject.SetActive(false);
-        ajure.enemyEmerge = true;
     }
 }

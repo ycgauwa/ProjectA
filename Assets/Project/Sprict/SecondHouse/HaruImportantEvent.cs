@@ -86,7 +86,7 @@ public class HaruImportantEvent : MonoBehaviour
         choiced = true;
         panel.gameObject.SetActive(false);
         choiceCanvas.gameObject.SetActive(false);
-        soundManager.StopBgm(enemyEncounter.fearMusic);
+        soundManager.StopBgm(SecondHouseManager.secondHouse_instance.fearMusic);
         //死亡前の最後の会話
         await MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken);
         Blackout().Forget();
@@ -104,7 +104,7 @@ public class HaruImportantEvent : MonoBehaviour
         cameraManager.playerCamera = false;
         player.gameObject.SetActive(false);
         cameraManager.haruCamera = true;
-        soundManager.StopBgm(enemyEncounter.fearMusic);
+        soundManager.StopBgm(SecondHouseManager.secondHouse_instance.fearMusic);
         playerManager = haru.AddComponent<PlayerManager>();
         playerManager = haru.GetComponent<PlayerManager>();
         playerManager.staminaMax = 300;
@@ -130,7 +130,7 @@ public class HaruImportantEvent : MonoBehaviour
         choiceCanvas.gameObject.SetActive(false);
         //見捨てる後悔と最後の別れを口に出してその場を後にする。
         await MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken);
-        soundManager.StopBgm(enemyEncounter.fearMusic);
+        soundManager.StopBgm(SecondHouseManager.secondHouse_instance.fearMusic);
         Blackout().Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         light2D.intensity = 1.0f;

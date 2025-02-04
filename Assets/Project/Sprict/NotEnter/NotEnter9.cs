@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class NotEnter9 : MonoBehaviour
 {
-    public SecondHouseManager secondHouseManager;
     public Item key4;
     [SerializeField]
     private List<string> messages;
@@ -31,7 +30,7 @@ public class NotEnter9 : MonoBehaviour
             else if(collider.gameObject.tag.Equals("Seiitirou"))
             {
                 // 鍵が必要だというメッセージ
-                MessageManager.message_instance.MessageWindowActive(messages, names, images2, ct: destroyCancellationToken).Forget();
+                MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken).Forget();
             }
         }
         else if(key4.checkPossession == true)
@@ -42,15 +41,8 @@ public class NotEnter9 : MonoBehaviour
             }
             else if(collider.gameObject.tag.Equals("Seiitirou"))
             {
-                // イベントが始まる
-                MessageManager.message_instance.MessageWindowActive(messages, names, images2, ct: destroyCancellationToken).Forget();
+                gameObject.tag = "Minnka2-17";
             }
         }
-    }
-    private async UniTask EnterClinicRoom()
-    {
-        //イベントの流れ、
-        await MessageManager.message_instance.MessageWindowActive(messages, names, images2, ct: destroyCancellationToken);
-
     }
 }

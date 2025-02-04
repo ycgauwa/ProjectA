@@ -25,6 +25,7 @@ public class TunnelSeiitirouEvent : MonoBehaviour
     private List<Sprite> images2;
 
     public GameObject cameraObject;
+    public GameObject skullObject;
     public Light2D light2D;
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -49,16 +50,21 @@ public class TunnelSeiitirouEvent : MonoBehaviour
         await Blackout();
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         cameraManager.seiitirouCamera = true;
-        Debug.Log("test2");
         //オブジェクトの総入れ替え
+        SecondHouseManager.secondHouse_instance.chickenDish.gameObject.SetActive(false);
+        SecondHouseManager.secondHouse_instance.shrimpDish.gameObject.SetActive(false);
+        SecondHouseManager.secondHouse_instance.fishDish.gameObject.SetActive(false);
         SecondHouseManager.secondHouse_instance.bear.gameObject.SetActive(false);
         SecondHouseManager.secondHouse_instance.chicken.gameObject.SetActive(false);
         SecondHouseManager.secondHouse_instance.mushroom.gameObject.SetActive(false);
         SecondHouseManager.secondHouse_instance.toEvent5.gameObject.SetActive(false);
+        SecondHouseManager.secondHouse_instance.weightObject.SetActive(true);
+        SecondHouseManager.secondHouse_instance.weightSwitch.SetActive(true);
+        SecondHouseManager.secondHouse_instance.talkingWithHaru.gameObject.transform.position = new Vector3(141,144,0);
+        skullObject.SetActive(true);
         GameManager.m_instance.stopSwitch = false;
         light2D.intensity = 1.0f;
         gameObject.SetActive(false);
-        Debug.Log("test3");
     }
     private async UniTask Blackout()
     {

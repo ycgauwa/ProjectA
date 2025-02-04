@@ -54,7 +54,6 @@ public class MessageManager : MonoBehaviour
         Time.timeScale = 1f;
         await UniTask.DelayFrame(1,cancellationToken : ct);
         isTalking = false;
-        //StopCoroutine(coroutine);
     }
     public async UniTask OnceMessageCoroutine(CancellationToken ct)
     {

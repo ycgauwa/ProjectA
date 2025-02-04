@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 //using static UnityEditor.Progress;
 
 public class ItemDateBase : MonoBehaviour
@@ -13,12 +14,15 @@ public class ItemDateBase : MonoBehaviour
     public NotEnter4 notEnter4;
     public Text itemTextMessage;
     public Canvas inventryCanvas;
+    public static ItemDateBase itemDate_instance;
 
     private void Start()
     {
+        itemDate_instance = this;
         for(int i = 0; i < items.Count; ++i)
         {
             items[i].checkPossession = false;
+            items[i].geted = false;
         }
     }
     public Item GetItemId(int itemid)

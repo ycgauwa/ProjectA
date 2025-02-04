@@ -624,13 +624,4 @@ public class PlayerManager : MonoBehaviour
         //別クラスのメソッドの行使引数はteleportAddress
         teleportManager.OnPlayerTeleport(teleportAddress);
     }
-    public void SeiitirouRes()
-    {
-        //if(m_Rigidbody == null)
-        //{
-        //    Debug.Log("null");
-        //}
-        //Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        //GameTeleportManager gametp = GetComponent<GameTeleportManager>();
-    }
 }

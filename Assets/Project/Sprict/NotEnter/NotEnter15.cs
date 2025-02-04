@@ -47,7 +47,7 @@ public class NotEnter15 : MonoBehaviour
         await MessageManager.message_instance.MessageWindowActive(messages2, names, images, ct: destroyCancellationToken);
         await Blackout();
         await UniTask.Delay(TimeSpan.FromSeconds(1f));
-        GameManager.m_instance.seiitirou.gameObject.transform.position = new Vector3(108, 102,0);
+        GameManager.m_instance.seiitirou.gameObject.transform.position = new Vector3(108, 102.8f,0);
         keyOpened = true;
         gameObject.tag = "Minnka2-9";
         SecondHouseManager.secondHouse_instance.light2D.intensity = 1.0f;

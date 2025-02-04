@@ -62,7 +62,6 @@ public class NotEnter6 : MonoBehaviour
     public bool choiced;
     public bool rescued;
     public bool seiitirouFlag;
-    public bool cameraSwitch = false;
 
     private IEnumerator coroutine;
     public ItemDateBase itemDateBase;
@@ -131,7 +130,11 @@ public class NotEnter6 : MonoBehaviour
             HeartSounds(heartSoundCTS.Token).Forget(e => { Debug.Log("キャンセルされた"); });
             soundManager.PlayBgm(fearBGM);
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
-            cameraSwitch = true;
+            while(cameraManager.cameraInstance.cameraSize > 0.5)
+            {
+                cameraManager.cameraInstance.cameraSize -= 0.01f;
+                await UniTask.Delay(1);
+            }
             Homing.m_instance.speed = 2;
         }
         else MessageManager.message_instance.MessageWindowActive(messages3, names3, images3, ct: destroyCancellationToken).Forget();
@@ -141,7 +144,7 @@ public class NotEnter6 : MonoBehaviour
         rescueEvent.gameObject.SetActive(true);
         soundManager.StopBgm(fearBGM);
         heartCounts = 1000;
-        cameraSwitch = false;
+        cameraManager.cameraInstance.cameraSize = 5f;
         notEnter6.gameObject.SetActive(false);
         choicePanel.gameObject.SetActive(false);
         heartSoundCTS.Cancel();
@@ -185,7 +188,7 @@ public class NotEnter6 : MonoBehaviour
             showMessage(rescuemessages[i], rescuenames[i], rescueimages[i]);
             yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
         }
-        if (cameraSwitch == true) cameraSwitch = false;
+        //if (cameraSwitch == true) cameraSwitch = false;
         yield break;
     }
     private IEnumerator Red()
@@ -220,7 +223,7 @@ public class NotEnter6 : MonoBehaviour
         //ハートの変数を１０００にしてカメラのズームを元に戻せばよいレスキューも同じ
         //あとは選択肢表示の時のウィンドウの表示が怪しいからちゃんと非表示にしておくそして自由に動けるようになった後選択肢も非表示にする。
         heartCounts = 1000;
-        cameraSwitch = false;
+        cameraManager.cameraInstance.cameraSize = 5f;
         notEnter6.gameObject.SetActive(false);
         choicePanel.gameObject.SetActive(false);
         heartSoundCTS.Cancel();

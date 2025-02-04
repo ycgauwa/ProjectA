@@ -15,7 +15,6 @@ public class ToEvent4 : MonoBehaviour
     public bool event4flag;
     public bool playerStop;
     public ToEvent3 toevent3;
-    private bool isContacted = false;
 
     // メッセージウィンドウ用の変数
     [SerializeField]

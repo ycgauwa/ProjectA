@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -16,23 +19,37 @@ public class CalenderMessage : MonoBehaviour
     private List<string> names;
     [SerializeField]
     private List<Sprite> image;
+    [SerializeField]
+    private List<string> seiitirouMessages;
+    [SerializeField]
+    private List<string> seiitirouNames;
+    [SerializeField]
+    private List<Sprite> seiitirouImages;
     public Canvas window;
     public Text target;
     public Text nameText;
     public Canvas calCanvas;
     public Image characterImage;
     public Image calender;
+    public Image seiCalender;
     public Image TVScreen;
     public GameObject firstSelect;
+    public GameObject seiFirstSelect;
     private IEnumerator coroutine;
     public bool messageSwitch = false;
     private bool isContacted = false;
+    private bool seiIsContacted = false;
+    public bool talked = false;
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.tag.Equals("Player"))
         {
             isContacted = true;
+        }
+        else if(collider.gameObject.tag.Equals("Seiitirou"))
+        {
+            seiIsContacted = true;
         }
 
     }
@@ -59,6 +76,20 @@ public class CalenderMessage : MonoBehaviour
                 calCanvas.gameObject.SetActive(false);
             }
         }
+        else if(collider.gameObject.tag.Equals("Seiitirou"))
+        {
+            seiIsContacted = false;
+            if(seiCalender == null) return;
+            else if(calCanvas.gameObject.activeSelf)
+            {
+                calender.gameObject.SetActive(false);
+                calCanvas.gameObject.SetActive(false);
+            }
+            if(TVScreen == null)
+            {
+                return;
+            }
+        }
     }
 
     public IEnumerator CreateCoroutine()
@@ -76,6 +107,7 @@ public class CalenderMessage : MonoBehaviour
 
         StopCoroutine(coroutine);
         coroutine = null;
+        if(!talked) talked = true;
         GameManager.m_instance.stopSwitch = false;
     }
 
@@ -91,12 +123,8 @@ public class CalenderMessage : MonoBehaviour
 
         for(int i = 0; i < messages.Count; ++i)
         {
-            // 1フレーム分 処理を待機(下記説明1)
             yield return null;
-
-            // 会話をwindowのtextフィールドに表示
             showMessage(messages[i], names[i], image[i]);
-
             yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
         }
         calCanvas.gameObject.SetActive(true);
@@ -106,6 +134,29 @@ public class CalenderMessage : MonoBehaviour
         yield break;
 
     }
+    private async UniTask ActiveSeiitirouCalender()
+    {
+        GameManager.m_instance.stopSwitch = true;
+        await MessageManager.message_instance.MessageWindowActive(seiitirouMessages,seiitirouNames,seiitirouImages ,ct: destroyCancellationToken);
+        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+        calCanvas.gameObject.SetActive(true);
+        seiCalender.gameObject.SetActive(true);
+        if(seiFirstSelect == null)
+        {
+            await UniTask.WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
+            seiCalender.gameObject.SetActive(false);
+            calCanvas.gameObject.SetActive(false);
+            GameManager.m_instance.stopSwitch = false;
+            return;
+        }
+        EventSystem.current.SetSelectedGameObject(seiFirstSelect);
+        await UniTask.WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
+        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+        seiCalender.gameObject.SetActive(false);
+        calCanvas.gameObject.SetActive(false);
+        if(!talked) talked = true;
+        GameManager.m_instance.stopSwitch = false;
+    }
     private void Update()
     {
         if (isContacted && messageSwitch == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
@@ -114,6 +165,17 @@ public class CalenderMessage : MonoBehaviour
             GameManager.m_instance.stopSwitch = true;
             coroutine = CreateCoroutine();
             StartCoroutine(coroutine);
+        }
+        else if(seiIsContacted && messageSwitch == false && seiCalender != null && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
+        {
+            messageSwitch = true;
+            GameManager.m_instance.stopSwitch = true;
+            ActiveSeiitirouCalender().Forget();
+        }
+        else if(seiIsContacted && messageSwitch == false && seiCalender == null && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
+        {
+            messageSwitch = true;
+            return;
         }
         if (calender.gameObject.activeSelf)
         {

@@ -10,6 +10,7 @@ using UnityEngine.EventSystems;
 using Cysharp.Threading.Tasks;
 using System.Linq;
 using System.IO;
+using DG.Tweening;
 using Unity.VisualScripting.FullSerializer;
 
 public class GameManager : MonoBehaviour
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<Sprite> Firimages3;
     public static GameManager m_instance;
+    public GameObject mainCamera;
     public GameObject player;
     public GameObject seiitirou;
     public PlayerManager playerManager;
@@ -51,6 +53,7 @@ public class GameManager : MonoBehaviour
     public Canvas InstructionsCanvas;
     public Canvas galleryCanvas;
     public Canvas messageCanvas;
+    public Canvas gameUICanvas;
     public Canvas diaryCanvas;
     public Canvas diary2Canvas;
     public Image charaImage;
@@ -77,8 +80,9 @@ public class GameManager : MonoBehaviour
     public Cooktop cooktop;
     public SoundManager soundManager;
     public Volume postVolume;
-    private Vignette vignette;
+    public Vignette vignette;
     public bool stopSwitch = false;
+    public bool adjustVignette = false;
     private TextAsset csvInteriorsFile; // CSVファイル
     private List<string[]> csvInteriorsData = new List<string[]>(); // CSVファイルの中身を入れるリスト
     private TextAsset csvNotEntersFile; // CSVファイル
@@ -118,7 +122,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        vignette.intensity.value = playerManager.staminaIntensity;
+        if(!adjustVignette)
+            vignette.intensity.value = playerManager.staminaIntensity;
         if (messageCanvas.gameObject.activeSelf || diaryCanvas.gameObject.activeSelf || diary2Canvas.gameObject.activeSelf)
         {
             playerManager.playerstate = PlayerManager.PlayerState.Talk;
@@ -272,7 +277,7 @@ public class GameManager : MonoBehaviour
         //デバック用
         if(Input.GetKeyDown(KeyCode.F1))
         {
-            player.transform.position = new Vector3(76,170,0);
+            player.transform.position = new Vector3(76, 170, 0);
         }
         else if(Input.GetKeyDown(KeyCode.F2))
         {
@@ -281,6 +286,19 @@ public class GameManager : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.F3))
         {
             player.transform.position = new Vector3(150, -12, 0);
+        }
+        else if(Input.GetKeyDown(KeyCode.F4))
+        {
+            player.transform.position = new Vector3(35, 66, 0);
+            rescueEvent.gameObject.SetActive(true);
+            rescueEvent.notEnter6.choiced = true;
+            rescueEvent.notEnter6.rescued = true;
+        }
+        else if(Input.GetKeyDown(KeyCode.F5))
+        {
+            GameObject deadYukito = GameObject.Find("YukitoGhost");
+            deadYukito.transform.position = new Vector3(64.33f, -46.27f, 0);
+            deadYukito.transform.DOLocalMove(new Vector3(67.33f, -46.27f, 0), 3f);
         }
     }
     public List<string> GetSpeakerName(string interiorName, string type)
@@ -398,7 +416,6 @@ public class GameManager : MonoBehaviour
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             homing.enemyEmerge = false;
             homing.enemyCount = 0;
-            playerManager.SeiitirouRes();
         }
         if (rescueEvent.RescueSwitch)
         {

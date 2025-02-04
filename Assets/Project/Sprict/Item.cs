@@ -11,10 +11,13 @@ public class Item : ScriptableObject
     public int itemID;//1～200は謎解き用アイテム201～250はキャラアイテム251～300は鍵301～400はその他アイテム
     public bool checkPossession = false;
     public bool selectedItem = false;
+    public bool geted = false;
 
     public void start()
     {
         checkPossession = false;
+        selectedItem = false;
+        geted = false;
     }
 
 
