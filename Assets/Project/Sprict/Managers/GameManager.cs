@@ -48,8 +48,8 @@ public class GameManager : MonoBehaviour
 
     public float nowTime;
     public float gameTimerCountSecond;
-    public int gameTimerCountMinute;
-    public int gameTimerCountHour;
+    public int gameTimerCountMinute = 00;
+    public int gameTimerCountHour = 00;
     public int deathCount;
     public GameObject enemy;
     public Homing homing;
@@ -103,6 +103,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        saveCanvas = GameStart.saveCanvas;
+        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(saveCanvas);
         EventSystem.current.SetSelectedGameObject(gamemodeFirstSelect);
         stopSwitch = true;
         m_instance = this;
@@ -488,6 +491,7 @@ public class GameManager : MonoBehaviour
         buttonPanel.gameObject.SetActive(false);
         gameoverWindow.gameObject.SetActive(false);
         Time.timeScale = 1.0f;
+        GameStart.saveCanvas = saveCanvas;
         SceneManager.LoadScene("Title");
     }
     public void OnClickHelpButton()

@@ -211,6 +211,7 @@ public class ToEvent2 : MonoBehaviour
         GameManager.m_instance.ImageErase(characterImage);
         window.gameObject.SetActive(false);
         GameManager.m_instance.stopSwitch = false;
+        FlagsManager.flag_Instance.chapterNum ++;
     }
     private async UniTask Flash()
     {

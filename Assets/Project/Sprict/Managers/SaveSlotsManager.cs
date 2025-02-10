@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class SaveSlotsManager : MonoBehaviour
 {
-    public Sprite[] characterSaveImages = new Sprite[6];
+    public Sprite[] SaveStageImages = new Sprite[6];
     public Button[] saveSlots = new Button[3];
+    public Image[] saveImages = new Image[3];
     public Text[] playTimes = new Text[3];
     public Text[] gameModes = new Text[3];
     public Text[] characters = new Text[3];
@@ -22,6 +23,10 @@ public class SaveSlotsManager : MonoBehaviour
         gameModes[i].text = FlagsManager.flag_Instance.gameMode.ToString();
         characters[i].text = FlagsManager.flag_Instance.characterName.ToString();
         Chapters[i].text = FlagsManager.flag_Instance.chapterNum.ToString();
+        saveImages[i].sprite = SaveStageImages[FlagsManager.flag_Instance.chapterNum];
+        if (!saveImages[i].gameObject.activeSelf)
+            saveImages[i].gameObject.SetActive(true);
+
     }
 
 }

@@ -11,9 +11,8 @@ public class UserData : MonoBehaviour
     Vector3 playerPosition;
     ItemDateBase itemDate;
     string characterName;
-
-    //ベストスコア
-    int stageNumber;
+    string playTime;
+    int chapterNumber;
 
     //セーブ設定
     QuickSaveSettings m_saveSettings;
@@ -35,19 +34,16 @@ public class UserData : MonoBehaviour
     /// </summary>
     public void LoadUserData()
     {
-        //ファイルが無ければ無視
-        if(FileAccess.Exists("SaveData") == false)
-        {
-            return;
-        }
-
         // QuickSaveReaderのインスタンスを作成
         QuickSaveReader reader = QuickSaveReader.Create("SaveData", m_saveSettings);
-
+        Debug.Log("Load完了");
         // データを読み込む
-        playerPosition　= reader.Read<Vector3>("PlayerPosition");
-        characterName = reader.Read<string>("CharacterName");
-        stageNumber = reader.Read<int>("StageNumber");
+        //playerPosition　= reader.Read<Vector3>("PlayerPosition");
+        //characterName = reader.Read<string>("CharacterName");
+        playTime = reader.Read<string>("PlayTime");
+        chapterNumber = reader.Read<int>("ChapterNumber");
+        FlagsManager.flag_Instance.chapterNum = 2;
+        Debug.Log("playTime" + playTime + "chapterNumber" + chapterNumber);
     }
 
     /// <summary>
@@ -60,10 +56,15 @@ public class UserData : MonoBehaviour
         // QuickSaveWriterのインスタンスを作成
         QuickSaveWriter writer = QuickSaveWriter.Create("SaveData", m_saveSettings);
 
+        playTime = FlagsManager.flag_Instance.playTime;
+        chapterNumber = FlagsManager.flag_Instance.chapterNum;
+        chapterNumber = FlagsManager.flag_Instance.chapterNum;
+
         // データを書き込む
-        writer.Write("PlayerPosition", playerPosition);
-        writer.Write("CharacterName", characterName);
-        writer.Write("StageNumber", stageNumber);
+        //writer.Write("PlayerPosition", playerPosition);
+       // writer.Write("CharacterName", characterName);
+        writer.Write("PlayTime",playTime);
+        writer.Write("ChapterNumber", chapterNumber);
 
         // 変更を反映
         writer.Commit();

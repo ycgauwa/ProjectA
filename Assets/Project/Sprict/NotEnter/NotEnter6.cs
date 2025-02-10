@@ -238,6 +238,7 @@ public class NotEnter6 : MonoBehaviour
         GameManager.m_instance.stopSwitch = false;
         inventry.Delete(itemDateBase.GetItemId(253));
         soundManager.StopBgm(fearBGM);
+        FlagsManager.flag_Instance.chapterNum ++;
     }
     public void OnRescueBotton()
     {
