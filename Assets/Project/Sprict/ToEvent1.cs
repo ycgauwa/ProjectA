@@ -26,14 +26,10 @@ public class ToEvent1 : MonoBehaviour
     public GameObject player;
     public GameObject anotherDoor;
     public Light2D light2D;
-    // Start is called before the first frame update
     void Start()
     {
         one = false;
     }
-
-    // Update is called once per frame
-
     private async void OnTriggerEnter2D(Collider2D collider)
     {
         //àÍâÒÇµÇ©çÏìÆÇµÇ»Ç¢ÇΩÇﬂÇÃédëgÇ›
@@ -53,10 +49,10 @@ public class ToEvent1 : MonoBehaviour
         await UniTask.Delay(TimeSpan.FromSeconds(1f));
         light2D.intensity = 1;
         player.transform.position = new Vector3(-33, -34, 0);
-        GameManager.m_instance.stopSwitch = false;
         await MessageManager.message_instance.MessageWindowOnceActive(messages, names, images, ct: destroyCancellationToken);
         await Blackout();
         await UniTask.Delay(TimeSpan.FromSeconds(1f));
+        GameManager.m_instance.stopSwitch = false;
         light2D.intensity = 1;
         if(gameObject.name == "SchoolWarp4")
         {

@@ -34,18 +34,26 @@ public class GameManager : MonoBehaviour
     public PlayerManager playerManager;
     public GameTeleportManager teleportManager;
     public RescueEvent rescueEvent;
+
     public GameObject rescuePoint;
     public GameObject yukitoDead;
     public GameObject menuFirstSelect;
     public GameObject gamemodeFirstSelect;
+    public GameObject saveMenuFirstSelect;
     public GameObject instructionFirstSelect;
     public GameObject instructionSecondSelect;
     public GameObject instructionThirdSelect;
     public GameObject instructionFourthSelect;
     public GameObject instructionFifthSelect;
+
+    public float nowTime;
+    public float gameTimerCountSecond;
+    public int gameTimerCountMinute;
+    public int gameTimerCountHour;
     public int deathCount;
     public GameObject enemy;
     public Homing homing;
+
     public Canvas menuCanvas;
     public Canvas inventryCanvas;
     public Canvas optionCanvas;
@@ -56,6 +64,8 @@ public class GameManager : MonoBehaviour
     public Canvas gameUICanvas;
     public Canvas diaryCanvas;
     public Canvas diary2Canvas;
+    public Canvas saveCanvas;
+
     public Image charaImage;
     public Image buttonPanel;
     public Image Instruction1;
@@ -66,6 +76,7 @@ public class GameManager : MonoBehaviour
     public Image gallery1;
     public Image gallery2;
     public Image lookPuzzle;
+
     public Sprite noneImage;
     public ItemDateBase itemDate;
     public Inventry inventry;
@@ -122,6 +133,20 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // ゲーム内時間をカウントしたい→60になったらｍを++して60ｍならｈを++
+        nowTime += Time.deltaTime;
+        gameTimerCountSecond += Time.deltaTime;
+        if(gameTimerCountSecond >= 60)
+        {
+            gameTimerCountSecond = 0;
+            gameTimerCountMinute ++;
+        }
+        if(gameTimerCountMinute >= 60)
+        {
+            gameTimerCountMinute = 0;
+            gameTimerCountHour++;
+        }
+        FlagsManager.flag_Instance.playTime = gameTimerCountHour + ":" + gameTimerCountMinute + ":" + (int)gameTimerCountSecond;
         if(!adjustVignette)
             vignette.intensity.value = playerManager.staminaIntensity;
         if (messageCanvas.gameObject.activeSelf || diaryCanvas.gameObject.activeSelf || diary2Canvas.gameObject.activeSelf)
@@ -450,6 +475,13 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    public void OnClickSaveButton()
+    {
+        menuCanvas.gameObject.SetActive(false);
+        saveCanvas.gameObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(saveMenuFirstSelect);
+        soundManager.PlaySe(decision);
+    }
     public void OnClickTitleButton() 
     {
         soundManager.PlaySe(decision);
@@ -492,6 +524,13 @@ public class GameManager : MonoBehaviour
         else if (galleryCanvas.gameObject.activeSelf)
         {
             galleryCanvas.gameObject.SetActive(false);
+            menuCanvas.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(menuFirstSelect);
+            soundManager.PlaySe(cancel);
+        }
+        else if(saveCanvas.gameObject.activeSelf)
+        {
+            saveCanvas.gameObject.SetActive(false);
             menuCanvas.gameObject.SetActive(true);
             EventSystem.current.SetSelectedGameObject(menuFirstSelect);
             soundManager.PlaySe(cancel);

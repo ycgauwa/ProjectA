@@ -493,7 +493,7 @@ public class EndingCase3 : MonoBehaviour
         light2D.intensity = 1.0f;
         soundManager.StopSe(eatSound);
         GameManager.m_instance.OnclickRetryButton();
-        EndingGalleryManager.m_gallery.endingGallerys[3].sprite = end4Image2.sprite;
+        EndingGalleryManager.m_gallery.endingGallerys[3].sprite = end4Image.sprite;
         EndingGalleryManager.m_gallery.endingFlag[3] = true;
         gameObject.SetActive(false);
     }

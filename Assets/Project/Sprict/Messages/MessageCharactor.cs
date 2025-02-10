@@ -271,6 +271,7 @@ public class MessageCharactor : MonoBehaviour
         images = character.freeImage1;
         messages = character.freeText1;
         charactername = "çKêl";
+        yield return new WaitForSeconds(0.5f);
         window.gameObject.SetActive(true);
         i = 0;
         foreach(string str in messages)

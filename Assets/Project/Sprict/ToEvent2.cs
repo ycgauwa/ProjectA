@@ -104,11 +104,6 @@ public class ToEvent2 : MonoBehaviour
                 CreateCoroutine().Forget();
             }
         }
-        if(girl.transform.position.x > -86 && cameraManager.girlCamera == true)
-        {
-            // girl‚ª“®‚­ƒvƒƒOƒ‰ƒ€
-            girl.transform.Translate(new Vector3(-0.05f, 0, 0.0f * Time.deltaTime * speed));
-        }
     }
     async UniTask CreateCoroutine()
     {
@@ -125,7 +120,10 @@ public class ToEvent2 : MonoBehaviour
         soundManager.PlaySe(SecondHouseManager.secondHouse_instance.runSound);
         await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
         soundManager.PlaySe(SecondHouseManager.secondHouse_instance.runSound);
-        await UniTask.Delay(TimeSpan.FromSeconds(0.7f));
+        await UniTask.Delay(TimeSpan.FromSeconds(3f));
+        soundManager.StopSe(SecondHouseManager.secondHouse_instance.runSound);
+
+        await LightOut();
         light2D.intensity = 1.0f;
         window.gameObject.SetActive(true);
 
@@ -145,6 +143,7 @@ public class ToEvent2 : MonoBehaviour
         soundManager.PlayBgm(suspiciousBgm);
         //camera‚Ìˆ—
         Event2Camera();
+        girl.transform.DOMoveY(6.01f, 1f);
         eventcamera.transform.DOMove(new Vector3(-80,6,-10),6);
 
         await UniTask.Delay(TimeSpan.FromSeconds(6.0f));
@@ -156,6 +155,7 @@ public class ToEvent2 : MonoBehaviour
         window.gameObject.SetActive(false);
         
         cameraManager.girlCamera = true;
+        girl.transform.DOMoveX(-86,4f);
         await UniTask.Delay(TimeSpan.FromSeconds(2.0f));
         soundManager.PlaySe(doorSound);
         await UniTask.Delay(TimeSpan.FromSeconds(2.0f));
@@ -163,6 +163,7 @@ public class ToEvent2 : MonoBehaviour
         guards.transform.position = new Vector3(-76, 5, 0);
         cameraManager.girlCamera = false;
         eventcamera.transform.DOMove(new Vector3(x, y, -10), t);
+        girl.transform.DOMoveX(-85.9f, 0.3f);
 
         await UniTask.Delay(TimeSpan.FromSeconds(3.0f));
 
@@ -296,6 +297,14 @@ public class ToEvent2 : MonoBehaviour
         while (light2D.intensity > 0.01f)
         {
             light2D.intensity -= 0.012f;
+            await UniTask.Delay(1);
+        }
+    }
+    private async UniTask LightOut()
+    {
+        while(light2D.intensity < 1f)
+        {
+            light2D.intensity += 0.008f;
             await UniTask.Delay(1);
         }
     }

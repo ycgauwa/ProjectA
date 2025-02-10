@@ -22,17 +22,12 @@ public class DifficultyLevelManager : MonoBehaviour
     {
         DifficultyCanvas.gameObject.SetActive(true);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void EasyButton()
     {
         difficultyLevel = DifficultyLevel.Easy;
         DifficultyCanvas.gameObject.SetActive(false);
         EventSystem.current.SetSelectedGameObject(firstSelect);
+        FlagsManager.flag_Instance.gameMode = "Easy";
         ActiveCanvas = true;
     }
     public void NormalButton()
@@ -40,6 +35,7 @@ public class DifficultyLevelManager : MonoBehaviour
         difficultyLevel = DifficultyLevel.Normal;
         DifficultyCanvas.gameObject.SetActive(false);
         EventSystem.current.SetSelectedGameObject(firstSelect);
+        FlagsManager.flag_Instance.gameMode = "Normal";
         ActiveCanvas = true;
     }
     public void HardButton()
@@ -47,6 +43,7 @@ public class DifficultyLevelManager : MonoBehaviour
         difficultyLevel = DifficultyLevel.Hard;
         DifficultyCanvas.gameObject.SetActive(false);
         EventSystem.current.SetSelectedGameObject(firstSelect);
+        FlagsManager.flag_Instance.gameMode = "Hard";
         ActiveCanvas = true;
     }
     public void ExtremeButton()
