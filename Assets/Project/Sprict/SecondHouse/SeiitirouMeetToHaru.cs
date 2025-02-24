@@ -89,11 +89,12 @@ public class SeiitirouMeetToHaru : MonoBehaviour
         await MessageManager.message_instance.MessageWindowActive(messages4, names4, images4, ct: destroyCancellationToken);
         GameManager.m_instance.seiitirou.gameObject.transform.position = new Vector3(130, 142.2f, 0);
         haru.gameObject.transform.position = new Vector3(141, 144.5f, 0);
+        haru.gameObject.transform.DOLocalMove(new Vector3(141, 144, 0), 0.3f);
         light2D.intensity = 1.0f;
         GameManager.m_instance.seiitirou.gameObject.transform.DOLocalMove(new Vector3(141, 142.2f, 0), 5f);
         await UniTask.Delay(TimeSpan.FromSeconds(5f));
         // お互いの事情を話し合い、ヒントを貰う。
-        await MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken);
+        await MessageManager.message_instance.MessageWindowActive(messages5, names5, images5, ct: destroyCancellationToken);
         await Blackout();
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         light2D.intensity = 1.0f; 

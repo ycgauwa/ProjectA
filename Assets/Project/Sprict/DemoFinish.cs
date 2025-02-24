@@ -5,11 +5,15 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.LowLevel;
+using Cysharp.Threading.Tasks;
+using System.Threading;
+using Unity.VisualScripting;
+using UnityEngine.Rendering.Universal;
 
 public class DemoFinish : MonoBehaviour
 {
     //最初のUIなんかを管理するクラス
-    //ゲームモード選択→難易度選択→説明みる→メニュー出現→メニューを閉じる
+    //難易度選択→説明みる→メニュー出現→メニューを閉じる
     //コルーチンでアクティブ状態で次に進めるように調節
     [SerializeField]
     private List<string> Messages;
@@ -19,6 +23,15 @@ public class DemoFinish : MonoBehaviour
     private List<string> names;
     [SerializeField]
     private List<Sprite> image;
+    public List<string> finishMessages;
+    public List<string> finishNames;
+    public List<Sprite> finishImage;
+    [SerializeField]
+    private List<string> finishMessages2;
+    [SerializeField]
+    private List<string> finishNames2;
+    [SerializeField]
+    private List<Sprite> finishImage2;
     public Canvas window;
     public Text target;
     public Text nameText;
@@ -34,32 +47,43 @@ public class DemoFinish : MonoBehaviour
     public Image Instruction;
     public Canvas DemoFinishCanvas;
     public GameObject player;
-    public Canvas gameModeCanvas;
     public string proMessage;
     public string norMessage;
     public GameObject firstSelect2;
 
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else Destroy(instance);
+    }
     void Start()
     {
-        firstActive = false;
-        instance = this;
-        StartCoroutine(CreateCoroutine());
+        if(SaveSlotsManager.save_Instance.saveState.loadIndex == 0)
+        {
+            player.transform.position = new Vector2(30, -35);
+            EventSystem.current.SetSelectedGameObject(firstSelect2);
+            CreateCoroutine().Forget();
+        }
+        else return;
+
     }
-    private IEnumerator CreateCoroutine()
-    {
+    private async UniTask CreateCoroutine(CancellationToken ct = default)
+    {//流れとして難易度決めてから説明行って、大体見たらセリフ出してゲーム開始。その間ESCは無効？
         Debug.Log("1");
-        yield return new WaitUntil(() => gameModeCanvas.gameObject.activeSelf == false);
+        //yield return new WaitUntil(() => gameModeCanvas.gameObject.activeSelf == false);
         Debug.Log("2");
-        yield return CanvasActive();
-        Debug.Log("3");
-        yield return new WaitUntil(() => StartActive);
+        await CanvasActive();
+        //Debug.Log("3");
         Debug.Log("4");
         Instruction.gameObject.SetActive(true);
-        yield return new WaitUntil(() => firstActive == true);
+        await UniTask.WaitUntil(() => firstActive, cancellationToken: ct);//FAは説明が見終わったBool値
         Debug.Log("5");
-        yield return new WaitUntil(() => GameManager.m_instance.menuCanvas.gameObject.activeSelf == false);
+        await UniTask.WaitUntil(() => GameManager.m_instance.menuCanvas.gameObject.activeSelf == false, cancellationToken: ct);
         Debug.Log("6");
-        yield return OnAction();
+        await MessageManager.message_instance.MessageWindowActive(Messages2, names, image, ct: destroyCancellationToken);
         Debug.Log("7");
 
         target.text = "";
@@ -73,12 +97,12 @@ public class DemoFinish : MonoBehaviour
         nameText.text = name;
         characterImage.sprite = image;
     }
-    IEnumerator CanvasActive()
+    async UniTask CanvasActive()
     {
         DifficultyCanvas.gameObject.SetActive(true);
-        yield return (difficultylevelmanager.ActiveCanvas == true);
+        await UniTask.WaitUntil(() => difficultylevelmanager.ActiveCanvas == true);
     }
-    IEnumerator OnAction()
+    IEnumerator OnAction()//セリフだし
     {
         if(GameManager.m_instance.stopSwitch == true)
             GameManager.m_instance.stopSwitch = false;
@@ -97,56 +121,29 @@ public class DemoFinish : MonoBehaviour
         window.gameObject.SetActive(false);
         yield break;
     }
-    private void Update()
+    private async void OnTriggerEnter2D(Collider2D collider)
     {
-        if(StartActive == true && firstActive == false)
+        if(collider.gameObject.tag.Equals("Seiitirou"))
         {
-            DemoImage.gameObject.SetActive(true);
-            DemoPanel.gameObject.SetActive(true);
+            await Blackout();
+            await MessageManager.message_instance.MessageWindowActive(finishMessages2, finishNames2, finishImage2, ct: destroyCancellationToken);
+            DemoFinishCanvas.gameObject.SetActive(true);
         }
-        if(DemoImage.gameObject.activeSelf)
-        {
-            //GameManager.m_instance.stopSwitch = true;
-            if(Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return))
-            {
-                DemoImage.gameObject.SetActive(false);
-                DemoPanel.gameObject.SetActive(false);
-                //firstActive = false;
-            }
-        }
-        if(!GameManager.m_instance.menuCanvas.gameObject.activeSelf && firstActive == true)
-        {
-            OnAction();
-        }
-    }
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if(collider.gameObject.tag.Equals("Player") || collider.gameObject.name == "Matiba Haru")
+        
+        /*if(collider.gameObject.tag.Equals("Player") || collider.gameObject.name == "Matiba Haru")
         {
             PlayerManager.m_instance.m_speed = 0;
             Time.timeScale = 0.0f;
             DemoFinishCanvas.gameObject.SetActive(true);
+        }*/
+    }
+    public async UniTask Blackout()
+    {
+        GameManager.m_instance.stopSwitch = true;
+        while(SecondHouseManager.secondHouse_instance.light2D.intensity > 0.01f)
+        {
+            SecondHouseManager.secondHouse_instance.light2D.intensity -= 0.008f;
+            await UniTask.Delay(1);
         }
-    }
-    // Start is called before the first frame update
-    void Awake()
-    {
-        gameModeCanvas.gameObject.SetActive(true);
-    }
-    public void prologue()
-    {
-        player.transform.position = new Vector2(30,-35);
-        gameModeCanvas.gameObject.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(firstSelect2);
-        StartActive = true;
-        //playerMessage.
-    }
-    public void normal() 
-    {
-        player.transform.position = new Vector2(70, -45);
-        gameModeCanvas.gameObject.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(firstSelect2);
-        StartActive = true;
-        Demo.gameObject.SetActive(true);
     }
 }

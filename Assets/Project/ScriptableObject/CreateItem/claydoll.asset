@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47c5cf7a1069f43acc6cfe09d5d118, type: 3}
   m_Name: claydoll
   m_EditorClassIdentifier: 
-  name: "\u571F\u4EBA\u5F62"
   icon: {fileID: 21300000, guid: 6d6d86022f09a2c4bbd6aaffdd8603de, type: 3}
   itemText: "\u5C0F\u3055\u3044\u5973\u306E\u5B50\u304C\u7C98\u571F\u3067\u4F5C\u3063\u305F\u4EBA\u5F62\u306E\u3088\u3046\u3060"
   itemID: 2
   checkPossession: 0
   selectedItem: 0
+  geted: 0

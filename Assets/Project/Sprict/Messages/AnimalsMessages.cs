@@ -36,23 +36,16 @@ public class AnimalsMessages : MonoBehaviour
     public AnimalsMessages mushroom;
     public Cooktop cooktop;
     public SecondHouseManager secondHouseManager;
-    private void Start()
-    {
-    }
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.tag.Equals("Player"))
-        {
             isContacted = true;
-        }
     }
     private void OnTriggerExit2D(Collider2D collider)
     {
         messageSwitch = false;
         if(collider.gameObject.tag.Equals("Player"))
-        {
             isContacted = false;
-        }
     }
 
     protected void showMessage(string message, string name, Sprite image)
@@ -61,7 +54,7 @@ public class AnimalsMessages : MonoBehaviour
         nameText.text = name;
         characterImage.sprite = image;
     }
-    IEnumerator OnAction()
+    IEnumerator OnAction() //このコードきしょいけど一旦放置
     {
         window.gameObject.SetActive(true);
         for(int i = 0; i < messages.Count; ++i)
@@ -95,7 +88,7 @@ public class AnimalsMessages : MonoBehaviour
     {
         if(isContacted && messageSwitch == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
-            if(cooktop.isCooked == true)
+            if(cooktop.isCooked == true)　//料理後
             {
                 messageSwitch = true;
                 coroutine = OnAction();
@@ -103,7 +96,7 @@ public class AnimalsMessages : MonoBehaviour
             }
             else
             {
-                messageSwitch = true;
+                messageSwitch = true; //料理前
                 MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken).Forget();
             }
         }

@@ -84,16 +84,13 @@ public class Cooktop : MonoBehaviour
     public Refrigerator refrigerator;
     public GameManager gameManager;
     public GameObject firstSelect;
-    private void Start()
-    {
-
-    }
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.tag.Equals("Player")) isContacted = true;
     }
     private void OnTriggerExit2D(Collider2D collider)
     {
+        messageSwitch = false;
         if(collider.gameObject.tag.Equals("Player")) isContacted = false;
     }
 
@@ -128,17 +125,17 @@ public class Cooktop : MonoBehaviour
     {
         if(!cooked.gameObject.activeSelf && isContacted && messageSwitch == false && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
-            if(refrigerator.isTaken == true)
-            {
-                messageSwitch = true;
-                coroutine = OnAction();
-                StartCoroutine(coroutine);
-            }
-            else if(isCooked == true)
+            if(isCooked == true)
             {
                 messageSwitch = true;
                 MessageManager.message_instance.MessageWindowActive(messages3, names3, image3, messageSwitch, ct: destroyCancellationToken).Forget();
             }
+            else if(refrigerator.isTaken == true)
+            {
+                messageSwitch = true;
+                coroutine = OnAction();
+                StartCoroutine(coroutine);
+            }         
             else
             {
                 messageSwitch = true;
@@ -146,27 +143,11 @@ public class Cooktop : MonoBehaviour
             }
         }
 
-        if(ingredients1Text.text == "使用済み" && ingredients2Text.text == "使用済み" && ingredients3Text.text == "使用済み") isCooked = true;
-        
-        /*if(cooked.gameObject.activeSelf && !interrupt.gameObject.activeSelf && !ingredients.gameObject.activeSelf)
+        if(itemDateBase.GetItemId(15).geted && itemDateBase.GetItemId(16).geted && itemDateBase.GetItemId(17).geted)
         {
-            if(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
-            {
-                //中断するかを問う選択肢の出現
-                MessageManager.message_instance.MessageWindowActive(messages4, names4, image4);
-                interrupt.gameObject.SetActive(true);
-                soundManager.PlaySe(gameManager.cancel);
-            }
+            if(!itemDateBase.GetItemId(15).checkPossession && !itemDateBase.GetItemId(16).checkPossession && !itemDateBase.GetItemId(17).checkPossession)
+                isCooked = true;
         }
-        else if(ingredients.gameObject.activeSelf)
-        {
-            if(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
-            {
-                //素材が出てる時に素材ウィンドウを消すメソッド
-                ingredients.gameObject.SetActive(false);
-                soundManager.PlaySe(gameManager.cancel);
-            }
-        }*/
     }
 
     //ボタンのスクリプトの作成をする。必要なスクリプトはinterruptの中断するとしないボタン
@@ -177,6 +158,8 @@ public class Cooktop : MonoBehaviour
         GameManager.m_instance.stopSwitch = false;
         cooked.gameObject.SetActive(false);
         interrupt.gameObject.SetActive(false);
+        target.text = "";
+        window.gameObject.SetActive(false);
         selection.gameObject.SetActive(false);
         Selectwindow.gameObject.SetActive(false);
     }
@@ -339,13 +322,21 @@ public class Cooktop : MonoBehaviour
     }
     public void OnclickDish1IngredientsButton()
     {
+        Debug.Log("a");
+        if(window.gameObject.activeSelf == true)
+        {
+            Debug.Log("1");
+            target.text = "";
+            window.gameObject.SetActive(false);
+            GameManager.m_instance.ImageErase(characterImage);
+        }
         //エビチリ用のボタン。所持している素材によって成功結果が変わる。もしエビチリ選択した状態で正解のエビチリかそれ以外に変化する。
-        if(itemDateBase.GetItemId(6).checkPossession == true  && selectedDish1 == true && ingredients1Text.text == "パクチー")
+        if(itemDateBase.GetItemId(15).checkPossession && selectedDish1 && ingredients1Text.text == "パクチー")
         {
             MessageManager.message_instance.MessageWindowActive(dish1Messages, dish1Names, dish1Image, messageSwitch, ct: destroyCancellationToken).Forget();
             ingredients.gameObject.SetActive(false);
             inventry.Delete(itemDateBase.GetItemId(6));
-            inventry.Delete(itemDateBase.GetItemId(1));
+            inventry.Delete(itemDateBase.GetItemId(15));
             inventry.Add(itemDateBase.GetItemId(21));
             selectedDish1 = false;
             ingredients1Text.text = "使用済み";
@@ -377,7 +368,15 @@ public class Cooktop : MonoBehaviour
     }
     public void OnclickDish2IngredientsButton()
     {
-        if(itemDateBase.GetItemId(16).checkPossession == true && selectedDish2 == true && ingredients2Text.text == "レモン")
+        Debug.Log("b");
+        if(window.gameObject.activeSelf == true)
+        {
+            Debug.Log("2");
+            target.text = "";
+            window.gameObject.SetActive(false);
+            GameManager.m_instance.ImageErase(characterImage);
+        }
+        if(itemDateBase.GetItemId(16).checkPossession && selectedDish2 && ingredients2Text.text == "レモン")
         {
             MessageManager.message_instance.MessageWindowActive(dish2Messages, dish2Names, dish2Image, messageSwitch, ct: destroyCancellationToken).Forget();
             ingredients.gameObject.SetActive(false);
@@ -414,7 +413,15 @@ public class Cooktop : MonoBehaviour
     }
     public void OnclickDish3IngredientsButton()
     {
-        if(itemDateBase.GetItemId(17).checkPossession == true && selectedDish3 == true && ingredients3Text.text == "赤いソース")
+        Debug.Log("c");
+        if(window.gameObject.activeSelf == true)
+        {
+            Debug.Log("3");
+            target.text = "";
+            window.gameObject.SetActive(false);
+            GameManager.m_instance.ImageErase(characterImage);
+        }
+        if(itemDateBase.GetItemId(17).checkPossession && selectedDish3 && ingredients3Text.text == "赤いソース")
         {
             MessageManager.message_instance.MessageWindowActive(dish3Messages, dish3Names, dish3Image, messageSwitch, ct: destroyCancellationToken).Forget();
             ingredients.gameObject.SetActive(false);

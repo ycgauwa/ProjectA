@@ -29,9 +29,7 @@ public class ItemGet3 : MonoBehaviour
     public ToEvent4 toevent4;
     public Item item;
     public Inventry inventry;
-    public NotEnter6 notEnter6;
     private bool isContacted = false;
-    public bool getedItem = false;
     public bool messageSwitch = false;
 
     // 最初は話しかけてもメッセージが出るだけだが、イベント４のフラグを回収すると別のメッセージが流れてアイテムをゲットできる。
@@ -39,17 +37,13 @@ public class ItemGet3 : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.tag.Equals("Player"))
-        {
             isContacted = true;
-        }
     }
     private void OnTriggerExit2D(Collider2D collider)
     {
         messageSwitch = false;
         if(collider.gameObject.tag.Equals("Player"))
-        {
             isContacted = false;
-        }
     }
     private void Update()
     {
@@ -61,20 +55,17 @@ public class ItemGet3 : MonoBehaviour
                 PlayerManager.m_instance.m_speed = 0;
                 MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
             }
-            else if(toevent4.event4flag == true && getedItem == false)
+            else if(toevent4.event4flag == true && !ItemDateBase.itemDate_instance.GetItemId(253).geted)
             {
                 messageSwitch = true;
                 PlayerManager.m_instance.m_speed = 0;
                 MessageManager.message_instance.MessageWindowActive(messages2, names2, image2, ct: destroyCancellationToken).Forget();
-                notEnter6.getKey = true;
-                getedItem = true;
                 inventry.Add(item);
             }
             //　もうここには用はない的なメッセージを書く
-            else if(toevent4.event4flag == true && getedItem == true)
+            else if(toevent4.event4flag == true && ItemDateBase.itemDate_instance.GetItemId(253).geted)
             {
                 messageSwitch = true;
-                PlayerManager.m_instance.m_speed = 0;
                 MessageManager.message_instance.MessageWindowActive(messages3, names3, image3, ct: destroyCancellationToken).Forget();
             }
         }

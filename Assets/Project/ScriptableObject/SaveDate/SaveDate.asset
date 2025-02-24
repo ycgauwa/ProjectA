@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98ed9b505fdd3794b911b9e5bf404186, type: 3}
+  m_Name: SaveDate
+  m_EditorClassIdentifier: 
+  playerPosition: {x: 131.1039, y: -14.629922, z: 0}
+  cameraPosition: {x: 0, y: 0, z: 0}
+  seiitirouPosition: {x: 28.65, y: 35.32, z: 0}
+  haruPosition: {x: 0, y: 0, z: 0}
+  mistukiPosition: {x: 0, y: 0, z: 0}
+  reiPosition: {x: 0, y: 0, z: 0}
+  eijiPosition: {x: 0, y: 0, z: 0}
+  enemyPosition: {x: 0, y: 0, z: 0}
+  enemy2Position: {x: 0, y: 0, z: 0}
+  characterName: "\u5E78\u4EBA"
+  playTime: 0:8:12
+  itemsPossessionList: 00000000000000000000000000000000000000000000000000000000000000000000000000
+  itemsGetedList: 01010100010001010101000000000000000000000000000000000000000000000000000000
+  gameProgressFlagsList: 01010101000000000000
+  endingFlagsList: 00000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  difficultyLevelManager: {fileID: 0}
+  gameModeString: Easy
+  chapterNumber: 3
+  totalSeconds: 492

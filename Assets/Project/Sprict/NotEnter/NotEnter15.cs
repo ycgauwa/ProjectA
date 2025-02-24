@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -18,7 +19,7 @@ public class NotEnter15 : MonoBehaviour
     private List<Sprite> images;
     [SerializeField]
     private List<Sprite> images2;
-    private bool keyOpened;
+    public bool keyOpened;
     public Canvas secondHouseCanvas;
     public Image buttonGrid;
     public AudioClip keyOpen;
@@ -31,10 +32,40 @@ public class NotEnter15 : MonoBehaviour
         else if(collider.gameObject.tag.Equals("Seiitirou"))
         {
             gameObject.tag = "Untagged";
-            await MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken);
+            Debug.Log("非同期処理を開始します");
+
+            if(MessageManager.message_instance == null)
+            {
+                Debug.LogError("MessageManager.message_instance is null.");
+                return;
+            }
+
+            if(GameManager.m_instance == null)
+            {
+                Debug.LogError("GameManager.m_instance is null.");
+                return;
+            }
+
+            if(secondHouseCanvas == null)
+            {
+                Debug.LogError("secondHouseCanvas is null.");
+                return;
+            }
+
+            await MessageManager.message_instance.MessageWindowActive(messages, names, images);
+
+            Debug.Log("awaitが完了しました");
             GameManager.m_instance.stopSwitch = true;
+            Debug.Log("GameManager の状態を更新しました");
+
             secondHouseCanvas.gameObject.SetActive(true);
             buttonGrid.gameObject.SetActive(true);
+            Debug.Log("Canvas の状態を更新しました");
+            /*gameObject.tag = "Untagged";
+            await MessageManager.message_instance.MessageWindowActive(messages, names, images);
+            GameManager.m_instance.stopSwitch = true;
+            secondHouseCanvas.gameObject.SetActive(true);
+            buttonGrid.gameObject.SetActive(true);*/
         }
     }
     public async void DefuseLocked()
@@ -49,6 +80,7 @@ public class NotEnter15 : MonoBehaviour
         await UniTask.Delay(TimeSpan.FromSeconds(1f));
         GameManager.m_instance.seiitirou.gameObject.transform.position = new Vector3(108, 102.8f,0);
         keyOpened = true;
+        FlagsManager.flag_Instance.seiitirouFlagBools[4] = true;
         gameObject.tag = "Minnka2-9";
         SecondHouseManager.secondHouse_instance.light2D.intensity = 1.0f;
         GameManager.m_instance.stopSwitch = false;

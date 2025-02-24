@@ -6,7 +6,6 @@ using UnityEngine;
 public class NotEnter3 : MonoBehaviour
 {
     //　今回はフラグが回収されなかったらメッセージ表示、回収されたらタグを持たせてあげる
-
     [SerializeField]
     private List<string> messages;
     [SerializeField]
@@ -26,10 +25,9 @@ public class NotEnter3 : MonoBehaviour
                 MessageManager.message_instance.MessageWindowActive(GameManager.m_instance.GetMessages(name, "NotEnter"), GameManager.m_instance.GetSpeakerName(name, "NotEnter"), images,ct: destroyCancellationToken).Forget();
             }
         }
-        // イベントが終わった後にTPできるようにしたい
-        else if(toevent3.event3flag == true)
+        else
         {
-            this.gameObject.tag = "Minnka1-1";
+            gameObject.tag = "Minnka1-1";
             if(collider.gameObject.tag.Equals("Seiitirou"))
             {
                 seiitirou.transform.position = new Vector2(24, -2);

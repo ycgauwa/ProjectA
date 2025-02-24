@@ -16,14 +16,14 @@ public class NotEnter11 : MonoBehaviour
     //f—ÃŠ‚É‚Ä1‰ñŒ¢‚É’Ç‚í‚ê‚Ä‚©‚ç–ß‚é‚ÆŒõ‚Á‚Ä‚éêŠ‚ª‚ ‚é‚½‚ßA‚»‚±‚Åèpº‚ÌŒ®‚ğè‚É‚·‚éB
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(key5.checkPossession == false)
+        if(key5.geted == false)
         {
             if(collider.gameObject.tag.Equals("Player"))
             {
                 MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
             }
         }
-        else if(key5.checkPossession == true)
+        else if(key5.geted)
         {
             if(collider.gameObject.tag.Equals("Player"))
             {

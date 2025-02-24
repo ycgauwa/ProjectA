@@ -30,6 +30,12 @@ public class EndingCase3 : MonoBehaviour
     [SerializeField]
     private List<Sprite> hidingImage;
     [SerializeField]
+    private List<string> hidingMessages2;
+    [SerializeField]
+    private List<string> hidingNames2;
+    [SerializeField]
+    private List<Sprite> hidingImage2;
+    [SerializeField]
     private List<string> debuffMessages;
     [SerializeField]
     private List<string> debuffNames;
@@ -134,7 +140,7 @@ public class EndingCase3 : MonoBehaviour
         target.text = "";
         window.gameObject.SetActive(false);
         coroutine = null;
-        homing.speed = 2;
+        homing.speed = 2 + GameManager.m_instance.difficultyLevelManager.addEnemySpeed;
         yield break;
     }
     private void Update()
@@ -223,7 +229,7 @@ public class EndingCase3 : MonoBehaviour
                     Selectwindow.gameObject.SetActive(true);
                     selection2.gameObject.SetActive(true);
                     soundManager.PlayBgm(heartSound);
-                    soundManager.StopBgm(gameTeleportManager.toevent3.chasedBGM);
+                    soundManager.StopBgm(Homing.m_instance.chasedBGM);
                     EventSystem.current.SetSelectedGameObject(firstSelect2);
                     isOpenSelect = true;
                     break;
@@ -243,7 +249,7 @@ public class EndingCase3 : MonoBehaviour
                 yield return ExitEvent();
                 yield break;
             }
-            else if(debuffPercent <= 3)
+            else if(debuffPercent <= 3 + GameManager.m_instance.difficultyLevelManager.hideDifficultyFactor)
             {
                 yield return debuffEvent();
             }
@@ -267,7 +273,7 @@ public class EndingCase3 : MonoBehaviour
                 yield return ExitEvent();
                 yield break;
             }
-            else if (debuffPercent <= 7)
+            else if (debuffPercent <= 7 + GameManager.m_instance.difficultyLevelManager.hideDifficultyFactor)
             {
                 yield return debuffEvent();
                 if (debuffcount == 3) yield break;
@@ -294,7 +300,7 @@ public class EndingCase3 : MonoBehaviour
                 yield return ExitEvent();
                 yield break;
             }
-            else if (debuffPercent <= 13)
+            else if (debuffPercent <= 13 + GameManager.m_instance.difficultyLevelManager.hideDifficultyFactor)
             {
                 yield return debuffEvent();
                 if (debuffcount == 3) yield break;
@@ -321,7 +327,7 @@ public class EndingCase3 : MonoBehaviour
                 yield return ExitEvent();
                 yield break;
             }
-            else if (debuffPercent <= 20)
+            else if (debuffPercent <= 20 + GameManager.m_instance.difficultyLevelManager.hideDifficultyFactor)
             {
                 yield return debuffEvent();
                 if (debuffcount == 3) yield break;
@@ -348,7 +354,7 @@ public class EndingCase3 : MonoBehaviour
                 yield return ExitEvent();
                 yield break;
             }
-            else if (debuffPercent <= 30)
+            else if (debuffPercent <= 30 + GameManager.m_instance.difficultyLevelManager.hideDifficultyFactor)
             {
                 yield return debuffEvent();
                 if (debuffcount == 3) yield break;
@@ -378,7 +384,7 @@ public class EndingCase3 : MonoBehaviour
                 yield return ExitEvent();
                 yield break;
             }
-            else if (debuffPercent <= 40)
+            else if (debuffPercent <= 40 + GameManager.m_instance.difficultyLevelManager.hideDifficultyFactor)
             {
                 yield return debuffEvent();
                 if (debuffcount == 3) yield break;
@@ -481,10 +487,16 @@ public class EndingCase3 : MonoBehaviour
         end3Canvas.gameObject.SetActive(false);
         light2D.intensity = 1.0f;
         soundManager.StopBgm(ending3Sound);
-        GameManager.m_instance.OnclickRetryButton();
+        soundManager.StopBgm(shortnessSound);
+        soundManager.StopBgm(sighSound);
+        GameManager.m_instance.stopSwitch = false;
+        GameManager.m_instance.player.transform.position = new Vector2(69, -46);
         EndingGalleryManager.m_gallery.endingGallerys[2].sprite = end3Image.sprite;
         EndingGalleryManager.m_gallery.endingFlag[2] = true;
-        this.gameObject.SetActive(false);
+        homing.speed = 2 + GameManager.m_instance.difficultyLevelManager.addEnemySpeed;
+        gameTeleportManager.StopChased();
+        homing.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
     public void OnclickEnd4Retry()
     {
@@ -492,9 +504,13 @@ public class EndingCase3 : MonoBehaviour
         end4Canvas.gameObject.SetActive(false);
         light2D.intensity = 1.0f;
         soundManager.StopSe(eatSound);
-        GameManager.m_instance.OnclickRetryButton();
+        GameManager.m_instance.stopSwitch = false;
+        GameManager.m_instance.player.transform.position = new Vector2(69, -46);
         EndingGalleryManager.m_gallery.endingGallerys[3].sprite = end4Image.sprite;
         EndingGalleryManager.m_gallery.endingFlag[3] = true;
+        homing.speed = 2 + GameManager.m_instance.difficultyLevelManager.addEnemySpeed;
+        gameTeleportManager.StopChased();
+        homing.gameObject.SetActive(false);
         gameObject.SetActive(false);
     }
     private IEnumerator ExitEvent()
@@ -507,6 +523,8 @@ public class EndingCase3 : MonoBehaviour
             yield return null;
             // 会話をwindowのtextフィールドに表示
             showMessage(exitMessages[i], exitNames[i], exitImage[i]);
+            if(i == exitMessages.Count -1)
+                soundManager.PlaySe(chestsSound);
             yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
         soundManager.StopBgm(heartSound);
@@ -529,6 +547,7 @@ public class EndingCase3 : MonoBehaviour
         target.text = "";
         window.gameObject.SetActive(false);
         coroutine = null;
+        homing.speed = 2 + GameManager.m_instance.difficultyLevelManager.addEnemySpeed;
         yield break;
     }
     public IEnumerator ExitToDeath()
@@ -536,7 +555,7 @@ public class EndingCase3 : MonoBehaviour
         //画像が出て死にます。
         soundManager.StopBgm(shortnessSound);
         soundManager.StopBgm(sighSound);
-        for (int i = 0; i < end3Messages.Count; ++i)
+        for (int i = 0; i < end4Messages.Count; ++i)
         {
             window.gameObject.SetActive(true);
             yield return null;
@@ -579,7 +598,6 @@ public class EndingCase3 : MonoBehaviour
         target.text = "";
         enemyImage.gameObject.SetActive(false);
         window.gameObject.SetActive(false);
-
         yield break;
     }
 }

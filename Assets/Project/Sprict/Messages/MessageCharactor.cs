@@ -119,7 +119,7 @@ public class MessageCharactor : MonoBehaviour
      */
     IEnumerator CharaShowMessage()
     {
-        if(notEnter4.getKey1 == true)//居間に行けるようになってからの内容
+        if(ItemDateBase.itemDate_instance.GetItemId(251).checkPossession == true)//居間に行けるようになってからの内容
         {
             charactername = character.charaName;
             images = character.characterImages3;

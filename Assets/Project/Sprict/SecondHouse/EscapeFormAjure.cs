@@ -23,7 +23,31 @@ public class EscapeFormAjure : MonoBehaviour
     private List<string> names;
     [SerializeField]
     private List<Sprite> image;
-    
+    [SerializeField]
+    private List<string> messages2;
+    [SerializeField]
+    private List<string> names2;
+    [SerializeField]
+    private List<Sprite> image2;
+    [SerializeField]
+    private List<string> messages3;
+    [SerializeField]
+    private List<string> names3;
+    [SerializeField]
+    private List<Sprite> image3;
+    [SerializeField]
+    private List<string> messages4;
+    [SerializeField]
+    private List<string> names4;
+    [SerializeField]
+    private List<Sprite> image4;
+    [SerializeField]
+    private List<string> messages5;
+    [SerializeField]
+    private List<string> names5;
+    [SerializeField]
+    private List<Sprite> image5;
+
     public EnemyEncounter enemyEncounter;
     public GameObject player;
     public GameObject haru;
@@ -74,16 +98,16 @@ public class EscapeFormAjure : MonoBehaviour
         await UniTask.Delay(TimeSpan.FromSeconds(2.6f));
         soundManager.PlaySe(stairSound);
         //「止まってドアを発見するまで」
-        await MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken);  
+        await MessageManager.message_instance.MessageWindowActive(messages2, names2, image2, ct: destroyCancellationToken);  
         soundManager.PlaySe(panelOpenSound);
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         //「下の様子を確認、＆降りる意思を確認→幸人勝手に降りる。晴困惑」
-        await MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken);
+        await MessageManager.message_instance.MessageWindowActive(messages3, names3, image3, ct: destroyCancellationToken);
         await UniTask.Delay(TimeSpan.FromSeconds(1f));
         soundManager.PlaySe(fallSound);
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         //「晴降りろ！」怖いよ→受け止めてやるから早く来い！襲われても知らんぞ！→
-        await MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken);
+        await MessageManager.message_instance.MessageWindowActive(messages4, names4, image4, ct: destroyCancellationToken);
         await UniTask.Delay(TimeSpan.FromSeconds(1f));
         soundManager.PlaySe(fallSound);
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
@@ -91,7 +115,7 @@ public class EscapeFormAjure : MonoBehaviour
         haru.transform.position = new Vector3(109, 107, 0);
         light2D.intensity = 1.0f;
         //「風呂場の点検口につながってたみたいだな。」にしてもなんであんなところに隠し通とがあったんだろう？「いいからいくそ！」
-        await MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken);
+        await MessageManager.message_instance.MessageWindowActive(messages5, names5, image5, ct: destroyCancellationToken);
         await Blackout();
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         light2D.intensity = 1.0f;

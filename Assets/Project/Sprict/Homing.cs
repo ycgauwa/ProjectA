@@ -8,13 +8,11 @@ using UnityEngine.LowLevel;
 
 public class Homing : MonoBehaviour
 {
-    //プレイヤーのTransform
     Transform playerTr;
-    //Staticを使ってたり、インスタンス化している
     public static Homing m_instance;
     public GameTeleportManager teleportManager;
-    [SerializeField] 
-    public float speed = 2; //敵の動くスピード
+    [SerializeField]
+    public float speed; //敵の動くスピード
     public ToEvent3 toevent3;
     public RescueEvent rescueEvent;
     public ItemDateBase itemDateBase;
@@ -23,27 +21,38 @@ public class Homing : MonoBehaviour
     public float enemyCount = 0.0f; //　敵が追いかけている時間
     public Canvas gameoverWindow;
     public Image buttonPanel;
-    public bool enemyEmerge;
+    public bool eventEnemySpawnToggle; //イベント用に敵の出現を調節するBool変数
+    public bool enemyEmerge; //この変数がtrueの時に敵が出てこれるようになりfalseの時は出てこない。
     public bool isMove;
     Rigidbody2D rbody;
     NPCAnimationController cr;
     public Vector2 enemyPosition;
     private Vector2 enemyMovement;
     public AudioClip meatEat;
+    public AudioClip chasedBGM;
 
+
+    private void Awake()
+    {
+        if(m_instance == null)
+        {
+            m_instance = this;
+        }
+        else Destroy(m_instance);
+    }
     private void Start()
     {
-        m_instance = this;
         // プレイヤーのTransformを取得（プレイヤーのタグPlayerに設定必要）
         playerTr = GameObject.FindGameObjectWithTag("Player").transform;
         cr = GetComponentInChildren<NPCAnimationController>();
         isMove = true;
+        eventEnemySpawnToggle = true;
         rbody = GetComponent<Rigidbody2D>();
         enemyCount = 0;
     }
     private void Update()
     {
-        if(toevent3.event3flag && enemyEmerge)
+        if(enemyEmerge)
         {
             if(Vector2.Distance(transform.position, playerTr.position) < 0.1f)
                 return;
@@ -109,7 +118,7 @@ public class Homing : MonoBehaviour
     // その変数の値が０となる。０の時は（一定の数以下なら）ワープしないを追加する
 
 
-    //敵が時間差テレポートするメソッド
+    /*
     public void TimerTeleport()
     {
         if(toevent3.event3flag && enemyEmerge)
@@ -117,7 +126,7 @@ public class Homing : MonoBehaviour
             var teleportAddress = teleportManager.FindTeleportAddress("House");
         }
     }
-    //プレイヤーがTPことを認知させる
+    */
     
 
 }

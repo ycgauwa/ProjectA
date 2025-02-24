@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
+using DG.Tweening;
+using Cysharp.Threading.Tasks;
+using System;
 
 public class ToEvent5 : MonoBehaviour
 {
@@ -28,15 +31,10 @@ public class ToEvent5 : MonoBehaviour
     public Text target;
     public Text nameText;
     public Image characterImage;
-    public float speed;
-    private IEnumerator coroutine;
     public GameObject eventcamera;
     public GameObject haru;
-    public ToEvent2 event2;
-    public Light2D light2D;
     CapsuleCollider2D capsuleCollider;
-    private bool phase1;
-    private bool event5Start = false;
+    public bool event5Start = false;
 
     //まず晴は本棚と向き合ってる状態なので後ろ向きの状態で晴が気づく。
     //その状態から晴がこちらに近づいてきて会話が始まる。
@@ -60,67 +58,35 @@ public class ToEvent5 : MonoBehaviour
             capsuleCollider.isTrigger = true;
             haru.transform.position = new Vector2(80,75);
             GameManager.m_instance.stopSwitch = true;
-            event2.enabled = false;
-            coroutine = CreateCoroutine();
-            StartCoroutine(coroutine);
+            EncountHaru().Forget();
         }
     }
-    private void FixedUpdate()
+    public void ColliderTrigger()
     {
-        if (eventcamera.transform.position.y < 72 && cameraManager.event5Camera == true)
-        {
-            eventcamera.transform.position += new Vector3(0f,0.05f,0f);
-            //eventcamera.transform.Translate(new Vector3(0.0f, 0.1f, 0.0f * Time.deltaTime * speed));
-        }
-        if(phase1 == true && event5Start == false)
-        {
-            if (eventcamera.transform.position.y > 69)
-            {
-                eventcamera.transform.position += new Vector3(0f, -0.05f, 0f);
-            }
-            if (haru.transform.position.y > 69)
-            {
-                haru.transform.position += new Vector3(0f, -0.05f, 0f);
-            }
-        }
-
+        capsuleCollider = haru.GetComponent<CapsuleCollider2D>();
+        capsuleCollider.isTrigger = true;
     }
-    IEnumerator CreateCoroutine()
+    private async UniTask EncountHaru()
     {
-        window.gameObject.SetActive(true);
-        yield return OnAction();
+        await MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken);
+        cameraManager.cameraInstance.playerCamera = false;
+        GameManager.m_instance.mainCamera.gameObject.transform.DOLocalMove(new Vector3(80, 72, -10), 4f);
+        await UniTask.Delay(TimeSpan.FromSeconds(4f));
 
-        Event5Camera();
-        yield return new WaitForSeconds(4.0f);
-        window.gameObject.SetActive(true);
-        yield return OnAction2();
+        await MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken);
 
-        yield return new WaitForSeconds(4.0f);
+        GameManager.m_instance.mainCamera.gameObject.transform.DOLocalMove(new Vector3(80, 69, -10), 4f);
+        haru.gameObject.transform.DOLocalMove(new Vector3(80, 69, 0), 4f);
+        await UniTask.Delay(TimeSpan.FromSeconds(4f));
+
         window.gameObject.SetActive(true);
-        yield return OnAction3();
-    }
-    private void Event5Camera()
-    {
-        cameraManager.playerCamera = false;
-        cameraManager.event5Camera = true;
+        await OnAction3();
     }
     protected void showMessage(string message, string name, Sprite image)
     {
         target.text = message;
         nameText.text = name;
         characterImage.sprite = image;
-    }
-    IEnumerator OnAction()
-    {
-        for (int i = 0; i < messages.Count; ++i)
-        {
-            yield return null;
-            showMessage(messages[i], names[i], images[i]);
-            yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
-        }
-        target.text = "";
-        window.gameObject.SetActive(false);
-        yield break;
     }
     IEnumerator OnAction2()
     {
@@ -132,8 +98,7 @@ public class ToEvent5 : MonoBehaviour
         }
         target.text = "";
         window.gameObject.SetActive(false);
-        phase1 = true;
-        cameraManager.event5Camera = false;
+
         yield break;
     }
     IEnumerator OnAction3()
@@ -149,20 +114,20 @@ public class ToEvent5 : MonoBehaviour
         StartCoroutine("Sleep");
         yield break;
     }
-    private IEnumerator Sleep()
+    private async UniTask Sleep()
     {
-        light2D.intensity = 1.0f;
+        SecondHouseManager.secondHouse_instance.light2D.intensity = 1;
         GameManager.m_instance.stopSwitch = true;
-        while(light2D.intensity > 0.01f)
+        while(SecondHouseManager.secondHouse_instance.light2D.intensity > 0.01f)
         {
-            light2D.intensity -= 0.007f;
-            yield return null; //ここで１フレーム待ってくれてる
+            SecondHouseManager.secondHouse_instance.light2D.intensity -= 0.007f;
+            await UniTask.Delay(1);
         }
-        light2D.intensity = 1.0f;
+        SecondHouseManager.secondHouse_instance.light2D.intensity = 1;
         event5Start = true;
+        FlagsManager.flag_Instance.flagBools[5] = true;
         haru.transform.position = new Vector2(80, 75);
-        cameraManager.event5Camera = false;
-        cameraManager.playerCamera = true;
+        cameraManager.cameraInstance.playerCamera = true;
         GameManager.m_instance.stopSwitch = false;
         gameObject.SetActive(false);
     }

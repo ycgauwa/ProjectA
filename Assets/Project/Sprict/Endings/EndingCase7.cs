@@ -88,6 +88,12 @@ public class EndingCase7 : MonoBehaviour
     private List<string> names13;
     [SerializeField]
     private List<Sprite> images13;
+    [SerializeField]
+    private List<string> messages14;
+    [SerializeField]
+    private List<string> names14;
+    [SerializeField]
+    private List<Sprite> images14;
     public Canvas window;
     public Canvas Selectwindow;
     public Canvas end7Window;
@@ -134,27 +140,37 @@ public class EndingCase7 : MonoBehaviour
     {
         if(Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return))
         {
-            if(isContacted == true && SecondHouseManager.secondHouse_instance.ajure.enemyEmerge == false)
+            if((isContacted == true || seiContacted == true) && SecondHouseManager.secondHouse_instance.ajure.enemyEmerge == true)//どのキャラでも敵に追われているとき出すセリフ
             {
-                if(answer == true && EndingGalleryManager.m_gallery.endingFlag[7])
-                {
+                MessageManager.message_instance.MessageWindowActive(messages14, names14, images14, ct: destroyCancellationToken).Forget();
+                isContacted = false;
+                seiContacted = false;
+            }
+            else if(isContacted == true && SecondHouseManager.secondHouse_instance.ajure.enemyEmerge == false)
+            {
+                 if(answer == true && EndingGalleryManager.m_gallery.endingFlag[7])
+                 {
                     MessageManager.message_instance.MessageWindowActive(messages13, names13, images13, ct: destroyCancellationToken).Forget();
                     isContacted = false;
-                }
-                else if(answer)
-                {
+                 }
+                 else if(answer)
+                 {
                     MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
                     isContacted = false;
-                }
-                else
-                {
+                 }
+                 else
+                 {
                     MessageManager.message_instance.MessageSelectWindowActive(messages2, names2, images2, Selectwindow, selection, firstSelect, ct: destroyCancellationToken).Forget();
                     isContacted = false;
-                }
+                 }
                     
             }
             else if(seiContacted == true && SecondHouseManager.secondHouse_instance.ajure.enemyEmerge == false)
+            {
                 MessageManager.message_instance.MessageWindowActive(messages3, names3, images3, ct: destroyCancellationToken).Forget();
+                seiContacted = false;
+            }
+                
         }
     }
     protected void showMessage(string message, string name, Sprite image)
@@ -165,8 +181,8 @@ public class EndingCase7 : MonoBehaviour
     }
     private async UniTask EndingEvent()
     {
+        GameManager.m_instance.notSaveSwitch = true;
         await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
-        Debug.Log("WindowTrue");
         window.gameObject.SetActive(true);
         for(int i = 0; i < messages4.Count; ++i)
         {
@@ -207,7 +223,7 @@ public class EndingCase7 : MonoBehaviour
         await UniTask.Delay(TimeSpan.FromSeconds(2f));
 
         SoundManager.sound_Instance.StopSe(SecondHouseManager.secondHouse_instance.runSound);
-        cameraManager.playerCamera = false;
+        cameraManager.cameraInstance.playerCamera = false;
         GameManager.m_instance.mainCamera.transform.DOLocalMove(new Vector3(106, 62f, -10), 2f);
         await UniTask.Delay(TimeSpan.FromSeconds(2f));
 
@@ -316,11 +332,16 @@ public class EndingCase7 : MonoBehaviour
     {
         end7Image2.gameObject.SetActive(false);
         end7Window.gameObject.SetActive(false);
-        cameraManager.playerCamera = true;
+        cameraManager.cameraInstance.playerCamera = true;
         SecondHouseManager.secondHouse_instance.light2D.intensity = 1;
         SoundManager.sound_Instance.StopBgm(ending7Sound);
+        target.text = "";
+        window.gameObject.SetActive(false);
+        GameManager.m_instance.ImageErase(characterImage);
         GameManager.m_instance.stopSwitch = false;
-        GameManager.m_instance.player.transform.position = new Vector2(69, -46);
+        GameManager.m_instance.notSaveSwitch = false;
+        GameManager.m_instance.player.transform.position = new Vector2(79.5f, 66);
+        SecondHouseManager.secondHouse_instance.haru.transform.position = new Vector2(80, 75);
         EndingGalleryManager.m_gallery.endingGallerys[6].sprite = end7Image2.sprite;
         EndingGalleryManager.m_gallery.endingFlag[6] = true;
     }
@@ -328,11 +349,16 @@ public class EndingCase7 : MonoBehaviour
     {
         end8Image2.gameObject.SetActive(false);
         end8Window.gameObject.SetActive(false);
-        cameraManager.playerCamera = true;
+        cameraManager.cameraInstance.playerCamera = true;
         SecondHouseManager.secondHouse_instance.light2D.intensity = 1;
         SoundManager.sound_Instance.StopBgm(ending8Sound);
+        target.text = "";
+        window.gameObject.SetActive(false);
+        GameManager.m_instance.ImageErase(characterImage);
         GameManager.m_instance.stopSwitch = false;
-        GameManager.m_instance.player.transform.position = new Vector2(69, -46);
+        GameManager.m_instance.notSaveSwitch = false;
+        GameManager.m_instance.player.transform.position = new Vector2(79.5f, 66);
+        SecondHouseManager.secondHouse_instance.haru.transform.position = new Vector2(80, 75);
         EndingGalleryManager.m_gallery.endingGallerys[7].sprite = end8Image2.sprite;
         EndingGalleryManager.m_gallery.endingFlag[7] = true;
     }

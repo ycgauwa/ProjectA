@@ -3,9 +3,6 @@ using System.Collections.Generic;
 //using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
-//using static UnityEditor.Progress;
 
 public class ItemDateBase : MonoBehaviour
 {
@@ -16,14 +13,24 @@ public class ItemDateBase : MonoBehaviour
     public Canvas inventryCanvas;
     public static ItemDateBase itemDate_instance;
 
+    private void Awake()
+    {
+        if(itemDate_instance == null)
+            itemDate_instance = this;
+        else Destroy(gameObject);
+    }
     private void Start()
     {
-        itemDate_instance = this;
-        for(int i = 0; i < items.Count; ++i)
+        //　エディター上で動かすとき初めからの場合変数が初期化される。
+        if(SaveSlotsManager.save_Instance.saveState.loadIndex == 0)
         {
-            items[i].checkPossession = false;
-            items[i].geted = false;
+            for(int i = 0; i < items.Count; ++i)
+            {
+                items[i].checkPossession = false;
+                items[i].geted = false;
+            }
         }
+        else return;
     }
     public Item GetItemId(int itemid)
     {
@@ -47,7 +54,7 @@ public class ItemDateBase : MonoBehaviour
     public void synthesis()
     {
         //　ハンマーと洗剤で普通のハンマーになる
-        if(GetItemId(3).selectedItem == true && GetItemId(4).selectedItem == true && notEnter4.getKey1 == false)
+        if(GetItemId(3).selectedItem == true && GetItemId(4).selectedItem == true)
         {
             inventry.Add(GetItemId(5));
             inventry.Delete(GetItemId(3));
@@ -57,14 +64,13 @@ public class ItemDateBase : MonoBehaviour
             itemTextMessage.text = "合成完了";
         }
         //　普通のハンマーと人形で鍵が出てくる。
-        if(GetItemId(5).selectedItem == true && GetItemId(2).selectedItem == true && notEnter4.getKey1 == false)
+        if(GetItemId(5).selectedItem == true && GetItemId(2).selectedItem == true)
         {
             inventry.Add(GetItemId(251));
             inventry.Delete(GetItemId(5));
             inventry.Delete(GetItemId(2));
             itemTextMessage.gameObject.SetActive(true);
             itemTextMessage.text = "合成完了";
-            notEnter4.getKey1 = true;
         }
         
     }

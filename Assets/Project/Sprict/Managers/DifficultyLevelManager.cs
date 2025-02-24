@@ -5,10 +5,11 @@ using UnityEngine.EventSystems;
 
 public class DifficultyLevelManager : MonoBehaviour
 {
-    public Homing homing;
     public Canvas DifficultyCanvas;
     public GameObject firstSelect;
     public bool ActiveCanvas = false;
+    public int addEnemySpeed;
+    public int hideDifficultyFactor;
     public enum DifficultyLevel
     {
         Easy,
@@ -17,17 +18,14 @@ public class DifficultyLevelManager : MonoBehaviour
         Extreme
     }
     public DifficultyLevel difficultyLevel;
-    // Start is called before the first frame update
-    void Start()
-    {
-        DifficultyCanvas.gameObject.SetActive(true);
-    }
     public void EasyButton()
     {
         difficultyLevel = DifficultyLevel.Easy;
         DifficultyCanvas.gameObject.SetActive(false);
         EventSystem.current.SetSelectedGameObject(firstSelect);
-        FlagsManager.flag_Instance.gameMode = "Easy";
+        SaveSlotsManager.save_Instance.saveState.gameModeString = "Easy";
+        addEnemySpeed = 0;
+        hideDifficultyFactor = 0;
         ActiveCanvas = true;
     }
     public void NormalButton()
@@ -35,7 +33,9 @@ public class DifficultyLevelManager : MonoBehaviour
         difficultyLevel = DifficultyLevel.Normal;
         DifficultyCanvas.gameObject.SetActive(false);
         EventSystem.current.SetSelectedGameObject(firstSelect);
-        FlagsManager.flag_Instance.gameMode = "Normal";
+        SaveSlotsManager.save_Instance.saveState.gameModeString = "Normal";
+        addEnemySpeed = 1;
+        hideDifficultyFactor = 10;
         ActiveCanvas = true;
     }
     public void HardButton()
@@ -43,7 +43,9 @@ public class DifficultyLevelManager : MonoBehaviour
         difficultyLevel = DifficultyLevel.Hard;
         DifficultyCanvas.gameObject.SetActive(false);
         EventSystem.current.SetSelectedGameObject(firstSelect);
-        FlagsManager.flag_Instance.gameMode = "Hard";
+        SaveSlotsManager.save_Instance.saveState.gameModeString = "Hard";
+        addEnemySpeed = 3;
+        hideDifficultyFactor = 20;
         ActiveCanvas = true;
     }
     public void ExtremeButton()

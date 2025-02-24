@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class SoundManager : MonoBehaviour
     AudioSource bgmAudioSource2;
     [SerializeField]
     AudioSource seAudioSource;
+    public Slider bgmSlider;
+    public Slider seSlider;
     public static SoundManager sound_Instance;
 
 
@@ -48,12 +51,26 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-
+    private void Awake()
+    {
+        if(sound_Instance == null)
+        {
+            sound_Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
     void Start()
     {
+        bgmAudioSource.volume = PlayerPrefs.GetFloat("bgmvolume",0.5f);
+        bgmAudioSource2.volume = PlayerPrefs.GetFloat("bgmvolume", 0.5f);
+        seAudioSource.volume = PlayerPrefs.GetFloat("sevolume", 0.5f);
+        bgmSlider.value = bgmAudioSource.volume;
+        seSlider.value = seAudioSource.volume;
         GameObject soundManager = CheckOtherSoundManager();
         bool checkResult = soundManager != null && soundManager != gameObject;
-        sound_Instance = this;
     }
 
     GameObject CheckOtherSoundManager()
@@ -107,32 +124,24 @@ public class SoundManager : MonoBehaviour
     {
         if(bgmAudioSource.clip != clip)
         {
-            Debug.Log("ちがうよ１");
             if(bgmAudioSource2.clip == clip)
             {
-                Debug.Log("とめるよ2");
                 bgmAudioSource2.Pause();
             }
-            Debug.Log("ちがうよ2");
             return;
         }
-        Debug.Log("とめるよ１");
         bgmAudioSource.Pause();
     }
     public void UnPauseBgm(AudioClip clip)
     {
         if(bgmAudioSource.clip != clip)
         {
-            Debug.Log("ちがうよ１");
             if(bgmAudioSource2.clip == clip)
             {
-                Debug.Log("とめるよ2");
                 bgmAudioSource2.UnPause();
             }
-            Debug.Log("ちがうよ2");
             return;
         }
-        Debug.Log("とめるよ１");
         bgmAudioSource.UnPause();
     }
 
@@ -162,13 +171,15 @@ public class SoundManager : MonoBehaviour
     /// <param name="newSliderValue">スライドバーの値(自動的に引数に値が入る)</param>
     public void BGMSoundSliderOnValueChange(float newSliderValue)
     {
-        // 音楽の音量をスライドバーの値に変更
+        // 音楽の音量をスライドバーの値に変更(どちらも同じスライドバー)
         bgmAudioSource.volume = newSliderValue;
         bgmAudioSource2.volume = newSliderValue;
+        PlayerPrefs.SetFloat("bgmvolume", bgmAudioSource.volume);
     }
     public void SESoundSliderOnValueChange(float newSliderValue)
     {
         // 音楽の音量をスライドバーの値に変更
         seAudioSource.volume = newSliderValue;
+        PlayerPrefs.SetFloat("sevolume", seAudioSource.volume);
     }
 }

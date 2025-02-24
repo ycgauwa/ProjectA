@@ -12,6 +12,7 @@ using System.Linq;
 using System.IO;
 using DG.Tweening;
 using Unity.VisualScripting.FullSerializer;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,8 +33,11 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject seiitirou;
     public PlayerManager playerManager;
+    public cameraManager cameraManager;
     public GameTeleportManager teleportManager;
+    public DifficultyLevelManager difficultyLevelManager;
     public RescueEvent rescueEvent;
+    public GameSceneController gameSceneController;
 
     public GameObject rescuePoint;
     public GameObject yukitoDead;
@@ -51,6 +55,9 @@ public class GameManager : MonoBehaviour
     public int gameTimerCountMinute = 00;
     public int gameTimerCountHour = 00;
     public int deathCount;
+    public int savedataCount = 0;
+    public int loaddataCount = 0;
+
     public GameObject enemy;
     public Homing homing;
 
@@ -76,14 +83,16 @@ public class GameManager : MonoBehaviour
     public Image gallery1;
     public Image gallery2;
     public Image lookPuzzle;
+    public Image loadPanel;
 
+    public Button saveBackButton;
+    public Button[]saveButtons = new Button[3];
     public Sprite noneImage;
-    public ItemDateBase itemDate;
     public Inventry inventry;
     public AudioClip cancel;
     public AudioClip decision;
     public AudioClip ikigire;
-    public ToEvent3 ToEvent3;
+    public AudioClip invalidSelectionClip;
     public FirEnemyMess firEnemyMess;
     public DishMessage chickenDish;
     public DishMessage fishDish;
@@ -93,6 +102,7 @@ public class GameManager : MonoBehaviour
     public Volume postVolume;
     public Vignette vignette;
     public bool stopSwitch = false;
+    public bool notSaveSwitch = false;
     public bool adjustVignette = false;
     private TextAsset csvInteriorsFile; // CSVファイル
     private List<string[]> csvInteriorsData = new List<string[]>(); // CSVファイルの中身を入れるリスト
@@ -101,14 +111,22 @@ public class GameManager : MonoBehaviour
     private TextAsset csvEndingsFile; // CSVファイル
     private List<string[]> csvEndingsData = new List<string[]>(); // CSVファイルの中身を入れるリスト
 
+    private void Awake()
+    {
+        if(m_instance == null)
+        {
+            m_instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     private void Start()
     {
-        saveCanvas = GameStart.saveCanvas;
-        DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(saveCanvas);
+        ImageErase(MessageManager.message_instance.characterImage);
         EventSystem.current.SetSelectedGameObject(gamemodeFirstSelect);
-        stopSwitch = true;
-        m_instance = this;
         postVolume.profile.TryGet(out vignette);
         csvInteriorsFile = Resources.Load("InteriorsText") as TextAsset; // ResourcesにあるCSVファイルを格納
         StringReader reader = new StringReader(csvInteriorsFile.text); // TextAssetをStringReaderに変換
@@ -138,18 +156,11 @@ public class GameManager : MonoBehaviour
     {
         // ゲーム内時間をカウントしたい→60になったらｍを++して60ｍならｈを++
         nowTime += Time.deltaTime;
-        gameTimerCountSecond += Time.deltaTime;
-        if(gameTimerCountSecond >= 60)
-        {
-            gameTimerCountSecond = 0;
-            gameTimerCountMinute ++;
-        }
-        if(gameTimerCountMinute >= 60)
-        {
-            gameTimerCountMinute = 0;
-            gameTimerCountHour++;
-        }
-        FlagsManager.flag_Instance.playTime = gameTimerCountHour + ":" + gameTimerCountMinute + ":" + (int)gameTimerCountSecond;
+        gameTimerCountSecond = (int)nowTime;
+        TimeSpan ts = TimeSpan.FromSeconds(gameTimerCountSecond);
+
+        SaveSlotsManager.save_Instance.saveState.playTime = $"{ts.Hours}:{ts.Minutes}:{ts.Seconds}";
+
         if(!adjustVignette)
             vignette.intensity.value = playerManager.staminaIntensity;
         if (messageCanvas.gameObject.activeSelf || diaryCanvas.gameObject.activeSelf || diary2Canvas.gameObject.activeSelf)
@@ -223,13 +234,13 @@ public class GameManager : MonoBehaviour
             if(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
             {
                 inventryCanvas.gameObject.SetActive(false);
-                itemDate.SelectDiff();
+                ItemDateBase.itemDate_instance.SelectDiff();
                 menuCanvas.gameObject.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(menuFirstSelect);
                 soundManager.PlaySe(cancel);
             }
         }
-        if (Instruction1.gameObject.activeSelf)
+        if(Instruction1.gameObject.activeSelf)
         {
             if (Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
             {
@@ -237,13 +248,43 @@ public class GameManager : MonoBehaviour
                 menuCanvas.gameObject.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(menuFirstSelect);
                 soundManager.PlaySe(cancel);
+                if(DemoFinish.instance.firstActive == false) DemoFinish.instance.firstActive = true;
             }
         }
         if(optionCanvas.gameObject.activeSelf)
         {
+            //PlayerPrefsでコンフィグを保存
             if(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
             {
                 optionCanvas.gameObject.SetActive(false);
+                menuCanvas.gameObject.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(menuFirstSelect);
+                soundManager.PlaySe(cancel);
+            }
+        }
+        if(saveCanvas.gameObject.activeSelf)
+        {
+            if(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
+            {
+                saveCanvas.gameObject.SetActive(false);
+                menuCanvas.gameObject.SetActive(true);
+                /*for(int i = 0; i < saveButtons.Length; i++)
+                {
+                    savedataCount--;
+                    Debug.Log($"セーブカウントは{savedataCount}");
+                    int index = i;
+                    saveButtons[i].onClick.RemoveListener(() => gameSceneController.SaveButton(index));
+                    saveButtons[i].onClick.RemoveListener(() => gameSceneController.userdata.SaveUserData(index + 1));
+                }*/
+                EventSystem.current.SetSelectedGameObject(menuFirstSelect);
+                soundManager.PlaySe(cancel);
+            }
+        }
+        if(galleryCanvas.gameObject.activeSelf)
+        {
+            if(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Escape))
+            {
+                galleryCanvas.gameObject.SetActive(false);
                 menuCanvas.gameObject.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(menuFirstSelect);
                 soundManager.PlaySe(cancel);
@@ -282,10 +323,8 @@ public class GameManager : MonoBehaviour
                     }
                     break;
             }
-                
-
         }
-
+        Debug.Log(SecondHouseManager.secondHouse_instance.ajure.savedSpeed);
         switch (playerManager.playerstate)
         {
             case PlayerManager.PlayerState.Idol:
@@ -293,11 +332,18 @@ public class GameManager : MonoBehaviour
                 if(playerManager.playercondition == PlayerManager.PlayerCondition.Suffocation2) playerManager.m_speed = 0.05f;
                 if(playerManager.staminastate == PlayerManager.StaminaState.exhausted) playerManager.m_speed = 0.05f;
                 break;
+
             case PlayerManager.PlayerState.Talk:
                 PlayerManager.m_instance.m_speed = 0;
                 Homing.m_instance.speed = 0;
-                
+                if(SecondHouseManager.secondHouse_instance.ajure.speed >= 0.4)
+                    SecondHouseManager.secondHouse_instance.ajure.savedSpeed = SecondHouseManager.secondHouse_instance.ajure.speed;
+                if(SecondHouseManager.secondHouse_instance.ajure.acceleration >= 0.1)
+                    SecondHouseManager.secondHouse_instance.ajure.savedAcceleration = SecondHouseManager.secondHouse_instance.ajure.acceleration;
+                SecondHouseManager.secondHouse_instance.ajure.acceleration = 0;
+                SecondHouseManager.secondHouse_instance.ajure.speed = 0;
                 break;
+
             case PlayerManager.PlayerState.Stop:
                 PlayerManager.m_instance.m_speed = 0;
                 break;
@@ -416,7 +462,7 @@ public class GameManager : MonoBehaviour
     {
         player.transform.position = new Vector2(0,0);
         stopSwitch = false;
-        if(homing.speed == 0)homing.speed = 2;
+        if(homing.speed == 0)homing.speed = 2 + difficultyLevelManager.addEnemySpeed;
         soundManager.StopSe(meatSound);
         if(MessageManager.message_instance.window.gameObject.activeSelf)
         {
@@ -424,9 +470,10 @@ public class GameManager : MonoBehaviour
         }
         if (deathCount > 4)
         {
-            inventry.Delete(itemDate.GetItemId(253));
+            inventry.Delete(ItemDateBase.itemDate_instance.GetItemId(253));
             yukitoDead.SetActive(true);
             seiitirou.gameObject.tag = "Seiitirou";
+            SaveSlotsManager.save_Instance.saveState.characterName = "征一郎";
 
             //　カメラの位置を幸人から征一郎に変更して、征一郎をキー操作で動かせるようにする。
             cameraManager.playerCamera = false;
@@ -451,26 +498,23 @@ public class GameManager : MonoBehaviour
             enemy.transform.position = new Vector2(35, 71);
             buttonPanel.gameObject.SetActive(false);
             gameoverWindow.gameObject.SetActive(false);
-            Homing.m_instance.speed = 2;
+            Homing.m_instance.speed = 2 + difficultyLevelManager.addEnemySpeed;
             deathCount++;
         }
         else
         {
-            Homing.m_instance.speed = 2;
             soundManager.PlaySe(decision);
-            buttonPanel.gameObject.SetActive(false);
-            gameoverWindow.gameObject.SetActive(false);
-            /*
-            シーンをロードして最初からにする。
-            SceneManager.LoadScene("Game");
-            */
-            //　最初は民家１の玄関前に復活できるようにする。
-            //　2軒目に行く時点でチェックポイントを変える。
-            //　その際は敵を消しておく。
-            player.transform.position = new Vector2(69, -46);
-            
-            if(firEnemyMess.gameObject.activeSelf)
-                firEnemyMess.firstDeath = true;
+            saveCanvas.gameObject.SetActive(true);
+            loadPanel.gameObject.SetActive(true);
+            saveBackButton.gameObject.SetActive(false);
+            /*for(int i = 0; i < saveButtons.Length; i++)
+            {
+                loaddataCount++;
+                Debug.Log($"ロードカウントは{loaddataCount}");
+                int index = i;
+                saveButtons[i].onClick.RemoveListener(() => gameSceneController.SaveButton(index));
+                saveButtons[i].onClick.AddListener(() => gameSceneController.userdata.LoadUserData(index+1));  // 各ボタンにクリックイベントを登録
+            }*/
             if(enemy.activeSelf)
             {
                 enemy.gameObject.SetActive(false);
@@ -480,8 +524,21 @@ public class GameManager : MonoBehaviour
     }
     public void OnClickSaveButton()
     {
+        if(notSaveSwitch)
+        {
+            soundManager.PlaySe(invalidSelectionClip);
+            return;
+        }
         menuCanvas.gameObject.SetActive(false);
         saveCanvas.gameObject.SetActive(true);
+        /*for(int i = 0; i < saveButtons.Length; i++)
+        {
+            savedataCount++;
+            Debug.Log($"セーブカウントは{savedataCount}");
+            int index = i;
+            saveButtons[i].onClick.AddListener(() => gameSceneController.SaveButton(index));
+            saveButtons[i].onClick.AddListener(() => gameSceneController.userdata.SaveUserData(index + 1));  // 各ボタンにクリックイベントを登録
+        }*/
         EventSystem.current.SetSelectedGameObject(saveMenuFirstSelect);
         soundManager.PlaySe(decision);
     }
@@ -491,7 +548,7 @@ public class GameManager : MonoBehaviour
         buttonPanel.gameObject.SetActive(false);
         gameoverWindow.gameObject.SetActive(false);
         Time.timeScale = 1.0f;
-        GameStart.saveCanvas = saveCanvas;
+        //GameStart.saveCanvas = saveCanvas;
         SceneManager.LoadScene("Title");
     }
     public void OnClickHelpButton()
@@ -514,12 +571,14 @@ public class GameManager : MonoBehaviour
         else if (inventryCanvas.gameObject.activeSelf)
         {
             inventryCanvas.gameObject.SetActive(false);
+            ItemDateBase.itemDate_instance.SelectDiff();
             menuCanvas.gameObject.SetActive(true);
             EventSystem.current.SetSelectedGameObject(menuFirstSelect);
             soundManager.PlaySe(cancel);
         }
         else if (optionCanvas.gameObject.activeSelf)
         {
+            //PlayerPrefsでコンフィグを保存
             optionCanvas.gameObject.SetActive(false);
             menuCanvas.gameObject.SetActive(true);
             EventSystem.current.SetSelectedGameObject(menuFirstSelect);
@@ -534,6 +593,15 @@ public class GameManager : MonoBehaviour
         }
         else if(saveCanvas.gameObject.activeSelf)
         {
+            /*
+            for(int i = 0; i < saveButtons.Length; i++)
+            {
+                savedataCount--;
+                Debug.Log($"セーブカウントは{savedataCount}");
+                int index = i;
+                saveButtons[i].onClick.RemoveListener(() => gameSceneController.SaveButton(i));
+                saveButtons[i].onClick.RemoveListener(() => gameSceneController.userdata.SaveUserData(index + 1));
+            }*/
             saveCanvas.gameObject.SetActive(false);
             menuCanvas.gameObject.SetActive(true);
             EventSystem.current.SetSelectedGameObject(menuFirstSelect);
@@ -610,6 +678,11 @@ public class GameManager : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(instructionFourthSelect);
             soundManager.PlaySe(cancel);
         }
+    }
+    public void SaveSoundValues()
+    {
+        PlayerPrefs.Save();
+        soundManager.PlaySe(decision);
     }
     public void ImageErase(Image image)
     {

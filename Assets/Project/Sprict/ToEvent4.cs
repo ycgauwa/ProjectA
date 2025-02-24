@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
+using DG.Tweening;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
@@ -13,7 +14,6 @@ public class ToEvent4 : MonoBehaviour
 
     public GameObject player;
     public bool event4flag;
-    public bool playerStop;
     public ToEvent3 toevent3;
 
     // メッセージウィンドウ用の変数
@@ -30,24 +30,51 @@ public class ToEvent4 : MonoBehaviour
     [SerializeField]
     private List<Sprite> images2;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        event4flag = false;
-    }
+    public AudioClip eventBGMClip;
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(!event4flag) //フラグが立ってないとき
         {
             if(collider.gameObject.tag.Equals("Player"))
             {
-                // プレイヤーの速度が停止
-                playerStop = true;
-                // 効果音とメッセージを流す
-                MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
-                event4flag = true; //フラグが立つ
-                toevent3.event3flag = true; //　敵が出てくるようにする。
+                // ここもうちょい凝っても良い。カメラ近づけて怪しげなBGMを流してもよい
+                strangerEncounterEvent().Forget();
             }
         }
+        else return;
+    }
+    private async UniTask strangerEncounterEvent()
+    {
+        GameManager.m_instance.stopSwitch = true;
+        cameraManager.cameraInstance.playerCamera = false;
+        while(cameraManager.cameraInstance.cameraSize > 2.5)
+        {
+            cameraManager.cameraInstance.cameraSize -= 0.025f;
+            await UniTask.Delay(1);
+        }
+        SoundManager.sound_Instance.PlayBgm(eventBGMClip);
+        GameManager.m_instance.mainCamera.transform.DOLocalMove(new Vector3(28.6f, 32.3f, -10),1f);
+        await UniTask.Delay(TimeSpan.FromSeconds(1f));
+        GameManager.m_instance.mainCamera.transform.DOLocalMove(new Vector3(28.6f, 34.5f, -10), 1.5f);
+        await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
+        await MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken);
+        FlagsManager.flag_Instance.flagBools[3] = true;
+        event4flag = true;
+        await Blackout();
+    }
+    private async UniTask Blackout()
+    {
+        while(SecondHouseManager.secondHouse_instance.light2D.intensity > 0.01f)
+        {
+            SecondHouseManager.secondHouse_instance.light2D.intensity -= 0.012f;
+            await UniTask.Delay(1);
+        }
+        await UniTask.Delay(TimeSpan.FromSeconds(1f));
+        cameraManager.cameraInstance.cameraSize = 5;
+        cameraManager.cameraInstance.playerCamera = true;
+        SecondHouseManager.secondHouse_instance.light2D.intensity = 1.0f;
+        GameManager.m_instance.stopSwitch = false;
+        SoundManager.sound_Instance.StopBgm(eventBGMClip);
     }
 }

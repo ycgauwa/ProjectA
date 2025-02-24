@@ -54,16 +54,14 @@ public class NotEnter6 : MonoBehaviour
     public Text nameText;
     public Image characterImage;
     public Image redScreen;
-    public Canvas choicePanel;
     public Image notEnter6;
+    public Canvas choicePanel;
+    public Canvas redCanvas;
 
-    public bool getKey;
-    public bool toevent5;
     public bool choiced;
     public bool rescued;
-    public bool seiitirouFlag;
+    public bool seiitirouFlag;//征一郎に一回触らせる。
 
-    private IEnumerator coroutine;
     public ItemDateBase itemDateBase;
     public Inventry inventry;
     public GameTeleportManager gameTeleportManager;
@@ -89,19 +87,20 @@ public class NotEnter6 : MonoBehaviour
         redScreen.color = Color.clear;
         heartSoundCTS = new CancellationTokenSource();
     }
-    private async void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(getKey == false && collider.gameObject.tag.Equals("Player")) MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
-        else if(getKey  == true)
+        if(ItemDateBase.itemDate_instance.GetItemId(253).checkPossession == false && collider.gameObject.tag.Equals("Player")) 
+            MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
+        else if(ItemDateBase.itemDate_instance.GetItemId(253).checkPossession)
         {
             if (collider.gameObject.tag.Equals("Player"))
             {
-                await ToEvent5();
+                ToEvent5().Forget();
             }
         }
         if(collider.gameObject.tag.Equals("Seiitirou"))
         {
-            if(underKey.checkPossession == false)
+            if(ItemDateBase.itemDate_instance.GetItemId(253).checkPossession == false)
             {
                 MessageManager.message_instance.MessageWindowActive(messages4, names4, images4, ct: destroyCancellationToken).Forget();
                 seiitirouFlag = true;
@@ -116,6 +115,7 @@ public class NotEnter6 : MonoBehaviour
         if(!choiced)
         {
             GameManager.m_instance.stopSwitch = true;
+            GameManager.m_instance.notSaveSwitch = true;
             Homing.m_instance.speed = 0;
 
             soundManager.PlaySe(scream);
@@ -130,16 +130,23 @@ public class NotEnter6 : MonoBehaviour
             HeartSounds(heartSoundCTS.Token).Forget(e => { Debug.Log("キャンセルされた"); });
             soundManager.PlayBgm(fearBGM);
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+            redCanvas.gameObject.SetActive(true);
+            redScreen.gameObject.SetActive(true);
+            RedScreenActive().Forget();
             while(cameraManager.cameraInstance.cameraSize > 0.5)
             {
-                cameraManager.cameraInstance.cameraSize -= 0.01f;
-                await UniTask.Delay(1);
+                if(!choiced)
+                {
+                    cameraManager.cameraInstance.cameraSize -= 0.01f;
+                    await UniTask.Delay(1);
+                }
+                else break;
             }
-            Homing.m_instance.speed = 2;
+            Homing.m_instance.speed = 2 + GameManager.m_instance.difficultyLevelManager.addEnemySpeed;
         }
         else MessageManager.message_instance.MessageWindowActive(messages3, names3, images3, ct: destroyCancellationToken).Forget();
     }
-    IEnumerator ToResqueEvent()
+    async UniTask ToResqueEvent()
     {
         rescueEvent.gameObject.SetActive(true);
         soundManager.StopBgm(fearBGM);
@@ -150,22 +157,22 @@ public class NotEnter6 : MonoBehaviour
         heartSoundCTS.Cancel();
         soundManager.StopSe(heartSound);
         redScreen.gameObject.SetActive(false);
+        redCanvas.gameObject.SetActive(false);
         GameManager.m_instance.stopSwitch = false;
         choiced = true;
+        FlagsManager.flag_Instance.flagBools[4] = true;
         rescued = true;
+        FlagsManager.flag_Instance.seiitirouFlagBools[0] = true;
         window.gameObject.SetActive(true);
-        yield return OnMessage3();
+        await OnMessage3();
         target.text = "";
         window.gameObject.SetActive(false);
-        if (itemDateBase.GetItemId(301).checkPossession == true)
+        GameManager.m_instance.notSaveSwitch = false;
+        if(itemDateBase.GetItemId(301).checkPossession == true)
         {
             itemSprictW.ItemDelete();
         }
-        else
-        {
-            yield break;
-        }
-        StopCoroutine(coroutine);
+        else return;
     }
     protected void showMessage(string message, string name, Sprite image)
     {
@@ -188,16 +195,15 @@ public class NotEnter6 : MonoBehaviour
             showMessage(rescuemessages[i], rescuenames[i], rescueimages[i]);
             yield return new WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)));
         }
-        //if (cameraSwitch == true) cameraSwitch = false;
         yield break;
     }
-    private IEnumerator Red()
+    private async UniTask RedScreenActive()
     {
         while(redNum < 0.7)
         {
             redScreen.color = new Color(0.7f, 0, 0, redNum);
-            redNum += 0.001f;
-            yield return null;
+            redNum += 0.003f;
+            await UniTask.Delay(1); ;
         }
     }
     private async UniTask HeartSounds(CancellationToken ct)
@@ -229,21 +235,23 @@ public class NotEnter6 : MonoBehaviour
         heartSoundCTS.Cancel();
         soundManager.StopSe(heartSound);
         redScreen.gameObject.SetActive(false);
+        redCanvas.gameObject.SetActive(false);
         choiced = true;
+        FlagsManager.flag_Instance.flagBools[4] = true;
         player.transform.position = new Vector3(128, 25, 0);
         enemy.transform.position = new Vector2(0, 0);
         enemy.gameObject.SetActive(false);
-        gameTeleportManager.soundManager.StopBgm(gameTeleportManager.toevent3.chasedBGM);
+        gameTeleportManager.soundManager.StopBgm(Homing.m_instance.chasedBGM);
         Homing.m_instance.enemyEmerge = false;
         GameManager.m_instance.stopSwitch = false;
-        inventry.Delete(itemDateBase.GetItemId(253));
+        GameManager.m_instance.inventry.Delete(ItemDateBase.itemDate_instance.GetItemId(253));//1度きりだからIFはいらない
         soundManager.StopBgm(fearBGM);
-        FlagsManager.flag_Instance.chapterNum ++;
+        SaveSlotsManager.save_Instance.saveState.chapterNum ++;
+        GameManager.m_instance.notSaveSwitch = false;
     }
     public void OnRescueBotton()
     {
         // 助けに行くボタンを押したときのメソッド要素として音をすべて消す、メッセージ、行けない
-        coroutine = ToResqueEvent();
-        StartCoroutine(coroutine);
+        ToResqueEvent().Forget();
     }
 }

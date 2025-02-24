@@ -20,6 +20,7 @@ public class ImagesMessage : MonoBehaviour
     public Canvas window;
     public Text target;
     public Text nameText;
+    public GameObject pictureImage;
     public Image materialImage;
     public Image charaImage;
     private IEnumerator coroutine;
@@ -69,6 +70,7 @@ public class ImagesMessage : MonoBehaviour
         yield return new WaitUntil(() => !MessageManager.message_instance.talking);
         //何回か押すとテキストが消えて、日記の表示がされる。
         diaryWindow.gameObject.SetActive(true);
+        pictureImage.gameObject.SetActive(true);
 
         for(int i = 0; i < materialImages.Count; ++i)
         {
@@ -80,11 +82,12 @@ public class ImagesMessage : MonoBehaviour
             yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
         }
         materialImage.sprite = materialImages[0];
+        pictureImage.gameObject.SetActive(false);
         diaryWindow.gameObject.SetActive(false);
         playerManager.playerstate = PlayerManager.PlayerState.Idol;
         coroutine = null;
         GameManager.m_instance.stopSwitch = false;
-        homing.speed = 2;
+        homing.speed = 2 + GameManager.m_instance.difficultyLevelManager.addEnemySpeed;
         yield break;
     }
 }

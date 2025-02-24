@@ -103,7 +103,9 @@ public class CalenderMessage : MonoBehaviour
         target.text = "";
         GameManager.m_instance.ImageErase(characterImage);
         window.gameObject.SetActive(false);
-        Homing.m_instance.speed = 2.0f;
+        Homing.m_instance.speed = 2 + GameManager.m_instance.difficultyLevelManager.addEnemySpeed;
+        SecondHouseManager.secondHouse_instance.ajure.speed = SecondHouseManager.secondHouse_instance.ajure.savedSpeed;
+        SecondHouseManager.secondHouse_instance.ajure.acceleration = SecondHouseManager.secondHouse_instance.ajure.savedAcceleration;
 
         StopCoroutine(coroutine);
         coroutine = null;
@@ -186,7 +188,9 @@ public class CalenderMessage : MonoBehaviour
                 calender.gameObject.SetActive(false);
                 calCanvas.gameObject.SetActive(false);
                 Time.timeScale = 1.0f;
-                Homing.m_instance.speed = 2.0f;
+                Homing.m_instance.speed = 2 + GameManager.m_instance.difficultyLevelManager.addEnemySpeed;
+                SecondHouseManager.secondHouse_instance.ajure.speed = SecondHouseManager.secondHouse_instance.ajure.savedSpeed;
+                SecondHouseManager.secondHouse_instance.ajure.acceleration = SecondHouseManager.secondHouse_instance.ajure.savedAcceleration;
                 GameManager.m_instance.stopSwitch = false;
             }
         }

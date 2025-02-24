@@ -26,14 +26,14 @@ public class NotEnter8 : MonoBehaviour
     {
         if(collider.gameObject.tag.Equals("Seiitirou"))
             gameObject.tag = "Minnka2-5";
-        if (secondHouseManager.firstkey == false)
+        if(secondHouseManager.animalKeys[3] == false)
         {
             if (collider.gameObject.tag.Equals("Player"))
             {
                 MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
             }
         }
-        else if (secondHouseManager.firstkey == true)
+        else if(secondHouseManager.animalKeys[3] == true)
         {
             if (collider.gameObject.tag.Equals("Player"))
             {

@@ -1,397 +1,474 @@
-PlayerMessage,幸人,「いってて、あれ……ここはいったいどこだ？」
-,幸人,「もうこんな時間か。待ち合わせ時間に遅れる前に学校に急ぐか。」
-,,
-HomeInterior1,幸人,おもちゃ箱だ。
-,幸人,小さいときに遊んでいたおもちゃが捨てられずに残っている
-,,
-HomeInterior2 Bed,幸人,（小さいころからずっと使っているベッドだ）
-,幸人,……二度寝しようかな
-,,
-,幸人,「僕はあの時の選択を後悔している。」
-,幸人,「一緒に行くはずだった友人たちや妹の消息がなくなってから１か月になる。」
-,幸人,「みんな……一体どこに行ってしまったんだ。こんな選択をするくらいなら、いっそ死んでもいいからやり直したいな、、、」
-,,End1 人生最大の後悔
-,,
-HomeInterior3,幸人,（木製の大きなタンスだ）
-,幸人,（学校には制服で行くためあまり用はない）
-,,
-HomeInterior4,幸人,（つい先月買ってもらったテレビだ）
-,幸人,「今日見たかったアニメあったけど、見れそうにないな」
-,,
-HomeInterior5,幸人,（フカフカのソファーのようだ）
-,幸人,「ゆったりしている暇もないし、帰ってきてからここでだらだらしよう」
-,,
-HomeInterior5 (1),幸人,（フカフカのソファーのようだ）
-,幸人,「ゆったりしている暇もないし、帰ってきてからここでだらだらしよう」
-,,
-HomeInterior6,幸人,(妹がくれた花が花瓶に入っている)
-,幸人,「最近手入れしてないからちょっとしおれてきてるな、、、」
-,,
-HomeInterior7,幸人,（物置にしているクローゼットだ）
-,幸人,（上着のほかに、本屋バッグなどの雑貨が収納されている）
-,,
-SchoolInterior (1),幸人,（鍵がついていて開きそうにない）
-,幸人,「なんで隣のロッカーだけ開いているんだ？」
-,,
-SchoolInterior (2),幸人,（中を覗いてみるとプラスチック用のゴミ箱のようだ）
-,,
-SchoolInterior (3),幸人,（中を覗くと可燃ごみ用のゴミ箱のようだ）
-,幸人,「中には……何もないみたいだな。」
-,,
-SchoolInterior (4),幸人,（薬品棚のようだ。見たこともない名前の薬品が並んでいる）
-,幸人,（扉を開けようとしても鍵がかかっているようだ）
-,,
-SchoolInterior (5),幸人,（精巧な作りの人体模型だ。今にも動き出しそうな迫力がある）
-,幸人,「不気味だな。深夜の学校で一番見たくなかったぜ」
-,,
-SchoolInterior (6),幸人,（人間大の全身骨格模型がある。）
-,幸人,「そういえばこれ２０万以上したって先生が言ってたな。傷つけないよう気を付けるか。」
-,,
-SchoolInterior (7),幸人,（理科の実験や授業で使うようなフラスコがある）
-,,
-SchoolInterior (8),幸人,（化石や動物の骨といった地質学的な資料が保管されている）
-,,
-SchoolInterior (9),幸人,（実験用の顕微鏡が並んでいる）
-,,
-SchoolInterior (11),幸人,（理科の実験で使う器具が並んでいる）
-,,
-SchoolInterior (12),幸人,（化石や動物の骨といった地質学的な資料が保管されている）
-,,
-SchoolInterior (13),幸人,（楽譜などといった音楽の教材が並んでいる）
-,,
-SchoolInterior (14),幸人,（音楽の授業で使うような小さい楽器が並べられている）
-,,
-SchoolInterior (16),幸人,（中を覗くと可燃ごみ用のゴミ箱のようだ）
-,,
-SchoolInterior (17),幸人,(ヴァイオリンが並んでいる)
-,幸人,「こうしてみるとこの楽器こんな大きかったんだな」
-,,
-SchoolInterior(18),幸人,（グランドピアノがある）
-,幸人,「そういえば零がピアノを弾けたはずだから肝試しが終わってから何か演奏してもらうか。」
-,,
-SchoolInterior (20),幸人,（観葉植物がある）
-,,
-SchoolInterior (21),幸人,（観葉植物がある）
-,,
-SchoolInterior (22),幸人,（教科書などの資料が入った棚が並んでいる）
-,,
-SchoolInterior (23),幸人,（合唱で使われるための太鼓が並んでいる）
-,幸人,「この学校にある太鼓は4つだったはずなのに……あれはなんだ？」
-,,
-SchoolInterior (24),幸人,（楽譜立てがある）
-,,
-SchoolInterior(25),幸人,（中を覗いてみるとプラスチック用のゴミ箱のようだ）
-,,
-MinkaInterior,幸人,（何やら難しそうな学術書が並んでいる。）
-,幸人,「埃かぶっていないところをみると最近まで使われていたようだな……」
-,,
-MinkaInterior (2),幸人,（古めかしい体重計がある。）
-,幸人,「電源は生きているのか……お、前に測った時よりも2㎏痩せているな。」
-,幸人,「まさかこんな意味の分からない状況の中でどうかしてるな、俺は。」
-,,
-MinkaInterior (3),幸人,（衣類を入れておくためのかごが並べられている。）
-,,（特にめぼしいものはないようだ。）
-,,
-MinkaInterior (4),幸人,（古めかしい洗濯機が置かれている。）
-,幸人,洗剤があれば洗濯できるし
-,,
-MinkaInterior (5),幸人,（洗濯かごが置かれている。）
-,幸人,（特にめぼしいものは何もないようだ。）
-,,
-MinkaInterior (6),幸人,（年季を感じさせる洗面台がある。）
-,,（鏡を見るといつもより焦燥した自分の顔が映っている）
-,,「はは、こんな状況とはいえ情けねぇ顔すんなよ……」
-,,
-MinkaInterior (7),幸人,（ふかふかのタオルがかけられている。）
-,,「今は必要なさそうだな。」
-,,
-MinkaInterior (8),幸人,（洗濯かごが置かれている。）
-,幸人,（特にめぼしいものは何もないようだ。）
-,,
-MinkaInterior (9),幸人,（ゴミ箱がある。中身は空っぽのようだ）
-,,
-MinkaInterior (10),幸人,（水の溜まった浴槽のようだ。）
-,幸人,「やっぱりここには誰か住んでいるのか？」
-,,
-MinkaInterior (11),幸人,（……シャワーから水は出てこないようだ）
-,幸人,「どこかで断水でもしているのか……？」
-,,
-MinkaInterior (12),幸人,（浴用の椅子のようだ。特におかしい部分は見つからない。）
-,,
-MinkaInterior (14),幸人,（替えのシャンプーなどが無造作に詰められている。）
-,幸人,（特に使えるものはなさそうだ。）
-,,
-MinkaInterior (15),幸人,（……めぼしいものは何もなさそうだ。）
-,,
-MinkaInterior (16),幸人,（風呂桶がある。これを使えば水を汲むことができそうだ）
-,,
-MinkaInterior (18),幸人,（水洗式のトイレがある。まだ水は流すことができるみたいだ）
-,幸人,「いまのところは、用もないな。」
-,,
-MinkaInterior (19),幸人,（来客用だろうか、きれいなスリッパが並べられている。）
-,,
-MinkaInterior (20),幸人,（フカフカのソファーのようだ。疲れた時にはここで休むのもありかもしれない。）
-,,
-MinkaInterior (23),幸人,（２人用の大きなベッドがある。）
-,幸人,「ここは夫婦の寝室だったのだろうか」
-,,
-MinkaInterior (26),幸人,（姿見が置かれている。自分の姿を見るが変わった様子は無いようだ。）
-,,
-MinkaInterior (27),幸人,（ゴミ箱がある。先ほどの惨劇の影響かところどころ血が降りかかっている。）
-,幸人,「いったい何だったんだあの化け物は。」
-,,
-MinkaInterior (28),幸人,（冷蔵庫が置かれている。中から微かに腐敗臭がする。）
-,幸人,「なんだか、嫌な予感がする……。開けるのはやめておこう。」
-,,
-MinkaInterior (29),幸人,（家庭用のキッチンがある。蛇口はひねっても水は出てこないみたいだ。）
-,幸人,「断水でもしているのか？なんにせよ水が確保できないのは少し不安だな。」
-,,
-MinkaInterior (30),幸人,「電話があるっ！もしかしたら外につながるのか！？」
-,幸人,（……自宅に電話を描けるがつながる気配はない。）
-,幸人,「ちくしょう、本当にここはいったい何なんだ。」
-,,
-MinkaInterior (31)Calender,幸人,（使い古されたカレンダーがある。）
-,幸人,「何か手掛かりがないか調べてみるか。」
-,,
-MinkaInterior (32),幸人,（スリッパがきれいに並べられて整列している。）
-,,
-MinkaInterior (33)Memo,幸人,（ガラスで作られた丸いテーブルが置かれている。）
-,幸人,（よく見ると机の上にメモ用紙が乗っている。）
-,,
-MinkaInterior (34),幸人,（小型冷蔵庫のようだ。中を調べるが特に何も入っていない。）
-,,
-MinkaInterior (36),幸人,（タンスとその上に家族写真が収まった写真立てがある。）
-,幸人,「タンスには何も入ってないし……家族写真も顔が塗りつぶされてて何もわからないな。」
-,,
-MinkaInterior (39),幸人,（テレビ台の上にこじんまりとしたテレビが置かれている。）
-,幸人,「ノイズが流れていて不気味だな……。」
-,,
-MinkaInterior (40),幸人,（フカフカのベッドがある。）
-,幸人,「こんな状況なんだ。うっかり寝てしまったら気づいたらあの世に行ってるだろうな。」
-,,
-MinkaInterior (41),幸人,（フカフカのソファーが置かれている。）
-,幸人,「俺の家に置いてあるソファーより良いだな。誰も住んでないなら持って帰りたいくらいだ」
-,,
-MinkaInterior (42),幸人,（フカフカのソファーが置かれている。）
-,幸人,「俺の家に置いてあるソファーより良いだな。誰も住んでないなら持って帰りたいくらいだ」
-,,
-MinkaInterior (43),幸人,（小さな机の上に植物と本が置かれている）
-,幸人,「……ん？埃がかぶっていないな。最近まで手入れされていたのか？」
-,,
-MinkaInterior (44),幸人,（フカフカのベッドがある。）
-,幸人,「休みたいけど今は脱出することを優先しよう。」
-,,
-MinkaInterior (45),幸人,（衣類を入れるクローゼットのようだ）
-,幸人,「中は何も入ってないけど俺が入れるほど大きくはないかな。」
-,,
-MinkaInterior (46),幸人,（ゴミ箱がある。）
-,幸人,「中身は空っぽみたいだな」
-,,
-MinkaInterior (47),幸人,（タンスの上に家族写真が置かれている。）
-,幸人,（夫婦の間に小さい娘が立っているが全員の顔が黒く塗りつぶされている。）
-,,
-MinkaInterior (48),幸人,（観葉植物が置かれている。）
-,幸人,「こんなに立派な観葉植物は初めて見たな。ここの家の家主は金持ちだったのか……？」
-,,
-MinkaInterior (49),幸人,（勉強机のようだ。端には小型のテレビが置かれている。）
-,幸人,「机にテレビがついてるなんて贅沢だな……。」
-,,
-MinkaInterior (50)Calender,幸人,（カレンダーのようだ）
-,幸人,「何か手がかりがないか調べてみるか。」
-,,
-MinkaInterior (51),幸人,（大きめのハンガーラックのようだ。）
-,幸人,（仕事で使われるようなスーツが何着もかけられている。）
-,,
-MinkaInterior (53),幸人,「収納棚のようだ。子供のおもちゃや雑貨などが押し込まれている様子がガラス越しに確認できる。」
-,,
-MinkaInterior (54)TV,幸人,「なんて大きいテレビなんだ……。こんな大きいサイズのものは初めて見たな。」
-,幸人,「？なにか映像が流れているみたいだな。少しチェックするか。」
-,,
-MinkaInterior (55),幸人,「木製の収納棚のようだ」
-,幸人,「中には特に役立ちそうなものはないみたいだな。」
-,,
-MinkaInterior (56)TVmemo,幸人,（収納棚のようだ。中は整頓されているが棚の上が様々なものでごちゃついている。）
-,幸人,「ん？なんだこれは？何かのメモみたいだが……。」
-,,
-MinkaInterior (60)Item3,幸人,「荷物を入れるための箱のようだ。」
-,幸人,「中に何が入っているかは後で確認するか。」
-,,
-MinkaInterior (61),幸人,本棚のようだ特にめぼしい本はない
-,,
-MinkaInterior (62),幸人,本棚のようだ特にめぼしい本はない
-,,
-MinkaInterior (64),幸人,本棚のようだ特にめぼしい本はない
-,,
-MinkaInterior (65),幸人,本棚のようだ特にめぼしい本はない
-,,
-MinkaInterior (66),幸人,本棚のようだ特にめぼしい本はない
-,,
-MinkaInterior2,幸人,医学系の本が並んでいるようだ……。
-,幸人,一冊手にとってみたが英語で書かれているため何も分からなかった。
-,,
-MinkaInterior2(1),幸人,本が隅まで並んでいる。そのほとんどが人体に関する本のようだ。
-,,
-MinkaInterior2 (4),,
-,,
-MinkaInterior2 (5),幸人,調べてみると水が溜まっていないようだ。
-,幸人,「故障しているのか？ここの家もいつから人が住んでいないのだろうか。」
-,,
-MinkaInterior2 (6),幸人,着替えを収納するためのカゴが仕舞われている。
-,幸人,「着替えはないみたいだが、小物は何やらたくさんあるようだ。」
-,,
-MinkaInterior2 (7),,大きな棚に衣服を入れる箱が仕舞われている。
-,,「こんな大きな棚が家にあるなんて相当の金持ちだったのだろうか……。」
-,,
-MinkaInterior2 (8),幸人,立派な観葉植物が置かれている。
-,幸人,「まだ枯れていないってことは長年世話されていないってことはなさそうだな。」
-,,
-MinkaInterior2 (9),幸人,「きれいな洗面台が置かれている。」
-,幸人,（改めて見た自分の顔はひどく疲れ切っている様子だ。）
-,,
-MinkaInterior2 (10),幸人,「乾いたタオルがかけられている。」
-,幸人,（何か濡れたものがあれば、乾かせそうだ。）
-,,
-MinkaInterior2 (11),幸人,洗濯機のようだ。
-,幸人,「電源はつかないみたいだ。これは使うことはできなさそうだな。」
-,,
-MinkaInterior2 (12),幸人,服が丁寧にたたまれてしまわれている
-,幸人,「女性用のデザインの服が多いし、なんだかいけないものを見ている気分だ……」
-,,
-MinkaInterior2 (13),幸人,空っぽのカゴのようだ
-,幸人,「特にめぼしいものはなさそうだ。」
-,,
-MinkaInterior2 (14),幸人,入浴時に使う石鹸やシャンプーがまとめられている。
-,幸人,「今の状況において特に役立ちそうなものはなさそうだな。」
-,,
-MinkaInterior2 (15),幸人,入浴時に使う石鹸やシャンプーが壁に立てかけられている。
-,幸人,「これは高そうだな。ここの住民は髪や肌に毛を使っていたんだろうか……。」
-,,
-MinkaInterior2 (16),幸人,入浴時に使う石鹸やシャンプーがぎっちりと収められている。
-,幸人,「これは予備の分みたいだな……。」
-,,
-MinkaInterior2 (17),幸人,空っぽのカゴのようだ
-,幸人,「特にめぼしいものはなさそうだ。」
-,,
-MinkaInterior2 (18),幸人,（水の溜まった浴槽のようだ。）
-,幸人,「やっぱりここにも誰かが住んでいたみたいだな」
-,,
-MinkaInterior2 (19),幸人,「浴槽用の桶のようだ。」
-,幸人,「水は張ってるみたいだが、いつの水かわからず少々怪しいにおいがする。」
-,,
-MinkaInterior2 (20),幸人,（浴用の椅子のようだ。特におかしい部分は見つからない。）
-,,
-MinkaInterior2(21),幸人,「先ほどの家と同じように巨大なテレビが置かれている。」
-,幸人,「電源がついていないのか画面は真っ暗だ。」
-,,
-MinkaInterior2(25),幸人,「大きな流しが設置されている。」
-,幸人,「何かを解凍したり、作業するのに使えそうだな。」
-,,
-MinkaInterior2(26),幸人,「大きなタンスのようだ。」
-,幸人,「今のところ固く閉ざされているみたいだ。後で調べてみるか。」
-,,
-MinkaInterior2 (27),幸人,（村の資料が置いてある。）
-,幸人,「この村について何か分かるかも知れない。」
-,,
-MinkaInterior2(28),幸人,収納棚の上には観葉植物とともに白いパンフレットが置かれている。
-,幸人,「何だ……？診療所案内のパンフレット、診療室に入る前にお読みください……か。」
-,幸人,中を覗いてみてもイラストと病気や問診票の書き方の簡易的な説明だった。
-,幸人,「つまりここはどこかの診療所ってことになるな。普通の家の一室にあるみたいだし、一般的な病院とは違うみたいだな。」
-,,
-MinkaInterior2 (29),幸人,木製の化粧台のようだ。よく観察すると化粧品のような物が開かれたまま放置されている。
-,幸人,「急用でもできて途中で切り上げたのか？なんにせよここまで中途半端な散らかり具合は気味が悪いな。」
-,,
-MinkaInterior2(30),幸人,木製の大きなタンスのようだ。中を開けると大人用の大きな服とその中に小さな服がいくつか紛れている。
-,幸人,「見た感じこの部屋は小さい子供と両親の寝室って事か？」
-,,
-MinkaInterior2(32),幸人,サイドテーブルの上には金色の燭台に新品のろうそくがつけられている。
-,幸人,「こんな豪華そうな家具があるなんて偏見だけど医者のおうちっぽいよな。」
-,,
-MinkaInterior2(33),幸人,大きく成長している観葉植物が飾られている。
-,幸人,「さっきの家でも飾られていたがどうやら同じ種類みたいだな……。」
-,,
-MinkaInterior2 (35),幸人,（フカフカのソファーが置かれている。）
-,幸人,「ここの家のソファーさっきの家の物よりもフカフカだ！かかっている金の量が違う気がする……。」
-,,
-MinkaInterior2(36),幸人,（フカフカのソファーが置かれている。）
-,幸人,「ここの家のソファーさっきの家の物よりもフカフカだ！かかっている金の量が違う気がする……。」
-,,
-MinkaInterior2(37),幸人,大きなダブルベットのようだ。2つの枕の間に毛布にかぶさった状態だが小さい枕も発見できた。
-,幸人,「やはりここは3人分の寝室のようだな。子供部屋を兼ねている割に内装は殺風景だが。」
-,,
-MinkaInterior2 (38),幸人,大きな机だ。よく見るとテレビの右側と左側で並んでいる紙が違う。
-,幸人,「紙の内容を見る感じ左側が父親のスペースで右側の机が子供の勉強机か。」
-,幸人,（仕事が忙しいとかで少しでも子供と一緒にいたかったと考えていたのだろうか……。）
-,,
-MinkaInterior2 (39),幸人,（フカフカのソファーが置かれている。）
-,幸人,「こちらのソファーは艶が段違いだ……革製品の中でもかなりきれいな部類な気がする。」
-,,
-MinkaInterior2 (40),幸人,（フカフカのソファーが置かれている。）
-,幸人,「こちらのソファーは艶が段違いだ……革製品の中でもかなりきれいな部類な気がする。」
-,,
-MinkaInterior2 (41),幸人,シングルベットにしてはやけに大き目な寝具が設置されている。
-,幸人,「この部屋の主はよっぽど大柄だったんだろうな。それか寝相が悪いかのどっちかか。」
-,,
-MinkaInterior2(42),幸人,ゴミ箱が置かれている。中は空っぽのようだ。
-,幸人,「この部屋の主はベットのそばにゴミ箱を置くタイプか。机のそばに置くタイプじゃない俺と気が合いそうだな。」
-,,
-MinkaInterior2(46),幸人,調べてみると水が溜まっていないようだ。
-,幸人,「一階のトイレもそうだったが風呂場の浴槽は溜まっているのになぜトイレだけ水が溜まっていないのだろう。」
-,,
-MinkaInterior2 (47),幸人,箱には鍵がかかっているようだ
-,,
-MinkaInterior2 (48),,
-,,
-MinkaInterior2 (49),,
-,,
-MinkaInterior2(50),幸人,診療室の椅子だろうか。ところどころ表面がかけていて年季を感じさせる。
-,幸人,「結構歴史のある診療所なのか？下手に座って壊れたら非常にまずいな……。」
-,,引き出した椅子をそっと奥へと仕舞った。
-,,
-MinnkaInterior2(58),,少し大き目な飛行機のおもちゃが落ちている。
-,幸人,「この部屋にある他のおもちゃよりも年季が入ってるように見えるな。」
-,幸人,「もともと使われてたおもちゃなのか？」
-,,気になって持ち上げると持ち手の部分には乾いた血がびっしり付着していた。
-,幸人,「うわっ！！なんだこれ……おかしいだろ……。」
-,,
-MinnkaInterior2(59),幸人,おもちゃのボールのようだ。持ってみるとおもちゃにしては少し重い
-,幸人,「壊れにくい素材で作られているのか？なんにせよ診療室のキッズスペースに気軽におけるものじゃなさそうだな。」
-,幸人,「さすがにこれで軽く遊んだら音が大きそうだな……。やめておくか。」
-,,
-MinnkaInterior2(60),幸人,おもちゃのボールのようだ。持ってみるとかなり軽い。
-,幸人,「はは、小さいときこういうボールでよく遊んだなー。」
-,幸人,手で弾ませたり転がしたりしながら軽く遊んでいると少し落ち着きを取り戻す事が出来た。
-,,
-MinnkaInterior2(61),幸人,こども用のくまのぬいぐるみのようだ。
-,幸人,「こう見ると可愛らしいが、クマだと一階にいた喋る首人形を思い出すな。」
-,幸人,「こいつは喋りださないよな？」
-,幸人,恐る恐るといった感じでつついたり振ったりしていたがその柔らかい物から声が聞こえることは無かった。
-,,
-MinkaInterior2(51),,
-,,
-MinkaInterior2(52),,
-,,
-MinkaInterior2(53),,
-,,
-MinkaInterior2(54),,
-,,
-MinkaInterior2(55),,
-,,
-MinkaInterior2(56),,
-,,
-MinkaInterior2(57),,
-,,
-MinkaInterior2 (47),幸人,
-,幸人,
-,,
-MinkaInterior2 (48),幸人,
-,幸人,
-,,
-MinkaInterior2 (49),幸人,
-,,
-MinnkaInterior2(58),,少し大き目な飛行機のおもちゃが落ちている。
-,幸人,「この部屋にある他のおもちゃよりも年季が入ってるように見えるな。」
-,幸人,「もともと使われてたおもちゃなのか？」
-,,気になって持ち上げると持ち手の部分には乾いた血がびっしり付着していた。
-,幸人,「うわっ！！なんだこれ……おかしいだろ……。」
-,,
-おわり,,
+PlayerMessage,幸人,「いってて、あれ……ここはいったいどこだ？」,Yukito,
+,幸人,「もうこんな時間か。待ち合わせ時間に遅れる前に学校に急ぐか。」,Yukito,
+,,,,
+HomeInterior1,幸人,（おもちゃ箱だ。）,Yukito,(It's a toy box.)
+,,小さいときに遊んでいたおもちゃが捨てられずに残っている,,"Toys that I used to play with when I was little are still there, unable to be thrown away."
+,,,,
+HomeInterior3,幸人,（木製の大きなタンスだ）,Yukito,(It's a big wooden chest of drawers.)
+,幸人,（学校には制服で行くためあまり用はない）,Yukito,(I don't have much use for this place since I go to school in uniform.)
+,,,,
+HomeInterior4,幸人,（つい先月買ってもらったテレビだ）,Yukito,(It's the TV I got just last month.)
+,幸人,「今日見たかったアニメあったけど、時間もないし見れそうにないな」,Yukito,"""There was an anime I wanted to watch today, but I don't think I'll have time to watch it.”"
+,,,,
+HomeInterior5,幸人,（フカフカのソファーのようだ）,Yukito,(Looks like a fluffy couch)
+,幸人,「ゆったりしている暇もないし、帰ってきてからここでだらだらしよう」,Yukito,"“We don't have time to relax, so let's just slack off here when we get back.”"
+,,,,
+HomeInterior5 (1),幸人,（フカフカのソファーのようだ）,Yukito,(Looks like a fluffy couch)
+,幸人,「ゆったりしている暇もないし、帰ってきてからここでだらだらしよう」,Yukito,"“We don't have time to relax, so let's just slack off here when we get back.”"
+,,,,
+HomeInterior6,幸人,(妹がくれた花が花瓶に入っている),Yukito,(Flowers my sister gave me are in a vase.)
+,幸人,「最近手入れしてないからちょっとしおれてきてるな、、、」,Yukito,“It's looking a little wilted because I haven't taken care of it lately...”
+,,,,
+HomeInterior7,幸人,（物置にしているクローゼットだ）,Yukito,(It's a closet I use for storage.)
+,幸人,（上着のほかに、本屋バッグなどの雑貨が収納されている）,Yukito,"(In addition to the jacket, the bookstore bag and other miscellaneous items are stored)"
+,,,,
+HomeInterior8,幸人,（これは様々な雑貨をしまっている棚だ。）,Yukito,(These are the shelves that hold the various sundries.)
+,幸人,「けっこうごちごちゃしてるしそろそろきれいにしないとな。」,Yukito,"“It's getting pretty messy, and it's time to clean it up.”"
+,,,,
+HomeInterior9,幸人,（ロフトへとつながる梯子が立てかけられている。）,Yukito,(A ladder leading to the loft is propped up.)
+,幸人,「昔はベッドを使ってたけど、ロフトで寝るのは秘密基地感が合って好きだな。」,Yukito,"“I used to have a bed, but I like sleeping in the loft because it feels like a secret base.”"
+,幸人,「今はちょっと眠いし、着替えて梯子上るのはだるいなぁ……。」,Yukito,"“I'm a little sleepy right now, and I'm too lazy to get dressed and go up the ladder......”"
+,,,,
+SchoolInterior (1),幸人,（鍵がついていて開きそうにない）,Yukito,(It's locked and unlikely to open)
+,幸人,「なんで隣のロッカーだけ開いているんだ？」,Yukito,“Why is the locker next to it the only one open?”
+,,,,
+SchoolInterior (2),幸人,（中を覗いてみるとプラスチック用のゴミ箱のようだ）,Yukito,(A peek inside reveals what appears to be a trash can for plastic.)
+,,,,
+SchoolInterior (3),幸人,（中を覗くと可燃ごみ用のゴミ箱のようだ）,Yukito,(A peek inside reveals what appears to be a trash can for combustible trash.)
+,幸人,「中には……何もないみたいだな。」,Yukito,“Looks like there's nothing inside .......”
+,,,,
+SchoolInterior (4),幸人,（薬品棚のようだ。見たこともない名前の薬品が並んでいる）,Yukito,"(It looks like a medicine cabinet, lined with drugs whose names I've never seen before.)"
+,幸人,（扉を開けようとしても鍵がかかっているようだ）,Yukito,(It seems to be locked when I try to open it)
+,,,,
+SchoolInterior (5),幸人,（精巧な作りの人体模型だ。今にも動き出しそうな迫力がある）,Yukito,"(It looks like an elaborately made model of the human body, and has the power to seem as if it could start moving at any moment.)"
+,幸人,「不気味だな。深夜の学校で一番見たくなかったぜ」,Yukito,"“It's creepy. That's the last thing I wanted to see at school late at night, man.”"
+,,,,
+SchoolInterior (6),幸人,（人間大の全身骨格模型がある。）,Yukito,(There is a full-body skeletal model the size of a human being.)
+,幸人,「そういえばこれ２０万以上したって先生が言ってたな。傷つけないよう気を付けるか。」,Yukito,
+,,,,
+SchoolInterior (7),幸人,（理科の実験や授業で使うようなフラスコがある）,Yukito,(There's a flask like you'd use in a science experiment or class.)
+,,,,
+SchoolInterior (8),幸人,（化石や動物の骨といった地質学的な資料が保管されている）,Yukito,(Geological materials such as fossils and animal bones are stored there.)
+,,,,
+SchoolInterior (9),幸人,（実験用の顕微鏡が並んでいる）,Yukito,(Lined with microscopes for experiments)
+,,,,
+SchoolInterior (11),幸人,（理科の実験で使う器具が並んでいる）,Yukito,(Instruments used in science experiments are lined up.)
+,,,,
+SchoolInterior (12),幸人,（化石や動物の骨といった地質学的な資料が保管されている）,Yukito,(Geological materials such as fossils and animal bones are stored there.)
+,,,,
+SchoolInterior (13),幸人,（楽譜などといった音楽の教材が並んでいる）,Yukito,"(Music materials, such as sheet music, etc., are lined up.)"
+,,,,
+SchoolInterior (14),幸人,（音楽の授業で使うような小さい楽器が並べられている）,Yukito,"(Small instruments, like those used in music class, are laid out inside.)"
+,,,,
+SchoolInterior (16),幸人,（中を覗くと可燃ごみ用のゴミ箱のようだ）,Yukito,(A peek inside reveals what appears to be a trash can for combustible trash.)
+,,,,
+SchoolInterior (17),幸人,(ヴァイオリンが並んでいる),Yukito,(Violins are lined up.)
+,幸人,「こうしてみるとこの楽器こんな大きかったんだな。」,Yukito,”I didn't realize how big this instrument was.”
+,,,,
+SchoolInterior(18),幸人,（グランドピアノがある）,Yukito,(There is a grand piano)
+,幸人,「そういえば零がピアノを弾けたはずだから肝試しが終わってから何か演奏してもらうか。」,Yukito,"”I was thinking that Rei could play the piano, so I'll ask him to play something for us after the liver test is over.”"
+,,,,
+SchoolInterior (20),幸人,（観葉植物がある）,Yukito,(There are houseplants.)
+,,,,
+SchoolInterior (21),幸人,（観葉植物がある）,Yukito,(There are houseplants.)
+,,,,
+SchoolInterior (22),幸人,（教科書などの資料が入った棚が並んでいる）,Yukito,(shelves lined with textbooks and other materials)
+,,,,
+SchoolInterior (23),幸人,（合奏で使われる太鼓が並んでいる）,Yukito,(Drums used in ensembles are lined up.)
+,幸人,「この学校にある太鼓は4つだったはずなのに……あれはなんだ？」,Yukito,I thought there were four drums in this school. ...... What are those?'
+,,,,
+SchoolInterior (24),幸人,（楽譜立てがある）,Yukito,(There's a music stand.)
+,,,,
+SchoolInterior(25),幸人,（中を覗いてみるとプラスチック用のゴミ箱のようだ）,Yukito,(A peek inside reveals what appears to be a trash can for plastic.)
+,,,,
+MinkaInterior,幸人,（何やら難しそうな学術書が並んでいる。）,Yukito,(There's a line of academic books that look kind of daunting.)
+,幸人,「埃かぶっていないところをみると最近まで使われていたようだな……」,Yukito,"“From the lack of dust, it looks like it was used until recently. ......”"
+,,,,
+MinkaInterior (2),幸人,（古めかしい体重計がある。）,Yukito,(There are old-fashioned scales.)
+,幸人,「電源は生きているのか……お、前に測った時よりも2㎏痩せているな。」,Yukito,"”Is the power supply still alive ...... Oh, you've lost two kilos since the last time I measured you.”"
+,幸人,「まさかこんな意味の分からない状況の中でどうかしてるな、俺は。」,Yukito,”What the hell am I doing in a situation that doesn't make sense .......”
+,,,,
+MinkaInterior (3),幸人,（衣類を入れておくためのかごが並べられている。）,Yukito,(Baskets are lined up to hold clothing.)
+,,（特にめぼしいものはないようだ。）,Yukito,
+,,,,
+MinkaInterior (4),幸人,（古めかしい洗濯機が置かれている。）,Yukito,(An old-fashioned washing machine is placed there.)
+,幸人,洗剤があれば洗濯できるし,Yukito,
+,,,,
+MinkaInterior (5),幸人,（洗濯かごが置かれている。）,Yukito,(A laundry basket is placed.)
+,幸人,（特にめぼしいものは何もないようだ。）,Yukito,
+,,,,
+MinkaInterior (6),幸人,（年季を感じさせる洗面台がある。）,Yukito,(There is a washbasin that shows its age.)
+,,（鏡を見るといつもより焦燥した自分の顔が映っている）,Yukito,"(I look in the mirror and see my face, more agitated than usual)"
+,,「はは、こんな状況とはいえ情けねぇ顔すんなよ……」,Yukito,"“Haha, don't look so pathetic in this situation. ......”"
+,,,,
+MinkaInterior (7),幸人,（ふかふかのタオルがかけられている。）,Yukito,(A fluffy towel is draped over it.)
+,,「今は必要なさそうだな。」,Yukito,”Doesn't seem necessary right now.”
+,,,,
+MinkaInterior (8),幸人,（洗濯かごが置かれている。）,Yukito,(A laundry basket is placed.)
+,幸人,（特にめぼしいものは何もないようだ。）,Yukito,
+,,,,
+MinkaInterior (9),幸人,（ゴミ箱がある。中身は空っぽのようだ）,Yukito,(There is a trash can. It appears to be empty inside.)
+,,,,
+MinkaInterior (10),幸人,（水の溜まった浴槽のようだ。）,Yukito,(It looks like a bathtub full of water.)
+,幸人,「やっぱりここには誰か住んでいるのか？」,Yukito,”I knew it. Who lives here?”
+,,,,
+MinkaInterior (11),幸人,（……シャワーから水は出てこないようだ）,Yukito,(...... no water seems to come out of the shower)
+,幸人,「どこかで断水でもしているのか……？」,Yukito,”Is there a water main break somewhere ......?”
+,,,,
+MinkaInterior (12),幸人,（浴用の椅子のようだ。特におかしい部分は見つからない。）,Yukito,(Looks like a bath chair. I can't find anything wrong with it.)
+,,,,
+MinkaInterior (14),幸人,（替えのシャンプーなどが無造作に詰められている。）,Yukito,"(Replacement shampoo, etc., packed haphazardly.)"
+,幸人,（特に使えるものはなさそうだ。）,Yukito,(Nothing seems particularly useful.)
+,,,,
+MinkaInterior (15),幸人,（……めぼしいものは何もなさそうだ。）,Yukito,
+,,,,
+MinkaInterior (16),幸人,（風呂桶がある。これを使えば水を汲むことができそうだ）,Yukito,(There is a bath tub.This would be a good way to get some water.）
+,,,,
+MinkaInterior (18),幸人,（水洗式のトイレがある。まだ水は流すことができるみたいだ）,Yukito,(There is a flush toilet. Looks like you can still flush.)
+,幸人,「いまのところは、用もないな。」,Yukito,”I have no use for this Toilet at the moment.”
+,,,,
+MinkaInterior (19),幸人,（来客用だろうか、きれいなスリッパが並べられている。）,Yukito,"(There are clean slippers lined up, probably for visitors.)"
+,,,,
+MinkaInterior (20),幸人,（フカフカのソファーのようだ。疲れた時にはここで休むのもありかもしれない。）,Yukito,(Looks like a fluffy sofa. Maybe I can rest here when I'm tired.)
+,,,,
+MinkaInterior (23),幸人,（２人用の大きなベッドがある。）,Yukito,(There is a large bed for two.)
+,幸人,「ここは夫婦の寝室だったのだろうか」,Yukito,”I wonder if this was the couple's bedroom.”
+,,,,
+MinkaInterior (26),幸人,（姿見が置かれている。自分の姿を見るが変わった様子は無いようだ。）,Yukito,"(A mirror is placed. I look at myself, but I don't seem to have changed.)"
+,,,,
+MinkaInterior (27),幸人,（ゴミ箱がある。先ほどの惨劇の影響かところどころ血が降りかかっている。）,Yukito,"(There is a trash can. It is covered with blood in some places, probably from the tragedy that occurred earlier.)"
+,幸人,「いったい何だったんだあの化け物は。」,Yukito,What the hell was that monster?”
+,,,,
+MinkaInterior (28),幸人,（冷蔵庫が置かれている。中から微かに腐敗臭がする。）,Yukito,(A refrigerator is placed. There is a faint smell of decay coming from inside.)
+,幸人,「なんだか、嫌な予感がする……。開けるのはやめておこう。」,Yukito,”I have a bad feeling about this. ....... I don't want to open it.”
+,,,,
+MinkaInterior (29),幸人,（家庭用のキッチンがある。蛇口はひねっても水は出てこないみたいだ。）,Yukito,(There is a home kitchen. The faucet doesn't seem to turn on but the water doesn't come out.)
+,幸人,「断水でもしているのか？なんにせよ水が確保できないのは少し不安だな。」,Yukito,"Is the water cut off or something? Whatever it is, I'm a little nervous about not having access to water.”"
+,,,,
+MinkaInterior (30),幸人,「電話があるっ！もしかしたら外につながるのか！？」,Yukito,”There's a phone! Maybe it leads outside!”
+,幸人,（……自宅に電話を掛けるがつながる気配はない。）,Yukito,(...... I try to call home but there is no sign of connection.)
+,幸人,「ちくしょう、本当にここはいったい何なんだ。」,Yukito,"”Damn it, what the hell is really going on here?”"
+,,,,
+MinkaInterior (31)Calender,幸人,（使い古されたカレンダーがある。）,Yukito,(There is a worn-out calendar.)
+,幸人,「何か手掛かりがないか調べてみるか。」,Yukito,Let's see if we can find any clues.”
+,,,,
+MinkaInterior (32),幸人,（スリッパがきれいに並べられて整列している。）,Yukito,(Slippers neatly lined up and in order.)
+,,,,
+MinkaInterior (33)Memo,幸人,（ガラスで作られた丸いテーブルが置かれている。）,Yukito,(A round table made of glass is placed.)
+,幸人,（よく見ると机の上にメモ用紙が乗っている。）,Yukito,(Look closely and you'll see a notepad on the desk.)
+,,,,
+MinkaInterior (34),幸人,（小型冷蔵庫のようだ。中を調べるが特に何も入っていない。）,Yukito,"(Looks like a small refrigerator. I checked inside, but there was nothing in particular.)"
+,,,,
+MinkaInterior (36),幸人,（タンスとその上に家族写真が収まった写真立てがある。）,Yukito,(There is a chest of drawers and a picture frame with family photos on it.)
+,幸人,「タンスには何も入ってないし……家族写真も顔が塗りつぶされてて何もわからないな。」,Yukito,"“I don't see anything in the wardrobe, and the ...... family photo doesn't tell me anything because the faces are painted over.”"
+,,,,
+MinkaInterior (39),幸人,（テレビ台の上にこじんまりとしたテレビが置かれている。）,Yukito,(A tiny TV is placed on top of the TV stand.)
+,幸人,「ノイズが流れていて不気味だな……。」,Yukito,
+,,,,
+MinkaInterior (40),幸人,（フカフカのベッドがある。）,Yukito,(There are fluffy beds.)
+,幸人,「こんな状況なんだ。うっかり寝てしまったら気づいたらあの世に行ってるだろうな。」,Yukito,"”I said to myself, “This is the situation. If I accidentally fall asleep, I'll find myself in the afterlife.”"
+,,,,
+MinkaInterior (41),幸人,（フカフカのソファーが置かれている。）,Yukito,(A fluffy couch is placed.)
+,幸人,「俺の家に置いてあるソファーより良いだな。誰も住んでないなら持って帰りたいくらいだ」,Yukito,”It's better than the couch I have in my house. I'd take it home with me if no one lived here.”
+,,,,
+MinkaInterior (42),幸人,（フカフカのソファーが置かれている。）,Yukito,(A fluffy couch is placed.)
+,幸人,「俺の家に置いてあるソファーより良いだな。誰も住んでないなら持って帰りたいくらいだ」,Yukito,”It's better than the couch I have in my house. I'd take it home with me if no one lived here.”
+,,,,
+MinkaInterior (43),幸人,（小さな机の上に植物と本が置かれている）,Yukito,
+,幸人,「……ん？埃がかぶっていないな。最近まで手入れされていたのか？」,Yukito,
+,,,,
+MinkaInterior (44),幸人,（フカフカのベッドがある。）,Yukito,
+,幸人,「休みたいけど今は脱出することを優先しよう。」,Yukito,
+,,,,
+MinkaInterior (45),幸人,（衣類を入れるクローゼットのようだ）,Yukito,
+,幸人,「中は何も入ってないけど俺が入れるほど大きくはないかな。」,Yukito,
+,,,,
+MinkaInterior (46),幸人,（ゴミ箱がある。）,Yukito,
+,幸人,「中身は空っぽみたいだな」,Yukito,
+,,,,
+MinkaInterior (47),幸人,（タンスの上に家族写真が置かれている。）,Yukito,
+,幸人,（夫婦の間に小さい娘が立っているが全員の顔が黒く塗りつぶされている。）,Yukito,
+,,,,
+MinkaInterior (48),幸人,（観葉植物が置かれている。）,Yukito,
+,幸人,「こんなに立派な観葉植物は初めて見たな。ここの家の家主は金持ちだったのか……？」,Yukito,
+,,,,
+MinkaInterior (49),幸人,（勉強机のようだ。端には小型のテレビが置かれている。）,Yukito,
+,幸人,「机にテレビがついてるなんて贅沢だな……。」,Yukito,
+,,,,
+MinkaInterior (50)Calender,幸人,（カレンダーのようだ）,Yukito,
+,幸人,「何か手がかりがないか調べてみるか。」,Yukito,
+,,,,
+MinkaInterior (51),幸人,（大きめのハンガーラックのようだ。）,Yukito,
+,幸人,（仕事で使われるようなスーツが何着もかけられている。）,Yukito,
+,,,,
+MinkaInterior (53),幸人,「収納棚のようだ。子供のおもちゃや雑貨などが押し込まれている様子がガラス越しに確認できる。」,Yukito,
+,,,,
+MinkaInterior (54)TV,幸人,「なんて大きいテレビなんだ……。こんな大きいサイズのものは初めて見たな。」,Yukito,
+,幸人,「？なにか映像が流れているみたいだな。少しチェックするか。」,Yukito,
+,,,,
+MinkaInterior (55),幸人,「木製の収納棚のようだ」,Yukito,
+,幸人,「中には特に役立ちそうなものはないみたいだな。」,Yukito,
+,,,,
+MinkaInterior (56)TVmemo,幸人,（収納棚のようだ。中は整頓されているが棚の上が様々なものでごちゃついている。）,Yukito,
+,幸人,「ん？なんだこれは？何かのメモみたいだが……。」,Yukito,
+,,,,
+MinkaInterior (60)Item3,幸人,「荷物を入れるための箱のようだ。」,Yukito,
+,幸人,「中に何が入っているかは後で確認するか。」,Yukito,
+,,,,
+MinkaInterior (61),幸人,本棚のようだ特にめぼしい本はない,Yukito,
+,,,,
+MinkaInterior (62),幸人,本棚のようだ特にめぼしい本はない,Yukito,
+,,,,
+MinkaInterior (64),幸人,本棚のようだ特にめぼしい本はない,Yukito,
+,,,,
+MinkaInterior (65),幸人,本棚のようだ特にめぼしい本はない,Yukito,
+,,,,
+MinkaInterior (66),幸人,本棚のようだ特にめぼしい本はない,Yukito,
+,,,,
+MinkaInterior2,幸人,医学系の本が並んでいるようだ……。,Yukito,
+,幸人,一冊手にとってみたが英語で書かれているため何も分からなかった。,Yukito,
+,,,,
+MinkaInterior2(1),幸人,本が隅まで並んでいる。そのほとんどが人体に関する本のようだ。,Yukito,
+,,,,
+MinkaInterior2 (4),,,,
+,,,,
+MinkaInterior2 (5),幸人,調べてみると水が溜まっていないようだ。,Yukito,
+,幸人,「故障しているのか？ここの家もいつから人が住んでいないのだろうか。」,Yukito,
+,,,,
+MinkaInterior2 (6),幸人,着替えを収納するためのカゴが仕舞われている。,Yukito,
+,幸人,「着替えはないみたいだが、小物は何やらたくさんあるようだ。」,Yukito,
+,,,,
+MinkaInterior2 (7),,大きな棚に衣服を入れる箱が仕舞われている。,Yukito,
+,,「こんな大きな棚が家にあるなんて相当の金持ちだったのだろうか……。」,Yukito,
+,,,,
+MinkaInterior2 (8),幸人,立派な観葉植物が置かれている。,Yukito,
+,幸人,「まだ枯れていないってことは長年世話されていないってことはなさそうだな。」,Yukito,
+,,,,
+MinkaInterior2 (9),幸人,「きれいな洗面台が置かれている。」,Yukito,
+,幸人,（改めて見た自分の顔はひどく疲れ切っている様子だ。）,Yukito,
+,,,,
+MinkaInterior2 (10),幸人,「乾いたタオルがかけられている。」,Yukito,
+,幸人,（何か濡れたものがあれば、乾かせそうだ。）,Yukito,
+,,,,
+MinkaInterior2 (11),幸人,洗濯機のようだ。,Yukito,
+,幸人,「電源はつかないみたいだ。これは使うことはできなさそうだな。」,Yukito,
+,,,,
+MinkaInterior2 (12),幸人,服が丁寧にたたまれてしまわれている,,
+,幸人,「女性用のデザインの服が多いし、なんだかいけないものを見ている気分だ……」,,
+,,,,
+MinkaInterior2 (13),幸人,空っぽのカゴのようだ,,
+,幸人,「特にめぼしいものはなさそうだ。」,,
+,,,,
+MinkaInterior2 (14),幸人,入浴時に使う石鹸やシャンプーがまとめられている。,,
+,幸人,「今の状況において特に役立ちそうなものはなさそうだな。」,,
+,,,,
+MinkaInterior2 (15),幸人,入浴時に使う石鹸やシャンプーが壁に立てかけられている。,,
+,幸人,「これは高そうだな。ここの住民は髪や肌に毛を使っていたんだろうか……。」,,
+,,,,
+MinkaInterior2 (16),幸人,入浴時に使う石鹸やシャンプーがぎっちりと収められている。,,
+,幸人,「これは予備の分みたいだな……。」,,
+,,,,
+MinkaInterior2 (17),幸人,空っぽのカゴのようだ,,
+,幸人,「特にめぼしいものはなさそうだ。」,,
+,,,,
+MinkaInterior2 (18),幸人,（水の溜まった浴槽のようだ。）,,
+,幸人,「やっぱりここにも誰かが住んでいたみたいだな」,,
+,,,,
+MinkaInterior2 (19),幸人,「浴槽用の桶のようだ。」,,
+,幸人,「水は張ってるみたいだが、いつの水かわからず少々怪しいにおいがする。」,,
+,,,,
+MinkaInterior2 (20),幸人,（浴用の椅子のようだ。特におかしい部分は見つからない。）,,
+,,,,
+MinkaInterior2(21),幸人,「先ほどの家と同じように巨大なテレビが置かれている。」,,
+,幸人,「電源がついていないのか画面は真っ暗だ。」,,
+,,,,
+MinkaInterior2(25),幸人,「大きな流しが設置されている。」,,
+,幸人,「何かを解凍したり、作業するのに使えそうだな。」,,
+,,,,
+MinkaInterior2(26),幸人,「大きなタンスのようだ。」,,
+,幸人,「今のところ固く閉ざされているみたいだ。後で調べてみるか。」,,
+,,,,
+MinkaInterior2 (27),幸人,（村の資料が置いてある。）,,
+,幸人,「この村について何か分かるかも知れない。」,,
+,,,,
+MinkaInterior2(28),幸人,収納棚の上には観葉植物とともに白いパンフレットが置かれている。,,
+,幸人,「何だ……？診療所案内のパンフレット、診療室に入る前にお読みください……か。」,,
+,幸人,中を覗いてみてもイラストと病気や問診票の書き方の簡易的な説明だった。,,
+,幸人,「つまりここはどこかの診療所ってことになるな。普通の家の一室にあるみたいだし、一般的な病院とは違うみたいだな。」,,
+,,,,
+MinkaInterior2 (29),幸人,木製の化粧台のようだ。よく観察すると化粧品のような物が開かれたまま放置されている。,,
+,幸人,「急用でもできて途中で切り上げたのか？なんにせよここまで中途半端な散らかり具合は気味が悪いな。」,,
+,,,,
+MinkaInterior2(30),幸人,木製の大きなタンスのようだ。中を開けると大人用の大きな服とその中に小さな服がいくつか紛れている。,,
+,幸人,「見た感じこの部屋は小さい子供と両親の寝室って事か？」,,
+,,,,
+MinkaInterior2(32),幸人,サイドテーブルの上には金色の燭台に新品のろうそくがつけられている。,,
+,幸人,「こんな豪華そうな家具があるなんて偏見だけど医者のおうちっぽいよな。」,,
+,,,,
+MinkaInterior2(33),幸人,大きく成長している観葉植物が飾られている。,,
+,幸人,「さっきの家でも飾られていたがどうやら同じ種類みたいだな……。」,,
+,,,,
+MinkaInterior2 (35),幸人,（フカフカのソファーが置かれている。）,,
+,幸人,「ここの家のソファーさっきの家の物よりもフカフカだ！かかっている金の量が違う気がする……。」,,
+,,,,
+MinkaInterior2(36),幸人,（フカフカのソファーが置かれている。）,,
+,幸人,「ここの家のソファーさっきの家の物よりもフカフカだ！かかっている金の量が違う気がする……。」,,
+,,,,
+MinkaInterior2(37),幸人,大きなダブルベットのようだ。2つの枕の間に毛布にかぶさった状態だが小さい枕も発見できた。,,
+,幸人,「やはりここは3人分の寝室のようだな。子供部屋を兼ねている割に内装は殺風景だが。」,,
+,,,,
+MinkaInterior2 (38),幸人,大きな机だ。よく見るとテレビの右側と左側で並んでいる紙が違う。,,
+,幸人,「紙の内容を見る感じ左側が父親のスペースで右側の机が子供の勉強机か。」,,
+,幸人,（仕事が忙しいとかで少しでも子供と一緒にいたかったと考えていたのだろうか……。）,,
+,,,,
+MinkaInterior2 (39),幸人,（フカフカのソファーが置かれている。）,,
+,幸人,「こちらのソファーは艶が段違いだ……革製品の中でもかなりきれいな部類な気がする。」,,
+,,,,
+MinkaInterior2 (40),幸人,（フカフカのソファーが置かれている。）,,
+,幸人,「こちらのソファーは艶が段違いだ……革製品の中でもかなりきれいな部類な気がする。」,,
+,,,,
+MinkaInterior2 (41),幸人,シングルベットにしてはやけに大き目な寝具が設置されている。,,
+,幸人,「この部屋の主はよっぽど大柄だったんだろうな。それか寝相が悪いかのどっちかか。」,,
+,,,,
+MinkaInterior2(42),幸人,ゴミ箱が置かれている。中は空っぽのようだ。,,
+,幸人,「この部屋の主はベットのそばにゴミ箱を置くタイプか。机のそばに置くタイプじゃない俺と気が合いそうだな。」,,
+,,,,
+MinkaInterior2(46),幸人,調べてみると水が溜まっていないようだ。,,
+,幸人,「一階のトイレもそうだったが風呂場の浴槽は溜まっているのになぜトイレだけ水が溜まっていないのだろう。」,,
+,幸人,「ん？しかも便器の前の床だけ微妙に色が違う……。ここだけ張り替えたのか?」,,
+,幸人,「なんにせよ、ここは違和感がすごいし時々確認してもよさそうだな。」,,
+,,,,
+MinkaInterior2 (47),幸人,箱には鍵がかかっているようだ,,
+,,,,
+MinkaInterior2 (48),幸人,箱型の年季の入ったテレビが置かれている。,,
+,幸人,「へぇ～こんな形のテレビは初めて見たな……。これがブラウン管ってやつだったりするのか？」,,
+,幸人,（現在は調べることは出来ないが、案外この診療所もかなり昔からある場所だったりしてな……。）,,
+,,,,
+MinkaInterior2(50),幸人,診療室の椅子だろうか。ところどころ表面がかけていて年季を感じさせる。,,
+,幸人,「結構歴史のある診療所なのか？下手に座って壊れたら非常にまずいな……。」,,
+,,引き出した椅子をそっと奥へと仕舞った。,,
+,,,,
+MinkaInterior2(52),幸人,本棚を見てみると、子供用の絵本が大量に仕舞われていた。,,
+,幸人,「ダメだ。患者のための子供用の絵本しかなさそうだ。」,,
+,幸人,何冊か手に取ってみるも特に有益そうな情報は得られなかった。,,
+,,,,
+MinkaInterior2(54),幸人,この本棚は患者用に何かの雑誌が仕舞われているようだ,,
+,幸人,しかしそのほとんどが黒く塗りつぶされており読める状態ではない。,,
+,幸人,「なんだよこれ……。気味が悪いな。」,,
+,,,,
+MinkaInterior2(55),幸人,棚が設置されている。中にはファイルがぎっちりと詰められている。,,
+,幸人,ファイルの背表紙にはそれぞれ番号と名前が割り振られているため患者の情報が載ったものだと推測できる,,
+,幸人,「鍵がかかってて中は見れないけど、正直見る必要もなさそうだな。」,,
+,,,,
+,,,,
+MinkaInterior2(56),幸人,本棚のようだ。中には医療用の本が大量に仕舞われている。,,
+,幸人,「ここの家主はお医者さんだったようだけど、医者になってからもたくさん本を読まなきゃいけないのは大変そうだな。」,,
+,幸人,「俺にも何か知識があれば怪我をした時に応急処置が出来るんだろうけど……。」,,
+,幸人,（題名も難しそうだし、1冊が辞書みたいに分厚いのにちょっと読んだだけじゃ何もわからないよなぁ。）,,
+,,,,
+MinkaInterior2(57),,,,
+,,,,
+MinnkaInterior2(58),,少し大き目な飛行機のおもちゃが落ちている。,,
+,幸人,「この部屋にある他のおもちゃよりも年季が入ってるように見えるな。」,,
+,幸人,「もともと使われてたおもちゃなのか？」,,
+,,気になって持ち上げると持ち手の部分には乾いた血がびっしり付着していた。,,
+,幸人,「うわっ！！なんだこれ……おかしいだろ……。」,,
+,,,,
+MinnkaInterior2(59),幸人,おもちゃのボールのようだ。持ってみるとおもちゃにしては少し重い,,
+,幸人,「壊れにくい素材で作られているのか？なんにせよ診療室のキッズスペースに気軽におけるものじゃなさそうだな。」,,
+,幸人,「さすがにこれで軽く遊んだら音が大きそうだな……。やめておくか。」,,
+,,,,
+MinnkaInterior2(60),幸人,おもちゃのボールのようだ。持ってみるとかなり軽い。,,
+,幸人,「はは、小さいときこういうボールでよく遊んだなー。」,,
+,幸人,手で弾ませたり転がしたりしながら軽く遊んでいると少し落ち着きを取り戻す事が出来た。,,
+,,,,
+MinnkaInterior2(61),幸人,こども用のくまのぬいぐるみのようだ。,,
+,幸人,「こう見ると可愛らしいが、クマだと一階にいた喋る首人形を思い出すな。」,,
+,幸人,「こいつは喋りださないよな？」,,
+,幸人,恐る恐るといった感じでつついたり振ったりしていたがその柔らかい物から声が聞こえることは無かった。,,
+,,,,
+MinkaInterior2(62),幸人,（ここでは医療で使う数々の薬品が仕舞われているみたいだ。）,,
+,幸人,「錠剤や粉薬が多いしこちらの棚は診察に来た患者に提供するための薬が保管されているのか。」,,
+,,,,
+MinkaInterior2(63),幸人,（この棚には瓶やプラスチックの容器に詰められた少し危険そうな薬品が入っている。）,,
+,幸人,「なんだか危なそうな薬品ばっかだな。手術用の麻酔とか入っているんだろうか？」,,
+,幸人,「まぁ俺にとっては扱えないし関係ない話か。」,,
+,幸人,「せめて何か教えてくれる人がいたならなぁ」,,
+,,,,
+MinkaInterior2(65),幸人,「なるほど、これでベッドを仕切っているのか。」,,
+,幸人,「カーテンとかつける金が無かったのか？」,,
+,幸人,（？）,,
+,幸人,（右側の面だけ明らかに冷たい。）,,
+,幸人,「まるで冷蔵庫で冷やされたみたいだな。一体どういうことだ？」,,
+,,,,
+MinkaInterior2(66),,（簡易的な手術用の寝台だろうか。今まで見てきたどのベッドよりもきちんとしている高級そうな見た目だ。）,,
+,,「医療用ってよりかは高級な休息のとれるベッドを患者用にあてているのか。」,,
+,,「ここの医者はかなりの人格者だったようだな。」,,
+,,,,
+MinkaInterior2(67),幸人,（簡易的な手術用の寝台だろうか。今まで見てきたどのベッドよりもきちんとしている高級そうな見た目だ。）,,
+,,「医療用ってよりかは高級な休息のとれるベッドを患者用にあてているのか。」,,
+,,「ここの医者はかなりの人格者だったようだな。」,,
+,,,,
+MinkaInterior2(65),,,,
+,,,,
+MinkaInterior2(66),,,,
+,,,,
+MinkaInterior2(67),,,,
+,,,,
+MinkaInterior2(68),,,,
+,,,,
+MinkaInterior2 (69),,,,
+,,,,
+MinkaInterior2 (70),,,,
+,,,,
+MinkaInterior2 (71),,,,
+,,,,
+MinkaInterior2 (72),,,,
+,,,,
+MinkaInterior2 (73),,,,
+,,,,
+MinkaInterior2 (74),,,,
+,,,,
+MinkaInterior2 (75),,,,
+,,,,
+MinkaInterior2 (76),,,,
+,,,,
+MinkaInterior2 (77),,,,
+,,,,
+MinkaInterior2 (78),,,,
+,,,,
+MinkaInterior2 (79),,,,
+,,,,
+MinkaInterior2 (80),,,,
+,,,,
+MinkaInterior2(81),,,,
+,,,,
+MinkaInterior2(82),,,,
+,,,,
+MinkaInterior2(83),,,,
+,,,,
+MinkaInterior2(84),,,,
+,,,,
+Stuffedbear2,くま？,「きみの為にあの子は焼かれたよ……。」,,
+,くま？,「生きろ。それが私たちの鎖が切れることにもつながる。」,,
+,,,,
+Stuffedmushroom2,きのこ？,「人間さんはどう生きていくの？こんな絶望に満ちた世界で。」,,
+,きのこ？,「もし生きたいなら僕たちの大切な仲間に会いに行くといいよ!」,,
+,きのこ？,「……もういないけどね。」,,
+,,,,
+AnimalEventNotEnter,,……開かない。不思議な力で閉ざされているみたいだ。,,
+,幸人,「くそっ……。いきなり何なんだ!」,,
+,幸人,「とりあえずこの部屋を探索して手がかりを探さないとな……。」,,
+,,,,
+SleepAjure,幸人,「一体なんなんだこいつは？」,,
+,幸人,（この部屋に入ってきた時から異様な存在感を放っていたが……よくよく観察してみると首も目もないじゃないか……）,,
+,幸人,（体躯は２，３メートル、グレーのごわごわとしてそうな毛並みに交じって鮮やかな赤色の肉が姿を晒している。）,,
+,幸人,（静かに上下している体をみると生きているようだし今は眠っているみたいだ。）,,
+,幸人,「こんなやつ起きてきて襲ってきたら本当におしまいだぞ。鍵がかかっているから晴は知らなかったのか……」,,
+,幸人,「とにかくこいつが起きないように慎重に行動しないとな。」,,
+,,,,
+MinkaInterior2(54)S,征一郎,「なんだよ、どれもこれもぐちゃぐちゃで読めたもんじゃねぇ。」,,
+,,,,
+MinkaInterior2(52)S,征一郎,「ここには役に立ちそうな情報はねぇな。」,,
+,,,,
+End,,,,

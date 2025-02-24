@@ -11,19 +11,29 @@ public class cameraManager : MonoBehaviour
     public GameObject girl;
     public GameObject haru;
     Vector3 pos;              // ƒJƒƒ‰‚Ì‰ŠúˆÊ’u‚ğ‹L‰¯‚·‚é‚½‚ß‚Ì•Ï”
-    public static bool playerCamera = true;
-    public static bool girlCamera = false;
-    public static bool seiitirouCamera = false;
-    public static bool haruCamera = false;
-    public static bool event5Camera = false;
+    public bool playerCamera = true;
+    public bool girlCamera = false;
+    public bool seiitirouCamera = false;
+    public bool haruCamera = false;
     public static cameraManager cameraInstance;
     public float cameraSize = 0.0f;
     public Camera cam;
 
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        if(cameraInstance == null)
+        {
+            cameraInstance = this;
+        }
+        else
+        {
+            Destroy(cameraInstance);
+        }
+    }
     void Start()
     {
-        cameraInstance = this;
         pos = Camera.main.gameObject.transform.position;
         cam = GetComponent<Camera>();
         cameraSize = cam.orthographicSize;

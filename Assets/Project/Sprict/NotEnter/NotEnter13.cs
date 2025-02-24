@@ -12,6 +12,10 @@ public class NotEnter13 : MonoBehaviour
     [SerializeField]
     private List<Sprite> image;
     [SerializeField]
+    private List<string> messages2;
+    [SerializeField]
+    private List<string> names2;
+    [SerializeField]
     private List<Sprite> image2;
     /*
      * 話しかけるキャラクターによって結果が異なる。
@@ -26,7 +30,7 @@ public class NotEnter13 : MonoBehaviour
         }
         else if(collider.gameObject.name == "Matiba Haru")
         {
-            MessageManager.message_instance.MessageWindowActive(messages, names, image2, ct: destroyCancellationToken).Forget();
+            MessageManager.message_instance.MessageWindowActive(messages2, names2, image2, ct: destroyCancellationToken).Forget();
         }
 
     }

@@ -6,7 +6,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
 using System;
-using static UnityEditor.Progress;
+using Unity.VisualScripting;
 
 public class BombDefuse : MonoBehaviour
 {
@@ -16,12 +16,29 @@ public class BombDefuse : MonoBehaviour
     private List<string> names;
     [SerializeField]
     private List<Sprite> image;
+    [SerializeField]
+    private List<string> messages2;
+    [SerializeField]
+    private List<string> names2;
+    [SerializeField]
+    private List<Sprite> image2;
+    [SerializeField]
+    private List<string> messages3;
+    [SerializeField]
+    private List<string> names3;
+    [SerializeField]
+    private List<Sprite> image3;
+    [SerializeField]
+    private List<string> messages4;
+    [SerializeField]
+    private List<string> names4;
+    [SerializeField]
+    private List<Sprite> image4;
     private List<int> difuseNum = new List<int>();
 
     public Light2D light2D;
     public Item defusedBomb;
     public Inventry inventry;
-    public EnemyEncounter enemyEncounter;
 
     public Canvas secondHouseCanvas;
     public Image bombImage;
@@ -52,14 +69,18 @@ public class BombDefuse : MonoBehaviour
     }
     void Update()
     {
-        if(timerStartSwitch == false && isContacted && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
+        if(defusedBomb.geted && isContacted && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
+        {
+            MessageManager.message_instance.MessageWindowActive(messages4, names4, image4, ct: destroyCancellationToken).Forget();
+        }
+        else if(timerStartSwitch == false && isContacted && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
             isContacted = false;
             BombDifuse().Forget();
         }
         if(timerStartSwitch)
             limitTime -= Time.deltaTime;
-        if(limitTime < 0)
+        if(timerStartSwitch && limitTime < 0)
         {
             limitTime = 0;
             timerStartSwitch = false;
@@ -75,21 +96,19 @@ public class BombDefuse : MonoBehaviour
         bombImage.gameObject.SetActive(true);
         timerStartSwitch = true;
         soundManager.PlayBgm(clockSound);
-        enemyEncounter.afterDifuse = true;
     }
     private async UniTask AfterDifuse()
     {
         soundManager.StopBgm(clockSound);
         //　ここで「爆弾解除できた！坑道に向かおう。」
-        await MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken);
+        await MessageManager.message_instance.MessageWindowActive(messages2, names2, image2, ct: destroyCancellationToken);
         inventry.Add(defusedBomb);
         SecondHouseManager.secondHouse_instance.enemyEncounter.gameObject.SetActive(true);
         GameManager.m_instance.stopSwitch = false;
     }
     private async UniTask ExplodeBomb()
     {
-        limitTime += 5;
-        await MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken);
+        await MessageManager.message_instance.MessageWindowActive(messages3, names3, image3, ct: destroyCancellationToken);
         soundManager.StopBgm(clockSound);
         soundManager.PlaySe(lastClockSound);
         bombImage.gameObject.SetActive(false);
@@ -97,6 +116,9 @@ public class BombDefuse : MonoBehaviour
         await Blackout();
         await UniTask.Delay(TimeSpan.FromSeconds(2.0f));
         soundManager.PlaySe(explosion);
+        await UniTask.Delay(TimeSpan.FromSeconds(3.0f));
+        GameManager.m_instance.gameoverWindow.gameObject.SetActive(true);
+        GameManager.m_instance.buttonPanel.gameObject.SetActive(true);
     }
     private async UniTask Blackout()
     {
@@ -138,6 +160,7 @@ public class BombDefuse : MonoBehaviour
         else 
         {
             Debug.Log("不正解");
+            soundManager.PlaySe(GameManager.m_instance.invalidSelectionClip);
             limitTime -= 5;
         }
     }

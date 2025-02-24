@@ -22,6 +22,24 @@ public class HaruImportantEvent : MonoBehaviour
     private List<string> names;
     [SerializeField]
     private List<Sprite> image;
+    [SerializeField]
+    private List<string> messages2;
+    [SerializeField]
+    private List<string> names2;
+    [SerializeField]
+    private List<Sprite> image2;
+    [SerializeField]
+    private List<string> messages3;
+    [SerializeField]
+    private List<string> names3;
+    [SerializeField]
+    private List<Sprite> image3;
+    [SerializeField]
+    private List<string> messages4;
+    [SerializeField]
+    private List<string> names4;
+    [SerializeField]
+    private List<Sprite> image4;
 
     public GameObject panel;
     public GameObject firstSelection;
@@ -50,6 +68,9 @@ public class HaruImportantEvent : MonoBehaviour
         if(collider.gameObject.tag.Equals("Player") && bomb.checkPossession)
         {
             GameManager.m_instance.stopSwitch = true;
+            SecondHouseManager.secondHouse_instance.ajure.acceleration = 0;
+            SecondHouseManager.secondHouse_instance.ajure.speed = 0;
+            SecondHouseManager.secondHouse_instance.ajure.enemyEmerge = false;
             HaruEvent().Forget();
         }
 
@@ -63,7 +84,6 @@ public class HaruImportantEvent : MonoBehaviour
         haru.gameObject.transform.position = new Vector3(159, -11, 0);
         //セリフ内容は（俺たちは走った。だが化け物のように走力のあるあの犬に追いつかれそうになっていた）的な内容
         await MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken);
-        GameManager.m_instance.stopSwitch = true;
         soundManager.PlayBgm(heartSound);
         choiceCanvas.gameObject.SetActive(true);
         panel.gameObject.SetActive(true);
@@ -88,7 +108,7 @@ public class HaruImportantEvent : MonoBehaviour
         choiceCanvas.gameObject.SetActive(false);
         soundManager.StopBgm(SecondHouseManager.secondHouse_instance.fearMusic);
         //死亡前の最後の会話
-        await MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken);
+        await MessageManager.message_instance.MessageWindowActive(messages2, names2, image2, ct: destroyCancellationToken);
         Blackout().Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         light2D.intensity = 1.0f;
@@ -101,9 +121,9 @@ public class HaruImportantEvent : MonoBehaviour
         }
         player.gameObject.tag = "Untagged";
         player.gameObject.SetActive(false);
-        cameraManager.playerCamera = false;
+        cameraManager.cameraInstance.playerCamera = false;
         player.gameObject.SetActive(false);
-        cameraManager.haruCamera = true;
+        cameraManager.cameraInstance.haruCamera = true;
         soundManager.StopBgm(SecondHouseManager.secondHouse_instance.fearMusic);
         playerManager = haru.AddComponent<PlayerManager>();
         playerManager = haru.GetComponent<PlayerManager>();
@@ -117,7 +137,7 @@ public class HaruImportantEvent : MonoBehaviour
 
         haru.gameObject.transform.position = new Vector3(169, -11, 0);
         //晴の独り言
-        await MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken);
+        await MessageManager.message_instance.MessageWindowActive(messages3, names3, image3, ct: destroyCancellationToken);
         GameManager.m_instance.stopSwitch = false;
         ajure.acceleration = 0;
         ajure.speed = 0;
@@ -129,7 +149,7 @@ public class HaruImportantEvent : MonoBehaviour
         panel.gameObject.SetActive(false);
         choiceCanvas.gameObject.SetActive(false);
         //見捨てる後悔と最後の別れを口に出してその場を後にする。
-        await MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken);
+        await MessageManager.message_instance.MessageWindowActive(messages4, names4, image4, ct: destroyCancellationToken);
         soundManager.StopBgm(SecondHouseManager.secondHouse_instance.fearMusic);
         Blackout().Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));

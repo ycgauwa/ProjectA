@@ -26,18 +26,12 @@ public class DishMessage : MonoBehaviour
     public Item shrimp;
     public Item chicken;
     public Item fish;
-    public GameObject dish;
     public GameObject firstSelect;
-    private void Start()
-    {
-        dish = gameObject;
-    }
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.tag.Equals("Player"))
-        {
             isContacted = true;
-        }
     }
     // この状態だと文字や画像は出る。でも画像が閉じれなくなってしまう。後動けない
     //　画像が一周してからもう一度画像を出すために
@@ -45,9 +39,7 @@ public class DishMessage : MonoBehaviour
     {
         messageSwitch = false;
         if(collider.gameObject.tag.Equals("Player"))
-        {
             isContacted = false;
-        }
     }
 
     protected void showMessage(string message, string name, Sprite image)
@@ -56,7 +48,7 @@ public class DishMessage : MonoBehaviour
         nameText.text = name;
         characterImage.sprite = image;
     }
-    IEnumerator OnAction()
+    IEnumerator OnAction()//改善の余地は大ありだけどスルーでもOK
     {
         window.gameObject.SetActive(true);
         for(int i = 0; i < messages.Count; ++i)

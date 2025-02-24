@@ -57,7 +57,7 @@ public class ToEvent2 : MonoBehaviour
     public Text target;
     public Text nameText;
     public Image characterImage;
-    public static bool one;
+    public bool eventFinished;
     private bool isContacted = false;
     public SoundManager soundManager;
     public AudioClip sound;
@@ -107,6 +107,7 @@ public class ToEvent2 : MonoBehaviour
     }
     async UniTask CreateCoroutine()
     {
+        GameManager.m_instance.notSaveSwitch = true;
         volume.profile.TryGet<ColorAdjustments>(out colorAdjustments);
         inventry.Delete(item);
         await MessageManager.message_instance.MessageWindowOnceActive(beforeMessages, beforeNames, beforeImages, ct: destroyCancellationToken);
@@ -154,14 +155,14 @@ public class ToEvent2 : MonoBehaviour
         target.text = "";
         window.gameObject.SetActive(false);
         
-        cameraManager.girlCamera = true;
+        cameraManager.cameraInstance.girlCamera = true;
         girl.transform.DOMoveX(-86,4f);
         await UniTask.Delay(TimeSpan.FromSeconds(2.0f));
         soundManager.PlaySe(doorSound);
         await UniTask.Delay(TimeSpan.FromSeconds(2.0f));
         
         guards.transform.position = new Vector3(-76, 5, 0);
-        cameraManager.girlCamera = false;
+        cameraManager.cameraInstance.girlCamera = false;
         eventcamera.transform.DOMove(new Vector3(x, y, -10), t);
         girl.transform.DOMoveX(-85.9f, 0.3f);
 
@@ -189,7 +190,7 @@ public class ToEvent2 : MonoBehaviour
         await Blackout2();
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         soundManager.StopBgm(suspiciousBgm);
-        cameraManager.playerCamera = true;
+        cameraManager.cameraInstance.playerCamera = true;
         cameraAnimator.enabled = true;
         light2D.intensity = 1.0f;
         gameMenuUI.SetActive(false);
@@ -211,7 +212,10 @@ public class ToEvent2 : MonoBehaviour
         GameManager.m_instance.ImageErase(characterImage);
         window.gameObject.SetActive(false);
         GameManager.m_instance.stopSwitch = false;
-        FlagsManager.flag_Instance.chapterNum ++;
+        GameManager.m_instance.notSaveSwitch = false;
+        eventFinished = true;
+        FlagsManager.flag_Instance.flagBools[1] = true;
+        SaveSlotsManager.save_Instance.saveState.chapterNum ++;
     }
     private async UniTask Flash()
     {
@@ -248,15 +252,14 @@ public class ToEvent2 : MonoBehaviour
     }
     private void Event2Camera()
     {
-        playerCamera = cameraManager.playerCamera;
-        cameraManager.playerCamera = false;
+        playerCamera = cameraManager.cameraInstance.playerCamera;
+        cameraManager.cameraInstance.playerCamera = false;
         player.transform.position = new Vector3(70, -45, 0);
         friends[0].transform.position = new Vector3(0, 0, 0);
         friends[1].transform.position = new Vector3(0, 0, 0);
         friends[2].transform.position = new Vector3(0, 0, 0);
         friends[3].transform.position = new Vector3(0, 0, 0);
         girl.transform.position = new Vector3(-80, 6, 0);
-
     }
     protected void showMessage(string message, string name , Sprite image)
     {
@@ -286,7 +289,7 @@ public class ToEvent2 : MonoBehaviour
             light2D.intensity -= 0.012f;
             await UniTask.Delay(1);
         }
-        friends[0].transform.position = new Vector3(-81, 19, 0);
+        friends[0].transform.position = new Vector3(-82, 19, 0);
         friends[1].transform.position = new Vector3(-81, 21, 0);
         friends[2].transform.position = new Vector3(-79, 21, 0);
         friends[3].transform.position = new Vector3(-78, 20, 0);

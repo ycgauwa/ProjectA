@@ -41,6 +41,18 @@ public class HaruDeathQuestion : MonoBehaviour
     private List<string> names5;
     [SerializeField]
     private List<Sprite> images5;
+    [SerializeField]
+    private List<string> messages6;
+    [SerializeField]
+    private List<string> names6;
+    [SerializeField]
+    private List<Sprite> images6;
+    [SerializeField]
+    private List<string> advancemessages;
+    [SerializeField]
+    private List<string> advancenames;
+    [SerializeField]
+    private List<Sprite> advanceimages;
     public GameObject player;
     public GameObject enemy;
     public GameObject haruDead;
@@ -54,7 +66,6 @@ public class HaruDeathQuestion : MonoBehaviour
 
     private int heartCounts;
     private bool choiced = false;
-    private bool isContacted = false;
 
     private CancellationTokenSource heartSoundCTS;
     public Homing2 ajure;
@@ -65,27 +76,21 @@ public class HaruDeathQuestion : MonoBehaviour
     public NotEnter10 notEnter10;
     // このスクリプトでは犬に追われている時に入ろうとすると晴を見捨てるかを選ぶことができる
 
-    private async void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.tag.Equals("Player") && ajure.enemyEmerge)
+        if(ItemDateBase.itemDate_instance.GetItemId(257).geted)
+            return;
+        if(choiced)
         {
-            isContacted = true;
-            await HaruDeathSelection();
-            GameManager.m_instance.stopSwitch = true;
+            MessageManager.message_instance.MessageWindowActive(messages6, names6, images6, ct: destroyCancellationToken).Forget();
         }
-        
-    }
-    private void OnTriggerExit2D(Collider2D collider)
-    {
-        if(collider.gameObject.tag.Equals("Player"))
-            isContacted = false;
-    }
-    private void Update()
-    {
-        if(ajure.enemyEmerge)
+        else if(collider.gameObject.tag.Equals("Player") && ajure.enemyEmerge)
+        {
             gameObject.tag = "Untagged";
+            HaruDeathSelection().Forget();
+            GameManager.m_instance.stopSwitch = true;
+        }        
     }
-
     async UniTask HaruDeathSelection()
     {
         ajure.StopEnemy();
@@ -97,8 +102,12 @@ public class HaruDeathQuestion : MonoBehaviour
         await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
         while(cameraManager.cameraInstance.cameraSize > 0.5)
         {
-            cameraManager.cameraInstance.cameraSize -= 0.01f;
-            await UniTask.Delay(1);
+            if(!choiced)
+            {
+                cameraManager.cameraInstance.cameraSize -= 0.01f;
+                await UniTask.Delay(1);
+            }
+            else break;
         }
     }
     async UniTask OnPanel1()
@@ -123,28 +132,29 @@ public class HaruDeathQuestion : MonoBehaviour
             }
         }
     }
-    public void OnIgnoredBotton()
+    public async void OnIgnoredBotton()
     {
         //無視するボタン。音楽を再開して敵を再び動かす。
         heartCounts = 1000;
+        choiced = true;
         cameraManager.cameraInstance.cameraSize = 5f;
         heartSoundCTS.Cancel();
         soundManager.StopSe(heartSound);
         soundManager.StopBgm(fearBGM);
-        ajure.MoveEnemy();
-        choiced = true;
         panel.gameObject.SetActive(false);
         choiceCanvas.gameObject.SetActive(false);
+        await MessageManager.message_instance.MessageWindowActive(advancemessages, advancenames, advanceimages, ct: destroyCancellationToken);
+        ajure.MoveEnemy();
         GameManager.m_instance.stopSwitch = false;
     }
     public async void OnAbandonBotton()
     {
-        // 進むボタン
         heartCounts = 1000;
         cameraManager.cameraInstance.cameraSize = 5f;
         heartSoundCTS.Cancel();
         soundManager.StopSe(heartSound);
         soundManager.StopBgm(fearBGM);
+        soundManager.StopBgm(SecondHouseManager.secondHouse_instance.fearMusic);
         choiced = true;
         panel.gameObject.SetActive(false);
         choiceCanvas.gameObject.SetActive(false);
@@ -163,6 +173,7 @@ public class HaruDeathQuestion : MonoBehaviour
         await Blackout();
         player.transform.position = new Vector3(131, -12, 0);
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
+        SecondHouseManager.secondHouse_instance.haru.transform.position = new Vector2(0, 0);
         // 晴の叫び声と幸人の後悔の描写
         await MessageManager.message_instance.MessageWindowActive(messages3, names3, images3, ct: destroyCancellationToken);
 
@@ -214,9 +225,18 @@ public class HaruDeathQuestion : MonoBehaviour
     public void OnclickEnd5Retry()
     {
         end5Canvas.gameObject.SetActive(false);
+        GameManager.m_instance.buttonPanel.gameObject.SetActive(false);
+        GameManager.m_instance.gameoverWindow.gameObject.SetActive(false);
+        GameManager.m_instance.stopSwitch = false;
+        notEnter10.gameObject.SetActive(true);
         light2D.intensity = 1.0f;
+        SecondHouseManager.secondHouse_instance.haru.transform.position = new Vector2(80, 75);
+        haruDead.gameObject.SetActive(false);
         soundManager.StopBgm(EndingGalleryManager.m_gallery.ending5Bgm);
-        //GameManager.m_instance.OnclickRetryButton();
+        GameManager.m_instance.player.transform.position = new Vector2(66, 148.4f);
+        SecondHouseManager.secondHouse_instance.ajure.gameObject.transform.position = new Vector3(83.8f,146.8f,0);
+        SecondHouseManager.secondHouse_instance.ajure.savedSpeed = 0;
+        SecondHouseManager.secondHouse_instance.ajure.savedAcceleration = 0;
         EndingGalleryManager.m_gallery.endingGallerys[4].sprite = end5Image.sprite;
         EndingGalleryManager.m_gallery.endingFlag[4] = true;
         haru.FavorabilityCount -= 40;

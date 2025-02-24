@@ -48,7 +48,6 @@ public class Choice1 : MonoBehaviour
     //アンサーとして何を答えたか
     private bool answer;
     //アイテムを既に入手しているかどうか
-    private bool isGet;
     private bool isOpenSelect = false;
     private bool isContacted = false;
 
@@ -56,7 +55,6 @@ public class Choice1 : MonoBehaviour
     void Start()
     {
         answer = false;
-        isGet = false;
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -81,7 +79,7 @@ public class Choice1 : MonoBehaviour
         {
             if(isContacted == true && coroutine == null)
             {
-                if(isGet)
+                if(ItemDateBase.itemDate_instance.GetItemId(1).checkPossession)
                 {
                     coroutine = OnAction2();
                     PlayerManager.m_instance.m_speed = 0;
@@ -131,7 +129,6 @@ public class Choice1 : MonoBehaviour
                 yield return null;
                 //入手するを表示
                 showMessage(messages2[i], names2[i], image2[i]);
-                isGet = true;
                 yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
             }
             inventry.Add(item);

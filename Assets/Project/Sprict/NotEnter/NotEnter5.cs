@@ -19,18 +19,17 @@ public class NotEnter5 : MonoBehaviour
     private List<string> names2;
     [SerializeField]
     private List<Sprite> images2;
-    public bool getKey2;
-    public ItemDateBase itemDateBase;
     public RescueEvent rescueEvent;
     public GameObject enemy;
     public Homing homing;
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(getKey2 == false)
+        if(ItemDateBase.itemDate_instance.GetItemId(252).geted == false)
         {
             if(collider.gameObject.tag.Equals("Player"))
             {
+                //「はいれませんよ～」
                 MessageManager.message_instance.MessageWindowActive(GameManager.m_instance.GetMessages(name, "NotEnter"), GameManager.m_instance.GetSpeakerName(name, "NotEnter"), images, ct: destroyCancellationToken).Forget();
             }
         }
@@ -39,24 +38,23 @@ public class NotEnter5 : MonoBehaviour
             if(collider.gameObject.tag.Equals("Player"))
             {
                 gameObject.tag = "Untagged";
+                //「ここに逃げても無駄だよ」
                 MessageManager.message_instance.MessageWindowActive(GameManager.m_instance.GetMessages(name + "A", "NotEnter"), GameManager.m_instance.GetSpeakerName(name + "A", "NotEnter"), images2, ct: destroyCancellationToken).Forget();
             }
         }
-        else if(getKey2 == true)
+        else if(ItemDateBase.itemDate_instance.GetItemId(252).geted == true)
         {
             if(collider.gameObject.tag.Equals("Player"))
             {
-                this.gameObject.tag = "Minnka1-20";
-                Inventry.instance.Delete(itemDateBase.GetItemId(252));
+                gameObject.tag = "Minnka1-20";
+                if(ItemDateBase.itemDate_instance.GetItemId(252).checkPossession)
+                    GameManager.m_instance.inventry.Delete(ItemDateBase.itemDate_instance.GetItemId(252));
                 if (enemy.gameObject.activeSelf)
                 {
                     homing.teleportManager.StopChased();
                     homing.enemyEmerge = false;
                 }
-
             }
         }
-
     }
-
 }

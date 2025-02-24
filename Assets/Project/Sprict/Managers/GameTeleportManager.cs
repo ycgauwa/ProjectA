@@ -14,7 +14,6 @@ public class GameTeleportManager : MonoBehaviour
     public float enemyTeleportTime;
     private bool enemyTeleportSwitch = false;
     public GameObject enemy;
-    public GameObject enemy2;
     public GameObject Yukito;
     public static bool chasedTime;
     private bool enemyStartTPTime;
@@ -26,14 +25,17 @@ public class GameTeleportManager : MonoBehaviour
     public SoundManager soundManager;
     public ToEvent3 toevent3;
 
+
+    //1体目の敵と2体目の敵は分けたい。どこから分けるかが大事であるがこれはかなり深いところで分けてしまってるため被害が出ている
+    //浅い階層で分けることできちんとした分別が出来る気がする。
     private void Update()
     {
         if(PlayerManager.m_instance.playerstate != PlayerManager.PlayerState.Talk && PlayerManager.m_instance.playerstate != PlayerManager.PlayerState.Stop && chasedTime == true)
-        {
+        {       
             enemyTeleportTime += Time.deltaTime;
-            if(enemyStartTPTime == true && enemyTeleportTime > 2.0f)//欲を言えば2体目は1fにしたい。
+            if(enemyStartTPTime == true && enemyTeleportTime > 2.0f)
             {
-                Debug.Log(Enemy);
+                Debug.Log("1");
                 Invoke("OnEnemyTeleport", 0f);
                 enemyStartTPTime = false;
             }
@@ -152,13 +154,15 @@ public class GameTeleportManager : MonoBehaviour
     エネミーの位置がプレイヤーが飛んだTPの位置まで移動してくれるものである*/
     private void OnEnemyTeleport()
     {
+        Debug.Log("2");
+
         if(Enemy == null)
         {
             Debug.LogError("エネミーの参照がありません");
             return;
         }
         // EnemyがTPするメソッド(ここに確率を加えたい)でも２匹目は基本イベントのみなのでstopchasedは必要ない。
-        if((toevent3.event3flag && Homing.m_instance.enemyEmerge) || Homing2.m_instance.enemyEmerge)
+        if((Homing.m_instance.eventEnemySpawnToggle && Homing.m_instance.enemyEmerge))
         {
             switch(difficultyLevelManager.difficultyLevel)
             {
@@ -171,10 +175,7 @@ public class GameTeleportManager : MonoBehaviour
                         Invoke("EnemyEmerge", 0f);
                         enemyTeleportSwitch = true;
                     }
-                    else
-                    {
-                        StopChased();
-                    }
+                    else StopChased();
                     break;
                 case DifficultyLevelManager.DifficultyLevel.Normal:
                     if(Homing.m_instance.enemyCount < 12.0f)
@@ -185,10 +186,7 @@ public class GameTeleportManager : MonoBehaviour
                         Invoke("EnemyEmerge", 0f);
                         enemyTeleportSwitch = true;
                     }
-                    else
-                    {
-                        StopChased();
-                    }
+                    else StopChased();
                     break;
                 case DifficultyLevelManager.DifficultyLevel.Hard:
                     if(Homing.m_instance.enemyCount < 16.0f)
@@ -199,10 +197,7 @@ public class GameTeleportManager : MonoBehaviour
                         Invoke("EnemyEmerge", 0f);
                         enemyTeleportSwitch = true;
                     }
-                    else
-                    {
-                        StopChased();
-                    }
+                    else StopChased();
                     break;
                 case DifficultyLevelManager.DifficultyLevel.Extreme:
                     if(Homing.m_instance.enemyCount < 15.0f)
@@ -216,17 +211,17 @@ public class GameTeleportManager : MonoBehaviour
                             enemyTeleportSwitch = true;
                         }
                     }
-                    else
-                    {
-                        StopChased();
-                    }
+                    else StopChased();
                     break;
             }
-            
-            //2匹目のスクリプト
-            if(enemy2.gameObject.activeSelf)
+        }
+        else if(SecondHouseManager.secondHouse_instance.ajure.gameObject.activeSelf == true)
+        {
+            Debug.Log("3");
+            if(Homing2.m_instance.enemyEmerge)
             {
-                enemy2.gameObject.SetActive(false);
+                Debug.Log("4");
+                SecondHouseManager.secondHouse_instance.ajure.gameObject.SetActive(false);
                 if(enemyTeleportSwitch) CancelInvoke("EnemyEmerge");
                 Invoke("EnemyEmerge2", 0f);
                 enemyTeleportSwitch = true;
@@ -237,9 +232,10 @@ public class GameTeleportManager : MonoBehaviour
     {
         chasedTime = false;
         enemy.gameObject.SetActive(false);
-        soundManager.StopBgm(toevent3.chasedBGM);
+        soundManager.StopBgm(Homing.m_instance.chasedBGM);
         Enemy.transform.position = new Vector2(0, 0);
         Homing.m_instance.enemyCount = 0;
+        GameManager.m_instance.notSaveSwitch = false;
     }
     private void EnemyEmerge()
     {
@@ -253,11 +249,16 @@ public class GameTeleportManager : MonoBehaviour
     }
     private void EnemyEmerge2()
     {
-        if(!enemy2.activeSelf)
+        Debug.Log("5");
+        if(!SecondHouseManager.secondHouse_instance.ajure.gameObject.activeSelf)
         {
-            enemy2.gameObject.SetActive(true);
+            Debug.Log("6");
             enemyTeleportSwitch = false;
-            Enemy2.transform.position = enemyTeleportAddress.playerPosition;
+            Enemy2.gameObject.SetActive(true);
+            SecondHouseManager.secondHouse_instance.ajure.gameObject.transform.position = enemyTeleportAddress.playerPosition;
+            Vector3 newPosition = SecondHouseManager.secondHouse_instance.ajure.gameObject.transform.position;
+            newPosition.y -= 1.3f;
+            SecondHouseManager.secondHouse_instance.ajure.gameObject.transform.position = newPosition;
             Enemy2.speed -= 1.5f;
             enemyTeleportTime = 0;
         }
@@ -270,8 +271,9 @@ public class GameTeleportManager : MonoBehaviour
             case DifficultyLevelManager.DifficultyLevel.Easy:
                 if(enemyRndNum > 92 && Homing.m_instance.enemyEmerge)
                 {
+                    GameManager.m_instance.notSaveSwitch = true;
                     Enemy.gameObject.SetActive(true);
-                    soundManager.PlayBgm(toevent3.chasedBGM);
+                    soundManager.PlayBgm(Homing.m_instance.chasedBGM);
                     Homing.m_instance.enemyCount += 0.1f;
                     chasedTime = true;
                 }
@@ -279,8 +281,9 @@ public class GameTeleportManager : MonoBehaviour
             case DifficultyLevelManager.DifficultyLevel.Normal:
                 if(enemyRndNum > 87 && Homing.m_instance.enemyEmerge)
                 {
+                    GameManager.m_instance.notSaveSwitch = true;
                     Enemy.gameObject.SetActive(true);
-                    soundManager.PlayBgm(toevent3.chasedBGM);
+                    soundManager.PlayBgm(Homing.m_instance.chasedBGM);
                     Homing.m_instance.enemyCount += 0.1f;
                     chasedTime = true;
                 }
@@ -288,8 +291,9 @@ public class GameTeleportManager : MonoBehaviour
             case DifficultyLevelManager.DifficultyLevel.Hard:
                 if(enemyRndNum > 82 && Homing.m_instance.enemyEmerge)
                 {
+                    GameManager.m_instance.notSaveSwitch = true;
                     Enemy.gameObject.SetActive(true);
-                    soundManager.PlayBgm(toevent3.chasedBGM);
+                    soundManager.PlayBgm(Homing.m_instance.chasedBGM);
                     Homing.m_instance.enemyCount += 0.1f;
                     chasedTime = true;
                 }
@@ -297,8 +301,9 @@ public class GameTeleportManager : MonoBehaviour
             case DifficultyLevelManager.DifficultyLevel.Extreme:
                 if(enemyRndNum > 74 && Homing.m_instance.enemyEmerge)
                 {
+                    GameManager.m_instance.notSaveSwitch = true;
                     Enemy.gameObject.SetActive(true);
-                    soundManager.PlayBgm(toevent3.chasedBGM);
+                    soundManager.PlayBgm(Homing.m_instance.chasedBGM);
                     Homing.m_instance.enemyCount += 0.1f;
                     chasedTime = true;
                 }

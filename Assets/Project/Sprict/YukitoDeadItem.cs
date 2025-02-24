@@ -24,7 +24,7 @@ public class YukitoDeadItem : MonoBehaviour
     public Canvas selectionCanvas;
     public Image selection;
     public GameObject firstSelect;
-    //　幸人が死体になった時にアイテムを取るためだけのスクリプト。
+    //幸人が死体になった時にアイテムを取るためだけのスクリプト。
     //設計としてはまず分岐として充希のお守りを持っているかどうかで変わる。
     //共通としてはカメラがズームされて縁が暗くなり晴が死んだときと同じ音楽が流れる。
     //お守りを持っていると追加でセリフと選択が入る。
@@ -58,12 +58,12 @@ public class YukitoDeadItem : MonoBehaviour
             GameManager.m_instance.vignette.intensity.value += 0.01f;
             await UniTask.Delay(1);
         }
+        SoundManager.sound_Instance.PlayBgm(EndingGalleryManager.m_gallery.ending5Bgm);
         while(cameraManager.cameraInstance.cameraSize > 2.5)
         {
             cameraManager.cameraInstance.cameraSize -= 0.01f;
             await UniTask.Delay(2);
         }
-        SoundManager.sound_Instance.PlayBgm(EndingGalleryManager.m_gallery.ending5Bgm);
         await MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken);
         GameManager.m_instance.inventry.Add(ItemDateBase.itemDate_instance.GetItemId(253));
         if(ItemDateBase.itemDate_instance.GetItemId(201).geted)

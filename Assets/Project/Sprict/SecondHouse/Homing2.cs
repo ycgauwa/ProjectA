@@ -70,12 +70,12 @@ public class Homing2 : MonoBehaviour
             // プレイヤーに向けて進む
             enemyMovement = Vector2.MoveTowards(
                 transform.position,
-                new Vector2(playerTr.position.x, playerTr.position.y),
+                new Vector2(playerTr.position.x, playerTr.position.y - 1.3f),
                 speed);
 
             transform.position = Vector2.MoveTowards(
                     transform.position,
-                    new Vector2(playerTr.position.x, playerTr.position.y),
+                    new Vector2(playerTr.position.x, playerTr.position.y - 1.3f),
                     speed * Time.deltaTime);
         }
         if(enemyEmerge == true && speed > 0 && PlayerManager.m_instance.playerstate != PlayerManager.PlayerState.Talk && PlayerManager.m_instance.playerstate != PlayerManager.PlayerState.Stop)
@@ -105,42 +105,40 @@ public class Homing2 : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if(speed == 0)
+            animator.enabled = false;
+        else animator.enabled = true;
         if(isMove)
         {
             Vector2 currentPos = rbody.position;
 
             enemyPosition.x = transform.position.x - enemyPosition.x;
-            enemyPosition.y = transform.position.y - enemyPosition.y;
+            enemyPosition.y = transform.position.y - enemyPosition.y - 1.3f;
             enemyMovement = new Vector2(enemyPosition.x, enemyPosition.y);
             //cr.SetDirection(enemyMovement);
         }
         enemyPosition.x = transform.position.x;
-        enemyPosition.y = transform.position.y;
+        enemyPosition.y = transform.position.y - 1.3f;
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.tag.Equals("Player"))
         {
-            /* 藁人形を人形を持っているときの処理
-            if(itemDateBase.items[8].checkPossession == true)
-            {
-                itemSprictW.ItemEffect();
-            }
-            else*/
-            {
-                // 食べられた時のサウンドを流す
-                // ゲームオーバー画面を出すためのキャンバスとその数秒後にボタンを出す
-                gameoverWindow.gameObject.SetActive(true);
-                GameManager.m_instance.stopSwitch = true;
-                Invoke("AppearChoice", 2.5f);
-            }
+            if(gameoverWindow.gameObject.activeSelf)
+                return;
+            GameManager.m_instance.stopSwitch = true;
+            SoundManager.sound_Instance.PlaySe(SecondHouseManager.secondHouse_instance.meatEat);
+            gameoverWindow.gameObject.SetActive(true);
+            GameManager.m_instance.stopSwitch = true;
+            Invoke("AppearChoice", 2.5f);
         }
     }
 
     public void AppearChoice()
     {
         buttonPanel.gameObject.SetActive(true);
-        if(gameObject.activeSelf) teleportManager.StopChased();
+        if(gameObject.activeSelf) 
+            teleportManager.StopChased();
     }
 
     // 敵が一定の距離を動いた状態でプレイヤーがワープしたら追っかけてこなくなる
@@ -159,8 +157,8 @@ public class Homing2 : MonoBehaviour
     //プレイヤーがTPことを認知させる
     public void StopEnemy()
     {
-        if(!gameObject.activeSelf)
-            gameObject.SetActive(true);
+        //if(!gameObject.activeSelf)
+          //  gameObject.SetActive(true);
         SoundManager.sound_Instance.PauseBgm(SecondHouseManager.secondHouse_instance.fearMusic);
 
         if(acceleration != 0)
@@ -176,8 +174,8 @@ public class Homing2 : MonoBehaviour
         acceleration = savedAcceleration;
         speed = savedSpeed;
         SoundManager.sound_Instance.UnPauseBgm(SecondHouseManager.secondHouse_instance.fearMusic);
-        if(gameObject.activeSelf)
-            gameObject.SetActive(false);
+        //if(gameObject.activeSelf)
+        //    gameObject.SetActive(false);
         enemyEmerge = true;
     }
     void Flip(float scaleX)

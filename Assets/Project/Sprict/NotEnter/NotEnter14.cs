@@ -7,7 +7,8 @@ using UnityEngine.Rendering.Universal;
 
 public class NotEnter14 : MonoBehaviour
 {
-    /*大岩で通れないスクリプト
+    /*
+     大岩で通れないスクリプト
     そのままと爆弾を持っている状態での処理は異なる。
     そのままはメッセージが表示されるだけ持っていたら。
     イベント発生
@@ -18,7 +19,15 @@ public class NotEnter14 : MonoBehaviour
     [SerializeField]
     private List<string> messages;
     [SerializeField]
+    private List<string> messages2;
+    [SerializeField]
+    private List<string> messages3;
+    [SerializeField]
     private List<string> names;
+    [SerializeField]
+    private List<string> names2;
+    [SerializeField]
+    private List<string> names3;
     [SerializeField]
     private List<Sprite> image;
     [SerializeField]
@@ -56,12 +65,13 @@ public class NotEnter14 : MonoBehaviour
         {
             savedNam = isContactedAndChara;
             isContactedAndChara = 0;
-            if(!bomb.checkPossession)
+
+            if(!bomb.geted)
                 NotUseBomb();
-            else
-            {
+            else if(bomb.checkPossession)
                 UseBomb().Forget();
-            }
+            else
+                return;
         }
     }
 
@@ -74,9 +84,9 @@ public class NotEnter14 : MonoBehaviour
     {
         //爆弾ありだからイベントあり
         if(savedNam == 1)
-            await MessageManager.message_instance.MessageWindowActive(messages, names, image2, ct: destroyCancellationToken);
+            await MessageManager.message_instance.MessageWindowActive(messages2, names2, image2, ct: destroyCancellationToken);
         else if(savedNam == 2)
-            await MessageManager.message_instance.MessageWindowActive(messages, names, image3, ct: destroyCancellationToken);
+            await MessageManager.message_instance.MessageWindowActive(messages3, names3, image3, ct: destroyCancellationToken);
 
         inventry.Delete(bomb);
         Blackout().Forget();
@@ -92,8 +102,7 @@ public class NotEnter14 : MonoBehaviour
         if(savedNam == 1)
             await MessageManager.message_instance.MessageWindowActive(messages, names, image2, ct: destroyCancellationToken);
         else if(savedNam == 2)
-            await MessageManager.message_instance.MessageWindowActive(messages, names, image3, ct: destroyCancellationToken);
-        
+            await MessageManager.message_instance.MessageWindowActive(messages, names, image3, ct: destroyCancellationToken);       
         GameManager.m_instance.stopSwitch = false;
     }
     private async UniTask Blackout()

@@ -125,7 +125,7 @@ public class EndingCase9 : MonoBehaviour
         GameManager.m_instance.seiitirou.gameObject.transform.position = new Vector3(87.1f, 139.7f, 0);
         GameManager.m_instance.mainCamera.gameObject.transform.position = new Vector3(87.1f, 139.7f, 0);
         SecondHouseManager.secondHouse_instance.light2D.intensity = 1.0f;
-        cameraManager.seiitirouCamera = false;
+        cameraManager.cameraInstance.seiitirouCamera = false;
         GameManager.m_instance.mainCamera.transform.DOLocalMove(new Vector3(81,142.3f, -10), 3f);
         await UniTask.Delay(TimeSpan.FromSeconds(3f));
         await MessageManager.message_instance.MessageWindowActive(messages3, names3, images3, ct: destroyCancellationToken);
@@ -137,7 +137,7 @@ public class EndingCase9 : MonoBehaviour
     public void OnAbandonBotton()
     {
         //見捨てるボタンだからイベント発生後エンディング
-        cameraManager.seiitirouCamera = true;
+        cameraManager.cameraInstance.seiitirouCamera = true;
         selectionCanvas.gameObject.SetActive(false);
         selection.gameObject.SetActive(false);
         MessageManager.message_instance.isOpenSelect = false;
@@ -167,7 +167,7 @@ public class EndingCase9 : MonoBehaviour
         SoundManager.sound_Instance.PlaySe(SecondHouseManager.secondHouse_instance.doorSound);
         yukitoGhost.gameObject.transform.position = new Vector3(130, 142.1f, 0);
         SoundManager.sound_Instance.PlayBgm(ending9Music);
-        cameraManager.seiitirouCamera = false;
+        cameraManager.cameraInstance.seiitirouCamera = false;
         GameManager.m_instance.mainCamera.transform.DOLocalMove(new Vector3(130, 142.1f, -10), 4f);
         await UniTask.Delay(TimeSpan.FromSeconds(4f));
         SoundManager.sound_Instance.PlayBgm(noiseSound);
@@ -186,7 +186,7 @@ public class EndingCase9 : MonoBehaviour
     public void OnResqueBotton()
     {
         // 助けるボタンだから少しイベント入れた後に追いかけっこ発生。暗転入れて、晴をにがしーのセリフであの部屋なら逃げ切れる。と入れる。
-        cameraManager.seiitirouCamera = true;
+        cameraManager.cameraInstance.seiitirouCamera = true;
         GameManager.m_instance.mainCamera.transform.position = GameManager.m_instance.seiitirou.transform.position;
         selectionCanvas.gameObject.SetActive(false);
         selection.gameObject.SetActive(false);

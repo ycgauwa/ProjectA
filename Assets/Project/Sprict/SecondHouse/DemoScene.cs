@@ -24,7 +24,7 @@ public class DemoScene : MonoBehaviour
     {
         if(collider.gameObject.tag.Equals("Player"))
         {
-            cameraManager.playerCamera = false;
+            cameraManager.cameraInstance.playerCamera = false;
             GameManager.m_instance.stopSwitch = true;
             cameraObject.transform.DOLocalMove(new Vector3(78, 149, -10), 2f);
             Invoke("MessageActive", 2f);

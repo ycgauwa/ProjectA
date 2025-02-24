@@ -43,7 +43,6 @@ public class LockPuzzle : MonoBehaviour
         if(AllLampsOn())
         {
             notEnter.DefuseLocked();
-            Debug.Log("Œ®‚ªŠJ‚¢‚½I");
         }
     }
 

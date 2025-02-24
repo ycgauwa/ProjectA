@@ -44,7 +44,6 @@ public class Test1 : MonoBehaviour
     }
     private void Update()//入力チェックはUpdateに書く
     {
-        
         //メッセージウィンドウ閉じるときはこのメソッドを
         if(isContacted && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {

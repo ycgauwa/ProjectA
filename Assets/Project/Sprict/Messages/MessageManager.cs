@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -31,12 +32,20 @@ public class MessageManager : MonoBehaviour
     public bool isOpenSelect = false;
 
     //ここでメッセージスクリプトを呼び出すスクリプトを作成する
-    void Start()
+    private void Awake()
     {
-        message_instance = this;
+        if(message_instance == null)
+        {
+            message_instance = this;
+        }
+        else
+        {
+            Destroy(message_instance);
+        }
     }
     public async UniTask MessageCoroutine(CancellationToken ct)
     {
+        await UniTask.Delay(1, cancellationToken: ct);
         isTalking = true;
         //if文でコルーチンがあるかどうかの条件式を作る
         //メッセージ中だよってboolを作る（IEnumerator内で）
@@ -50,7 +59,10 @@ public class MessageManager : MonoBehaviour
         talking = false;
         Refrigerator.messageSwitch = false;
         PlayerManager.m_instance.m_speed = 0.075f;
-        Homing.m_instance.speed = 2;
+        Homing.m_instance.speed = 2 + GameManager.m_instance.difficultyLevelManager.addEnemySpeed;
+        SecondHouseManager.secondHouse_instance.ajure.speed = SecondHouseManager.secondHouse_instance.ajure.savedSpeed;
+        SecondHouseManager.secondHouse_instance.ajure.acceleration = SecondHouseManager.secondHouse_instance.ajure.savedAcceleration;
+        Debug.Log(SecondHouseManager.secondHouse_instance.ajure.speed);
         Time.timeScale = 1f;
         await UniTask.DelayFrame(1,cancellationToken : ct);
         isTalking = false;
@@ -64,7 +76,10 @@ public class MessageManager : MonoBehaviour
         GameManager.m_instance.ImageErase(characterImage);
         window.gameObject.SetActive(false);
         PlayerManager.m_instance.m_speed = 0.075f;
-        Homing.m_instance.speed = 2;
+        Homing.m_instance.speed = 2 + GameManager.m_instance.difficultyLevelManager.addEnemySpeed;
+        SecondHouseManager.secondHouse_instance.ajure.speed = SecondHouseManager.secondHouse_instance.ajure.savedSpeed;
+        SecondHouseManager.secondHouse_instance.ajure.acceleration = SecondHouseManager.secondHouse_instance.ajure.savedAcceleration;
+        Debug.Log(SecondHouseManager.secondHouse_instance.ajure.speed);
         Time.timeScale = 1f;
         await UniTask.DelayFrame(1, cancellationToken: ct);
         isTalking = false;
@@ -115,11 +130,14 @@ public class MessageManager : MonoBehaviour
     {
         //コルーチンは始まる前に一回はじかれる
         if(isTalking) return;
+        Debug.Log("MessageWindowActive メソッド開始");
         this.messages = messages;
         this.names = names;
         this.image = image;
         talking = msgSwitch;
+        Debug.Log("MessageCoroutine メソッド呼び出し前");
         await MessageCoroutine(ct);
+        Debug.Log("MessageCoroutine メソッド呼び出し後");
     }
     /*疑問点まとめ
     １受け取る側の引数の名前がmsgとnamだけどこれどっからとってきてるの？

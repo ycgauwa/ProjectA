@@ -116,7 +116,6 @@ public class Refrigerator : MonoBehaviour
             }
         }
     }
-
     public void RefrigeratorSelection1()
     {
         if(target.text == "「エビチリ似合いそうな良い素材はないかな？」")
@@ -141,6 +140,9 @@ public class Refrigerator : MonoBehaviour
             selection.gameObject.SetActive(false);
             Selectwindow.gameObject.SetActive(false);
             target.text = "これで食材の用意ができた。調理に向かおう";
+            select1.text = "パクチー";
+            select2.text = "ショウガ";
+            select3.text = "ニンニク";
             isOpenSelect = false;
             isTaken = true;
         }
@@ -169,6 +171,9 @@ public class Refrigerator : MonoBehaviour
             selection.gameObject.SetActive(false);
             Selectwindow.gameObject.SetActive(false);
             target.text = "これで食材の用意ができた。調理に向かおう";
+            select1.text = "パクチー";
+            select2.text = "ショウガ";
+            select3.text = "ニンニク";
             isOpenSelect = false;
             isTaken = true;
         }
@@ -197,6 +202,9 @@ public class Refrigerator : MonoBehaviour
             selection.gameObject.SetActive(false);
             Selectwindow.gameObject.SetActive(false);
             target.text = "これで食材の用意ができた。調理に向かおう";
+            select1.text = "パクチー";
+            select2.text = "ショウガ";
+            select3.text = "ニンニク";
             isOpenSelect = false;
             isTaken = true;
         }

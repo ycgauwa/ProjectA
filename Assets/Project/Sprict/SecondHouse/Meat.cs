@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using System;
+using UnityEngine.UIElements;
 
 public class Meat : MonoBehaviour
 {
@@ -21,9 +22,9 @@ public class Meat : MonoBehaviour
     [SerializeField]
     private List<Sprite> images2;
     public GameObject player;
-    public GameObject enemy;
     public GameObject lightAnimation;
     public GameObject haruSelectionObject;
+    public bool meatEatAfter;
     public Light2D light2D;
     public Homing2 ajure;
     public NotEnter10 notEnter10;
@@ -59,6 +60,8 @@ public class Meat : MonoBehaviour
     }
     private async UniTask MeatEated()
     {
+        SecondHouseManager.secondHouse_instance.messagedBear.SetActive(false);
+        SecondHouseManager.secondHouse_instance.messagedMushroom.SetActive(false);
         await MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken);
         await Blackout();
         soundManager.PlaySe(meatSound);
@@ -67,12 +70,20 @@ public class Meat : MonoBehaviour
         light2D.intensity = 1.0f;
         await MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken);
         GameManager.m_instance.stopSwitch = false;
+        GameManager.m_instance.notSaveSwitch = false;
         soundManager.StopSe(meatSound);
         lightAnimation.gameObject.SetActive(true);
         haruSelectionObject.tag = "Minnka2-4";
+        meatEatAfter = true;
+        FlagsManager.flag_Instance.flagBools[7] = true;
+        FalseComponent();
+    }
+    public void FalseComponent()
+    {
         Meat meat = GetComponent<Meat>();
         meat.enabled = false;
     }
+
     private async UniTask Blackout()
     {
         light2D.intensity = 1.0f;
@@ -83,7 +94,7 @@ public class Meat : MonoBehaviour
             await UniTask.Delay(1);
         }
         player.transform.position = new Vector3(142, 92, 0);
-        enemy.transform.position = new Vector3(138, 88, 0);
+        SecondHouseManager.secondHouse_instance.ajure.transform.position = new Vector3(138, 88, 0);
 
     }
 }

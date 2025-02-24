@@ -12,14 +12,20 @@ public class Inventry : MonoBehaviour
     private void Awake()
     {
         if (instance == null)
-        {
             instance = this;
-        }
+        else Destroy(instance);
     }
     private void Start()
     {
         inventryUI = GetComponent<InventryUI>();
-        //inventryUI.UpdateUI();
+        if(SaveSlotsManager.save_Instance.saveState.loadIndex > 0)
+        {
+            foreach(Item items in ItemDateBase.itemDate_instance.items)
+            {
+                if(items.checkPossession)
+                    Add(items);
+            }
+        }
     }
     public void Add(Item item)
     {

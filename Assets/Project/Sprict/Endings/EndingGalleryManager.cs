@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
+using System.Linq;
 
 public class EndingGalleryManager : MonoBehaviour
 {
     public Image[] endingGallerys  = new Image[100];
+    public Sprite[] endingSprites = new Sprite[100];
     public bool[] endingFlag = new bool[100];
     public Image[] endingGalleryPages = new Image[16];
     private int activePageNum = 0;
@@ -26,9 +28,29 @@ public class EndingGalleryManager : MonoBehaviour
     public string explainText;
     public static EndingGalleryManager m_gallery;
 
+    private void Awake()
+    {
+        if(m_gallery == null)
+            m_gallery = this;
+        else
+        {
+            Destroy(this);
+        }
+    }
     private void Start()
     {
-        m_gallery = this;
+        //ƒ[ƒh‚µ‚½Žž‚ÉƒMƒƒƒ‰ƒŠ[‰æ–Ê‚ÌUI‚ðXV‚Ü‚½AƒGƒ“ƒfƒBƒ“ƒO‰ñŽû‚É‚æ‚Á‚Ä‚©‚í‚é—v‘f‚ð‚±‚±‚Å‰Á‚¦‚Ä‚¨‚­
+        if(SaveSlotsManager.save_Instance.saveState.loadIndex > 0)
+        {
+            for(int i = 0 ; i <  endingFlag.Length; i++)
+            {
+                if(endingFlag[i] == true)
+                {
+                    m_gallery.endingGallerys[i].sprite = endingSprites[i];
+                    LoadEndingChanges(i);
+                }
+            }
+        }
     }
     public void EndingToDetail(int i)
     {
@@ -57,6 +79,64 @@ public class EndingGalleryManager : MonoBehaviour
         else if(i == 9)
             explainText = "End6 ŒŒ‚É‚Ü‚Ý‚ê‚½”ÓŽ`‰ï\nyŽæ“¾ðŒz\neØ‚È‚Ê‚¢‚®‚é‚Ý‚½‚¿‚Éì‚Á‚½—¿—‚ð“n‚³‚È‚¢";
         endingDetailText.text = explainText;
+    }
+    public void LoadEndingChanges(int endNumber)
+    {
+        switch(endNumber)
+        {
+            case 0:
+                endingCase1.gameObject.transform.position = new Vector3(-35, 29, 0);
+                endingCase1.answerNum = 3;
+                Destroy(endingCase1.faliedSelect.gameObject);
+                break;
+            case 1:
+                endingCase2.entrance.gameObject.SetActive(false);
+                endingCase2.wall.gameObject.SetActive(true);
+                endingCase2.gameObject.SetActive(false);
+                break;
+            case 2:
+                endingCase3.gameObject.SetActive(false);
+                break;
+            case 3:
+                endingCase3.gameObject.SetActive(false);
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
+                break;
+            case 11:
+                break;
+            case 12:
+                break;
+            case 13:
+                break;
+            case 14:
+                break;
+            case 15:
+                break;
+            case 16:
+                break;
+            case 17:
+                break;
+            case 18:
+                break;
+            case 19:
+                break;                   
+            case 20:
+                break;
+            default
+                : break;
+        }
     }
     public void CloseEndingDetail()
     {

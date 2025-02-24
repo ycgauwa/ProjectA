@@ -23,9 +23,6 @@ public class TVCharadeManager : MonoBehaviour
     [SerializeField]
     private string messages2;
     public Text screenText;
-    public Item item;
-    public Inventry inventry;
-    public NotEnter5 notEnter5;
 
     // 正解を押し続けたらアイテムがもらえて、メッセージも表示させる仕組みの作成
     // 不正解を選択したら最後のメッセージがでてアイテムはもらえない。
@@ -93,8 +90,10 @@ public class TVCharadeManager : MonoBehaviour
     {
         TVScreen.gameObject.SetActive(true);
         screenText.text = messages;
-        inventry.Add(item);
-        notEnter5.getKey2 = true;
+        Debug.Log(Inventry.instance);
+        Debug.Log(ItemDateBase.itemDate_instance);
+        if(ItemDateBase.itemDate_instance.GetItemId(252).geted == false)
+            GameManager.m_instance.inventry.Add(ItemDateBase.itemDate_instance.GetItemId(252));
     }
     private void TVMessageMiss() 
     {

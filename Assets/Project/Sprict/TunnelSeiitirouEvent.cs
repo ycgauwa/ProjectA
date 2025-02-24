@@ -24,32 +24,34 @@ public class TunnelSeiitirouEvent : MonoBehaviour
     [SerializeField]
     private List<Sprite> images2;
 
+    public bool tunnelEvent;
     public GameObject cameraObject;
     public GameObject skullObject;
     public Light2D light2D;
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.tag.Equals("Seiitirou"))
+        if(collider.gameObject.tag.Equals("Seiitirou") && !tunnelEvent)
         {
             TunnelEvent().Forget();
+            tunnelEvent = true;
+            FlagsManager.flag_Instance.seiitirouFlagBools[3] = true;
         }
         else if(collider.gameObject.tag.Equals("Player")) gameObject.SetActive(false);
     }
     private async UniTask TunnelEvent()
     {
+        Debug.Log("EventStart");
         GameManager.m_instance.stopSwitch = true;
-        //セリフ内容（この坑道をもう一度通るだなんて想像もしていなかった。
-        //元々居た家はやばい奴が居たのに逃げ出した先でもあんな化け物がいるだなんて……。
-        //安全を求めて移動を続けているが、やはり別の出口にある大岩を壊すしかなさそうだな。）
+        GameManager.m_instance.notSaveSwitch = true;
         await MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken);
-        cameraManager.seiitirouCamera = false;
+        cameraManager.cameraInstance.seiitirouCamera = false;
         cameraObject.transform.DOLocalMove(new Vector3(190, 11, -10), 4f);
         await UniTask.Delay(TimeSpan.FromSeconds(4f));
         await MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken);
         await Blackout();
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
-        cameraManager.seiitirouCamera = true;
+        cameraManager.cameraInstance.seiitirouCamera = true;
         //オブジェクトの総入れ替え
         SecondHouseManager.secondHouse_instance.chickenDish.gameObject.SetActive(false);
         SecondHouseManager.secondHouse_instance.shrimpDish.gameObject.SetActive(false);
@@ -63,6 +65,7 @@ public class TunnelSeiitirouEvent : MonoBehaviour
         SecondHouseManager.secondHouse_instance.talkingWithHaru.gameObject.transform.position = new Vector3(141,144,0);
         skullObject.SetActive(true);
         GameManager.m_instance.stopSwitch = false;
+        GameManager.m_instance.notSaveSwitch = false;
         light2D.intensity = 1.0f;
         gameObject.SetActive(false);
     }

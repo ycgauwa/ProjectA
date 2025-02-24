@@ -8,7 +8,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using DG.Tweening;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 using static UnityEngine.GraphicsBuffer;
 using System;
 
@@ -121,21 +120,22 @@ public class SecondHouseManager : MonoBehaviour
     private IEnumerator coroutine;
     public Canvas window;
     public Canvas end6Canvas;
+    public Canvas failedGameOverCanvas;
     public Text target;
     public Text nameText;
     public Image characterImage;
+    public Image gameOverButtonPanel;
     public Image[] end6Image;
-    private bool bearKey = false;
-    private bool chickenKey = false;
-    private bool mushroomKey = false;
-    public bool firstkey = false;
+    public bool[] animalKeys = new bool[4];
     public bool haruTakedKey = false;
-    public GameObject meat;
     public GameObject haru;
     public GameObject metalBlade;
     public GameObject weightObject;
     public GameObject weightSwitch;
     public GameObject sleepAjure;
+    public GameObject notEnterObject;
+    public GameObject messagedBear;
+    public GameObject messagedMushroom;
     public NotEnter9 notEnter9;
     public EndingCase9 endingCase9;
     public Inventry inventry;
@@ -155,6 +155,7 @@ public class SecondHouseManager : MonoBehaviour
     public TunnelSeiitirouEvent tunnelSeiitirou;
     public Cooktop cooktop;
     public Homing2 ajure;
+    public Meat meat;
     public static SecondHouseManager secondHouse_instance;
     public SoundManager soundManager;
     public Item clinicKey;
@@ -170,21 +171,29 @@ public class SecondHouseManager : MonoBehaviour
     public AudioClip bigSoundSE;
     public AudioClip runSound;
     public AudioClip fearMusic;
+    public AudioClip lockSound;
     //2軒目の選択肢を統括するスクリプト
 
-    private void Start()
+    private void Awake()
     {
-        secondHouse_instance = this;
+        if(secondHouse_instance == null)
+            secondHouse_instance = this;
+        else
+        {
+            Destroy(secondHouse_instance);
+        }
     }
     private void Update()
     {
-        if(chickenKey == true && mushroomKey == true && bearKey == true && firstkey == false && coroutine == null)
+        if(animalKeys[0] && animalKeys[1] && animalKeys[2] && !animalKeys[3] && coroutine == null)
         {
             //鍵が開いた音
             coroutine = OpenKey();
             StartCoroutine(coroutine);
             //鍵が空いてからメッセージを出す
-            firstkey = true;
+            animalKeys[3] = true;
+            notEnterObject .gameObject.SetActive(false);
+            FlagsManager.flag_Instance.flagBools[6] = true;
         }
     }
 
@@ -211,6 +220,7 @@ public class SecondHouseManager : MonoBehaviour
         window.gameObject.SetActive(false);
         coroutine = null;
         GameManager.m_instance.stopSwitch = false;
+        GameManager.m_instance.notSaveSwitch = false;
         yield break;
     }
     IEnumerator OnAction2()
@@ -278,10 +288,10 @@ public class SecondHouseManager : MonoBehaviour
             yield return Blackout();
             yield return new WaitForSeconds(1.5f);
             // ゲームオーバー画面を出すためのキャンバスとその数秒後にボタンを出す
-            GameManager.m_instance.gameoverWindow.gameObject.SetActive(true);
+            failedGameOverCanvas.gameObject.SetActive(true);
             GameManager.m_instance.stopSwitch = true;
             yield return new WaitForSeconds(2.0f);
-            GameManager.m_instance.buttonPanel.gameObject.SetActive(true);
+            gameOverButtonPanel.gameObject.SetActive(true);
             light2D.intensity = 1.0f;
         }
         else if (chicken.isContacted == true)
@@ -296,10 +306,10 @@ public class SecondHouseManager : MonoBehaviour
             SoundManager.sound_Instance.PlaySe(meatEat);
             yield return Blackout();
             yield return new WaitForSeconds(1.5f);
-            GameManager.m_instance.gameoverWindow.gameObject.SetActive(true);
+            failedGameOverCanvas.gameObject.SetActive(true);
             GameManager.m_instance.stopSwitch = true;
             yield return new WaitForSeconds(2.0f);
-            GameManager.m_instance.buttonPanel.gameObject.SetActive(true);
+            gameOverButtonPanel.gameObject.SetActive(true);
             light2D.intensity = 1.0f;
         }
         else if (mushroom.isContacted == true)
@@ -314,10 +324,10 @@ public class SecondHouseManager : MonoBehaviour
             SoundManager.sound_Instance.PlaySe(meatEat);
             yield return Blackout();
             yield return new WaitForSeconds(1.5f);
-            GameManager.m_instance.gameoverWindow.gameObject.SetActive(true);
+            failedGameOverCanvas.gameObject.SetActive(true);
             GameManager.m_instance.stopSwitch = true;
             yield return new WaitForSeconds(2.0f);
-            GameManager.m_instance.buttonPanel.gameObject.SetActive(true);
+            gameOverButtonPanel.gameObject.SetActive(true);
             light2D.intensity = 1.0f;
         }
         yield break;
@@ -332,7 +342,7 @@ public class SecondHouseManager : MonoBehaviour
             {//本物持ってた時ドアが空くキーが一個解放する（３つでドアが開く）
                 inventry.Delete(itemDate.GetItemId(23));
                 bear.isOpenSelect = false;
-                bearKey = true;
+                animalKeys[0] = true;
                 coroutine = OnAction2();
                 StartCoroutine(coroutine);
             }
@@ -352,7 +362,7 @@ public class SecondHouseManager : MonoBehaviour
             {
                 inventry.Delete(itemDate.GetItemId(22));
                 chicken.isOpenSelect = false;
-                chickenKey = true;
+                animalKeys[1] = true;
                 coroutine = OnAction2();
                 StartCoroutine(coroutine);
             }
@@ -372,7 +382,7 @@ public class SecondHouseManager : MonoBehaviour
             {
                 inventry.Delete(itemDate.GetItemId(21));
                 mushroom.isOpenSelect = false;
-                mushroomKey = true;
+                animalKeys[2] = true;
                 coroutine = OnAction2();
                 StartCoroutine(coroutine);
             }
@@ -403,7 +413,11 @@ public class SecondHouseManager : MonoBehaviour
             if(EndingGalleryManager.m_gallery.endingFlag[5])
             {
                 //すでにエンドが回収されているならメタ発言。そのあとに料理の選定に入る。
-                MessageManager.message_instance.MessageWindowActive(bearfailedMetamessages, bearfailedMetanames, bearfailedMetaimages, ct: destroyCancellationToken).Forget();
+                bear.selection.gameObject.SetActive(false);
+                bear.Selectwindow.gameObject.SetActive(false);
+                bear.isOpenSelect = false;
+                bear.enabled = false;
+                await MessageManager.message_instance.MessageWindowActive(bearfailedMetamessages, bearfailedMetanames, bearfailedMetaimages, ct: destroyCancellationToken);
                 AnimalGiveDish();
                 return;
             }
@@ -428,7 +442,11 @@ public class SecondHouseManager : MonoBehaviour
             if(EndingGalleryManager.m_gallery.endingFlag[5])
             {
                 //すでにエンドが回収されているならメタ発言。そのあとに料理の選定に入る。
-                MessageManager.message_instance.MessageWindowActive(chickenfailedMetamessages, chickenfailedMetanames, chickenfailedMetaimages, ct: destroyCancellationToken).Forget();
+                chicken.selection.gameObject.SetActive(false);
+                chicken.Selectwindow.gameObject.SetActive(false);
+                chicken.isOpenSelect = false;
+                chicken.enabled = false;
+                await MessageManager.message_instance.MessageWindowActive(chickenfailedMetamessages, chickenfailedMetanames, chickenfailedMetaimages, ct: destroyCancellationToken);
                 AnimalGiveDish();
                 return;
             }
@@ -448,7 +466,11 @@ public class SecondHouseManager : MonoBehaviour
             if(EndingGalleryManager.m_gallery.endingFlag[5])
             {
                 //すでにエンドが回収されているならメタ発言。そのあとに料理の選定に入る。
-                MessageManager.message_instance.MessageWindowActive(mushroomfailedMetamessages, mushroomfailedMetanames, mushroomfailedMetaimages, ct: destroyCancellationToken).Forget();
+                mushroom.selection.gameObject.SetActive(false);
+                mushroom.Selectwindow.gameObject.SetActive(false);
+                mushroom.isOpenSelect = false;
+                mushroom.enabled = false;
+                await MessageManager.message_instance.MessageWindowActive(mushroomfailedMetamessages, mushroomfailedMetanames, mushroomfailedMetaimages, ct: destroyCancellationToken);
                 AnimalGiveDish();
                 return;
             }
@@ -486,7 +508,6 @@ public class SecondHouseManager : MonoBehaviour
         end6Image[0].GetComponent<Image>().color = color;
         while(color.a > 0.01f)
         {
-            Debug.Log(color.a);
             color.a -= 0.004f;
             end6Image[0].color = color;
             await UniTask.DelayFrame(1);
@@ -508,7 +529,6 @@ public class SecondHouseManager : MonoBehaviour
         end6Image[1].GetComponent<Image>().color = color;
         while(color.a > 0.01f)
         {
-            Debug.Log(color.a);
             color.a -= 0.004f;
             end6Image[1].color = color;
             await UniTask.DelayFrame(1);
@@ -530,7 +550,7 @@ public class SecondHouseManager : MonoBehaviour
         end6Image[2].GetComponent<Image>().color = color;
         while(color.a > 0.01f)
         {
-            color.a -= 0.004f;
+            color.a -= 0.008f;
             end6Image[2].color = color;
             await UniTask.DelayFrame(1);
         }
@@ -555,7 +575,7 @@ public class SecondHouseManager : MonoBehaviour
             inventry.Add(shrimpDish.shrimp);
             shrimpDish.isOpenSelect = false;
             shrimpDish.window.gameObject.SetActive(false);
-            shrimpDish.dish.SetActive(false);
+            shrimpDish.gameObject.SetActive(false);
         }
         //とったアイテムが鳥の丸焼きの時
         else if(chickenDish.isContacted == true)
@@ -565,7 +585,7 @@ public class SecondHouseManager : MonoBehaviour
             inventry.Add(chickenDish.chicken);
             chickenDish.isOpenSelect = false;
             chickenDish.window.gameObject.SetActive(false);
-            chickenDish.dish.SetActive(false);
+            chickenDish.gameObject.SetActive(false);
         }
         else if(fishDish.isContacted == true)
         {
@@ -574,7 +594,7 @@ public class SecondHouseManager : MonoBehaviour
             inventry.Add(fishDish.fish);
             fishDish.isOpenSelect = false;
             fishDish.window.gameObject.SetActive(false);
-            fishDish.dish.SetActive(false);
+            fishDish.gameObject.SetActive(false);
         }
     }
     public void DishNotTaken()
@@ -604,8 +624,57 @@ public class SecondHouseManager : MonoBehaviour
         end6Canvas.gameObject.SetActive(false);
         light2D.intensity = 1.0f;
         soundManager.StopBgm(ending6Music);
-        //GameManager.m_instance.OnclickRetryButton();
+        if(!bear.enabled)
+            bear.enabled = true;
+        if(!chicken.enabled)
+            chicken.enabled = true;
+        if(!mushroom.enabled)
+            mushroom.enabled = true;
+        for(int i = 6; i < 24; i++)
+        {
+            if(ItemDateBase.itemDate_instance.GetItemId(i).checkPossession)
+                GameManager.m_instance.inventry.Delete(ItemDateBase.itemDate_instance.GetItemId(i));
+            ItemDateBase.itemDate_instance.GetItemId(i).geted = false;
+        }
+        shrimpDish.gameObject.SetActive(true);
+        fishDish.gameObject.SetActive(true);
+        chickenDish.gameObject.SetActive(true);
+        bear.gameObject.transform.position = new Vector2(136,88);
+        chicken.gameObject.transform.position = new Vector2(140,88);
+        mushroom.gameObject.transform.position = new Vector2(144,88);
+        cooktop.isCooked = false;
+        cooktop.refrigerator.isTaken = false;
+        target.text = "";
+        window.gameObject.SetActive(false);
+        GameManager.m_instance.ImageErase(characterImage);
+        GameManager.m_instance.stopSwitch = false;
+        GameManager.m_instance.notSaveSwitch = false;
+        GameManager.m_instance.player.transform.position = new Vector2(79.5f, 66);
         EndingGalleryManager.m_gallery.endingGallerys[5].sprite = end6Image[3].sprite;
         EndingGalleryManager.m_gallery.endingFlag[5] = true;
+    }
+    public void OnclickfiledRetry(AudioClip meatSound = null)
+    {
+        gameOverButtonPanel.gameObject.SetActive(false);
+        failedGameOverCanvas.gameObject.SetActive(false);
+        soundManager.StopSe(meatSound);
+        for(int i = 6; i < 24; i++)
+        {
+            if(ItemDateBase.itemDate_instance.GetItemId(i).checkPossession)
+                GameManager.m_instance.inventry.Delete(ItemDateBase.itemDate_instance.GetItemId(i));
+            ItemDateBase.itemDate_instance.GetItemId(i).geted = false;
+        }
+        shrimpDish.gameObject.SetActive(true);
+        fishDish.gameObject.SetActive(true);
+        chickenDish.gameObject.SetActive(true);
+        cooktop.isCooked = false;
+        cooktop.refrigerator.isTaken = false;
+        target.text = "";
+        window.gameObject.SetActive(false);
+        GameManager.m_instance.ImageErase(characterImage);
+        GameManager.m_instance.stopSwitch = false;
+        GameManager.m_instance.notSaveSwitch = false;
+        GameManager.m_instance.player.transform.position = new Vector2(79.5f, 66);
+        haru.transform.position = new Vector2(80, 75);
     }
 }

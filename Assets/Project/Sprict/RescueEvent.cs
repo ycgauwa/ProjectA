@@ -102,14 +102,18 @@ public class RescueEvent : MonoBehaviour
             light2D.intensity = 1.0f;
             if (yukitoProfile.gameObject.activeSelf)
             {
+                FlagsManager.flag_Instance.seiitirouFlagBools[2] = true;
                 yukitoProfile.gameObject.SetActive(false);
                 seiitirouProfile.gameObject.SetActive(true);
                 notEnter6.inventry.Delete(notEnter6.itemDateBase.GetItemId(251));
                 notEnter6.inventry.Delete(notEnter6.itemDateBase.GetItemId(252));
-                soundManager.StopBgm(toEvent3.chasedBGM);
+                if(notEnter6.itemDateBase.GetItemId(201).checkPossession)
+                    notEnter6.inventry.Delete(notEnter6.itemDateBase.GetItemId(201));
+                soundManager.StopBgm(Homing.m_instance.chasedBGM);
                 if(SeiitirouAnimation.GetComponent<AnimationStateController>().enabled == false)
                     SeiitirouAnimation.GetComponent<AnimationStateController>().enabled = true;
                 GameManager.m_instance.deathCount = 0;
+                GameManager.m_instance.notSaveSwitch = false;
                 gameObject.SetActive(false);
             }
         }
@@ -124,10 +128,10 @@ public class RescueEvent : MonoBehaviour
             {
                 CapsuleCollider2D capsuleCollider = Seiitirou.GetComponent<CapsuleCollider2D>();
                 GameManager.m_instance.stopSwitch = true;
+                GameManager.m_instance.notSaveSwitch = true;
                 capsuleCollider.enabled = false;
                 RescueSeiitirouEvent().Forget();
                 Homing.m_instance.enemyEmerge = true;
-                toEvent3.event3flag = true;
             }
         }
     }
@@ -155,11 +159,12 @@ public class RescueEvent : MonoBehaviour
 
         Enemy.gameObject.SetActive(true);
         RescueSwitch = true;
+        FlagsManager.flag_Instance.seiitirouFlagBools[1] = true;
         Homing.m_instance.speed = 0;
         Enemy.transform.position = new Vector2(35, 71);
         await MessageManager.message_instance.MessageWindowActive(messages3, names3, images3, ct: destroyCancellationToken);
         GameManager.m_instance.stopSwitch = false;
-        Homing.m_instance.speed = 2;
+        Homing.m_instance.speed = 2 + GameManager.m_instance.difficultyLevelManager.addEnemySpeed;
         soundManager.PlayBgm(ChasedBGM);
         BoxCollider2D boxCollider = gameObject.GetComponent<BoxCollider2D>();
         boxCollider.enabled = false;

@@ -22,26 +22,44 @@ public class ToEvent1 : MonoBehaviour
     public Text target;
     public Text nameText;
     public Image Chara;
-    public static bool one;
+    public static bool one = false;
     public GameObject player;
     public GameObject anotherDoor;
     public Light2D light2D;
-    void Start()
-    {
-        one = false;
-    }
     private async void OnTriggerEnter2D(Collider2D collider)
     {
         //一回しか作動しないための仕組み
-        if(collider.gameObject.tag.Equals("Player"))
-            if (!one) await Event1();
+        if(gameObject.tag == "Untagged")
+        {
+            if(collider.gameObject.tag.Equals("Player"))
+                if(!one) await Event1();
+            if(one)
+            {
+                if(gameObject.name == "SchoolWarp4")
+                {
+                    gameObject.gameObject.tag = "School8";
+                    anotherDoor.gameObject.tag = "School7";
+                }
+                else
+                {
+                    gameObject.gameObject.tag = "School7";
+                    anotherDoor.gameObject.tag = "School8";
+                }
+            }
+        }
+        else
+        {
+            return;
+        }
     }
     //イベント１のためのコルーチン。大枠の役割を果たしてくれる。
     private async UniTask Event1()
     {
         PlayerManager.m_instance.soundManager.PlaySe(PlayerManager.m_instance.teleportManager.schoolDoor);
         GameManager.m_instance.stopSwitch = true;
+        GameManager.m_instance.notSaveSwitch = true;
         one = true;
+        FlagsManager.flag_Instance.flagBools[0] = true;
         await Blackout();
         SecondHouseManager.secondHouse_instance.haru.transform.DOLocalMove(new Vector3(-35.1f, -34.17f, 0), 0.1f);
         Rigidbody2D rb = SecondHouseManager.secondHouse_instance.haru.GetComponent<Rigidbody2D>();
@@ -53,6 +71,7 @@ public class ToEvent1 : MonoBehaviour
         await Blackout();
         await UniTask.Delay(TimeSpan.FromSeconds(1f));
         GameManager.m_instance.stopSwitch = false;
+        GameManager.m_instance.notSaveSwitch = false;
         light2D.intensity = 1;
         if(gameObject.name == "SchoolWarp4")
         {

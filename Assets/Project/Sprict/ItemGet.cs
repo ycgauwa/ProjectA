@@ -52,7 +52,7 @@ public class ItemGet : MonoBehaviour
             inventry.Add(item);
             ItemGet getItem = GetComponent<ItemGet>();
             getItem.enabled = false;
-            if(name == "LightAnimation")
+            if(name == "LightAnimation" || name == "LightAnimationofMetal")
                 gameObject.SetActive(false);
         }
     }
