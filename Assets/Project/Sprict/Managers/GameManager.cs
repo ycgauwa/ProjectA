@@ -324,7 +324,6 @@ public class GameManager : MonoBehaviour
                     break;
             }
         }
-        Debug.Log(SecondHouseManager.secondHouse_instance.ajure.savedSpeed);
         switch (playerManager.playerstate)
         {
             case PlayerManager.PlayerState.Idol:
@@ -349,31 +348,6 @@ public class GameManager : MonoBehaviour
                 break;
         }
         //デバック用
-        if(Input.GetKeyDown(KeyCode.F1))
-        {
-            player.transform.position = new Vector3(76, 170, 0);
-        }
-        else if(Input.GetKeyDown(KeyCode.F2))
-        {
-            player.transform.position = new Vector3(106, 140, 0);
-        }
-        else if(Input.GetKeyDown(KeyCode.F3))
-        {
-            player.transform.position = new Vector3(150, -12, 0);
-        }
-        else if(Input.GetKeyDown(KeyCode.F4))
-        {
-            player.transform.position = new Vector3(35, 66, 0);
-            rescueEvent.gameObject.SetActive(true);
-            rescueEvent.notEnter6.choiced = true;
-            rescueEvent.notEnter6.rescued = true;
-        }
-        else if(Input.GetKeyDown(KeyCode.F5))
-        {
-            GameObject deadYukito = GameObject.Find("YukitoGhost");
-            deadYukito.transform.position = new Vector3(64.33f, -46.27f, 0);
-            deadYukito.transform.DOLocalMove(new Vector3(67.33f, -46.27f, 0), 3f);
-        }
     }
     public List<string> GetSpeakerName(string interiorName, string type)
     {

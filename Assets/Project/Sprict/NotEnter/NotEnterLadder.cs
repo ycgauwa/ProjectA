@@ -43,15 +43,24 @@ public class NotEnterLadder : MonoBehaviour
             isContacted = false;
         }
     }
-    private void Update()
+    private async void Update()
     {
         if (isContacted && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
             if (toevent3.event3flag == false) MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
             else if (toevent3.event3flag == true)
             {
-                MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken).Forget();
+                isContacted = false;
+                await MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken);
+                Homing.m_instance.speed = 0;
+                soundManager.PlaySe(ladderSound);
+                await SecondHouseManager.secondHouse_instance.Blackout();
                 gameObject.name = "Ladder1-1";
+                GameManager.m_instance.player.transform.position = GameManager.m_instance.teleportManager.FindTeleportAddress("Ladder1-1").playerPosition;
+                GameManager.m_instance.teleportManager.OnPlayerTeleport(GameManager.m_instance.teleportManager.FindTeleportAddress("Ladder1-1"));
+                SecondHouseManager.secondHouse_instance.light2D.intensity = 1;
+                GameManager.m_instance.stopSwitch = false;
+                Homing.m_instance.speed = 2 + GameManager.m_instance.difficultyLevelManager.addEnemySpeed;
             }
         }
     }

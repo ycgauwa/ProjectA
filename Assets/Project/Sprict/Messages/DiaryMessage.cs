@@ -108,6 +108,7 @@ public class DiaryMessage : MonoBehaviour
         }
         sentence.text = "";
         date.text = "";
+        Homing.m_instance.speed = 2 + GameManager.m_instance.difficultyLevelManager.addEnemySpeed;
         diaryWindow.gameObject.SetActive(false);
     }
     private async UniTask SeiitirouWindowAction()
@@ -131,6 +132,7 @@ public class DiaryMessage : MonoBehaviour
         }
         sentence.text = "";
         date.text = "";
+        Homing.m_instance.speed = 2 + GameManager.m_instance.difficultyLevelManager.addEnemySpeed;
         diaryWindow.gameObject.SetActive(false);
     }
 }

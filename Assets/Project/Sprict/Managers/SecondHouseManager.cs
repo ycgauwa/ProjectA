@@ -261,7 +261,7 @@ public class SecondHouseManager : MonoBehaviour
         coroutine = null;
         yield break;
     }
-    private IEnumerator Blackout()
+    public IEnumerator Blackout()
     {
         light2D.intensity = 1.0f;
         GameManager.m_instance.stopSwitch = true;
