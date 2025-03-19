@@ -112,6 +112,7 @@ public class EndingCase1 : MonoBehaviour
     }
     private IEnumerator Blackout()
     {
+        FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(false);
         light2D.intensity = 1.0f;
         GameManager.m_instance.stopSwitch = true;
         soundManager.PlaySe(runSound);
@@ -121,6 +122,9 @@ public class EndingCase1 : MonoBehaviour
             yield return null; //‚±‚±‚Å‚PƒtƒŒ[ƒ€‘Ò‚Á‚Ä‚­‚ê‚Ä‚é
         }
         player.transform.position = new Vector3(-11, -72,0);
+        FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(true);
+        FlagsManager.flag_Instance.ChangeUIDestnation(1,"Yukito");
+        FlagsManager.flag_Instance.ChangeUILocation("School3");
         light2D.intensity = 1.0f;
         GameManager.m_instance.stopSwitch = false;
         soundManager.StopSe(runSound);

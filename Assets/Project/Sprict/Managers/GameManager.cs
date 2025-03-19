@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
 
     public float nowTime;
     public float gameTimerCountSecond;
+    public int languageIndex = 0;
     public int gameTimerCountMinute = 00;
     public int gameTimerCountHour = 00;
     public int deathCount;

@@ -17,3 +17,4 @@ MonoBehaviour:
   itemID: 1
   checkPossession: 0
   selectedItem: 0
+  geted: 0

@@ -132,6 +132,7 @@ public class Choice1 : MonoBehaviour
                 yield return new WaitUntil(() => Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return));
             }
             inventry.Add(item);
+            FlagsManager.flag_Instance.ChangeUIDestnation(3, "Yukito");
         }
         else
         {

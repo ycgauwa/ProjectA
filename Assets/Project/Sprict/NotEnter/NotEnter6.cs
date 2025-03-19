@@ -203,7 +203,7 @@ public class NotEnter6 : MonoBehaviour
         {
             redScreen.color = new Color(0.7f, 0, 0, redNum);
             redNum += 0.003f;
-            await UniTask.Delay(1); ;
+            await UniTask.Delay(1);
         }
     }
     private async UniTask HeartSounds(CancellationToken ct)
@@ -248,6 +248,7 @@ public class NotEnter6 : MonoBehaviour
         soundManager.StopBgm(fearBGM);
         SaveSlotsManager.save_Instance.saveState.chapterNum ++;
         GameManager.m_instance.notSaveSwitch = false;
+        FlagsManager.flag_Instance.ChangeUILocation("Minnka1-23");
     }
     public void OnRescueBotton()
     {

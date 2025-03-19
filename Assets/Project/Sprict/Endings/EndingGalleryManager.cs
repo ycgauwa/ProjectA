@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
 using System.Linq;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 
 public class EndingGalleryManager : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class EndingGalleryManager : MonoBehaviour
     public bool[] endingFlag = new bool[100];
     public Image[] endingGalleryPages = new Image[16];
     private int activePageNum = 0;
+    public int getedEndTotalNumber;
     public Sprite testSprite;
     public EndingCase1 endingCase1;
     public Case1Object case1Object;
@@ -21,10 +24,16 @@ public class EndingGalleryManager : MonoBehaviour
     public EndingCase3 endingCase3;
     public GameObject endingDetail;
     public Image endingDetailImage;
+    public Image endedUIPanel;
+    public Image noiseImage;
     public Text endingDetailText;
+    public Text endCountNumber;
+    public Text endCountNextNumber;
     public AudioClip ending5Bgm;
     public AudioClip freezeSound;
     public AudioClip blizzardSound;
+    public AudioClip noiseSound;
+    public AudioClip endingCountSound;
     public string explainText;
     public static EndingGalleryManager m_gallery;
 
@@ -79,6 +88,60 @@ public class EndingGalleryManager : MonoBehaviour
         else if(i == 9)
             explainText = "End6 血にまみれた晩餐会\n【取得条件】\n親切なぬいぐるみたちに作った料理を渡さない";
         endingDetailText.text = explainText;
+    }
+    public  async UniTask GetedEndings(int getedEndingCount, CancellationToken ct = default)
+    {
+        endCountNumber.text = getedEndTotalNumber.ToString();
+        getedEndTotalNumber++;
+        endCountNextNumber.text = getedEndTotalNumber.ToString();
+        await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: ct);
+        //この関数を呼び出したら取得後の数字が変わる演出を出す
+        //具体的にエンディングの取得個数が変わるのだがそれは小さい数字の透明度が半分を切った段階
+        //で新しいほうの数字が徐々に表記される。で最初と最後でいじる変数はセーブとストップのスイッチ
+        //あとは２つの文字の透明度を最後は0に変える。欲を言えば怖いSEも欲しい。
+        GameManager.m_instance.notSaveSwitch = true;
+        GameManager.m_instance.stopSwitch = true;
+        endedUIPanel.gameObject.SetActive(true);
+        noiseImage.gameObject.SetActive(true);
+        SoundManager.sound_Instance.PlaySe(noiseSound);
+        await UniTask.Delay(TimeSpan.FromSeconds(1f), cancellationToken: ct);
+        SoundManager.sound_Instance.StopSe(noiseSound);
+        SoundManager.sound_Instance.PlaySe(endingCountSound);
+        noiseImage.gameObject.SetActive(false);
+        Color color = endCountNumber.GetComponent<Text>().color;
+        Color nextColor = endCountNextNumber.GetComponent<Text>().color;
+
+        while (color.a > 0f)
+        {
+            color.a -= 0.01f;
+            endCountNumber.color = color;
+            await UniTask.Delay(1);
+            if(color.a < 0.5f)
+            {
+                nextColor.a += 0.007f;
+                endCountNextNumber.color = nextColor;
+            }
+        }
+        while (nextColor.a < 1f)
+        {
+            nextColor.a += 0.007f;
+            endCountNextNumber.color = nextColor;
+            await UniTask.Delay(1);
+        }
+        noiseImage.gameObject.SetActive(true);
+        SoundManager.sound_Instance.PlaySe(noiseSound);
+        await UniTask.Delay(TimeSpan.FromSeconds(1f), cancellationToken: ct);
+        SoundManager.sound_Instance.StopSe(noiseSound);
+
+        color.a = 1f;
+        nextColor.a = 0f;
+        endCountNumber.color = color;
+        endCountNextNumber.color = nextColor;
+        noiseImage.gameObject.SetActive(false);
+
+        GameManager.m_instance.notSaveSwitch = false;
+        GameManager.m_instance.stopSwitch = false;
+        endedUIPanel.gameObject.SetActive(false);
     }
     public void LoadEndingChanges(int endNumber)
     {

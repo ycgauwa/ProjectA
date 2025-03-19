@@ -497,6 +497,7 @@ public class EndingCase3 : MonoBehaviour
         gameTeleportManager.StopChased();
         homing.gameObject.SetActive(false);
         gameObject.SetActive(false);
+        EndingGalleryManager.m_gallery.GetedEndings(EndingGalleryManager.m_gallery.getedEndTotalNumber).Forget();
     }
     public void OnclickEnd4Retry()
     {
@@ -512,6 +513,7 @@ public class EndingCase3 : MonoBehaviour
         gameTeleportManager.StopChased();
         homing.gameObject.SetActive(false);
         gameObject.SetActive(false);
+        EndingGalleryManager.m_gallery.GetedEndings(EndingGalleryManager.m_gallery.getedEndTotalNumber).Forget();
     }
     private IEnumerator ExitEvent()
     {

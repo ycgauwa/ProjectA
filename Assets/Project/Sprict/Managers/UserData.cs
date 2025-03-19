@@ -23,8 +23,12 @@ public class UserData : MonoBehaviour
     public string characterName;
     public string playTime;
     public string gameMode;
+    private string locationName;
+    private string destinationName;
     public int totalTime;
     public int chapterNumber;
+    public int getedEndTotalCount;
+    private int callNumber;
     // アイテムリストが入ってない……
     public List<bool> itemsCheckPossession;
     public List<bool> itemsCheckGeted;
@@ -63,9 +67,13 @@ public class UserData : MonoBehaviour
         seiitirouPosition = reader.Read < Vector3 > ("SeiitirouPosition");
         playTime = reader.Read<string>("PlayTime");
         gameMode = reader.Read<string>("GameMode");
+        locationName = reader.Read<string>("LocationName");
+        destinationName = reader.Read<string>("DestinationName");
         chapterNumber = reader.Read<int>("ChapterNumber");
         characterName = reader.Read<string>("CharacterName");
         totalTime = reader.Read<int>("TotalTime");
+        getedEndTotalCount = reader.Read<int>("GetedEndTotalCount");
+        callNumber = reader.Read<int>("CallNumber");
         itemsCheckPossession = reader.Read<List<bool>>("ItemsCheckPossession");
         itemsCheckGeted = reader.Read<List<bool>>("ItemsCheckGeted");
         gameProgressFlags = reader.Read<List<bool>>("GameProgressFlags");
@@ -81,9 +89,13 @@ public class UserData : MonoBehaviour
         saveDate.seiitirouPosition = seiitirouPosition;
         saveDate.playTime = playTime;
         saveDate.gameModeString = gameMode;
+        saveDate.locationName = locationName;
+        saveDate.destinationName = destinationName;
         saveDate.chapterNumber = chapterNumber;
         saveDate.characterName = characterName;
         saveDate.totalSeconds = totalTime;
+        saveDate.getedEndTotalCount = getedEndTotalCount;
+        saveDate.callNumber = callNumber;
         saveDate.itemsPossessionList = itemsCheckPossession;
         saveDate.itemsGetedList = itemsCheckGeted;
         saveDate.gameProgressFlagsList = gameProgressFlags;
@@ -125,9 +137,13 @@ public class UserData : MonoBehaviour
         seiitirouPosition = saveDate.seiitirouPosition;
         playTime = saveDate.playTime;
         gameMode = saveDate.gameModeString;
+        locationName = saveDate.locationName;
+        destinationName = saveDate.destinationName;
         chapterNumber = saveDate.chapterNumber;
         characterName = saveDate.characterName;
         totalTime = saveDate.totalSeconds;
+        getedEndTotalCount = saveDate.getedEndTotalCount;
+        callNumber = saveDate.callNumber;
         itemsCheckPossession = saveDate.itemsPossessionList;
         itemsCheckGeted = saveDate.itemsGetedList;
         gameProgressFlags = saveDate.gameProgressFlagsList;
@@ -143,9 +159,13 @@ public class UserData : MonoBehaviour
         writer.Write("SeiitirouPosition", seiitirouPosition);
         writer.Write("PlayTime",playTime);
         writer.Write("GameMode",gameMode);
+        writer.Write("LocationName", locationName);
+        writer.Write("DestinationName", destinationName);
         writer.Write("ChapterNumber", chapterNumber);
         writer.Write("CharacterName", characterName);
         writer.Write("TotalTime",totalTime);
+        writer.Write("GetedEndTotalCount", getedEndTotalCount);
+        writer.Write("CallNumber", callNumber);
         writer.Write("ItemsCheckPossession",itemsCheckPossession);
         writer.Write("ItemsCheckGeted", itemsCheckGeted);
         writer.Write("GameProgressFlags",gameProgressFlags);

@@ -39,6 +39,7 @@ public class NotEnter1 : MonoBehaviour
                 MessageManager.message_instance.MessageWindowActive(GameManager.m_instance.GetMessages(name, "NotEnter"), GameManager.m_instance.GetSpeakerName(name, "NotEnter"), image, ct: destroyCancellationToken).Forget();
             //MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken).Forget();
             else if (one == true) player.transform.position = new Vector2(-10, -105);
+            FlagsManager.flag_Instance.ChangeUILocation("School10");
         }
     }
     private void OnTriggerExit2D(Collider2D collider)

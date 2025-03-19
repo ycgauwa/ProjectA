@@ -215,6 +215,9 @@ public class ToEvent2 : MonoBehaviour
         GameManager.m_instance.notSaveSwitch = false;
         eventFinished = true;
         FlagsManager.flag_Instance.flagBools[1] = true;
+        FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(true);
+        FlagsManager.flag_Instance.ChangeUIDestnation(4, "Yukito");
+        FlagsManager.flag_Instance.locationText.text = "1F˜L‰º";
         SaveSlotsManager.save_Instance.saveState.chapterNum ++;
     }
     private async UniTask Flash()
@@ -284,6 +287,7 @@ public class ToEvent2 : MonoBehaviour
     {
         light2D.intensity = 1.0f;
         GameManager.m_instance.stopSwitch = true;
+        FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(false);
         while (light2D.intensity > 0.01f)
         {
             light2D.intensity -= 0.012f;

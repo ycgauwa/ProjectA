@@ -97,5 +97,6 @@ public class Case1Object : MonoBehaviour
         endingCase1.gameObject.transform.position = new Vector3(-35,29,0);
         endingCase1.answerNum = 3;
         Destroy(endingCase1.faliedSelect.gameObject);
+        EndingGalleryManager.m_gallery.GetedEndings(EndingGalleryManager.m_gallery.getedEndTotalNumber).Forget();
     }
 }

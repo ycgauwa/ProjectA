@@ -22,6 +22,9 @@ public class SaveDate : ScriptableObject
     public Vector3 enemy2Position;
     public string characterName;
     public string playTime;
+    public string gameModeString;
+    public string locationName;
+    public string destinationName;
     public List<bool> itemsPossessionList;
     public List<bool> itemsGetedList;
     public List<bool> gameProgressFlagsList;
@@ -29,9 +32,10 @@ public class SaveDate : ScriptableObject
     public List<bool> haruProgressFlagsList;
     public List<bool> endingFlagsList;
     public DifficultyLevelManager difficultyLevelManager;
-    public string gameModeString;
     public int chapterNumber;
     public int totalSeconds;
+    public int getedEndTotalCount;
+    public int callNumber;
 
     public void KeepDateMethod()
     {
@@ -43,9 +47,13 @@ public class SaveDate : ScriptableObject
         seiitirouPosition = GameManager.m_instance.seiitirou.transform.position;
         playTime = SaveSlotsManager.save_Instance.saveState.playTime;
         gameModeString = SaveSlotsManager.save_Instance.saveState.gameModeString;
+        locationName = FlagsManager.flag_Instance.locationText.text;
+        destinationName = FlagsManager.flag_Instance.destinationText.text;
         chapterNumber = SaveSlotsManager.save_Instance.saveState.chapterNum;
         characterName = SaveSlotsManager.save_Instance.saveState.characterName;
         totalSeconds = (int)GameManager.m_instance.nowTime;
+        getedEndTotalCount = EndingGalleryManager.m_gallery.getedEndTotalNumber;
+
         itemsPossessionList.Clear();
         itemsGetedList.Clear();
         gameProgressFlagsList.Clear();
@@ -76,7 +84,7 @@ public class SaveDate : ScriptableObject
     }
     public void LoadDateMethod()
     {
-        //ロードの際にJsonファイルから読み取ったデータを一時的に保管しておく。
+        //ロードの際にJsonファイルから読み取ったデータを一時的に保管しておく(代入してゲーム内に反映させる)。
         GameManager.m_instance.player.transform.position = playerPosition;
         SecondHouseManager.secondHouse_instance.haru.transform.position = haruPosition;
         GameManager.m_instance.enemy.transform.position = enemyPosition;
@@ -84,9 +92,12 @@ public class SaveDate : ScriptableObject
         GameManager.m_instance.seiitirou.transform.position = seiitirouPosition;
         SaveSlotsManager.save_Instance.saveState.playTime = playTime;
         SaveSlotsManager.save_Instance.saveState.gameModeString = gameModeString;
+        FlagsManager.flag_Instance.locationText.text = locationName;
+        FlagsManager.flag_Instance.destinationText.text = destinationName;
         SaveSlotsManager.save_Instance.saveState.chapterNum = chapterNumber;
         SaveSlotsManager.save_Instance.saveState.characterName = characterName;
         GameManager.m_instance.nowTime = totalSeconds;
+        EndingGalleryManager.m_gallery.getedEndTotalNumber = getedEndTotalCount;
         // 上はリストを削除したりしてるからforeachだけどこっちはデータを入れるだけだから左の方が確定でIndexが多い
         for(int i = 0; i < itemsPossessionList.Count; i++)
         {

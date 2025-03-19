@@ -60,7 +60,9 @@ public class ToEvent1 : MonoBehaviour
         GameManager.m_instance.notSaveSwitch = true;
         one = true;
         FlagsManager.flag_Instance.flagBools[0] = true;
+        FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(false);
         await Blackout();
+        FlagsManager.flag_Instance.ChangeUILocation("School7");
         SecondHouseManager.secondHouse_instance.haru.transform.DOLocalMove(new Vector3(-35.1f, -34.17f, 0), 0.1f);
         Rigidbody2D rb = SecondHouseManager.secondHouse_instance.haru.GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -73,7 +75,9 @@ public class ToEvent1 : MonoBehaviour
         GameManager.m_instance.stopSwitch = false;
         GameManager.m_instance.notSaveSwitch = false;
         light2D.intensity = 1;
-        if(gameObject.name == "SchoolWarp4")
+        FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(true);
+        FlagsManager.flag_Instance.ChangeUIDestnation(2, "Yukito");
+        if (gameObject.name == "SchoolWarp4")
         {
             gameObject.gameObject.tag = "School8";
             anotherDoor.gameObject.tag = "School7";

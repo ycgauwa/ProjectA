@@ -57,12 +57,12 @@ public class HeadSet : MonoBehaviour
     public Image selection;
     public GameObject firstSelect;
     public Button[] talkSelection = new Button[3];
-    public int answerNum;
     public AudioClip noiseSound;
     private bool isContacted = false;
     private bool SeiContacted = false;
     public AudioClip callStart;
     public AudioClip callStop;
+    public SaveDate saveDate;
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.tag.Equals("Player"))
@@ -93,7 +93,7 @@ public class HeadSet : MonoBehaviour
     private async UniTask YukitoEvent()
     {
         await MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken);
-        switch (answerNum)
+        switch (saveDate.callNumber)
         {
             
             case 0:
@@ -126,7 +126,7 @@ public class HeadSet : MonoBehaviour
         selectionCanvas.gameObject.SetActive(false);
         selection.gameObject.SetActive(false);
         MessageManager.message_instance.isOpenSelect = false;
-        answerNum = 1;
+        saveDate.callNumber = 1;
         await MessageManager.message_instance.MessageSelectWindowActive(messages7, names7, images7, selectionCanvas, selection, firstSelect, ct: destroyCancellationToken);
     }
     public async void PressMiddleButton()
@@ -134,7 +134,7 @@ public class HeadSet : MonoBehaviour
         selectionCanvas.gameObject.SetActive(false);
         selection.gameObject.SetActive(false);
         MessageManager.message_instance.isOpenSelect = false;
-        answerNum = 2;
+        saveDate.callNumber = 2;
         await MessageManager.message_instance.MessageSelectWindowActive(messages7, names7, images7, selectionCanvas, selection, firstSelect, ct: destroyCancellationToken);
     }
     public async void PressBottomButton()
@@ -142,7 +142,7 @@ public class HeadSet : MonoBehaviour
         selectionCanvas.gameObject.SetActive(false);
         selection.gameObject.SetActive(false);
         MessageManager.message_instance.isOpenSelect = false;
-        answerNum = 3;
+        saveDate.callNumber = 3;
         await MessageManager.message_instance.MessageSelectWindowActive(messages7, names7, images7, selectionCanvas, selection, firstSelect, ct: destroyCancellationToken);
     }
 }

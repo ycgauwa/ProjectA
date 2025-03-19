@@ -9,6 +9,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using UnityEditor.Rendering;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class FlagsManager : MonoBehaviour
 {
@@ -29,6 +30,10 @@ public class FlagsManager : MonoBehaviour
     public RescueEvent rescueEvent;
     public TunnelSeiitirouEvent tunnelSeiitirou;
     private ColorAdjustments colorAdjustments;
+    public Image navigationPanel;
+    public Text locationText;
+    public Text destinationText;
+    public CharactersFlag[] charactersFlags;
     public bool[] flagBools = new bool[7];
     public bool[] seiitirouFlagBools = new bool[15];
     public bool[] haruFlagBools = new bool[7];
@@ -177,5 +182,184 @@ public class FlagsManager : MonoBehaviour
         }
         if(ItemDateBase.itemDate_instance.GetItemId(257).geted)
             SecondHouseManager.secondHouse_instance.enemyEncounter.gameObject.SetActive(true);
+    }
+    //‚±‚Ì‰º‚ÌŠÖ”‚ªif•¶‚ª[‚­‚È‚è‚»‚¤‚È‚Æ‚«‚ÉŠÖ”‚ðŽg‚Á‚½‚è‚µ‚Ä[‚­‚È‚é‚Ì‚ð–h‚®‚â‚è•û‚Å‚ ‚éB
+    public void ChangeUIDestnation(int progressionLevel,string characterName)
+    {
+        CharactersFlag selectedCharacterFlags = GetCharacterFlagsById(characterName);
+
+        //ƒXƒNƒŠƒvƒ^ƒuƒ‹ƒIƒuƒWƒFƒNƒg‚ðŽg‚Á‚Ä‘ã“ü‚µ‚½‚¢B
+        //–Ú“I’n‚ÉŠÖ‚µ‚Ä‚ÍƒCƒxƒ“ƒg–”‚ÍƒAƒCƒeƒ€‚Ì“üŽèŽž‚É•ÏX‚³‚ê‚é‚à‚Ì‚¾‚©‚çƒCƒxƒ“ƒg‚Ì“s“xŠÖ”‚ð“ü‚ê‚Ä•ÏX‚µ‚½‚Á‚Ä—Ç‚¢B
+        string[] destinationList = GetDestinationListByLanguage(selectedCharacterFlags, GameManager.m_instance.languageIndex);
+
+        if (destinationList != null && progressionLevel >= 1 && progressionLevel <= destinationList.Length)
+        {
+            destinationText.text = destinationList[progressionLevel]; // progressionLevel ‚Í1‚©‚çŽn‚Ü‚é‘z’è
+        }
+    }
+    // ƒLƒƒƒ‰ƒNƒ^[ID‚ÉŠî‚Ã‚¢‚ÄCharacterFlags‚ðŽæ“¾
+    private CharactersFlag GetCharacterFlagsById(string characterId)
+    {
+        // —á‚¦‚ÎAcharacterFlags‚ª”z—ñ‚¾‚Æ‚µ‚ÄAƒLƒƒƒ‰ƒNƒ^[ID‚ÉŠî‚Ã‚¢‚ÄŠY“–‚·‚éCharacterFlags‚ðŽæ“¾
+        foreach (var flags in charactersFlags)
+        {
+            if (flags.name == characterId)  // ƒLƒƒƒ‰ƒNƒ^[ID‚Åˆê’v‚·‚é‚à‚Ì‚ð’T‚·
+            {
+                return flags;
+            }
+        }
+        return null;  // Œ©‚Â‚©‚ç‚È‚©‚Á‚½ê‡
+    }
+    private string[] GetDestinationListByLanguage(CharactersFlag flags, int languageNum)
+    {
+        switch (languageNum)
+        {
+            case 0:
+                return flags.JPN_characterDestination;
+            case 1:
+                return flags.EN_characterDestination;
+            default:
+                return null;  // ƒTƒ|[ƒg‚³‚ê‚Ä‚¢‚È‚¢Œ¾Œê‚Ìê‡‚Ínull
+        }
+    }
+    public void ChangeUILocation(string LocationName)
+    {
+        if (true) //“ú–{Œê‚ÌŽž
+        {
+            switch (LocationName)
+            {
+                case "School1":
+                    locationText.text = "‘æ2‹³Žº";
+                    break;
+                case "School2":
+                    locationText.text = "‘æ2‹³Žº";
+                    break ;
+                case "School3":
+                    locationText.text = "2F˜L‰º";
+                    break;
+                case "School4":
+                    locationText.text = "2F˜L‰º";
+                    break;
+                case "School5":
+                    locationText.text = "2F˜L‰º";
+                    break;
+                case "School6":
+                    locationText.text = "2F˜L‰º";
+                    break;
+                case "School7":
+                    locationText.text = "‘æ1‹³Žº";
+                    break;
+                case "School8":
+                    locationText.text = "‘æ1‹³Žº";
+                    break;
+                case "School9":
+                    locationText.text = "2F˜L‰º";
+                    break;
+                case "School10":
+                    locationText.text = "3F˜L‰º";
+                    break;
+                case "School11":
+                    locationText.text = "—‰ÈŽº";
+                    break;
+                case "School12":
+                    locationText.text = "3F˜L‰º";
+                    break;
+                case "School13":
+                    locationText.text = "—‰ÈŽº";
+                    break;
+                case "School14":
+                    locationText.text = "3F˜L‰º";
+                    break;
+                case "School15":
+                    locationText.text = "‰¹ŠyŽº";
+                    break;
+                case "School16":
+                    locationText.text = "3F˜L‰º";
+                    break;
+                case "School17":
+                    locationText.text = "‰¹ŠyŽº";
+                    break;
+                case "School18":
+                    locationText.text = "3F˜L‰º";
+                    break;
+
+                case "Minnka1-1":
+                    locationText.text = "2F˜L‰º";
+                    break;
+                case "Minnka1-2":
+                    locationText.text = "1F˜L‰º";
+                    break;
+                case "Minnka1-3":
+                    locationText.text = "’EˆßŠ";
+                    break;
+                case "Minnka1-4":
+                    locationText.text = "1F˜L‰º";
+                    break;
+                case "Minnka1-5":
+                    locationText.text = "—Žº";
+                    break;
+                case "Minnka1-6":
+                    locationText.text = "’EˆßŠ";
+                    break;
+                case "Minnka1-7":
+                    locationText.text = "1FƒgƒCƒŒ";
+                    break;
+                case "Minnka1-8":
+                    locationText.text = "1F˜L‰º";
+                    break;
+                case "Minnka1-9":
+                    locationText.text = "1FQŽº";
+                    break;
+                case "Minnka1-10":
+                    locationText.text = "ƒ_ƒCƒjƒ“ƒOƒLƒbƒ`ƒ“";
+                    break;
+                case "Minnka1-11":
+                    locationText.text = "1F˜L‰º";
+                    break;
+                case "Minnka1-12":
+                    locationText.text = "1F˜L‰º";
+                    break;
+                case "Minnka1-13":
+                    locationText.text = "2F‹qŠÔ";
+                    break;
+                case "Minnka1-14":
+                    locationText.text = "2FQŽº";
+                    break;
+                case "Minnka1-15":
+                    locationText.text = "2F˜L‰º";
+                    break;
+                case "Minnka1-16":
+                    locationText.text = "2F˜L‰º";
+                    break;
+                case "Minnka1-17":
+                    locationText.text = "2F‹ŠÔ";
+                    break;
+                case "Minnka1-18":
+                    locationText.text = "2F˜L‰º";
+                    break;
+                case "Minnka1-19":
+                    locationText.text = "2FŽq‹Ÿ•”‰®";
+                    break;
+                case "Minnka1-20":
+                    locationText.text = "2F‰œ‚ÌQŽº";
+                    break;
+                case "Minnka1-21":
+                    locationText.text = "2F‹ŠÔ";
+                    break;
+                case "Minnka1-22":
+                    locationText.text = "B“¹";
+                    break;
+                case "Minnka1-23":
+                    locationText.text = "’n‰º‚Ö‘±‚­‘Ö";
+                    break;
+                case "Minnka1-24":
+                    locationText.text = "";
+                    break;
+            }
+        }
+        else if(false)//‰pŒê‚ÌŽž
+        {
+
+        }
     }
 }

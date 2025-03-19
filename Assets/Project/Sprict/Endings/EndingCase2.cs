@@ -184,6 +184,7 @@ public class EndingCase2 : MonoBehaviour
         SecondHouseManager.secondHouse_instance.light2D.intensity = 1f;
         EndingGalleryManager.m_gallery.endingGallerys[1].sprite = end2retry.sprite;
         EndingGalleryManager.m_gallery.endingFlag[1] = true;
+        EndingGalleryManager.m_gallery.GetedEndings(EndingGalleryManager.m_gallery.getedEndTotalNumber).Forget();
     }
     public void End2SelectYes()
     {
