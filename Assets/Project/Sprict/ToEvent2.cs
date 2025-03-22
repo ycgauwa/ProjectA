@@ -72,7 +72,6 @@ public class ToEvent2 : MonoBehaviour
     public GameObject eventcamera;
     public GameObject gameMenuUI;
     public float speed;
-    public Inventry inventry;
     public Item item;
     private bool playerCamera;
     public PlayableDirector playableDirector;
@@ -109,7 +108,7 @@ public class ToEvent2 : MonoBehaviour
     {
         GameManager.m_instance.notSaveSwitch = true;
         volume.profile.TryGet<ColorAdjustments>(out colorAdjustments);
-        inventry.Delete(item);
+        GameManager.m_instance.inventry.Delete(item);
         await MessageManager.message_instance.MessageWindowOnceActive(beforeMessages, beforeNames, beforeImages, ct: destroyCancellationToken);
 
         await Blackout();

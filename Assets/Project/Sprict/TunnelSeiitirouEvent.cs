@@ -35,6 +35,7 @@ public class TunnelSeiitirouEvent : MonoBehaviour
         {
             TunnelEvent().Forget();
             tunnelEvent = true;
+            FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(false);
             FlagsManager.flag_Instance.seiitirouFlagBools[3] = true;
         }
         else if(collider.gameObject.tag.Equals("Player")) gameObject.SetActive(false);
@@ -51,6 +52,8 @@ public class TunnelSeiitirouEvent : MonoBehaviour
         await MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken);
         await Blackout();
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
+        FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(true);
+        FlagsManager.flag_Instance.ChangeUIDestnation(9, "Seiitirou");
         cameraManager.cameraInstance.seiitirouCamera = true;
         //オブジェクトの総入れ替え
         SecondHouseManager.secondHouse_instance.chickenDish.gameObject.SetActive(false);

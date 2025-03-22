@@ -105,10 +105,10 @@ public class RescueEvent : MonoBehaviour
                 FlagsManager.flag_Instance.seiitirouFlagBools[2] = true;
                 yukitoProfile.gameObject.SetActive(false);
                 seiitirouProfile.gameObject.SetActive(true);
-                notEnter6.inventry.Delete(notEnter6.itemDateBase.GetItemId(251));
-                notEnter6.inventry.Delete(notEnter6.itemDateBase.GetItemId(252));
+                GameManager.m_instance.inventry.Delete(notEnter6.itemDateBase.GetItemId(251));
+                GameManager.m_instance.inventry.Delete(notEnter6.itemDateBase.GetItemId(252));
                 if(notEnter6.itemDateBase.GetItemId(201).checkPossession)
-                    notEnter6.inventry.Delete(notEnter6.itemDateBase.GetItemId(201));
+                    GameManager.m_instance.inventry.Delete(notEnter6.itemDateBase.GetItemId(201));
                 soundManager.StopBgm(Homing.m_instance.chasedBGM);
                 if(SeiitirouAnimation.GetComponent<AnimationStateController>().enabled == false)
                     SeiitirouAnimation.GetComponent<AnimationStateController>().enabled = true;
@@ -137,6 +137,7 @@ public class RescueEvent : MonoBehaviour
     }
     private async UniTask RescueSeiitirouEvent()
     {
+        FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(false);
         await MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken);
         //ªˆê˜Y‚ªo‚Ä‚«‚Ä‰ï˜b‚·‚é
         await UniTask.Delay(TimeSpan.FromSeconds(1f));
@@ -168,5 +169,7 @@ public class RescueEvent : MonoBehaviour
         soundManager.PlayBgm(ChasedBGM);
         BoxCollider2D boxCollider = gameObject.GetComponent<BoxCollider2D>();
         boxCollider.enabled = false;
+        FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(true);
+        FlagsManager.flag_Instance.ChangeUIDestnation(1, "Seiitirou");
     }
 }

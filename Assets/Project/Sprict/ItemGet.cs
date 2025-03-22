@@ -52,8 +52,16 @@ public class ItemGet : MonoBehaviour
             inventry.Add(item);
             ItemGet getItem = GetComponent<ItemGet>();
             getItem.enabled = false;
-            if(name == "LightAnimation" || name == "LightAnimationofMetal")
+            if(name == "LightAnimation")
+            {
                 gameObject.SetActive(false);
+            }
+            else if (name == "LightAnimationofMetal")
+            {
+                gameObject.SetActive(false);
+                FlagsManager.flag_Instance.ChangeUIDestnation(11, "Seiitirou");
+            }
+                
         }
     }
 }

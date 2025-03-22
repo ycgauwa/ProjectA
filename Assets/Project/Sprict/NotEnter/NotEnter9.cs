@@ -40,7 +40,8 @@ public class NotEnter9 : MonoBehaviour
             {
                 gameObject.tag = "Minnka2-17";
                 GameManager.m_instance.inventry.Delete(key4);
-                if(enemy2.activeSelf == false)
+                FlagsManager.flag_Instance.ChangeUIDestnation(9,"Yukito");
+                if (enemy2.activeSelf == false)
                     enemy2.SetActive(true);
             }
             else if(collider.gameObject.tag.Equals("Seiitirou"))

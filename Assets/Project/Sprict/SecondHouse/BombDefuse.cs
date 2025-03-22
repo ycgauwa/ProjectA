@@ -38,7 +38,6 @@ public class BombDefuse : MonoBehaviour
 
     public Light2D light2D;
     public Item defusedBomb;
-    public Inventry inventry;
 
     public Canvas secondHouseCanvas;
     public Image bombImage;
@@ -102,7 +101,7 @@ public class BombDefuse : MonoBehaviour
         soundManager.StopBgm(clockSound);
         //　ここで「爆弾解除できた！坑道に向かおう。」
         await MessageManager.message_instance.MessageWindowActive(messages2, names2, image2, ct: destroyCancellationToken);
-        inventry.Add(defusedBomb);
+        GameManager.m_instance.inventry.Add(defusedBomb);
         SecondHouseManager.secondHouse_instance.enemyEncounter.gameObject.SetActive(true);
         GameManager.m_instance.stopSwitch = false;
     }

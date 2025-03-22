@@ -22,7 +22,6 @@ public class DishMessage : MonoBehaviour
     public Canvas Selectwindow;
     public Image selection;
     public bool isOpenSelect = false;
-    public Inventry inventry;
     public Item shrimp;
     public Item chicken;
     public Item fish;

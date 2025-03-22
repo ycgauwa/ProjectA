@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class GameSceneController : MonoBehaviour
 {
@@ -16,10 +17,14 @@ public class GameSceneController : MonoBehaviour
     string[] gameModes = new string[3];
     string[] characters = new string[3];
     private int[] chapterNumber = new int[3];
+    private RectTransform rectTransform;
+    public Image savedMessageImage;
     public UserData userdata;
 
     void Start()
     {
+        rectTransform = GetComponent<RectTransform>();
+        savedMessageImage.rectTransform.anchoredPosition = new Vector3(900, -230, 0);
         userdata.UpdateSaveData(ref playTimes, ref gameModes, ref characters, ref chapterNumber);
         for(int i = 0; i < images.Length; i++)
         {
@@ -75,6 +80,7 @@ public class GameSceneController : MonoBehaviour
     public void SaveButton(int i)
     {
         Debug.Log(i);
+        savedMessageImage.rectTransform.DOMove(new Vector3(300, -230, 0), 1f).SetEase(Ease.OutBounce);
         times[i].text = SaveSlotsManager.save_Instance.saveState.playTime.ToString();
         modes[i].text = SaveSlotsManager.save_Instance.saveState.gameModeString.ToString();
         chars[i].text = SaveSlotsManager.save_Instance.saveState.characterName;

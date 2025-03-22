@@ -29,6 +29,11 @@ HomeInterior9,幸人,（ロフトへとつながる梯子が立てかけられ�
 ,幸人,「昔はベッドを使ってたけど、ロフトで寝るのは秘密基地感が合って好きだな。」,Yukito,"“I used to have a bed, but I like sleeping in the loft because it feels like a secret base.”"
 ,幸人,「今はちょっと眠いし、着替えて梯子上るのはだるいなぁ……。」,Yukito,"“I'm a little sleepy right now, and I'm too lazy to get dressed and go up the ladder......”"
 ,,,,
+HomeInterior10,幸人,おもちゃ箱だ。,,
+,幸人,小さいときに遊んでいたおもちゃが捨てられずに残っている,,
+,幸人,「あれ?こんな赤い染みあったっけ?」,,
+,幸人,「……まぁいいか多分俺の気のせいだろ。気にしない気にしない。」,,
+,,,,
 SchoolInterior (1),幸人,（鍵がついていて開きそうにない）,Yukito,(It's locked and unlikely to open)
 ,幸人,「なんで隣のロッカーだけ開いているんだ？」,Yukito,“Why is the locker next to it the only one open?”
 ,,,,
@@ -359,7 +364,6 @@ MinkaInterior2(54),幸人,この本棚は患者用に何かの雑誌が仕舞わ
 MinkaInterior2(55),幸人,棚が設置されている。中にはファイルがぎっちりと詰められている。,,
 ,幸人,ファイルの背表紙にはそれぞれ番号と名前が割り振られているため患者の情報が載ったものだと推測できる,,
 ,幸人,「鍵がかかってて中は見れないけど、正直見る必要もなさそうだな。」,,
-,,,,
 ,,,,
 MinkaInterior2(56),幸人,本棚のようだ。中には医療用の本が大量に仕舞われている。,,
 ,幸人,「ここの家主はお医者さんだったようだけど、医者になってからもたくさん本を読まなきゃいけないのは大変そうだな。」,,

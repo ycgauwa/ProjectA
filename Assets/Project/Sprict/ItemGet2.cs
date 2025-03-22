@@ -32,7 +32,6 @@ public class ItemGet2 : MonoBehaviour
     public Inventry inventry;
     public Item hummer;
     public Item detergent;
-    public Item underKey;
     private bool isContacted = false;
     private bool hummerGeted = false;
 

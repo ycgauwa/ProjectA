@@ -58,6 +58,8 @@ public class ToEvent5 : MonoBehaviour
             capsuleCollider.isTrigger = true;
             haru.transform.position = new Vector2(80,75);
             GameManager.m_instance.stopSwitch = true;
+            GameManager.m_instance.notSaveSwitch = true;
+            FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(false);
             EncountHaru().Forget();
         }
     }
@@ -116,8 +118,6 @@ public class ToEvent5 : MonoBehaviour
     }
     private async UniTask Sleep()
     {
-        SecondHouseManager.secondHouse_instance.light2D.intensity = 1;
-        GameManager.m_instance.stopSwitch = true;
         while(SecondHouseManager.secondHouse_instance.light2D.intensity > 0.01f)
         {
             SecondHouseManager.secondHouse_instance.light2D.intensity -= 0.007f;
@@ -129,6 +129,9 @@ public class ToEvent5 : MonoBehaviour
         haru.transform.position = new Vector2(80, 75);
         cameraManager.cameraInstance.playerCamera = true;
         GameManager.m_instance.stopSwitch = false;
+        GameManager.m_instance.notSaveSwitch = false;
+        FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(true);
+        FlagsManager.flag_Instance.ChangeUIDestnation(6, "Yukito");
         gameObject.SetActive(false);
     }
 }

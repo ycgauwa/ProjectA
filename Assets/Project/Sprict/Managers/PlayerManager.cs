@@ -123,7 +123,7 @@ public class PlayerManager : MonoBehaviour
     /// 別スクリプトであるGameTeleportManageが活きる
     /// </summary>
     /// <param name="other"></param>
-    private void OnTriggerEnter2D(Collider2D other)
+    private async void OnTriggerEnter2D(Collider2D other)
     {
         /*bool isTeleport =
             other.gameObject.CompareTag("House"   ) || other.gameObject.CompareTag("Warp1") ||
@@ -487,23 +487,27 @@ public class PlayerManager : MonoBehaviour
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-21");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka1-21");
         }
         if(other.gameObject.CompareTag("Minnka1-22"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-22");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.climbStairs);
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka1-22");
         }
         if(other.gameObject.CompareTag("Minnka1-23"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-23");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.climbStairs);
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka1-23");
         }
         if(other.gameObject.CompareTag("Minnka1-24"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka1-24");
             transform.position = teleportAddress.playerPosition;
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka1-24");
         }
         if(other.gameObject.CompareTag("Minnka1-25"))
         {
@@ -515,180 +519,212 @@ public class PlayerManager : MonoBehaviour
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-1");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.climbStairs);
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-1");
         }
         if(other.gameObject.CompareTag("Minnka2-2"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-2");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.climbStairs);
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-2");
         }
         if(other.gameObject.CompareTag("Minnka2-3"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-3");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-3");
         }
         if(other.gameObject.CompareTag("Minnka2-4"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-4");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-4");
         }
         if(other.gameObject.CompareTag("Minnka2-5"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-5");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.climbStairs);
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-5");
         }
         if(other.gameObject.CompareTag("Minnka2-6"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-6");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.climbStairs);
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-6");
         }
         if(other.gameObject.CompareTag("Minnka2-7"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-7");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-7");
         }
         if(other.gameObject.CompareTag("Minnka2-8"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-8");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-8");
         }
         if(other.gameObject.CompareTag("Minnka2-9"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-9");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-9");
         }
         if(other.gameObject.CompareTag("Minnka2-10"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-10");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-10");
         }
         if(other.gameObject.CompareTag("Minnka2-11"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-11");
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-11");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
             if(gameObject.name == "Player" && !SecondHouseManager.secondHouse_instance.animalKeys[3])
             {
                 // 鍵が閉まりメッセージが流れる+セーブが出来なくなる
+                FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(false);
                 soundManager.PlaySe(SecondHouseManager.secondHouse_instance.lockSound);
                 SecondHouseManager.secondHouse_instance.notEnterObject.SetActive(true);
                 GameManager.m_instance.notSaveSwitch = true;
-                MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken).Forget();
+                await MessageManager.message_instance.MessageWindowActive(messages, names, image, ct: destroyCancellationToken);
+                FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(true);
+                FlagsManager.flag_Instance.ChangeUIDestnation(7, "Yukito");
             }
         }
         if(other.gameObject.CompareTag("Minnka2-12"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-12");
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-12");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.bathDoor);
         }
         if(other.gameObject.CompareTag("Minnka2-13"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-13");
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-13");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.bathDoor);
         }
         if(other.gameObject.CompareTag("Minnka2-14"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-14");
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-14");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka2-15"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-15");
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-15");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka2-16"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-16");
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-16");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka2-17"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-17");
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-17");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka2-18"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-18");
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-18");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka2-19"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-19");
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-19");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka2-20"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-20");
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-20");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka2-21"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-21");
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-21");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka2-22"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-22");
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-22");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
         }
         if(other.gameObject.CompareTag("Minnka2-23"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Minnka2-23");
+            FlagsManager.flag_Instance.ChangeUILocation("Minnka2-23");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
         }
         if(other.gameObject.name == "Ladder1-1")
         {
             teleportAddress = teleportManager.FindTeleportAddress("Ladder1-1");
+            FlagsManager.flag_Instance.ChangeUILocation("Ladder1-1");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.climbStairs);
         }
         if(other.gameObject.name == ("Ladder1-2"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Ladder1-2");
+            FlagsManager.flag_Instance.ChangeUILocation("Ladder1-2");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.climbStairs);
         }
         if(other.gameObject.name == "Warp2-23")
         {
             teleportAddress = teleportManager.FindTeleportAddress("Warp2-23");
+            FlagsManager.flag_Instance.ChangeUILocation("Warp2-23");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
         }
         if(other.gameObject.name == ("Warp2-24"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Warp2-24");
+            FlagsManager.flag_Instance.ChangeUILocation("Warp2-24");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
         }
         if(other.gameObject.name == ("Warp2-25"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Warp2-25");
+            FlagsManager.flag_Instance.ChangeUILocation("Warp2-25");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
         }
         if(other.gameObject.name == ("Warp2-26"))
         {
             teleportAddress = teleportManager.FindTeleportAddress("Warp2-26");
+            FlagsManager.flag_Instance.ChangeUILocation("Warp2-26");
             transform.position = teleportAddress.playerPosition;
             teleportManager.soundManager.PlaySe(teleportManager.minnkaDoor);
         }

@@ -23,11 +23,12 @@ public class GameStart : MonoBehaviour
     public Canvas optionCanvas;
     public UserData userData;
     public AudioClip decision;
+    public AudioClip titleBgm;
 
     void Start()
     {
         var saveData = SaveSlotsManager.save_Instance;
-
+        SoundManager.sound_Instance.PlayBgm(titleBgm);
         //ロード画面で保存されている情報が色々書きこまれている。
         //別のメソッドを用意したほうがよさそう。
         userData.UpdateSaveData(ref playTimes,ref gameModes,ref characters,ref chaptersNumber);

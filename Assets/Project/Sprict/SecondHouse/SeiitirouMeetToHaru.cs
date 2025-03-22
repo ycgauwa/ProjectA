@@ -51,11 +51,13 @@ public class SeiitirouMeetToHaru : MonoBehaviour
     {
         if(collider.gameObject.tag.Equals("Seiitirou"))
         {
-            if(!metalBlade.checkPossession)
+            FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(false);
+            if (!metalBlade.checkPossession)
             {
                 if(!enabled) return;
                 gameObject.tag = "Untagged";
                 GameManager.m_instance.stopSwitch = true;
+                GameManager.m_instance.notSaveSwitch = true;
                 await HaruCryingEvent();
             }
             else if(metalBlade.checkPossession)
@@ -73,15 +75,19 @@ public class SeiitirouMeetToHaru : MonoBehaviour
         //誰か泣いている？
         await MessageManager.message_instance.MessageWindowActive(messages2, names2, images2, ct: destroyCancellationToken);
         GameManager.m_instance.stopSwitch = false;
+        GameManager.m_instance.notSaveSwitch = false;
         SecondHouseManager.secondHouse_instance.metalBlade.gameObject.SetActive(true);
+        FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(true);
+        FlagsManager.flag_Instance.ChangeUIDestnation(10, "Seiitirou");
     }
     private async UniTask OpendKey()
     {
         // コメント「鍵が開けられる。」体で押したわずかな隙間に金属板を差し込むとドアが少しずつだが開いた。
-        await MessageManager.message_instance.MessageWindowActive(messages3, names3, images3, ct: destroyCancellationToken);
+        await MessageManager.message_instance.MessageWindowActive(messages3, names3, images3, ct: destroyCancellationToken);       
         SoundManager.sound_Instance.PlaySe(doorSound);
         //GameManager.m_instance.inventry.Delete(metalBlade);
         GameManager.m_instance.stopSwitch = true;
+        GameManager.m_instance.notSaveSwitch = true;
         await UniTask.Delay(TimeSpan.FromSeconds(4f));
         await Blackout();
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
@@ -97,15 +103,16 @@ public class SeiitirouMeetToHaru : MonoBehaviour
         await MessageManager.message_instance.MessageWindowActive(messages5, names5, images5, ct: destroyCancellationToken);
         await Blackout();
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
-        light2D.intensity = 1.0f; 
-        GameManager.m_instance.stopSwitch =false;
+        light2D.intensity = 1.0f;
+        FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(true);
+        FlagsManager.flag_Instance.ChangeUIDestnation(12, "Seiitirou");
+        GameManager.m_instance.stopSwitch = false;
+        GameManager.m_instance.notSaveSwitch = false;
         gameObject.tag = "Minnka2-15";
         enabled = false;
     }
     private async UniTask Blackout()
     {
-        light2D.intensity = 1.0f;
-        GameManager.m_instance.stopSwitch = true;
         while(light2D.intensity > 0.01f)
         {
             light2D.intensity -= 0.012f;

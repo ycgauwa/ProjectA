@@ -78,7 +78,6 @@ public class Cooktop : MonoBehaviour
     public bool selectedDish3 = false;
     public AudioClip decision;
     public AudioClip cookingMusic;
-    public Inventry inventry;
     public ItemDateBase itemDateBase;
     public SoundManager soundManager;
     public Refrigerator refrigerator;
@@ -335,9 +334,9 @@ public class Cooktop : MonoBehaviour
         {
             MessageManager.message_instance.MessageWindowActive(dish1Messages, dish1Names, dish1Image, messageSwitch, ct: destroyCancellationToken).Forget();
             ingredients.gameObject.SetActive(false);
-            inventry.Delete(itemDateBase.GetItemId(6));
-            inventry.Delete(itemDateBase.GetItemId(15));
-            inventry.Add(itemDateBase.GetItemId(21));
+            GameManager.m_instance.inventry.Delete(itemDateBase.GetItemId(6));
+            GameManager.m_instance.inventry.Delete(itemDateBase.GetItemId(15));
+            GameManager.m_instance.inventry.Add(itemDateBase.GetItemId(21));
             selectedDish1 = false;
             ingredients1Text.text = "使用済み";
         }
@@ -349,18 +348,18 @@ public class Cooktop : MonoBehaviour
         {
             MessageManager.message_instance.MessageWindowActive(dishFailMessages, dishFailNames, dishFailImage, messageSwitch, ct: destroyCancellationToken).Forget();
             ingredients.gameObject.SetActive(false);
-            inventry.Delete(itemDateBase.GetItemId(15));
+            GameManager.m_instance.inventry.Delete(itemDateBase.GetItemId(15));
             if(itemDateBase.GetItemId(7).checkPossession == true)
             {
-                inventry.Delete(itemDateBase.GetItemId(7));
-                inventry.Add(itemDateBase.GetItemId(18));
+                GameManager.m_instance.inventry.Delete(itemDateBase.GetItemId(7));
+                GameManager.m_instance.inventry.Add(itemDateBase.GetItemId(18));
                 selectedDish1 = false;
                 ingredients1Text.text = "使用済み";
             }
             else if(itemDateBase.GetItemId(8).checkPossession == true)
             {
-                inventry.Delete(itemDateBase.GetItemId(8));
-                inventry.Add(itemDateBase.GetItemId(18));
+                GameManager.m_instance.inventry.Delete(itemDateBase.GetItemId(8));
+                GameManager.m_instance.inventry.Add(itemDateBase.GetItemId(18));
                 selectedDish1 = false;
                 ingredients1Text.text = "使用済み";
             }
@@ -380,9 +379,9 @@ public class Cooktop : MonoBehaviour
         {
             MessageManager.message_instance.MessageWindowActive(dish2Messages, dish2Names, dish2Image, messageSwitch, ct: destroyCancellationToken).Forget();
             ingredients.gameObject.SetActive(false);
-            inventry.Delete(itemDateBase.GetItemId(16));
-            inventry.Delete(itemDateBase.GetItemId(9));
-            inventry.Add(itemDateBase.GetItemId(22));
+            GameManager.m_instance.inventry.Delete(itemDateBase.GetItemId(16));
+            GameManager.m_instance.inventry.Delete(itemDateBase.GetItemId(9));
+            GameManager.m_instance.inventry.Add(itemDateBase.GetItemId(22));
             selectedDish2 = false;
             ingredients2Text.text = "使用済み";
         }
@@ -394,18 +393,18 @@ public class Cooktop : MonoBehaviour
         {
             MessageManager.message_instance.MessageWindowActive(dishFailMessages, dishFailNames, dishFailImage, messageSwitch, ct: destroyCancellationToken).Forget();
             ingredients.gameObject.SetActive(false);
-            inventry.Delete(itemDateBase.GetItemId(16));
+            GameManager.m_instance.inventry.Delete(itemDateBase.GetItemId(16));
             if(itemDateBase.GetItemId(10).checkPossession == true)
             {
-                inventry.Delete(itemDateBase.GetItemId(10));
-                inventry.Add(itemDateBase.GetItemId(19));
+                GameManager.m_instance.inventry.Delete(itemDateBase.GetItemId(10));
+                GameManager.m_instance.inventry.Add(itemDateBase.GetItemId(19));
                 selectedDish2 = false;
                 ingredients2Text.text = "使用済み";
             }
             else if(itemDateBase.GetItemId(11).checkPossession == true)
             {
-                inventry.Delete(itemDateBase.GetItemId(11));
-                inventry.Add(itemDateBase.GetItemId(19));
+                GameManager.m_instance.inventry.Delete(itemDateBase.GetItemId(11));
+                GameManager.m_instance.inventry.Add(itemDateBase.GetItemId(19));
                 selectedDish2 = false;
                 ingredients2Text.text = "使用済み";
             }
@@ -425,9 +424,9 @@ public class Cooktop : MonoBehaviour
         {
             MessageManager.message_instance.MessageWindowActive(dish3Messages, dish3Names, dish3Image, messageSwitch, ct: destroyCancellationToken).Forget();
             ingredients.gameObject.SetActive(false);
-            inventry.Delete(itemDateBase.GetItemId(17));
-            inventry.Delete(itemDateBase.GetItemId(12));
-            inventry.Add(itemDateBase.GetItemId(23));
+            GameManager.m_instance.inventry.Delete(itemDateBase.GetItemId(17));
+            GameManager.m_instance.inventry.Delete(itemDateBase.GetItemId(12));
+            GameManager.m_instance.inventry.Add(itemDateBase.GetItemId(23));
             selectedDish3 = false;
             ingredients3Text.text = "使用済み";
         }
@@ -439,18 +438,18 @@ public class Cooktop : MonoBehaviour
         {
             MessageManager.message_instance.MessageWindowActive(dishFailMessages, dishFailNames, dishFailImage, messageSwitch, ct: destroyCancellationToken).Forget();
             ingredients.gameObject.SetActive(false);
-            inventry.Delete(itemDateBase.GetItemId(17));
+            GameManager.m_instance.inventry.Delete(itemDateBase.GetItemId(17));
             if(itemDateBase.GetItemId(13).checkPossession == true)
             {
-                inventry.Delete(itemDateBase.GetItemId(13));
-                inventry.Add(itemDateBase.GetItemId(20));
+                GameManager.m_instance.inventry.Delete(itemDateBase.GetItemId(13));
+                GameManager.m_instance.inventry.Add(itemDateBase.GetItemId(20));
                 selectedDish3 = false;
                 ingredients3Text.text = "使用済み";
             }
             else if(itemDateBase.GetItemId(14).checkPossession == true)
             {
-                inventry.Delete(itemDateBase.GetItemId(14));
-                inventry.Add(itemDateBase.GetItemId(20));
+                GameManager.m_instance.inventry.Delete(itemDateBase.GetItemId(14));
+                GameManager.m_instance.inventry.Add(itemDateBase.GetItemId(20));
                 selectedDish3 = false;
                 ingredients3Text.text = "使用済み";
             }

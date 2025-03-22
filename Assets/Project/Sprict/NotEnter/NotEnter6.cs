@@ -63,7 +63,6 @@ public class NotEnter6 : MonoBehaviour
     public bool seiitirouFlag;//征一郎に一回触らせる。
 
     public ItemDateBase itemDateBase;
-    public Inventry inventry;
     public GameTeleportManager gameTeleportManager;
     public ItemSprictW itemSprictW;
     public Item underKey;
@@ -87,7 +86,7 @@ public class NotEnter6 : MonoBehaviour
         redScreen.color = Color.clear;
         heartSoundCTS = new CancellationTokenSource();
     }
-    private void OnTriggerEnter2D(Collider2D collider)
+    private async void OnTriggerEnter2D(Collider2D collider)
     {
         if(ItemDateBase.itemDate_instance.GetItemId(253).checkPossession == false && collider.gameObject.tag.Equals("Player")) 
             MessageManager.message_instance.MessageWindowActive(messages, names, images, ct: destroyCancellationToken).Forget();
@@ -102,8 +101,9 @@ public class NotEnter6 : MonoBehaviour
         {
             if(ItemDateBase.itemDate_instance.GetItemId(253).checkPossession == false)
             {
-                MessageManager.message_instance.MessageWindowActive(messages4, names4, images4, ct: destroyCancellationToken).Forget();
                 seiitirouFlag = true;
+                await MessageManager.message_instance.MessageWindowActive(messages4, names4, images4, ct: destroyCancellationToken);
+                FlagsManager.flag_Instance.ChangeUIDestnation(7, "Seiitirou");
                 enemy.transform.position = new Vector2(0, 0);
                 enemy.gameObject.SetActive(false);
             }
@@ -125,6 +125,7 @@ public class NotEnter6 : MonoBehaviour
             //選択肢を出したりBGMを付ける。画面を揺らす？とか近づけたりしていろいろいじくる
 
             //選択肢が選ばれる前に会話が終わらないため下に行かない。
+            FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(false);
             await OnPanel1();
             heartSoundCTS = new CancellationTokenSource();
             HeartSounds(heartSoundCTS.Token).Forget(e => { Debug.Log("キャンセルされた"); });
@@ -168,7 +169,9 @@ public class NotEnter6 : MonoBehaviour
         target.text = "";
         window.gameObject.SetActive(false);
         GameManager.m_instance.notSaveSwitch = false;
-        if(itemDateBase.GetItemId(301).checkPossession == true)
+        FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(true);
+        FlagsManager.flag_Instance.ChangeUIDestnation(0, "Seiitirou");
+        if (itemDateBase.GetItemId(301).checkPossession == true)
         {
             itemSprictW.ItemDelete();
         }
@@ -249,6 +252,8 @@ public class NotEnter6 : MonoBehaviour
         SaveSlotsManager.save_Instance.saveState.chapterNum ++;
         GameManager.m_instance.notSaveSwitch = false;
         FlagsManager.flag_Instance.ChangeUILocation("Minnka1-23");
+        FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(true);
+        FlagsManager.flag_Instance.ChangeUIDestnation(5, "Yukito");
     }
     public void OnRescueBotton()
     {

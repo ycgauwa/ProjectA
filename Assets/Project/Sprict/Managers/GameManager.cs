@@ -445,6 +445,7 @@ public class GameManager : MonoBehaviour
         }
         if (deathCount > 4)
         {
+            FlagsManager.flag_Instance.ChangeUIDestnation(6, "Seiitirou");
             inventry.Delete(ItemDateBase.itemDate_instance.GetItemId(253));
             yukitoDead.SetActive(true);
             seiitirou.gameObject.tag = "Seiitirou";
@@ -469,6 +470,7 @@ public class GameManager : MonoBehaviour
         }
         if (rescueEvent.RescueSwitch)
         {
+            FlagsManager.flag_Instance.ChangeUIDestnation(deathCount+1, "Seiitirou");
             player.transform.position = new Vector2(35, 68);
             enemy.transform.position = new Vector2(35, 71);
             buttonPanel.gameObject.SetActive(false);

@@ -187,12 +187,12 @@ public class FlagsManager : MonoBehaviour
     public void ChangeUIDestnation(int progressionLevel,string characterName)
     {
         CharactersFlag selectedCharacterFlags = GetCharacterFlagsById(characterName);
-
+        Debug.Log(selectedCharacterFlags);
         //ƒXƒNƒŠƒvƒ^ƒuƒ‹ƒIƒuƒWƒFƒNƒg‚ðŽg‚Á‚Ä‘ã“ü‚µ‚½‚¢B
         //–Ú“I’n‚ÉŠÖ‚µ‚Ä‚ÍƒCƒxƒ“ƒg–”‚ÍƒAƒCƒeƒ€‚Ì“üŽèŽž‚É•ÏX‚³‚ê‚é‚à‚Ì‚¾‚©‚çƒCƒxƒ“ƒg‚Ì“s“xŠÖ”‚ð“ü‚ê‚Ä•ÏX‚µ‚½‚Á‚Ä—Ç‚¢B
         string[] destinationList = GetDestinationListByLanguage(selectedCharacterFlags, GameManager.m_instance.languageIndex);
 
-        if (destinationList != null && progressionLevel >= 1 && progressionLevel <= destinationList.Length)
+        if (destinationList != null && progressionLevel >= 0 && progressionLevel <= destinationList.Length)
         {
             destinationText.text = destinationList[progressionLevel]; // progressionLevel ‚Í1‚©‚çŽn‚Ü‚é‘z’è
         }
@@ -347,13 +347,91 @@ public class FlagsManager : MonoBehaviour
                     locationText.text = "2F‹ŠÔ";
                     break;
                 case "Minnka1-22":
-                    locationText.text = "B“¹";
+                    locationText.text = "’n‰ºB“¹";
                     break;
                 case "Minnka1-23":
                     locationText.text = "’n‰º‚Ö‘±‚­‘Ö";
                     break;
                 case "Minnka1-24":
                     locationText.text = "";
+                    break;
+                case "Minnka2-1":
+                    locationText.text = "1F‘Ö";
+                    break;
+                case "Minnka2-2":
+                    locationText.text = "’n‰ºB“¹";
+                    break;
+                case "Minnka2-3":
+                    locationText.text = "1F˜L‰º";
+                    break;
+                case "Minnka2-4":
+                    locationText.text = "1F‘Ö";
+                    break;
+                case "Minnka2-5":
+                    locationText.text = "2F˜L‰º";
+                    break;
+                case "Minnka2-6":
+                    locationText.text = "1F˜L‰º";
+                    break;
+                case "Minnka2-7":
+                    locationText.text = "1FƒgƒCƒŒ";
+                    break;
+                case "Minnka2-8":
+                    locationText.text = "1F˜L‰º";
+                    break;
+                case "Minnka2-9":
+                    locationText.text = "’EˆßŠ";
+                    break;
+                case "Minnka2-10":
+                    locationText.text = "1F˜L‰º";
+                    break;
+                case "Minnka2-11":
+                    locationText.text = "ƒ_ƒCƒjƒ“ƒOƒLƒbƒ`ƒ“";
+                    break;
+                case "Minnka2-12":
+                    locationText.text = "’EˆßŠ";
+                    break;
+                case "Minnka2-13":
+                    locationText.text = "—Žº";
+                    break;
+                case "Minnka2-14":
+                    locationText.text = "1F˜L‰º";
+                    break;
+                case "Minnka2-15":
+                    locationText.text = "2FQŽº";
+                    break;
+                case "Minnka2-16":
+                    locationText.text = "2F˜L‰º";
+                    break;
+                case "Minnka2-17":
+                    locationText.text = "fŽ@Žº";
+                    break;
+                case "Minnka2-18":
+                    locationText.text = "2F˜L‰º";
+                    break;
+                case "Minnka2-19":
+                    locationText.text = "Žq‹Ÿ•”‰®";
+                    break;
+                case "Minnka2-20":
+                    locationText.text = "2F˜L‰º";
+                    break;
+                case "Minnka2-21":
+                    locationText.text = "ŽG–±Žº";
+                    break;
+                case "Minnka2-22":
+                    locationText.text = "fŽ@Žº";
+                    break;
+                case "Minnka2-23":
+                    locationText.text = "ŠÈˆÕŽèpŽº";
+                    break;
+                case "Minnka2-24":
+                    locationText.text = "fŽ@Žº";
+                    break;
+                case "Minnka2-25":
+                    locationText.text = "2FƒgƒCƒŒ";
+                    break;
+                case "Minnka2-26":
+                    locationText.text = "2F˜L‰º";
                     break;
             }
         }

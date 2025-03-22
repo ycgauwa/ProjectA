@@ -42,15 +42,19 @@ public class YukitoDeadItem : MonoBehaviour
     }
     private void Update()
     {
-        if(!ItemDateBase.itemDate_instance.GetItemId(253).checkPossession && seiIsContacted && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
+        if(seiIsContacted && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
         {
-            //　触ります、カメラが変化します音楽も流れます。セリフも出します。終わったら選択も出します。選択肢で展開を変えます。
-            GetItemFromYdead().Forget();
-            seiIsContacted = false;
+            if (!ItemDateBase.itemDate_instance.GetItemId(253).checkPossession)
+            {
+                //　触ります、カメラが変化します音楽も流れます。セリフも出します。終わったら選択も出します。選択肢で展開を変えます。
+                GetItemFromYdead().Forget();
+                seiIsContacted = false;
+            }
         }
     }
     private async UniTask GetItemFromYdead()
     {
+        FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(false);
         GameManager.m_instance.stopSwitch = true;
         GameManager.m_instance.adjustVignette = true;
         while(GameManager.m_instance.vignette.intensity.value < 0.6f)
@@ -103,5 +107,7 @@ public class YukitoDeadItem : MonoBehaviour
         GameManager.m_instance.stopSwitch = false;
         GameManager.m_instance.adjustVignette = false;
         SoundManager.sound_Instance.StopBgm(EndingGalleryManager.m_gallery.ending5Bgm);
+        FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(true);
+        FlagsManager.flag_Instance.ChangeUIDestnation(8, "Seiitirou");
     }
 }

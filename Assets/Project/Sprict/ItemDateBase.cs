@@ -32,6 +32,7 @@ public class ItemDateBase : MonoBehaviour
         }
         else return;
     }
+    //ItemIDからItemDatebaseを参照してアイテムのデータを取ってこれるメソッド
     public Item GetItemId(int itemid)
     {
         Item item = new Item();

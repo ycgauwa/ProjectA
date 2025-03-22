@@ -91,6 +91,7 @@ public class EndingGalleryManager : MonoBehaviour
     }
     public  async UniTask GetedEndings(int getedEndingCount, CancellationToken ct = default)
     {
+        SecondHouseManager.secondHouse_instance.light2D.intensity = 0f;
         endCountNumber.text = getedEndTotalNumber.ToString();
         getedEndTotalNumber++;
         endCountNextNumber.text = getedEndTotalNumber.ToString();
@@ -103,6 +104,7 @@ public class EndingGalleryManager : MonoBehaviour
         GameManager.m_instance.stopSwitch = true;
         endedUIPanel.gameObject.SetActive(true);
         noiseImage.gameObject.SetActive(true);
+        SecondHouseManager.secondHouse_instance.light2D.intensity = 1f;
         SoundManager.sound_Instance.PlaySe(noiseSound);
         await UniTask.Delay(TimeSpan.FromSeconds(1f), cancellationToken: ct);
         SoundManager.sound_Instance.StopSe(noiseSound);

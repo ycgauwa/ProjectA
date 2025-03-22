@@ -35,7 +35,6 @@ public class NotEnter14 : MonoBehaviour
     [SerializeField]
     private List<Sprite> image3;
     public Item bomb;
-    public Inventry inventry;
     public GameObject bigStone;
 
     public SoundManager soundManager;
@@ -88,7 +87,7 @@ public class NotEnter14 : MonoBehaviour
         else if(savedNam == 2)
             await MessageManager.message_instance.MessageWindowActive(messages3, names3, image3, ct: destroyCancellationToken);
 
-        inventry.Delete(bomb);
+        GameManager.m_instance.inventry.Delete(bomb);
         Blackout().Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         soundManager.PlaySe(bombTimer);

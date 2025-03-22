@@ -221,6 +221,7 @@ public class SecondHouseManager : MonoBehaviour
         coroutine = null;
         GameManager.m_instance.stopSwitch = false;
         GameManager.m_instance.notSaveSwitch = false;
+        FlagsManager.flag_Instance.ChangeUIDestnation(8,"Yukito");
         yield break;
     }
     IEnumerator OnAction2()
@@ -508,7 +509,7 @@ public class SecondHouseManager : MonoBehaviour
         end6Image[0].GetComponent<Image>().color = color;
         while(color.a > 0.01f)
         {
-            color.a -= 0.004f;
+            color.a -= 0.008f;
             end6Image[0].color = color;
             await UniTask.DelayFrame(1);
         }
@@ -529,7 +530,7 @@ public class SecondHouseManager : MonoBehaviour
         end6Image[1].GetComponent<Image>().color = color;
         while(color.a > 0.01f)
         {
-            color.a -= 0.004f;
+            color.a -= 0.008f;
             end6Image[1].color = color;
             await UniTask.DelayFrame(1);
         }
@@ -550,7 +551,7 @@ public class SecondHouseManager : MonoBehaviour
         end6Image[2].GetComponent<Image>().color = color;
         while(color.a > 0.01f)
         {
-            color.a -= 0.008f;
+            color.a -= 0.012f;
             end6Image[2].color = color;
             await UniTask.DelayFrame(1);
         }

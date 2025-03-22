@@ -29,7 +29,6 @@ public class AnimalsMessages : MonoBehaviour
     public Canvas Selectwindow;
     public Image selection;
     public bool isOpenSelect = false;
-    public Inventry inventry;
     public ItemDateBase itemDate;
     public AnimalsMessages bear;
     public AnimalsMessages chicken;
