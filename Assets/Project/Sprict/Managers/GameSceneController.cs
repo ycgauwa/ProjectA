@@ -4,9 +4,16 @@ using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class GameSceneController : MonoBehaviour
 {
+    public List<string> saveMessages;
+    public List<string> saveNames;
+    public List<Sprite> saveImages;
+    public Canvas Selectwindow;
+    public Image saveConfilmPanel;
+    public GameObject firstSelect;
     public Sprite[] stageImages = new Sprite[6];
     public Image[] images = new Image[3];
     public Text[] times = new Text[3];
@@ -19,12 +26,16 @@ public class GameSceneController : MonoBehaviour
     private int[] chapterNumber = new int[3];
     private RectTransform rectTransform;
     public Image savedMessageImage;
+    public Vector2 targetPosition;
     public UserData userdata;
 
     void Start()
     {
-        rectTransform = GetComponent<RectTransform>();
-        savedMessageImage.rectTransform.anchoredPosition = new Vector3(900, -230, 0);
+        rectTransform = savedMessageImage.GetComponent<RectTransform>();
+        rectTransform.anchorMin = new Vector2(1, 0); // 右下アンカー
+        rectTransform.anchorMax = new Vector2(1, 0); // 右下アンカー
+        rectTransform.anchoredPosition = new Vector2(Screen.width, 70); // 画面外
+        //rectTransform.anchoredPosition = new Vector3(900, -230, 0);
         userdata.UpdateSaveData(ref playTimes, ref gameModes, ref characters, ref chapterNumber);
         for(int i = 0; i < images.Length; i++)
         {
@@ -80,7 +91,7 @@ public class GameSceneController : MonoBehaviour
     public void SaveButton(int i)
     {
         Debug.Log(i);
-        savedMessageImage.rectTransform.DOMove(new Vector3(300, -230, 0), 1f).SetEase(Ease.OutBounce);
+        rectTransform.DOAnchorPos(targetPosition, 1f).SetEase(Ease.OutCubic).SetUpdate(true); ;//セーブアニメーション
         times[i].text = SaveSlotsManager.save_Instance.saveState.playTime.ToString();
         modes[i].text = SaveSlotsManager.save_Instance.saveState.gameModeString.ToString();
         chars[i].text = SaveSlotsManager.save_Instance.saveState.characterName;
@@ -88,6 +99,24 @@ public class GameSceneController : MonoBehaviour
         images[i].sprite = stageImages[SaveSlotsManager.save_Instance.saveState.chapterNum];
         if(!images[i].gameObject.activeSelf)
             images[i].gameObject.SetActive(true);
+    }
+    public void AcceptSaveRequest()
+    {
+        saveConfilmPanel.gameObject.SetActive(false);
+        Selectwindow.gameObject.SetActive(false);
+        MessageManager.message_instance.isOpenSelect = false;
+        GameManager.m_instance.notSaveSwitch = false;
+        GameManager.m_instance.saveCanvas.gameObject.SetActive(true);
+    }
+    public void IgnoreSaveRequest()
+    {
+        MessageManager.message_instance.isOpenSelect = false;
+        saveConfilmPanel.gameObject.SetActive(false);
+        Selectwindow.gameObject.SetActive(false);
+    }
+    public void ResetImagePosition()
+    {
+        rectTransform.anchoredPosition = new Vector2(Screen.width, 70); // 画面外
     }
 }
 public class SaveState

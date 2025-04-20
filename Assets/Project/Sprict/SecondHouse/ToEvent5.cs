@@ -33,6 +33,7 @@ public class ToEvent5 : MonoBehaviour
     public Image characterImage;
     public GameObject eventcamera;
     public GameObject haru;
+    private GameSceneController gameSceneController;
     CapsuleCollider2D capsuleCollider;
     public bool event5Start = false;
 
@@ -123,6 +124,8 @@ public class ToEvent5 : MonoBehaviour
             SecondHouseManager.secondHouse_instance.light2D.intensity -= 0.007f;
             await UniTask.Delay(1);
         }
+        await MessageManager.message_instance.MessageSelectWindowActive(gameSceneController.saveMessages, gameSceneController.saveNames, gameSceneController.saveImages, gameSceneController.Selectwindow, gameSceneController.saveConfilmPanel, gameSceneController.firstSelect, ct: destroyCancellationToken);
+        await UniTask.WaitUntil(() => !GameManager.m_instance.saveCanvas.gameObject.activeSelf);
         SecondHouseManager.secondHouse_instance.light2D.intensity = 1;
         event5Start = true;
         FlagsManager.flag_Instance.flagBools[5] = true;

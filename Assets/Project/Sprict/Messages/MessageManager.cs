@@ -30,6 +30,7 @@ public class MessageManager : MonoBehaviour
     public bool talking = false;
     public bool isTalking = false;
     public bool isOpenSelect = false;
+    public bool isTextAdvanceEnabled = true;
 
     //ここでメッセージスクリプトを呼び出すスクリプトを作成する
     private void Awake()
@@ -121,7 +122,7 @@ public class MessageManager : MonoBehaviour
         {
             await UniTask.DelayFrame(5,cancellationToken :ct);
             showMessage(messages[i], names[i], image[i]);
-            await UniTask.WaitUntil(() => (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)), cancellationToken: ct);
+            await UniTask.WaitUntil(() => (isTextAdvanceEnabled && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return))), cancellationToken: ct);
         }
     }
     /*（）の中に引数をいれるその引数の中身はTest1.csが渡してきている

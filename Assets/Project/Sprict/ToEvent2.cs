@@ -60,6 +60,7 @@ public class ToEvent2 : MonoBehaviour
     public bool eventFinished;
     private bool isContacted = false;
     public SoundManager soundManager;
+    private GameSceneController gameSceneController;
     public AudioClip sound;
     public AudioClip doorSound;
     public AudioClip flashSe;
@@ -106,6 +107,7 @@ public class ToEvent2 : MonoBehaviour
     }
     async UniTask CreateCoroutine()
     {
+        gameSceneController = GameManager.m_instance.gameSceneController;
         GameManager.m_instance.notSaveSwitch = true;
         volume.profile.TryGet<ColorAdjustments>(out colorAdjustments);
         GameManager.m_instance.inventry.Delete(item);
@@ -201,6 +203,13 @@ public class ToEvent2 : MonoBehaviour
         cameraAnimator.enabled = false;
         timelineCanvas.gameObject.SetActive(false);
         colorAdjustments.active = true;
+        FlagsManager.flag_Instance.flagBools[1] = true;
+        FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(true);
+        FlagsManager.flag_Instance.ChangeUIDestnation(4, "Yukito");
+        FlagsManager.flag_Instance.locationText.text = "1F廊下";
+        SaveSlotsManager.save_Instance.saveState.chapterNum++;
+        await MessageManager.message_instance.MessageSelectWindowActive(gameSceneController.saveMessages, gameSceneController.saveNames, gameSceneController.saveImages, gameSceneController.Selectwindow, gameSceneController.saveConfilmPanel, gameSceneController.firstSelect, ct: destroyCancellationToken);
+        await UniTask.WaitUntil(() => !GameManager.m_instance.saveCanvas.gameObject.activeSelf);
         light2D.intensity = 1.0f;
         gameMenuUI.SetActive(true);
 
@@ -213,11 +222,6 @@ public class ToEvent2 : MonoBehaviour
         GameManager.m_instance.stopSwitch = false;
         GameManager.m_instance.notSaveSwitch = false;
         eventFinished = true;
-        FlagsManager.flag_Instance.flagBools[1] = true;
-        FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(true);
-        FlagsManager.flag_Instance.ChangeUIDestnation(4, "Yukito");
-        FlagsManager.flag_Instance.locationText.text = "1F廊下";
-        SaveSlotsManager.save_Instance.saveState.chapterNum ++;
     }
     private async UniTask Flash()
     {
@@ -229,28 +233,6 @@ public class ToEvent2 : MonoBehaviour
             light2D.intensity += 0.1f;
             await UniTask.Delay(1);
         }
-        /*Light2D x = light2D;
-        x.intensity = 1.0f;
-        while(x.intensity < 7.0f)
-        {
-           light2D.intensity += 0.1f;
-        }
-        
-        下は間違えた例。上から２行目の文が間違い違いとしてはコピーするのかショートカットの違い
-        float int stringの３つが危険。上の例はLight2D x = light2Dがコピーでなくショートカット
-        新たな疑問点として下はfloatじゃなくてvarにしてもダメみたいだからその理由が右辺にあるのかチェックしておく
-        
-        light2D = this.gameObject.GetComponent<Light2D>();
-        float brightness = light2D.intensity;
-        Debug.Log(light2D.intensity);
-        brightness = 1.0f;
-
-        while(brightness < 7.0f)
-        {
-            light2D.intensity += 0.1f;
-        }
-        
-        */
     }
     private void Event2Camera()
     {

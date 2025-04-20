@@ -25,6 +25,7 @@ public class TunnelSeiitirouEvent : MonoBehaviour
     private List<Sprite> images2;
 
     public bool tunnelEvent;
+    private GameSceneController gameSceneController;
     public GameObject cameraObject;
     public GameObject skullObject;
     public Light2D light2D;
@@ -69,6 +70,9 @@ public class TunnelSeiitirouEvent : MonoBehaviour
         skullObject.SetActive(true);
         GameManager.m_instance.stopSwitch = false;
         GameManager.m_instance.notSaveSwitch = false;
+        gameSceneController = GameManager.m_instance.gameSceneController;
+        await MessageManager.message_instance.MessageSelectWindowActive(gameSceneController.saveMessages, gameSceneController.saveNames, gameSceneController.saveImages, gameSceneController.Selectwindow, gameSceneController.saveConfilmPanel, gameSceneController.firstSelect, ct: destroyCancellationToken);
+        await UniTask.WaitUntil(() => !GameManager.m_instance.saveCanvas.gameObject.activeSelf);
         light2D.intensity = 1.0f;
         gameObject.SetActive(false);
     }

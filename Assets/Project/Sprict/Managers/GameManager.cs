@@ -215,6 +215,7 @@ public class GameManager : MonoBehaviour
                     PlayerManager.m_instance.m_speed = 0;
                     Time.timeScale = 0;
                     menuCanvas.gameObject.SetActive(true);
+                    MessageManager.message_instance.isTextAdvanceEnabled = false;
                     EventSystem.current.SetSelectedGameObject(menuFirstSelect);
                     soundManager.PlaySe(cancel);
                 }
@@ -227,6 +228,7 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1;
                 PlayerManager.m_instance.m_speed = 0.075f;
                 menuCanvas.gameObject.SetActive(false);
+                MessageManager.message_instance.isTextAdvanceEnabled = true;
                 soundManager.PlaySe(cancel);
             }
         }
@@ -269,6 +271,7 @@ public class GameManager : MonoBehaviour
             {
                 saveCanvas.gameObject.SetActive(false);
                 menuCanvas.gameObject.SetActive(true);
+                gameSceneController.ResetImagePosition();
                 /*for(int i = 0; i < saveButtons.Length; i++)
                 {
                     savedataCount--;
@@ -399,6 +402,7 @@ public class GameManager : MonoBehaviour
             PlayerManager.m_instance.m_speed = 0.075f;
             menuCanvas.gameObject.SetActive(false);
             soundManager.PlaySe(cancel);
+            MessageManager.message_instance.isTextAdvanceEnabled = true;
         }
     }
     public void OnClickMenuButton()
@@ -408,6 +412,7 @@ public class GameManager : MonoBehaviour
             PlayerManager.m_instance.m_speed = 0;
             Time.timeScale = 0;
             menuCanvas.gameObject.SetActive(true);
+            MessageManager.message_instance.isTextAdvanceEnabled = false;
             EventSystem.current.SetSelectedGameObject(menuFirstSelect);
             soundManager.PlaySe(cancel);
         }
@@ -508,14 +513,6 @@ public class GameManager : MonoBehaviour
         }
         menuCanvas.gameObject.SetActive(false);
         saveCanvas.gameObject.SetActive(true);
-        /*for(int i = 0; i < saveButtons.Length; i++)
-        {
-            savedataCount++;
-            Debug.Log($"セーブカウントは{savedataCount}");
-            int index = i;
-            saveButtons[i].onClick.AddListener(() => gameSceneController.SaveButton(index));
-            saveButtons[i].onClick.AddListener(() => gameSceneController.userdata.SaveUserData(index + 1));  // 各ボタンにクリックイベントを登録
-        }*/
         EventSystem.current.SetSelectedGameObject(saveMenuFirstSelect);
         soundManager.PlaySe(decision);
     }
@@ -581,6 +578,7 @@ public class GameManager : MonoBehaviour
             }*/
             saveCanvas.gameObject.SetActive(false);
             menuCanvas.gameObject.SetActive(true);
+            gameSceneController.ResetImagePosition();
             EventSystem.current.SetSelectedGameObject(menuFirstSelect);
             soundManager.PlaySe(cancel);
         }

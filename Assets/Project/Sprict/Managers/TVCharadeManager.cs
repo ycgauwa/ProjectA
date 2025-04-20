@@ -7,6 +7,18 @@ using static UnityEngine.GraphicsBuffer;
 
 public class TVCharadeManager : MonoBehaviour
 {
+    [SerializeField]
+    private List<string> failedMessages;
+    [SerializeField]
+    private List<string> failedNames;
+    [SerializeField]
+    private List<Sprite> failedImages;
+    [SerializeField]
+    private List<string> successedMessages;
+    [SerializeField]
+    private List<string> successedNames;
+    [SerializeField]
+    private List<Sprite> successedImages;
     public Canvas diaryCanvas;
     public Image panel1;
     public Image panel2;
@@ -90,8 +102,6 @@ public class TVCharadeManager : MonoBehaviour
     {
         TVScreen.gameObject.SetActive(true);
         screenText.text = messages;
-        Debug.Log(Inventry.instance);
-        Debug.Log(ItemDateBase.itemDate_instance);
         if(ItemDateBase.itemDate_instance.GetItemId(252).geted == false)
             GameManager.m_instance.inventry.Add(ItemDateBase.itemDate_instance.GetItemId(252));
     }
@@ -104,5 +114,6 @@ public class TVCharadeManager : MonoBehaviour
         Panel2Answer = false;
         Panel3Answer = false;
         Panel4Answer = false;
+        
     }
 }

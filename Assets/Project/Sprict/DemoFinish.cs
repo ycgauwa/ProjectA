@@ -50,6 +50,7 @@ public class DemoFinish : MonoBehaviour
     public string proMessage;
     public string norMessage;
     public GameObject firstSelect2;
+    public GameObject enterUI;
 
     private void Awake()
     {
@@ -65,10 +66,11 @@ public class DemoFinish : MonoBehaviour
         {
             player.transform.position = new Vector2(30, -35);
             EventSystem.current.SetSelectedGameObject(firstSelect2);
+            MessageManager.message_instance.isTextAdvanceEnabled = false;
+            Time.timeScale = 0;
             CreateCoroutine().Forget();
         }
-        else return;
-
+        else enterUI.SetActive(false);
     }
     private async UniTask CreateCoroutine(CancellationToken ct = default)
     {//流れとして難易度決めてから説明行って、大体見たらセリフ出してゲーム開始。その間ESCは無効？
@@ -90,6 +92,8 @@ public class DemoFinish : MonoBehaviour
         window.gameObject.SetActive(false);
         //StartActive = true;
         GameManager.m_instance.stopSwitch = false;
+        enterUI.SetActive(false);
+        Time.timeScale = 1;
     }
     protected void showMessage(string message, string name, Sprite image)
     {
