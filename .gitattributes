@@ -5,9 +5,9 @@
 =======
 ビルド/怨嗟の村_Data/sharedasset1.asset.resS filter=lfs diff=lfs merge=lfs -text
 >>>>>>> 500a9c54917ce7c2c0b5f088ee93b10f16add18d
-*.gif filter=lfs diff=lfs merge=lfs -text
+#*.gif filter=lfs diff=lfs merge=lfs -text
 #*.png filter=lfs diff=lfs merge=lfs -text
-*.jpg filter=lfs diff=lfs merge=lfs -text
-*.wav filter=lfs diff=lfs merge=lfs -text
+#*.jpg filter=lfs diff=lfs merge=lfs -text
+#*.wav filter=lfs diff=lfs merge=lfs -text
 *.zip filter=lfs diff=lfs merge=lfs -text
-*.mp3 filter=lfs diff=lfs merge=lfs -text
+#*.mp3 filter=lfs diff=lfs merge=lfs -text
