@@ -116,7 +116,7 @@ public class GameSceneController : MonoBehaviour
     }
     public void ResetImagePosition()
     {
-        rectTransform.anchoredPosition = new Vector2(Screen.width, 70); // 画面外
+        rectTransform.anchoredPosition = new Vector2(Screen.width, 70); // 画面外.動いてる途中に画面遷移するとそのまま残る。
     }
 }
 public class SaveState

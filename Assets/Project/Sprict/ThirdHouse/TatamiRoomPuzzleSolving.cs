@@ -39,7 +39,7 @@ public class TatamiRoomPuzzleSolving : MonoBehaviour
         {
             int index = i;
             buttons[i].onClick.AddListener(() => SetEnteredText(kanaCharacters[index]));  // 各ボタンにクリックイベントを登録
-            Debug.Log($"ボタン {buttons[i].name} にイベント登録: {kanaCharacters[index]}");
+            //Debug.Log($"ボタン {buttons[i].name} にイベント登録: {kanaCharacters[index]}");
         }
     }
     public void SetEnteredText(string SetedJapanese)//buttonに登録するメソッド

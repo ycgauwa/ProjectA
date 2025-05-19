@@ -40,17 +40,19 @@ public class DemoFinish : MonoBehaviour
     public DifficultyLevelManager difficultylevelmanager;
     public bool StartActive = false;
     public bool firstActive;
+    private bool exhibitionGameSwitch = true;
     public Canvas Demo;
+    public Canvas DemoFinishCanvas;
+    public Canvas confirmCanvas;
     public Canvas DifficultyCanvas;
     public Image DemoImage;
     public Image DemoPanel;
     public Image Instruction;
-    public Canvas DemoFinishCanvas;
     public GameObject player;
-    public string proMessage;
-    public string norMessage;
     public GameObject firstSelect2;
     public GameObject enterUI;
+    public string proMessage;
+    public string norMessage;
 
     private void Awake()
     {
@@ -68,17 +70,17 @@ public class DemoFinish : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(firstSelect2);
             MessageManager.message_instance.isTextAdvanceEnabled = false;
             Time.timeScale = 0;
-            CreateCoroutine().Forget();
+            GameStartFlow().Forget();
         }
         else enterUI.SetActive(false);
     }
-    private async UniTask CreateCoroutine(CancellationToken ct = default)
+    private async UniTask GameStartFlow(CancellationToken ct = default)
     {//流れとして難易度決めてから説明行って、大体見たらセリフ出してゲーム開始。その間ESCは無効？
         Debug.Log("1");
-        //yield return new WaitUntil(() => gameModeCanvas.gameObject.activeSelf == false);
+        await confirmCanvasActive();
         Debug.Log("2");
-        await CanvasActive();
-        //Debug.Log("3");
+        await difficultCanvasActive();
+        Debug.Log("3");
         Debug.Log("4");
         Instruction.gameObject.SetActive(true);
         await UniTask.WaitUntil(() => firstActive, cancellationToken: ct);//FAは説明が見終わったBool値
@@ -101,8 +103,13 @@ public class DemoFinish : MonoBehaviour
         nameText.text = name;
         characterImage.sprite = image;
     }
-    async UniTask CanvasActive()
+    async UniTask confirmCanvasActive()
     {
+        confirmCanvas.gameObject.SetActive(true);
+        await UniTask.WaitUntil(() => !confirmCanvas.gameObject.activeSelf);
+    }
+    async UniTask difficultCanvasActive()
+    {//難易度選択メソッド。ボタンを押すまでは先に進まないようにしたい。
         DifficultyCanvas.gameObject.SetActive(true);
         await UniTask.WaitUntil(() => difficultylevelmanager.ActiveCanvas == true);
     }
@@ -149,5 +156,24 @@ public class DemoFinish : MonoBehaviour
             SecondHouseManager.secondHouse_instance.light2D.intensity -= 0.008f;
             await UniTask.Delay(1);
         }
+    }
+    public void prologueButtonMethod()
+    {
+        // そのままウィンドウを消してゲームに移る
+        confirmCanvas.gameObject.SetActive(false);
+        
+    }
+    public void GameButtonMethod()
+    {
+        // 様々な条件設定をしてチャプター1にいく
+        confirmCanvas.gameObject.SetActive(false);
+        player.transform.position = new Vector3(70, -45, 0);
+        FlagsManager.flag_Instance.flagBools[1] = true;
+        FlagsManager.flag_Instance.navigationPanel.gameObject.SetActive(true);
+        FlagsManager.flag_Instance.ChangeUIDestnation(4, "Yukito");
+        FlagsManager.flag_Instance.locationText.text = "1F廊下";
+        SaveSlotsManager.save_Instance.saveState.chapterNum++;
+        FlagsManager.flag_Instance.LoadFlagsData();
+        MessageManager.message_instance.MessageWindowActive(Messages, names, image, ct: destroyCancellationToken).Forget();
     }
 }

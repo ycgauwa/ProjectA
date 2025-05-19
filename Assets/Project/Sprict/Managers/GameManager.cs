@@ -486,6 +486,7 @@ public class GameManager : MonoBehaviour
         else
         {
             soundManager.PlaySe(decision);
+            gameoverWindow.gameObject.SetActive(false);
             saveCanvas.gameObject.SetActive(true);
             loadPanel.gameObject.SetActive(true);
             saveBackButton.gameObject.SetActive(false);

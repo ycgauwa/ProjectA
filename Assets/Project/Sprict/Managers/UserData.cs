@@ -189,11 +189,11 @@ public class UserData : MonoBehaviour
 
             string filePath = Path.Combine(Application.persistentDataPath, "QuickSave", $"SaveData{i+1}.json");
 
-            if(File.Exists(filePath))
+            if (File.Exists(filePath))
             {
-                Debug.Log($"ロードファイル{i+1}が存在します。");
+                Debug.Log($"ロードファイル{i + 1}が存在します。");
             }
-            else break;
+            else continue;
 
             QuickSaveReader loadReader = QuickSaveReader.Create($"SaveData{i+1}", m_saveSettings);
             playTime = loadReader.Read<string>("PlayTime");
@@ -211,5 +211,23 @@ public class UserData : MonoBehaviour
         chars = characters;
         Chapters = chapterNum;
         Debug.Log("GameStartクラスに戻ります");
+    }
+
+    public void DeleteUserDate()
+    {
+        for (int i = 1; i <= 3; i++)
+        {
+            string filePath = Path.Combine(Application.persistentDataPath, "QuickSave", $"SaveData{i}.json");
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+                Debug.Log($"削除: {filePath}");
+            }
+            else
+            {
+                Debug.Log($"ファイルが存在しません: {filePath}");
+            }
+        }
     }
 }

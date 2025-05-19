@@ -16,6 +16,7 @@ public class GameStart : MonoBehaviour
     string[] gameModes = new string[3];
     string[] characters = new string[3];
     private int[] chaptersNumber = new int[3];
+    private bool exhibitionGameSwitch = true;
     public Button[] saveButtons = new Button[3];
     public Button toTitleButton;
     public SaveDate saveDate;
@@ -27,6 +28,10 @@ public class GameStart : MonoBehaviour
 
     void Start()
     {
+        if (exhibitionGameSwitch)
+        {
+            userData.DeleteUserDate();
+        }
         var saveData = SaveSlotsManager.save_Instance;
         SoundManager.sound_Instance.PlayBgm(titleBgm);
         //ロード画面で保存されている情報が色々書きこまれている。
