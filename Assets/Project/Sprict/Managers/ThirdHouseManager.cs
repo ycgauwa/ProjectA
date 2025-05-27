@@ -5,7 +5,9 @@ using UnityEngine;
 public class ThirdHouseManager : MonoBehaviour
 {
     public static ThirdHouseManager thirdHouse_instance;
-    // Start is called before the first frame update
+    public ThirdUnlockBasement thirdUnlockBasement;
+    public GameObject futon;
+    public GameObject[] thirdBloodObject;
     private void Awake()
     {
         if(thirdHouse_instance == null)

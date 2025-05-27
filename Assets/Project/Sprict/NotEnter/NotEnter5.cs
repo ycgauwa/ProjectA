@@ -29,7 +29,7 @@ public class NotEnter5 : MonoBehaviour
         {
             if(collider.gameObject.tag.Equals("Player"))
             {
-                //「はいれませんよ～」
+                //「はいれませんよ」
                 MessageManager.message_instance.MessageWindowActive(GameManager.m_instance.GetMessages(name, "NotEnter"), GameManager.m_instance.GetSpeakerName(name, "NotEnter"), images, ct: destroyCancellationToken).Forget();
             }
         }
