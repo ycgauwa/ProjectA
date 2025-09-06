@@ -73,7 +73,44 @@ public class ItemDateBase : MonoBehaviour
             itemTextMessage.gameObject.SetActive(true);
             itemTextMessage.text = "‡¬Š®—¹";
         }
-        
+        //ôÜ‚Æ•r‚ÅôÜ•r‚Ì§ì
+        if (GetItemId(25).selectedItem == true && GetItemId(27).selectedItem == true)//‰–‘fŒn‚Ì‚Ù‚¤
+        {
+            inventry.Add(GetItemId(28));
+            inventry.Delete(GetItemId(27));
+            inventry.Delete(GetItemId(25));
+            itemTextMessage.gameObject.SetActive(true);
+            itemTextMessage.text = "‡¬Š®—¹";
+            if (GetItemId(26).selectedItem)
+                GetItemId(26).selectedItem = false;
+        }
+        else if (GetItemId(26).selectedItem == true && GetItemId(27).selectedItem == true)//_«‚Ì‚Ù‚¤
+        {
+            inventry.Add(GetItemId(28));
+            inventry.Delete(GetItemId(27));
+            inventry.Delete(GetItemId(26));
+            itemTextMessage.gameObject.SetActive(true);
+            itemTextMessage.text = "‡¬Š®—¹";
+            if (GetItemId(25).selectedItem)
+                GetItemId(25).selectedItem = false;
+        }
+        //ôÜ‚ÆôÜ•r‚ÅƒKƒX“ü‚è•r‚Ì§ì
+        if (GetItemId(25).selectedItem == true && GetItemId(28).selectedItem == true)//‰–‘fŒn‚Ì‚Ù‚¤
+        {
+            inventry.Add(GetItemId(29));
+            inventry.Delete(GetItemId(28));
+            inventry.Delete(GetItemId(25));
+            itemTextMessage.gameObject.SetActive(true);
+            itemTextMessage.text = "‡¬Š®—¹";
+        }
+        else if (GetItemId(26).selectedItem == true && GetItemId(28).selectedItem == true)//_«‚Ì‚Ù‚¤
+        {
+            inventry.Add(GetItemId(29));
+            inventry.Delete(GetItemId(28));
+            inventry.Delete(GetItemId(26));
+            itemTextMessage.gameObject.SetActive(true);
+            itemTextMessage.text = "‡¬Š®—¹";
+        }
     }
     private void Update()
     {

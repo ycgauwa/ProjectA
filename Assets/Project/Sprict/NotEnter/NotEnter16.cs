@@ -21,7 +21,6 @@ public class NotEnter16 : MonoBehaviour
     private bool isContacted = false;
     public Canvas thirdHouseCanvas;
     public GameObject buttonGrid;
-    public AudioClip keyOpen;
     public AudioClip defuseLocked;
     public AudioClip runSound;
 
@@ -54,7 +53,7 @@ public class NotEnter16 : MonoBehaviour
             isContacted = false;
             TatamiPuzzle().Forget();
         }
-        else if(isContacted && (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return)))
+        else if(isContacted /*&& (Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Return))*/)
         {
             //åÆÇäJÇØÇΩéûÅ®ÇªÇÃÇ‹Ç‹í ÇÍÇÈ
         }
